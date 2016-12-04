@@ -5,6 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 
+% The usepackage's should be cleaned one day...
+
 \usepackage{fancyhdr} 	% fancy header and footer
 \usepackage{graphicx} 	% show graphics
 \usepackage{listings} 	% show code listings
@@ -24,6 +26,7 @@
 \usepackage{natbib} % For quotationn
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
 \usepackage{pgfplots}
+\usepackage{tabto}
 
 \usepackage{xparse,nameref} % for chapref
 \NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}
@@ -33,10 +36,10 @@
 % Define Theorems %
 %%%%%%%%%%%%%%%%%%%
 
-\newtheorem{thm}{Theorem}
-\newtheorem{lem}[thm]{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
-\newtheorem{defi}{Definition}[section]
+\newtheorem{definition}{Definition}[section]
 
 
 %%%%%%%%%%%%%
