@@ -1,5 +1,16 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 *.pdf
 *.aux
+*.out
 *.log
-*.synctec
+*.toc
+*.bbl
+*.blg
+*.odt
+*.tdo
+*.synctex.gz
+*.odt.classpath
+*.pytxcode
+pythontex*
+*.lof
+

@@ -1,0 +1,58 @@
+\newcommandx{\settitlepage}[2][]{
+    \thispagestyle{empty}
+
+    \begin{minipage}[H]{\textwidth}
+        \vspace{3.5cm}
+        \begin{center}
+                \Large Beschreibungslogik
+
+                \vspace{1cm}
+                \LARGE \textbf{SoSe 2016: Inoffizielles Skript} \\
+
+                \vspace{3cm}
+                \Large Sascha Jongebloed\\
+        \end{center}
+    \end{minipage}
+    \vfill
+    \vfill
+
+    \begin{minipage}[H]{\textwidth}
+        \begin{center}
+
+                \begin{tabular}{ r l }
+                  Dozent: & Prof. Dr. Thomas Schneider\\
+                \end{tabular}
+        \end{center}
+    \end{minipage}
+    \vspace{.5cm}
+
+    \begin{center}
+        \today
+    \end{center}
+    \newpage
+}
+
+\newcommand{\setpagestyle} {
+    \pagestyle{fancy}
+    \renewcommand{\headrulewidth}{0.1pt}
+    %\setlength{\headheight}{1cm}
+    %\fancyhead[R]{Test}
+    \fancyhead[L]{\leftmark}
+    \fancyfoot[C]{\thepage}
+}
+
+\newcommand{\settableofcontents} {
+    \setcounter{tocdepth}{4}
+    \tableofcontents
+    \newpage
+}
+
+\newcommand{\setbibliography} {
+    \clearpage
+    \phantomsection
+    \label{ch:bib}%
+    \addcontentsline{toc}{section}{Literatur}%
+        \nocite{*}%
+        \bibliographystyle{apalike}%
+        \bibliography{bibtex/bibliography}%
+}

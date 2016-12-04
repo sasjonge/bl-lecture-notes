@@ -1,0 +1,24 @@
+% Use of todos
+\newcommandx{\info}[2][1=] {
+	\todo[noprepend,linecolor=OliveGreen,backgroundcolor=OliveGreen!25,
+		  bordercolor=OliveGreen,#1]{#2}
+	\PackageWarning{[INFO]]}{#2}
+}
+\newcommandx{\missing}[2][1=] {
+	\todo[noprepend,linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}
+	\PackageWarning{[MISSING]}{#2}
+}
+
+% Backslash
+\newcommand{\bs} {\textbackslash}
+\newcommand{\MT}{\mathcal{T}}
+\newcommand{\MI}{\mathcal{I}}
+\newcommand{\MJ}{\mathcal{J}}
+\newcommand{\EL}{\mathcal{E}\mathcal{L}}
+\newcommand{\ELFF}{\mathcal{E}\mathcal{L}^\mathcal{F}}
+\newcommand{\ELF}{\mathcal{E}\mathcal{L}^f}
+\newcommand{\ALC}{\mathcal{A}\mathcal{L}\mathcal{C}}
+
+% leftragged tablecontent with size
+\newcolumntype{E}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
