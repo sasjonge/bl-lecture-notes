@@ -1,5 +1,5 @@
 \theoremstyle{definition}
-\begin{definition}{$\ALC$-Konzepte}
+\begin{definition}{$\ALC$-Konzepte} \\
 	Die Menge der $\ALC$-Konzepte is induktiv definiert:
 	\begin{itemize}
 		\item Jeder Konzeptname ist $\ALC$-Konzept
@@ -18,3 +18,52 @@
 	\end{itemize}
 \end{definition}
 
+\textbf{T2.1 Beispiel}
+
+Hier einige Beispiel für diese Syntax:
+
+\begin{center}
+$Student \sqcap \exists studiert.Naturwissenschaft$ \\
+$Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
+$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
+$A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
+\end{center}
+
+\textbf{Weiteres zur Syntax}
+
+Dabei verwenden wir folgende Symbole:
+
+\begin{itemize}
+	\item{$A$,$B$ für Konzeptnamen}
+	\item{$C$,$D$ für zusammengesetzte Konzepte}
+	\item{$r$,$s$ für Rollennamen}
+\end{itemize}
+
+Zudem benutzen zudem folgende Abkürzungen: wir schreiben
+
+\begin{itemize}
+	\item{$\top$ für $A \sqcup \neg A$}
+	\item{$\perp$ für $A \sqcap \neg A$}
+\end{itemize}
+
+\textbf{Präzedenzregel}
+
+\begin{itemize}
+	\item{$\neg$,$\exists$,$\forall$ binden stärker als $\sqcap$ und $\sqcup$}
+\end{itemize}
+
+Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\exists r.A) \sqcap B)$ und nicht für $\forall r.(\exists r.(A \sqcap B))$.
+
+Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
+
+\begin{definition}{$\ALC$ Semantik} \\
+Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
+	\begin{itemize}
+		\item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
+		\item{$\cdot^{\MI}$ \emph{Interpretationsfunktion} bildet ab:
+		 \begin{itemize}
+			 \item{jeden Konzeptnamen $A$ auf Menge $A^{\MI} \subseteq \Delta^{\MI}$}
+			 \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
+		 \end{itemize}}
+	\end{itemize}
+\end{definition}
