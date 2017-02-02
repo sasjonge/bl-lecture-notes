@@ -1,0 +1,496 @@
+\subsection{ALC ohne TBoxen}\label{alc-ohne-tboxen}
+
+\subsubsection{Negationsnormalform}\label{negationsnormalform}
+
+Konzept ist in \emph{Negationsnormalform} (NNF) gdw. Negation nur auf
+Konzeptnamen angewendet wird.
+
+\subsubsection{Lemma 4.2}\label{lemma-4.2}
+
+Jedes Konzept kann in Linearzeit in ein äquivalentes Konzept in NNF
+umgewandelt werden.
+
+Beweisskizze. Wende Gesetzte der doppelten Negation, de Morgan und
+Dualität von $\exists$, $\forall$ an.
+
+\subsubsection{I-Baum}\label{i-baum}
+
+\emph{I-Baum} für $C_{0}$ (in NNF) ist knoten- und kantenbeschrifteter
+Baum $\left( V,E,L \right)$ mit
+
+\begin{itemize}
+\item
+  $V$ Knotenmenge
+\item
+  $E$ ist Menge beschrifteter Kanten $\left( v,r,v^{'} \right)$ mit
+  $v$,$\ v^{'} \in V$, $r$ Rollenname
+\item
+  $L$: $V \rightarrow 2^{sub(C_{0})}$
+\end{itemize}
+
+\subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
+
+Berechnet Folge $M_{0},M_{1},\ldots$ von Mengen von I-Bäumen:
+
+$M_{0} = \left\{ B_{\text{ini}} \right\}$ mit $B_{\text{ini}}$
+\emph{initialer I-Baum} für $C_{0}$:
+
+\begin{itemize}
+\item
+  $V \left\{ v_{\text{ini}} \right\}$
+\item
+  $E \varnothing$
+\item
+  $L\left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
+\end{itemize}
+
+$M_{i + 1}$ entsteht aus $M_{i}$ durch Anwendung der Tableau-Regeln
+auf irgendeinen I-Baum in $M_{i}$ und anschließendes Austauschen des
+verwendeten Baumes durch den neu erzeugten (Sei $\left( V,E,L \right)$
+I-Baum):
+
+\begin{itemize}
+\item
+  $\sqcap$-Regel
+
+  \begin{itemize}
+  \item
+    Wähle $v \in V$ und $C \sqcap D \in L\left( v \right)$ so dass
+    \emph{nicht} $\left\{ C,D \right\}\  \subseteq L\left( v \right)$
+  \item
+    erweitere $L(v)$ um $C$ und $D$
+  \end{itemize}
+\item
+  $\sqcup$-Regel
+
+  \begin{itemize}
+  \item
+    Wähle $v \in V$ und $C \sqcup D \in L\left( v \right)$ so dass
+    $\left\{ C,D \right\}\  \cap L\left( v \right) = \varnothing$
+  \item
+    erweitere $L(v)$ um $C$ oder $D$ (ergibt zwei I-Bäume)
+  \end{itemize}
+\item
+  $\exists$-Regel
+
+  \begin{itemize}
+  \item
+    Wähle $v \in V$ und $\exists r.C \in L\left( v \right)$ so dass
+    es kein $v^{'} \in V$ gibt mit $\left( v,r,v^{'} \right) \in E$
+    und $C\  \in L\left( v' \right)$
+  \item
+    erweitere V um neuen Konten $v^{'}$ und $E$ um
+    $\left( v,r,v^{'} \right)$; setze
+    $L\left( v^{'} \right) = \left\{ C \right\}$
+  \end{itemize}
+\item
+  $\forall$-Regel
+
+  \begin{itemize}
+  \item
+    Wähle $v,v^{'} \in V$ und $\forall r.C \in L\left( v \right)$ so
+    dass $\left( v,r,v^{'} \right) \in E$ und
+    $C\  \notin L\left( v \right)$
+  \item
+    erweitere $L(v')$ um $C$
+  \end{itemize}
+\end{itemize}
+
+Stoppe, wenn alle Regeln erschöpfend angewandt wurden. Gib „erfüllbar``
+zurück, falls es einen I-Baum ohne offensichtlichen Widerspruch
+($\left\{ A,\neg A \right\} \subseteq L\left( v \right)$) gibt;
+„unerfüllbar`` sonst.
+
+\subsubsection{Definition Rollentiefe}\label{definition-rollentiefe}
+
+Rollentiefe $\text{rd}\left( C \right)$ von Konzepten
+$C \in sub\left( C_{0} \right)$ ist induktiv definiert:
+
+\begin{itemize}
+\item
+  $\text{rd}\left( A \right) = rd\left( \neg A \right) = 0$
+\item
+  $\text{rd}\left( C \sqcap D \right) = rd\left( C \sqcup D \right) = \max\left( \text{rd}\left( C \right),rd\left( D \right) \right)$
+\item
+  $\text{rd}\left( \exists r.C \right) = rd\left( \forall r.C \right) = 1 + rd\left( C \right)$
+\end{itemize}
+
+\paragraph{Lemma 4.4}\label{lemma-4.4}
+
+Für alle $C \in sub\left( C_{0} \right)$ gilt
+$\text{rd}\left( C \right) \leq \left| C \right|$.
+
+\subsubsection{Multimengen}\label{multimengen}
+
+Multimengen sind Mengen, in denen Elemente mehrfach vorkommen dürfen.
+Formal: Abbildung $M:S\mathbb{\rightarrow N}$, welche jedes Element
+auf die Anzahl seines Vorkommens abbildet.
+
+$MM(S)$ ist die Menge aller Multimengen über der Menge S.
+
+Gegeben strikte partielle Ordnung $\left( S, < \right)$, ist die
+Multimengenerweiterung
+$\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$ definiert
+als $M_{2} <_{\text{mul}}M_{1}$ gdw. $\exists X,Y \in MM(S)$, so
+dass
+
+\begin{itemize}
+\item
+  $\varnothing \neq X \subseteq M_{1}$
+\item
+  $M_{2} = \left( M_{1} \smallsetminus X \right) \cup Y$
+\item
+  $\forall y \in Y\exists x \in X : x > y$
+\end{itemize}
+
+Beispiel:
+$\left\{ 3,1 \right\} >_{\text{mul}}\{ 2,2,2\} >_{\text{mul}}\{ 2,2\} >_{\text{mul}}\{ 2,1,1,1\}$
+
+\paragraph{Theorem 4.6}\label{theorem-4.6}
+
+Wenn $\left( S, < \right)$ wohlfundiert (hat keine unendlichen
+absteigenden Ketten) ist, dann ist auch
+$\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$
+wohlfundiert.
+
+\hypertarget{proposition-4.5-terminierung}{\subsubsection{Proposition
+4.5 (Terminierung)}\label{proposition-4.5-terminierung}}
+
+Der Tableau-Algorithmus stoppt nach endlicher Zeit.
+
+Beweis in 4 Schritten:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Es werden nur I-Bäume mit einem Verzweigungsgrad
+  $\leq \left| C_{0} \right|$ generiert.
+\end{enumerate}
+
+Beweisskizze. Nur die $\exists$-Regel generiert Nachfolger, aber
+höchstens einen für jedes Konzept $\exists r.C \in sub(C_{0})$. Nach
+\protect\hyperlink{lemma-3.13}{Lemma 3.13} enthält
+$\text{sub}\left( C_{o} \right)$ höchstens $\left| C_{0} \right|$
+viele Konzepte.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Es werden nur I-Bäume mit einer Tiefe $\leq \left| C_{0} \right|$
+  generiert.
+\end{enumerate}
+
+Beweisskizze über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
+Knoten mit Tiefe $i$ ist, dann gilt
+$\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
+$C \in L\left( v \right)$.
+
+\textbf{I.A.} Es gibt nur Knoten $v_{\text{ini}}$ mit
+$L\left( v_{\text{ini}} \right) = \left\{ C_{0} \right\}$. I.V. gilt,
+da $i = 0$.
+
+\textbf{I.S.} Fallunterscheidung nach angewandter Regel (exemplarisch
+$\sqcap$, $\exists$):
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  $\sqcap$-Regel
+\end{enumerate}
+
+\begin{quote}
+$C \sqcap D \in L(v)$ und $L(v)$ wird durch $C$, $D$ erweitert.
+Nach I.V. gilt:
+$\text{rd}\left( C \sqcap D \right) \leq rd\left( C_{0} \right) - i$,
+also auch $\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$,
+weil $\text{rd}\left( C \right) \leq rd\left( C \sqcap D \right)$.
+Analog für $D$.
+\end{quote}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  $\exists$-Regel
+\end{enumerate}
+
+\begin{quote}
+Dann $\exists r.C \in L\left( v \right)$ und es wird neues $v^{'}$
+auf Tiefe $i + 1$ generiert mit
+$L\left( v^{'} \right) = \left\{ C \right\}$. Es gilt
+$\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0} \right) - i - 1 = rd\left( C_{0} \right) - (i + 1)$
+\end{quote}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{i}$ für
+  ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
+  $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$
+  Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+\end{enumerate}
+
+\hypertarget{proposition-4.7-korrektheit}{\subsubsection{Proposition 4.7
+(Korrektheit)}\label{proposition-4.7-korrektheit}}
+
+Wenn der Tableau-Algorithmus „erfüllbar`` zurückgibt, so ist $C_{0}$
+erfüllbar.
+
+Beweisskizze per Induktion über die Struktur von $C$.
+„erfüllbar``-Ausgabe bedeutet widerspruchsfreier, vollständiger I-Baum
+$B = \left( V,E,L \right)$ gefunden. Konstruiere Interpretation $I$:
+
+\begin{itemize}
+\item
+  $\Delta^{I} = V$
+\item
+  $r^{I} = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
+  für alle Rollennamen $r$
+\item
+  $A^{I} = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
+  alle Konzeptnamen $A$
+\end{itemize}
+
+Behauptung: Für alle Konzepte $C$ und $v \in V$ gilt
+$C \in L\left( v \right)$ impliziert $v \in C^{I}$. Da
+$C_{0} \in L\left( v_{\text{ini}} \right)$ in $B_{\text{ini}}$ gilt
+auch $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B$. Also
+$v_{\text{ini}} \in C_{0}^{I}$ nach Behauptung, weswegen dann
+$C_{0}$ erfüllbar.
+
+\textbf{I.A.} $C = A$ (Konzeptname) I.B. gilt nach Definition von
+$I$.
+
+\textbf{I.S.} An den Beispielen $\neg$, $\sqcap$
+
+\begin{itemize}
+\item
+  $C = \neg A$
+\end{itemize}
+
+$A$ Konzeptname. Da $B$ keinen offensichtlichen Widerspruch hat,
+folgt das $A \notin L(v)$. Nach Definition von $I$ gilt
+$v \notin A^{I}$. Also $v \in \left( \neg A \right)^{I}$.
+
+\begin{itemize}
+\item
+  $C = D \sqcap E$
+\end{itemize}
+
+$C \in L\left( v \right) \Rightarrow$ ($\sqcap$-Regel nicht
+anwendbar)
+$D \in L\left( v \right),\ E \in L\left( v \right) \Rightarrow$ (I.V.)
+$v \in D^{I},\ v \in E^{I} \Rightarrow$ (Semantik)
+$v \in \left( D \sqcap E \right)^{I}$
+
+\hypertarget{realisierbarkeit}{\subsubsection{Realisierbarkeit}\label{realisierbarkeit}}
+
+Sei $B = \left( V,E,L \right)$ ein I-Baum. Interpretation $I$
+\emph{realisiert} $B$ gdw. es gibt eine Funktion
+$\pi\ :V \rightarrow \Delta^{I}$ so dass
+
+\begin{itemize}
+\item
+  $\left( v,r,v^{'} \right) \in E$ impliziert
+  $\left( \pi\left( v \right),\pi\left( v^{'} \right) \right) \in r^{I}$
+\item
+  $C \in L\left( v \right)$ impliziert
+  $\pi\left( v \right) \in C^{I}$
+\end{itemize}
+
+B ist realisierbar, wenn es Interpretation $I$ gibt, die $B$
+realisiert. Menge $M$ von I-Bäumen ist realisierbar gdw. ein
+$B \in M$ realisierbar.
+
+\subsubsection{Proposition 4.9
+(Vollständigkeit)}\label{proposition-4.9-vollstuxe4ndigkeit}
+
+Wenn $C_{0}$ erfüllbar, so gibt der Tableau-Algorithmus „erfüllbar``
+zurück.
+
+Beweisskizze per Induktion über $i$. Sei $C_{0}$ erfüllbar. Nach
+\protect\hyperlink{proposition-4.5-terminierung}{Proposition 4.5}
+berechnet der Algorithmus endlich Folge $M_{0},\ldots,M_{n}$. Wir
+zeigen: $M_{i}$ ist realisierbar für alle $0 \leq i \leq n$. Daraus
+folgt: Es gibt realisierbaren Baum $B \in M_{n}$ und damit enthält
+$B$ keinen offensichtlichen Widerspruch. Also gibt der Algorithmus
+„erfüllbar`` zurück.
+
+\textbf{I.A.} $i = 0$. $M_{0} = {\{ B}_{\text{ini}}\}$.
+$B_{\text{ini}}$ ist realisierbar, weil $C_{0}$ erfüllbar.
+
+\textbf{I.S.} Fallunterscheidung gemäß der Regel, mit der $M_{i + 1}$
+aus $M_{i}$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
+$M_{i}$, auf welchen Regel angewandt wird. Beispielhaft
+$\sqcup$-Regel:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  $\sqcup$-Regel
+\end{enumerate}
+
+Dann wird $B = \left( V,E,L \right)$ ersetzt durch
+$B^{'} = \left( V,E,L^{'} \right) \in M_{i + 1}$ und
+$B^{''} = \left( V,E,L^{''} \right) \in M_{i + 1}$ und es gibt
+$v \in V$ mit
+
+\begin{itemize}
+\item
+  $\left( C \sqcup D \right) \in L(v)$
+\item
+  $L^{'}\left( v \right) = L\left( v \right) \cup \left\{ C \right\}$,
+  $L^{''}\left( v \right) = L\left( v \right) \cup \left\{ D \right\}$
+\item
+  $L^{'}\left( u \right) = L^{''}\left( u \right) = L\left( u \right)$
+  für alle $u \neq v$
+\end{itemize}
+
+Es genügt zu zeigen, dass wenn $B$ realisiertbar, dann $B'$ oder
+$B''$ realisierbar. Sei $\text{I\ }$Interpretation, die $B$
+realisiert und $\pi\ :V \rightarrow \Delta^{I}$ Abbildung wie in
+\protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt
+$\pi\left( v \right) \in \left( C \sqcup D \right)^{I}$. Nach
+Semantik: $\pi\left( v \right) \in C^{I}$ oder
+$\pi\left( v \right) \in D^{I}$. Also realisiert $I$ den Baum $B'$
+oder $B''$.
+
+\subsubsection{Praktikabilität}\label{praktikabilituxe4t}
+
+I-Bäume können höchstens exponentiell groß werden.
+
+\subsection{ALC mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
+
+Jede TBox $T$ ist äquivalent zu einer TBox der Form
+$\left\{ \top \sqcap C_{T} \right\}$. Setzte
+$C_{T} \prod_{C \sqsubseteq D \in T}^{}{\neg C \sqcup D}$.
+
+\subsubsection{TBox-Regel}\label{tbox-regel}
+
+Wähle $v \in V$ so dass $C_{T} \notin L\left( V \right)$ und
+erweitere $L\left( v \right)$ um $C_{T}$.
+
+Problem: Terminiert nicht.
+
+\subsubsection{Blockieren}\label{blockieren}
+
+Sei $\left( V,E,L \right)$ ein I-Baum und $u,v \in V$. Dann ist
+$v$ direkt blockiert durch $u$, wenn
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  $u$ Vorgänger von $v$ in $B$ ist und
+\item
+  $L\left( v \right) \subseteq L\left( u \right)$
+\end{enumerate}
+
+$v$ ist blockiert, wenn $v$ direkt blockiert ist oder einen direkt
+blockierten Vorgänger hat.
+
+\subsubsection{\texorpdfstring{Neue $\exists$-Regel
+($\exists^{'}$-Regel)}{Neue \textbackslash{}exists-Regel (\textbackslash{}exists\^{}\{'\}-Regel)}}\label{neue-exists-regel-exists-regel}
+
+\begin{itemize}
+\item
+  Wähle $v \in V$ und $\exists r.C \in L\left( v \right)$ so dass
+  $v$ \emph{nicht blockiert ist und} es kein $v^{'} \in V$ gibt mit
+  $\left( v,r,v^{'} \right) \in E$ und $C\  \in L\left( v' \right)$
+\item
+  erweitere V um neuen Konten $v^{'}$ und $E$ um
+  $\left( v,r,v^{'} \right)$; setze
+  $L\left( v^{'} \right) = \left\{ C \right\}$
+\end{itemize}
+
+\subsubsection{Vollständigkeit}\label{vollstuxe4ndigkeit}
+
+Beweis wie ohne TBoxen: Alle $M_{0},\ldots,\ M_{n}$ sind realisierbar
+bzgl. $I$ (Induktion), also enthält $M_{n}$ einen Baum ohne
+offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel
+und Realisierbarkeitsbegriff auf TBoxen erweitert).
+
+\subsubsection{Korrektheit}\label{korrektheit}
+
+Beweisskizze per Induktion über die Struktur von $C$. Definiere
+Interpretation $I$:
+
+\begin{itemize}
+\item
+  $\Delta^{I} = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
+\item
+  $r^{I} = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
+\item
+  $A^{I} = \left\{ v \middle| A \in L\left( v \right) \right\}$
+\end{itemize}
+
+Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^{I}$ gilt:
+$C \in L\left( v \right) \Rightarrow v \in C^{I}$. Die Behauptung
+impliziert wie gewünscht, dass
+
+\begin{itemize}
+\item
+  $I$ Modell von $T$ ist.
+\end{itemize}
+
+Da die TBox-Regel nicht anwendbar ist, gilt
+$C_{T} \in L\left( v \right)$ für alle $v \in V$. Also
+$v \in C_{T}^{I}$ für alle $v \in \Delta^{I}$.
+
+\begin{itemize}
+\item
+  $I$ Modell von $C_{0}$ ist.
+\end{itemize}
+
+Da $C_{0} \in L\left( v_{\text{ini}} \right)$ gilt nach Behauptung
+$v_{\text{ini}} \in C_{0}^{I}$.
+
+\textbf{I.A.} Siehe Beweis zu
+\protect\hyperlink{proposition-4.7-korrektheit}{Proposition 4.7}.
+
+\textbf{I.S.} Schritte wie in Beweis zu Proposition 4.7, außer:
+
+\begin{itemize}
+\item
+  $C = \exists r.D$
+\end{itemize}
+
+Sei $\exists r.D \in L\left( v \right)$. Da die $\exists'$-Regel
+nicht anwendbar ist, gibt es $v^{'} \in V$ mit
+$\left( v,r,v^{'} \right) \in E$ und $D \in L\left( v \right)$.
+Fallunterscheidung:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^{I}$
+  (Definition $I$), $v^{'} \in D^{I}$ (\textbf{I.V.})
+  $\Rightarrow v \in \left( \exists r.D \right)^{I}$
+\item
+  $v^{'}$ blockiert. Da der direkte Vorgänger $v$ von $v'$
+  unblockiert ist, ist $v'$ direkt blockiert von unblockiertem
+  Vorgänger $u$. Es gilt:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  $\left( v,u \right) \in r^{I}$ nach Definition $r^{I}$
+\item
+  $D \in L\left( v \right) \subseteq L\left( u \right)$
+  (Blockierungsbedingung)
+\item
+  $\Rightarrow u \in D^{I}$ (\textbf{I.V.})
+\end{itemize}
+
+\begin{quote}
+Also $v \in \left( \exists r.D \right)^{I}$.
+\end{quote}
+
+\begin{itemize}
+\item
+  $C = \forall r.D$
+\end{itemize}
+
+Ähnlich zu oberem Fall.
+
+\subsubsection{Terminierung}\label{terminierung}
+
+Beweis analog, aber mit Einbezug der TBox.

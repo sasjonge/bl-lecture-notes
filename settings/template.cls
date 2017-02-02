@@ -27,6 +27,7 @@
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
 \usepackage{pgfplots}
 \usepackage{tabto}
+\usepackage{todonotes}
 
 \usepackage{xparse,nameref} % for chapref
 \NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}

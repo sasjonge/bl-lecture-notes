@@ -1,0 +1,118 @@
+\subsection{$\ALC$: Syntax}
+
+\theoremstyle{definition}
+\begin{definition}{$\ALC$-Konzepte} \\
+	Die Menge der $\ALC$-Konzepte is induktiv definiert:
+	\begin{itemize}
+		\item Jeder Konzeptname ist $\ALC$-Konzept
+		\item Wenn $C$, $D$ $\ALC$-Konzepte, so auch
+		\begin{itemize}
+			\item $\neg C$ \tabto{2cm}(Negation)
+			\item $C \sqcap D$ \tabto{2cm}(Konjunktion)
+			\item $C \sqcup D$ \tabto{2cm}(Disjunktion)
+		\end{itemize}
+		\item {Wenn $C$ $\ALC$-Konzept und $r$ Rollenname, so sind
+		\begin{itemize}
+			\item $\exists r.C$ \tabto{2cm}(Existenzrestriktion)
+			\item $\forall r.C$ \tabto{2cm}(Werterestriktion)
+		\end{itemize}
+		$\ALC$-Konzepte}
+	\end{itemize}
+\end{definition}
+
+\textbf{T2.1 Beispiel}
+
+Hier einige Beispiel für diese Syntax:
+
+\begin{center}
+$Student \sqcap \exists studiert.Naturwissenschaft$ \\
+$Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
+$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
+$A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
+\end{center}
+
+\textbf{Weiteres zur Syntax}
+
+Dabei verwenden wir folgende Symbole:
+
+\begin{itemize}
+	\item{$A$,$B$ für Konzeptnamen}
+	\item{$C$,$D$ für zusammengesetzte Konzepte}
+	\item{$r$,$s$ für Rollennamen}
+\end{itemize}
+
+Zudem benutzen zudem folgende Abkürzungen: wir schreiben
+
+\begin{itemize}
+	\item{$\top$ für $A \sqcup \neg A$}
+	\item{$\perp$ für $A \sqcap \neg A$}
+\end{itemize}
+
+\textbf{Präzedenzregel}
+
+\begin{itemize}
+	\item{$\neg$,$\exists$,$\forall$ binden stärker als $\sqcap$ und $\sqcup$}
+\end{itemize}
+
+Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\exists r.A) \sqcap B)$ und nicht für $\forall r.(\exists r.(A \sqcap B))$.
+
+Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
+
+\subsection{$\ALC$: Semantik}
+
+\begin{definition}{$\ALC$ Semantik} \\
+Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
+	\begin{itemize}
+		\item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
+		\item{$\cdot^{\MI}$ \emph{Interpretationsfunktion} bildet ab:
+		 \begin{itemize}
+			 \item{jeden Konzeptnamen $A$ auf Menge $A^{\MI} \subseteq \Delta^{\MI}$}
+			 \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
+		 \end{itemize}}
+	\end{itemize}
+\end{definition}
+
+\textbf{T2.2}
+
+\todo{T2.2 einfügen}
+
+Abbildung $\cdot^{\MI}$ wird induktiv auf zusammengesetzte Konzepte erweitert:
+
+\begin{itemize}
+	\item $(\neg C)^{\MI} = \Delta^{\MI} \setminus C^{\MI}$
+	\item $(C \sqcap D)^{\MI} = C^{\MI} \cap D^{\MI}$
+	\item $(C \sqcup D)^{\MI} = C^{\MI} \cup D^{\MI}$
+	\item $(\exists r.C)^{\MI} = \{d \in \Delta^{\MI} |$ es gibt $ e \in \Delta^{\MI}$ mit $(d,e) \in r^{\MI}$ und $e \in C^{\MI}\}$
+	\item $(\forall r.C)^{\MI} = \{d \in \Delta^{\MI} |$ für alle $ e \in \Delta^{\MI}$, $(d,e) \in r^{\MI}$ impliziert $e \in C^{\MI}\}$
+\end{itemize}
+
+Verwendete Simbole:
+
+\begin{itemize}
+	\item $\MI$, $\MJ$ für Interpretationen
+	\item $d$, $e$ für Elemente der Domäne
+\end{itemize}
+
+Für Interpretationen verwenden wir übliche Terminologie für Graphen:
+
+\begin{itemize}
+	\item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^{\MI}
+	\item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^{\MI}
+	\item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern / Vorgängern
+	\item $\MI$ ist endlich gdw. $\Delta^{\MI}$ endlich ist.
+\end{itemize}
+
+\subsection{Extension / Modell}
+
+Wir nennen
+
+\begin{itemize}
+	\item $C^{\MI}$ die Extension des Konzeptes $C$
+	\item jedes $d \in C^{\MI} eine Instanz des Konzeptes $C$
+	\item $r^{\MI}$ die Extension der Rolle $r$
+\end{itemize}
+
+Beachte:
+
+\begin{itemize}
+	\item $\top$

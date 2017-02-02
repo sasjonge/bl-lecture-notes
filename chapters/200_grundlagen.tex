@@ -1,69 +1,221 @@
-\theoremstyle{definition}
-\begin{definition}{$\ALC$-Konzepte} \\
-	Die Menge der $\ALC$-Konzepte is induktiv definiert:
-	\begin{itemize}
-		\item Jeder Konzeptname ist $\ALC$-Konzept
-		\item Wenn $C$, $D$ $\ALC$-Konzepte, so auch
-		\begin{itemize}
-			\item $\neg C$ \tabto{2cm}(Negation)
-			\item $C \sqcap D$ \tabto{2cm}(Konjunktion)
-			\item $C \sqcup D$ \tabto{2cm}(Disjunktion)
-		\end{itemize}
-		\item {Wenn $C$ $\ALC$-Konzept und $r$ Rollenname, so sind
-		\begin{itemize}
-			\item $\exists r.C$ \tabto{2cm}(Existenzrestriktion)
-			\item $\forall r.C$ \tabto{2cm}(Werterestriktion)
-		\end{itemize}
-		$\ALC$-Konzepte}
-	\end{itemize}
-\end{definition}
+\subsection{Attributive Language with Complement
+(ALC)}\label{attributive-language-with-complement-alc}
 
-\textbf{T2.1 Beispiel}
+\subsubsection{Konzept- und Rollennamen}\label{konzept--und-rollennamen}
 
-Hier einige Beispiel für diese Syntax:
+Konzept- und Rollennamen abzählbar unendliche und disjunkte (durch Groß-
+und Kleinschreibung) Mengen.
 
-\begin{center}
-$Student \sqcap \exists studiert.Naturwissenschaft$ \\
-$Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
-$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
-$A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
-\end{center}
+\subsubsection{Konzepte}\label{konzepte}
 
-\textbf{Weiteres zur Syntax}
+Rekursive Definition über Konzeptnamen, Negation, Konjunktion,
+Disjunktion, Existenz---und Werterestriktion. Darüber hinaus Top-Konzept
+und Bottom-Konzept.
 
-Dabei verwenden wir folgende Symbole:
+\subsubsection{Interpretation}\label{interpretation}
+
+$I$ ist Paar $\left( \Delta^{I}, \cdot^{I} \right)$ mit
 
 \begin{itemize}
-	\item{$A$,$B$ für Konzeptnamen}
-	\item{$C$,$D$ für zusammengesetzte Konzepte}
-	\item{$r$,$s$ für Rollennamen}
+\item
+  $\Delta^{I}$ nicht-leere Menge (\emph{Domäne})
+\item
+  $\cdot^{I}$ Interpretationsfunktion bildet ab:
+
+  \begin{itemize}
+  \item
+    jeden Konzeptnamen $A$ auf Menge $A^{I} \subseteq \Delta^{I}$
+  \item
+    jeden Rollennamen $r$ auf Relation
+    $r^{I} \subseteq \Delta^{I} \times \Delta^{I}$
+  \end{itemize}
 \end{itemize}
 
-Zudem benutzen zudem folgende Abkürzungen: wir schreiben
+Außerdem rekursive Definition für Zusammengesetzte Konzeptnamen.
+
+\subsubsection{Terminologien}\label{terminologien}
 
 \begin{itemize}
-	\item{$\top$ für $A \sqcup \neg A$}
-	\item{$\perp$ für $A \sqcap \neg A$}
+\item
+  $C^{I}$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
+\item
+  jedes $d \in C^{I}$ ist eine Instanz des Konzeptes $C$
+\item
+  $r$-Nachfolger, $r$-Vorgänger
 \end{itemize}
 
-\textbf{Präzedenzregel}
+\hypertarget{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}{\subsubsection{Erfüllbarkeit,
+Subsumtion,
+Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
+
+Definition: Seien $C$ und $D$ ALC-Konzepte. Dann
 
 \begin{itemize}
-	\item{$\neg$,$\exists$,$\forall$ binden stärker als $\sqcap$ und $\sqcup$}
+\item
+  ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $I$ gibt mit
+  $C^{I} \neq \varnothing$. $I$ ist dann ein \emph{Modell} von
+  $C$.
+\item
+  wird $C$ von $D$ \emph{subsumiert}, wenn $C^{I} \subseteq D^{I}$
+  in allen Interpretationen $I$ (Notation $C \sqsubseteq D$)
+\item
+  sind C und D \emph{äquivalent}, wenn $C = D$ in allen
+  Interpretationen $I$ (Notation $C \equiv D$)
 \end{itemize}
 
-Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\exists r.A) \sqcap B)$ und nicht für $\forall r.(\exists r.(A \sqcap B))$.
+Es gelten die üblichen aussagenlogischen Äquivalenten, wie z.B. de
+Morgan.
 
-Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
+\subsection{TBoxen}\label{tboxen}
 
-\begin{definition}{$\ALC$ Semantik} \\
-Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
-	\begin{itemize}
-		\item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
-		\item{$\cdot^{\MI}$ \emph{Interpretationsfunktion} bildet ab:
-		 \begin{itemize}
-			 \item{jeden Konzeptnamen $A$ auf Menge $A^{\MI} \subseteq \Delta^{\MI}$}
-			 \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
-		 \end{itemize}}
-	\end{itemize}
-\end{definition}
+TBoxen definieren Konzepte und setzten diese zueinander in Beziehung.
+
+\subsubsection{Definition}\label{definition-1}
+
+\emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$. \emph{TBox}
+ist endliche Menge von Konzeptinklusionen. $C \equiv D$ ist Abkürzung
+für $C \sqsubseteq D$, $D \sqsubseteq C$. Eine Interpretation $I$
+
+\begin{itemize}
+\item
+  erfüllt Konzeptinklusion $C \sqsubseteq D$ gdw.
+  $C^{I} \subseteq D^{I}$
+\item
+  ist Modell von TBox $T$ gdw. $I$ alle Konzeptinklusionen in $T$
+  erfüllt
+\end{itemize}
+
+\subsubsection{Modellierung}\label{modellierung}
+
+\begin{itemize}
+\item
+  Konzeptinklusion $A \sqsubseteq C$: $C$ ist notwendige Bedingung
+  dafür, eine Instanz von $A$ zu sein
+\item
+  Konzeptdefinition $A \equiv C$: \emph{C} ist hinreichende Bedingung
+  dafür, eine Instanz von $A$ zu sein
+\item
+  Disjunktheitsconstraints $C \sqcap D \sqsubseteq \bot$: Kein Objekt
+  kann gleichzeitig zu $C$ und $D$ gehören
+\end{itemize}
+
+\subsubsection{Erfüllbarkeit, Subsumtion,
+Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
+
+Wie in
+\protect\hyperlink{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}{2.1.5},
+nur ist $I$ jeweils Modell von einer TBox $T$.
+
+\begin{itemize}
+\item
+  Erfüllbarkeit zeigen: Modell angeben
+\item
+  Unerfüllbarkeit / Subsumption zeigen: semantisch Argumentieren
+\item
+  Nicht-Subsumtion zeigen: Gegenmodell angeben
+\end{itemize}
+
+\subsubsection{Monotonie}\label{monotonie}
+
+\textbf{Lemma 2.7}: Seinen $T_{1}$ und $T_{2}$ TBoxen mit
+$T_{1} \subseteq T_{2}$. Dann gilt:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Wenn $C$ erfüllbar bzgl. $T_{2}$, dann ist $C$ erfüllbar bzgl.
+  $T_{1}$.
+\item
+  Wenn $T_{1} \vDash C \sqsubseteq D$, dann
+  $T_{2} \vDash C \sqsubseteq D$.
+\end{enumerate}
+
+Beweisskizze.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Sei $C$ erfüllbar bzgl. $T_{2}$. Dann gibt es Modell $I$ von
+  $T_{2}$ mit $C^{I} \neq \varnothing$. Also erfüllt $I$ alle
+  Konzeptinklusionen in $T_{2}$ und wegen $T_{1} \sqsubseteq T_{2}$
+  auch alle in $T_{1}$.
+\item
+  Kontraposition, analog zu 1.
+\end{enumerate}
+
+\subsection{Schlussfolgerungsprobleme}\label{schlussfolgerungsprobleme}
+
+Die Probleme sind wechselseitig aufeinander reduzierbar:
+
+\begin{itemize}
+\item
+  \emph{Erfüllbarkeitsproblem} auf Nicht-Äquivalenz
+\end{itemize}
+
+$C$ erfüllbar bzgl. $T$ gdw. $\neg T \vDash C \equiv \bot$
+
+\begin{itemize}
+\item
+  \emph{Subsumtionsproblem} auf Unerfüllbarkeit
+\end{itemize}
+
+$T \vDash C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
+$T$
+
+\begin{itemize}
+\item
+  \emph{Äquivalenzproblem} auf Subsumtion
+\end{itemize}
+
+$T \vDash C \equiv D$ \emph{gdw.}
+$T \vDash \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$
+
+Motivation hinter den Problemen:
+
+\begin{itemize}
+\item
+  Modellierungsfehler finden
+\item
+  Struktur der TBox explizit machen
+\item
+  Redundanzen finden
+\end{itemize}
+
+\subsubsection{Subsumtion als
+Ordnungsrelation}\label{subsumtion-als-ordnungsrelation}
+
+\textbf{Lemma 2.8}: Für jede TBox $T$ ist die Relation
+„$\sqsubseteq$ bzgl. $T$``
+
+\begin{itemize}
+\item
+  reflexiv ($T \vDash C \sqsubseteq C$) und
+\item
+  transitiv ($T \vDash C \sqsubseteq D$ und
+  $T \vDash D \sqsubseteq E$ impliziert $T \vDash C \sqsubseteq E$).
+\end{itemize}
+
+Bis auf fehlende Antisymmetrie ist $\sqsubseteq$ also partielle
+Ordnung (Hasse-Diagramm).
+
+\subsection{Erweiterungen von ALC}\label{erweiterungen-von-alc}
+
+\subsubsection{Inverse Rollen (ALCI)}\label{inverse-rollen-alci}
+
+Definition: Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
+Rolle} zu $r$. Wir definieren
+$\left( r^{-} \right)^{I} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{I}\}$
+
+\subsubsection{Zahlenrestriktion (ALCQ)}\label{zahlenrestriktion-alcq}
+
+Definition: Für jede natürliche Zahl $n$, jeden Rollennamen $r$ und
+jedes Konzept $C$:
+
+\begin{itemize}
+\item
+  Höchstens-Restriktion:
+  $\left( \leq n\ r\ C \right)^{I} = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \leq n \right\}$
+\item
+  Mindestens-Restriktion
+  $( \leq n\ r\ C) = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \geq n \right\}$
+\end{itemize}
