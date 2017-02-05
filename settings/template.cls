@@ -33,14 +33,16 @@
 \NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}
 
 \usepackage{textgreek} % Use for example textepsilon
+\setlength\parindent{0pt}
+\let\emptyset\varnothing
 %%%%%%%%%%%%%%%%%%%
 % Define Theorems %
 %%%%%%%%%%%%%%%%%%%
-
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+
 
 
 %%%%%%%%%%%%%
