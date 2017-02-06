@@ -1,5 +1,5 @@
 \subsection{Attributive Language with Complement
-(ALC)}\label{attributive-language-with-complement-alc}
+($\ALC$)}\label{attributive-language-with-complement-alc}
 
 \subsubsection{Konzept- und Rollennamen}\label{konzept--und-rollennamen}
 
@@ -128,7 +128,7 @@ Menschen, die keine Kinder haben
 {\subsubsection{Erfüllbarkeit,Subsumtion,Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
 
 \begin{definition}{Erfüllbar, susumiert, äquivalent} \\
-Seien $C$ und $D$ ALC-Konzepte. Dann
+Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 
 \begin{itemize}
 \item
@@ -298,6 +298,7 @@ Dies ist ein Berechnungsproblem (kein Entscheidungsproblem), das in der Praxis d
 
 Die Entscheidungsprobleme sind wechselseitig polynomiell aufeinander reduzierbar:
 
+\begin{lemma}
 \begin{enumerate}
 \item{\emph{Erfüllbarkeit} auf \emph{Nicht-Äquivalenz} \\
 $C$ erfüllbar bzgl. $T$ gdw. $T \not\vDash C \equiv \bot$}
@@ -307,27 +308,49 @@ $T$
 \item{\emph{Äquivalenz} auf \emph{Subsumtion} \\}
 $T \vDash C \equiv D$ \emph{gdw.} $T \vDash \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
 \end{enumerate}
+\end{lemma}
 
 Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die anderen beiden verwendet werden können. Alle drei Probleme haben dieselbe Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auch Erfüllbarkeit konzentrieren.
 
-\subsection{Erweiterungen von ALC}\label{erweiterungen-von-alc}
+\subsection{Erweiterungen von $\ALC$}\label{erweiterungen-von-alc}
 
-\subsubsection{Inverse Rollen (ALCI)}\label{inverse-rollen-alci}
+Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von $\ALC$. Es existieren viel mehr Erweiterungen (z.B.: um spezielle Rolleniterpretationen, temporale Operatoren etc.). Diese können auch kombiniert werden, z.B.: $\ALCQI$.
 
-Definition: Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
-Rolle} zu $r$. Wir definieren
+\subsubsection{Inverse Rollen ($\ALCI$)}\label{inverse-rollen-alci}
+
+Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen in Existenz- und Werterestriktionen zu benutzen erweitert.
+
+\begin{definition}{Inverse Rollen}
+Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
+Rolle} zu $r$. Wir definieren \\
 $\left( r^{-} \right)^{I} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{I}\}$
+\end{definition}
 
-\subsubsection{Zahlenrestriktion (ALCQ)}\label{zahlenrestriktion-alcq}
+\subsubsection{Zahlenrestriktion ($\ALCQ$)}\label{zahlenrestriktion-alcq}
 
-Definition: Für jede natürliche Zahl $n$, jeden Rollennamen $r$ und
+\begin{definition}{Zahlenrestriktion}
+Für jede natürliche Zahl $n$, jeden Rollennamen $r$ und
 jedes Konzept $C$:
 
+\begin{itemize}
+  \item $\left( \leq n\ r\ C \right)$ (Höchstens-Restriktion)
+  \item $\left( \geq n\ r\ C \right)$ (Mindestens-Restriktion)
+\end{itemize}
+
+Die Semantik ist
 \begin{itemize}
 \item
   Höchstens-Restriktion:
   $\left( \leq n\ r\ C \right)^{I} = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \leq n \right\}$
 \item
   Mindestens-Restriktion
-  $( \leq n\ r\ C) = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \geq n \right\}$
+  $( \geq n\ r\ C) = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \geq n \right\}$
+\end{itemize}
+\end{definition}
+
+Beachte:
+
+\begin{itemize}
+  \item $\exists r.C$ ist äquivalent zu $(\geq 1\ r\ C)$
+  \item $\forall r.C$ ist äquivalent zu $(\leq 0\ r\ \neg C)$
 \end{itemize}

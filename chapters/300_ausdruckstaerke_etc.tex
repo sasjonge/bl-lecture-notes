@@ -5,7 +5,9 @@ charakterisieren.
 
 \subsection{Bisimulation}\label{bisimulation}
 
-\subsubsection{Definition}\label{definition-2}
+Bisimulation ist ein graphentheoretische Begriff, die ``Ähnlichkeit'' von Graphen beschreibt und eng mit der Ausdruckstärke von $\ALC$ zusammenhängt.
+
+\begin{definition}{Bisimulation}
 
 Seien $I_{1}$ und $I_{2}$ Interpretationen. Relation
 $\rho \subseteq \Delta^{I_{1}} \times \Delta^{I_{2}}$ ist Bisimulation
@@ -29,6 +31,7 @@ zwischen $I_{1}$ und $I_{2}$, wenn gilt:
   mit ${d'}_{1}\text{\ $\rho$}{\ d'}_{2}$ und
   $\left( d_{1},d_{1}^{'} \right) \in r^{I_{1}}$.
 \end{enumerate}
+\end{definition}
 
 Seien $I_{1}$ und $I_{2}$ Interpretationen,
 $d_{1} \in \Delta^{I_{1}}$, $d_{2} \in \Delta^{I_{2}}$:
@@ -37,21 +40,24 @@ $(I_{1},d_{1}) \sim (I_{2},d_{2})$: Es gibt Bisimulation $\rho$
 zwischen $I_{1}$ und $I_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
 Die leere Relation ist immer Bisimulation.
 
-\subsubsection{Theorem 3.2}\label{theorem-3.2}
-
+\begin{theorem}
 Seien $I_{1}$, $I_{2}$ Interpretationen,
 $d_{1} \in \Delta^{I_{1}}$ und $d_{2} \in \Delta^{I_{2}}$. Wenn
 $(I_{1},d_{1}) \sim (I_{2},d_{2})$, dann gilt für alle ALC-Konzepte
 $C$:
 
-$d_{1} \in C^{I_{1}}$ gdw. $d_{2} \in C^{I_{2}}$
+$$d_{1} \in C^{I_{1}}\ gdw.\ d_{2} \in C^{I_{2}}$$
+\end{theorem}
 
+\textbf{T3.2.}
+
+\begin{proof}
 Beweisskizze per Induktion über die Struktur von C. Sei $\rho$ eine
 Bisimulation zwischen $I_{1}$ und $I_{2}$ mit
 $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
-Bisimulation gilt $d_{1} \in A^{I_{1}}$ gdw. $d_{2} \in A^{I_{2}}$.
+Bisimulation gilt $$d_{1} \in A^{I_{1}}\ gdw.\ d_{2} \in A^{I_{2}}$$.
 
 \textbf{I.S.} Unterscheide Fälle gemäß des äußersten Konstruktes von C.
 Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
@@ -63,9 +69,13 @@ Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
 \end{enumerate}
 
 \begin{quote}
-$d_{1} \in C^{I_{1}}$ gdw. $d_{1} \notin D^{I_{1}}$ (Semantik) gdw.
-$d_{2} \notin D^{I_{2}}$ (I.V.) gdw. $d_{2} \in C^{I_{2}}$
-(Semantik)
+\begin{equation}
+\begin{split}
+d_{1} \in C^{I_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
+&\stackrel{I.V.}{gdw.} d_{2} \notin D^{\MI_{2}} \\
+&\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
+\end{split}
+\end{equation}
 \end{quote}
 
 \begin{enumerate}
@@ -75,10 +85,13 @@ $d_{2} \notin D^{I_{2}}$ (I.V.) gdw. $d_{2} \in C^{I_{2}}$
 \end{enumerate}
 
 \begin{quote}
-$d_{1} \in C^{I_{1}}$ gdw. $d_{1} \in D_{1}^{I_{1}}$und
-$d_{1} \in D_{2}^{I_{1}}$ (Semantik) gdw. $d_{2} \in D_{1}^{I_{2}}$
-und $d_{2} \in D_{2}^{I_{2}}$ (I.V.) gdw. $d_{2} \in C^{I_{2}}$
-(Semantik)
+\begin{equation}
+\begin{split}
+d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \in D_{1}^{\MI_{1}}\ und\ d_{1} \in D_{2}^{\MI_{1}}\\
+&\stackrel{I.V.}{gdw.} d_{2} \in D_{1}^{\MI_{2}}\ und\ d_{2} \in D_{2}^{\MI_{2}} \\
+&\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
+\end{split}
+\end{equation}
 \end{quote}
 
 \begin{enumerate}
@@ -88,28 +101,71 @@ und $d_{2} \in D_{2}^{I_{2}}$ (I.V.) gdw. $d_{2} \in C^{I_{2}}$
 \end{enumerate}
 
 \begin{quote}
-Hinrichtung und Rückrichtung analog über Semantik, 2. Bedingung der
-Bisimulation, I.V., Semantik.
+\begin{equation}
+\begin{split}
+d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{\Rightarrow} \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1}\\
+&\stackrel{2.Bed.}{\Rightarrow} \exists e_2 \in \Delta_2^{\MI_2}: (d_2,e_e) \in r^{\MI_2}\ und\ (e_1 \rho e_2) \\
+&\stackrel{I.V.}{\Rightarrow} e_2 \in D^{\MI_2} \\
+&\stackrel{Sem.}{\Rightarrow} d_{2} \in (\exists r.D)^{\MI_2} \\
+&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_{2}}
+\end{split}
+\end{equation}
+Rückrichtung analog, nur mit der 3. Bedingung.
 \end{quote}
+\end{proof}
 
 \subsection{Ausdrucksstärke}\label{ausdrucksstuxe4rke}
 
-\subsubsection{Definition}\label{definition-3}
+\begin{definition}{Eigenschaft, Ausdrückbarkeit}
 
-Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(I,d)$, wobei
-$I$ eine Interpretation und $d \in \Delta^{I}$ ein Element in $I$
-ist. $E$ ist \emph{ausdrückbar in ALC}, wenn es ein ALC-Konzept $C$
-gibt, so dass für alle $I$ und $d \in \Delta^{I}$ gilt:
-$\left( I,\ d \right) \in E$ gdw. $d \in C^{I}$.
+Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(\MI,d)$, wobei
+$\MI$ eine Interpretation und $d \in \Delta^{\MI}$ ein Element in $\MI$ ist.
 
-\subsubsection{Theorem 3.4}\label{theorem-3.4}
+$E$ ist \emph{ausdrückbar in $\ALC$}, wenn es ein $\ALC$-Konzept $C$
+gibt, so dass für alle $\MI$ und $d \in \Delta^{\MI}$ gilt:
+$$\left( \MI,\ d \right) \in E\ gdw.\ d \in C^{\MI}$$
+\end{definition}
 
-Die zusätzlichen Eigenschaften von ALCI und ALCQ sind in ALC nicht
-ausdrückbar.
+\subsubsection{Anwendungen von Bisimulation I}\label{theorem-3.4}
+
+\begin{theorem}
+In $\ALC$ ist nicht ausdrückbar: 
+\begin{itemize}
+\item das $\ALCI$-Konzept $\exists r^{-}.\top$ 
+\item die $\ALCQ$-Konzepte
+\begin{itemize}
+  \item $(\leq\ n\ r\ \top)$ für alle $n\ > 0$ und
+  \item $(\geq\ n\ r\ \top)$ für alle $n\ > 1$
+\end{itemize}
+\end{itemize}
+\end{theorem}
+
+\textbf{T.3.3.}
 
 Beweisskizze. Finde Bisimulation für die dies nicht gilt.
 
-\subsubsection{Theorem 3.5}\label{theorem-3.5}
+\begin{proof}
+\textbf{$\exists r.\top$}
+
+Betrachte 2 Interpretationen $\MI$ und $\MJ$
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/33inv.png}
+
+Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^{\MI}$. Mit Theorem 3.2 folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
+\end{proof} 
+
+\begin{proof}
+$\leq\ n\ r\ \top$
+
+Betrachte 2 Interpretationen $\MI$ und $\MJ$
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/33low.png}
+
+Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv (\leq\ n\ r\ \top)$. Dann gilt $d \in C^{\MI}$. Mit Theorem 3.2 folgt $x \in C^{\MJ}$, also $x \in (\leq\ n\ r\ \top)$. $\lightning$
+\end{proof}
+
+Man sieht, dass die Argumentation zum Beweis der Nicht-Ausdrückbarkeit immer auf dasselbe hinausläuft:
+\begin{theorem}
 
 Sei $E$ eine Eigenschaft. Wenn es Interpretation $I_{1}$, $I_{2}$
 und Elemente $d_{1} \in \Delta^{I_{1}}$ und
@@ -123,99 +179,134 @@ $d_{2} \in \Delta^{I_{2}}$ gibt, so dass
   $(I_{1},d_{1}) \sim (I_{2},d_{2})$
 \end{itemize}
 
-dann ist $E$ nicht in ALC ausdrückbar.
+dann ist $E$ nicht in $\ALC$ ausdrückbar.
+\end{theorem}
 
-\subsubsection{Theorem 3.6}\label{theorem-3.6}
+\subsubsection{Anwendungen von Bisimulation II}\label{theorem-3.6}
 
-Wenn ein ALC-Konzept $C$ bzgl. einer ALC-TBox $T$ erfüllbar ist,
-dann haben $C$ und $T$ ein gemeinsames Baummodell $I$. $I$ Baum,
-Wurzel in $C^{I}$.
+Interpretation ist \emph{Baum} gdw. $(\Delta^{\MI}, \cdot^{\MI})$ Baum (endl. oder unendl.). $\ALC$ hat die \emph{Baummodelleigenschaft}
+
+\begin{theorem}
+Wenn ein ALC-Konzept $C$ bzgl. einer ALC-TBox $\MT$ erfüllbar ist,
+dann haben $C$ und $\MT$ ein \underline{gemeinsames Baummodell} $\MI$. (mit $\MI$ Baum, Wurzel in $C^{\MI}$.)
+\end{theorem}
 
 \subsubsection{Unravelling}\label{unravelling}
 
-Sei $I$ eine Interpretation und $d \in \Delta^{I}$. $d$-Pfad in
-$I$: Sequenz $d_{0}d_{1}\ldots d_{n - 1}$, $n > 0$ mit
+Sei $\MI$ eine Interpretation und $d \in \Delta^{\MI}$. 
+
+$d$-Pfad in $\MI$: Sequenz $d_{0}d_{1}\ldots d_{n - 1}$, $n > 0$ mit
 
 \begin{itemize}
 \item
   $d_{0} = d$
 \item
   für alle $i < n$: es gibt Rollenname $r$ mit
-  $\left( d_{i},d_{i + 1} \right) \in r^{I}$.
+  $\left( d_{i},d_{i + 1} \right) \in r^{\MI}$.
 \end{itemize}
 
 Wir setzen
 $\text{end}\left( d_{0}\ldots d_{n - 1} \right) = d_{n - 1}$.
 
-Definition: Unravelling von $I$ an Stelle $d$ ist folgende
-Interpretation $J$:
+\begin{definition}{Unravelling}
+
+Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 
 \begin{itemize}
 \item
-  $\Delta^{J} =$ Menge aller $d$-Pfade in $I$
+  $\Delta^{\MJ} =$ Menge aller $d$-Pfade in $\MI$
 \item
-  $A^{J} = \left\{ p \in \Delta^{J}\  \right|\text{\ end}\left( p \right) \in A^{I}\}$
+  $A^{\MJ} = \left\{ p \in \Delta^{\MJ}\  \right|\text{\ end}\left( p \right) \in A^{\MI}\}$
 \item
-  $r^{J} = \left\{ \left( p,p' \right) \in \Delta^{J} \times \Delta^{J}\ |\ \exists e:p^{'} = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^{I} \right\}$
+  $r^{\MJ} = \left\{ \left( p,p' \right) \in \Delta^{\MJ} \times \Delta^{\MJ}\ |\ \exists e:p^{'} = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^{\MI} \right\}$
 \end{itemize}
+
+für alle Konzeptnamen $A$ und Rollennamne $r$
+\end{definition}
+
+\includegraphics[width=4.71910in,height=1.83200in]{media/36unraveling.png}
 
 Erklärung: Erzeuge Knoten, die den Folgen entsprechen, füge sie den
 Konzepten hinzu, die als letztes Element in der Folge vorkommen und
 erzeuge Kanten die den weiterführenden Rollen entsprechen.
 
-\hypertarget{lemma-3.8}{\subsubsection{Lemma 3.8}\label{lemma-3.8}}
+\begin{lemma}\label{lemma37}
+Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle $\ALC$-Konzepte $C$ und alle $p \in \Delta^{\MJ}$ gilt:
+$$\text{end}\left( p \right) \in C^{\MI}\ gdw.\ p \in C^{\MJ}$$
+\end{lemma}
 
-Sei $J$ Unravelling von $I$ an Stelle $d$. Für alle ALC-Konzepte
-$C$ und alle $p \in \Delta^{J}$ gilt:
-$\text{end}\left( p \right) \in C^{I}$ gdw. $p \in C^{J}$.
+\textbf{T3.7}
 
-Beweisskizze. Zeige Bisimulation
-$\left( I,end\left( p \right) \right)\sim\left( J,p \right)$, z.B.
-$\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^{I} \times \Delta^{J}\  \right|\text{\ p\ }\mathrm{\text{ist}}\text{\ d}\mathrm{- Pfad}\}\ $(Bilde
-alle Knoten in $J$ auf ihr Ende ab).
+\begin{proof}
+Mit Theorem genügt es folgende Bisimulation zu zeigen:
+$$\left( I,end\left( p \right) \right)\sim\left( J,p \right)$$ Definiere Relation: $$\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^{\MI} \times \Delta^{\MJ}\  \right|\text{\ p\ }\mathrm{\text{ist}}\text{\ d}\mathrm{- Pfad}\}\ $$(Bilde
+alle Knoten in $\MJ$ auf ihr Ende ab). 
+
+Zur Bisimulation:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  gilt per Definition von $J$.
+  gilt per Definition von $\MJ$.
 \item
-  Angenommen $e$,$\rho$, $p$ und
-  $\left( e,e^{'} \right) \in r^{I}$. Dann $e = end\left( p \right)$
-  per Konstruktion von $J$. Wegen $\left( e,e^{'} \right) \in r^{I}$
-  ist $pe'$ Pfad. Nach Konstruktion von $J$ gilt
-  $\left( p,pe^{'} \right) \in r^{J}$.
+  Angenommen $e$ $\rho$ $p$ und
+  $\left( e,e^{'} \right) \in r^{\MI}$. Dann $e = end\left( p \right)$
+  per Konstruktion von $\MJ$. Wegen $\left( e,e^{'} \right) \in r^{\MI}$
+  ist $pe'$ Pfad. Nach Konstruktion von $\MJ$ gilt
+  $\left( p,pe^{'} \right) \in r^{\MJ}$.
 \end{enumerate}
+\end{proof}
 
-\subsubsection{Theorem 3.6}\label{theorem-3.6-1}
+Nun folgt Theorem 3.6.:
 
-Wenn ein ALC-Konzept $C$ bzgl. einer TBox $T$ erfüllbar ist, dann
-haben $C$ und $T$ ein gemeinsames Baummodell $I$.
+\textbf{Theorem 3.6} Wenn ein $\ALC$-Konzept $C$ bzgl. einer TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Baummodell $\MI$.
 
-Beweisskizze. Wurzel von Unravelling $J$ von $I$ an der Stelle
-$d \in C^{I}$ nach \protect\hyperlink{lemma-3.8}{Lemma 3.8} in
-$C^{J}$. Zu zeigen: $J$ ist Modell von $T$. Sei
-$D \sqsubseteq E$ in $T$ und $p \in D^{J}$. Nach
-\protect\hyperlink{lemma-3.8}{Lemma 3.8} ist dann
-$\text{end}\left( p \right) \in D^{I}$ und weil $I$ Modell von $T$
-folgt $\text{end}\left( p \right) \in E^{I}$. Mit
-\protect\hyperlink{lemma-3.8}{Lemma 3.8} folgt
-$p \in E^{J} \Rightarrow J \vDash D \sqsubseteq E$.
+\textbf{T3.8}
+\begin{proof}
+Sei $C$ erfüllbar bezüglich $\MT$. Dann gibt es Modell $\MI$ von $C$ und $\MT$. Sei $\MJ$ das Unravelling von $\MI$ an der Stelle
+$d_0 \in C^{\MI}$.
 
-\subsubsection{Bisimulation versus
-Ausdrucksstärke}\label{bisimulation-versus-ausdrucksstuxe4rke}
+Mit \hyperlink{lemma37}{Lemma 3.8} ist die Wurzel $d_0$ von $\MJ$ in $C^{\MJ}$. Noch zu zeigen: $\MJ$ ist Modell von $\MT$. 
 
-Bisimulation entspricht nicht der Ausdrucksstärke von ALC.
+Sei $D \sqsubseteq E$ in $\MT$ und $p \in D^{\MJ}$. Nach \protect\hyperlink{lemma37}{Lemma 3.8} ist dann $\text{end}\left( p \right) \in D^{\MI}$ und weil $\MI$ Modell von $\MT$ folgt $\text{end}\left( p \right) \in E^{\MI}$. Mit \protect\hyperlink{lemma37}{Lemma 3.8} folgt $p \in E^{\MJ} \Rightarrow J \vDash D \sqsubseteq E$.
+\end{proof}
 
-\subsubsection{Bisimulation in ALCI}\label{bisimulation-in-alci}
+\subsubsection{Bisimulation versus Ausdrucksstärke}\label{bisimulation-versus-ausdrucksstuxe4rke}
 
-Füge 2 Regeln hinzu, sodass Vorgänger auch simuliert sein müssen.
+Bisimulation entspricht nicht der Ausdrucksstärke von $\ALC$, denn die Gegenrichtung von Theorem 3.2 gilt nicht:
+
+Es gibt Interpreatationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^{\MI}$ gdw. $x \in C^{\MJ}$ für alle $\ALC$-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
+
+Beispiel:
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/39bis.png}
+
+Es gilt:
+
+\begin{itemize}
+  \item $d \in C^{\MI}$ gdw. $x \in C^{\MJ}$, falls ALC-Konzept C
+  \item $(\MI,d) \not\sim (\MJ,x)$: für $y$ in $\MJ$ gibt es kein adäquates Element $e \in \Delta^{\MI}$ mit $e\ \rho\ y$
+\end{itemize}
+
+Sie gilt allerdings für verschiedene Klassen von Interpretationen, wie die Klasse aller endlichen Interpretationen oder die Klasse aller Interpretationen mit endlicher Verweigungszahl.
+
+\subsubsection{Bisimulation für Erweiterungen von $\ALCI$}\label{bisimulation-in-alci}
+
+Für $\ALCI$, $\ALCQ$ und $\ALCQI$ gibt es ebenfalls Bisimulationsbegriffe.
+
+Fpr $\ALCI$ füge 2 Regeln hinzu, sodass Vorgänger auch simuliert sein müssen.
+
+So kann man zudem zeigen, dass $\ALCI$, $\ALCQ$ und $\ALCQI$ die Baummodelleigenschaft haben.
 
 \subsection{Ausdrucksstärke und
 Modellkonstruktion}\label{ausdrucksstuxe4rke-und-modellkonstruktion}
 
+In diesem Kapitel wird die endliche Modelleigenschaft und Filtration eingeführt.
+
 \subsubsection{Größe von Konzepten und
 TBoxen}\label{gruxf6uxdfe-von-konzepten-und-tboxen}
 
+\begin{definition}{Größe}
 \emph{Größe} $\left| C \right|$ eines ALC-Konzeptes $C$ ist induktiv
 definiert:
 
@@ -230,11 +321,40 @@ definiert:
   $\left| \exists r.C \right| = \left| \forall r.C \right| = \left| C \right| + 3$
 \end{itemize}
 
-\emph{Größe} $\left| C \right|$ einer TBox $T$ ist
+\emph{Größe} $\left| C \right|$ einer TBox $\MT$ ist
 
 \begin{itemize}
 \item
   $\sum_{C \sqsubseteq D \in T}^{}{\left| C \right| + \left| D \right| + 1}$
+\end{itemize}
+\end{definition}
+
+Intuitiv entspricht dies der Anzahl von Symbolen in $C$ bzw. $\MT$.
+
+\subsubsection{Endliche/beschränkte Modelleigenschaft}
+
+$\ALC$ hat \emph{endliche Modelleigenschaft}:
+
+\begin{theorem}
+Wenn ein $\ALC$-Konzept $C$ bzgl. einer $\ALC$-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames \emph{endliches} Modell.
+\end{theorem}
+
+$\ALC$ hat sogar \emph{beschränkte Modelleigenschaft}:
+
+\begin{theorem}
+Wenn ein $\ALC$-Konzept $C$ bzgl. einer $\ALC$-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der \emph{Kardinalität} $\leq 2^{|C|+|T|}$
+\end{theorem}
+
+\subsubsection{Typ}
+
+Im Folgenden sei $C$ $\ALC$-Konzept und $\MT$ TBox, so dass $C$ erfüllbar bzgl. $\MT$.
+
+Wir definieren den Begriff eines Typs:
+
+\begin{itemize}
+  \item ist Menge von Konzepten
+  \item beschreibt einen Punkt $d \in \Delta^{\MI}$ in einer Interpreatation $\MI$
+  \item Einschränkung auf Teilkonzepte von $C$ und $\MT$ (um Endlichkeit zu erreichen)
 \end{itemize}
 
 \subsubsection{Teilkonzepte}\label{teilkonzepte}
@@ -255,47 +375,47 @@ $\left| \text{sub}\left( C,T \right) \right| \leq \left| C \right| + \left| T \r
 
 \subsubsection{Typ}\label{typ}
 
-Sei $I$ eine Interpretation, $d \in \Delta^{I}$. Der \emph{Typ}
-$t_{I}\left( d \right)$ \emph{von} $d$ \emph{in} $I$ ist
-$t_{I}\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^{I}\}$.
+Sei $\MI$ eine Interpretation, $d \in \Delta^{\MI}$. Der \emph{Typ}
+$t_{\MI}\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
+$t_{\MI}\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^{\MI}\}$.
 
-Erklärung: Alle Konzepte in $T$ und $C$, die ein Objekt $d$
+Erklärung: Alle Konzepte in $\MT$ und $C$, die ein Objekt $d$
 erfüllt.
 
 \hypertarget{lemma-3.15}{\subsubsection{Lemma 3.15}\label{lemma-3.15}}
 
-Für jede Interpretation $I$ gilt:
-$\#\left\{ t_{I}\left( d \right)\ |\ d \in \Delta^{I} \right\} \leq 2^{\left| C \right| + |T|}$
+Für jede Interpretation $\MI$ gilt:
+$\#\left\{ t_{\MI}\left( d \right)\ |\ d \in \Delta^{\MI} \right\} \leq 2^{\left| C \right| + |T|}$
 
 \subsubsection{Filtration}\label{filtration}
 
-Sei $I$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
-$\Delta^{I}$: $d \sim e$ gdw.
-$t_{I}\left( d \right) = t_{I}\left( e \right)$. Wir bezeichnen diese
-Äquivalenzklasse von $d \in \Delta^{I}$ bzgl. $\sim$ mit
-$\left\lbrack d \right\rbrack$. Die Filtration von $I$ bzgl. $C$
-und $T$ ist folgende Interpretation $J$:
+Sei $\MI$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
+$\Delta^{\MI}$: $d \sim e$ gdw.
+$t_{\MI}\left( d \right) = t_{\MI}\left( e \right)$. Wir bezeichnen diese
+Äquivalenzklasse von $d \in \Delta^{\MI}$ bzgl. $\sim$ mit
+$\left\lbrack d \right\rbrack$. Die Filtration von $\MI$ bzgl. $C$
+und $\MT$ ist folgende Interpretation $\MJ$:
 
 \begin{itemize}
 \item
-  $\Delta^{J} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^{I} \right\}$
+  $\Delta^{\MJ} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^{\MI} \right\}$
 \item
-  $A^{J} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^{I} \right\}$
+  $A^{\MJ} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^{\MI} \right\}$
   für alle $A \in sub\left( C,T \right)$
 \item
-  $r^{J} = \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^{I} \right\}$
+  $r^{\MJ} = \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^{\MI} \right\}$
   für alle Rollennamen $r$
 \end{itemize}
 
 \hypertarget{theorem-3.17}{\paragraph{Theorem 3.17}\label{theorem-3.17}}
 
-Wenn $I$ Modell von $C$ und $T$, so auch $J$, bzw. für alle
-$d \in \Delta^{I}$ und $D \in sub(C,T)$ gilt: $d \in D^{I}$ gdw.
-$\left\lbrack d \right\rbrack \in D^{J}$
+Wenn $\MI$ Modell von $C$ und $\MT$, so auch $\MJ$, bzw. für alle
+$d \in \Delta^{\MI}$ und $D \in sub(C,T)$ gilt: $d \in D^{\MI}$ gdw.
+$\left\lbrack d \right\rbrack \in D^{\MJ}$
 
 Beweisskizze per Induktion über die Struktur von D.
 
-\textbf{I.A.} $C = A$ folgt aus Definition $A^{J}$.
+\textbf{I.A.} $C = A$ folgt aus Definition $A^{\MJ}$.
 
 \textbf{I.S.}
 
@@ -314,14 +434,14 @@ Beweisskizze per Induktion über die Struktur von D.
 \end{enumerate}
 
 \begin{quote}
-$d \in \left( \exists r.E \right)^{I} \Leftrightarrow$ (Semantik) es
-gibt $e \in \Delta^{I}$ mit $\left( d,e \right) \in r^{I}$ und
-$e \in E^{I} \Rightarrow$ (Definition $r^{J}$ und I.V.) es gibt
-$e \in \Delta^{I}$ mit
-$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{J}$
-und $\left\lbrack e \right\rbrack \in E^{J} \Leftrightarrow$ (Semantik
+$d \in \left( \exists r.E \right)^{\MI} \Leftrightarrow$ (Semantik) es
+gibt $e \in \Delta^{\MI}$ mit $\left( d,e \right) \in r^{\MI}$ und
+$e \in E^{\MI} \Rightarrow$ (Definition $r^{\MJ}$ und I.V.) es gibt
+$e \in \Delta^{\MI}$ mit
+$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$
+und $\left\lbrack e \right\rbrack \in E^{\MJ} \Leftrightarrow$ (Semantik
 $\exists$)
-$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{J}$
+$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}$
 \end{quote}
 
 \begin{enumerate}
@@ -331,24 +451,24 @@ $\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{J}$
 \end{enumerate}
 
 \begin{quote}
-$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{J} \Leftrightarrow$
-(Semantik $\exists$) es gibt $e \in \Delta^{J}$ mit
-$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{J}$
-und $\left\lbrack e \right\rbrack \in E^{J} \Leftrightarrow$
-(Definition $r^{J}$ und I.V.) es gibt $e \in \Delta^{J}$, es gibt
+$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} \Leftrightarrow$
+(Semantik $\exists$) es gibt $e \in \Delta^{\MJ}$ mit
+$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$
+und $\left\lbrack e \right\rbrack \in E^{\MJ} \Leftrightarrow$
+(Definition $r^{\MJ}$ und I.V.) es gibt $e \in \Delta^{\MJ}$, es gibt
 $d^{'} \in \left\lbrack d \right\rbrack$,
 $e^{'} \in \left\lbrack e \right\rbrack$,
-$\left( d^{'},\ e^{'} \right) \in r^{I}$ und
-$e^{'} \in E^{I} \Rightarrow$ (Semantik $\exists$)
-$d^{'} \in \left( \exists r.E \right)^{I} \Rightarrow$
-($d \sim d^{'}$) $d \in \left( \exists r.E \right)^{I}$
+$\left( d^{'},\ e^{'} \right) \in r^{\MI}$ und
+$e^{'} \in E^{\MI} \Rightarrow$ (Semantik $\exists$)
+$d^{'} \in \left( \exists r.E \right)^{\MI} \Rightarrow$
+($d \sim d^{'}$) $d \in \left( \exists r.E \right)^{\MI}$
 \end{quote}
 
 \subsubsection{Theorem 3.11 -- Beschränkte
 Modelleigenschaft}\label{theorem-3.11-beschruxe4nkte-modelleigenschaft}
 
-Wenn ein Konzept $C$ bzgl. einer $\text{TBox}$ $T$ erfüllbar ist,
-dann haben $C$ und $T$ ein gemeinsames Modell der
+Wenn ein Konzept $C$ bzgl. einer $\text{TBox}$ $\MT$ erfüllbar ist,
+dann haben $C$ und $\MT$ ein gemeinsames Modell der
 \emph{Kardinalität} $\leq 2^{\left| C \right| + |T|}$.
 
 Beweis. Folgt aus \protect\hyperlink{theorem-3.17}{Theorem 3.17} und
@@ -356,7 +476,7 @@ Beweis. Folgt aus \protect\hyperlink{theorem-3.17}{Theorem 3.17} und
 
 \subsubsection{Theorem 3.18}\label{theorem-3.18}
 
-ALCQI hat nicht die endliche Modelleigenschaft.
+$\ALCQI$ hat nicht die endliche Modelleigenschaft.
 
 Beweis: $A$ hat nur unendliche Modelle bzgl. folgender TBox:
 
@@ -370,27 +490,27 @@ Beweis: $A$ hat nur unendliche Modelle bzgl. folgender TBox:
 \subsubsection{Theorem 3.11 --
 Erfüllbarkeit}\label{theorem-3.11-erfuxfcllbarkeit}
 
-Wenn $C$ erfüllbar bzgl. $T$, dann haben $C$ und $T$ Modell der
+Wenn $C$ erfüllbar bzgl. $\MT$, dann haben $C$ und $\MT$ Modell der
 Größe $\leq 2^{\left| C \right| + \left| T \right|}$. Erfüllbarkeit
 ist also entscheidbar (Erzeuge alle Interpretationen mit
-$\left| \Delta \right|^{I} \leq 2^{n}$ und prüfe, ob ein Modell
+$\left| \Delta \right|^{\MI} \leq 2^{n}$ und prüfe, ob ein Modell
 darunter ist).
 
 \subsubsection{Lemma 3.19}\label{lemma-3.19}
 
-Gegeben sei ein Konzept $C$ und endliche Interpretation $I$. Man
+Gegeben sei ein Konzept $C$ und endliche Interpretation $\MI$. Man
 kann in polynomieller Zeit -- genauer in Zeit
-$O\left( \left| C \right| \cdot \left| \Delta^{I} \right| \right)$ --
-die Extension $C^{I}$ berechnen.
+$O\left( \left| C \right| \cdot \left| \Delta^{\MI} \right| \right)$ --
+die Extension $C^{\MI}$ berechnen.
 
 Beweis: Rekursiver Algorithmus über die Definition der Konzeptsemantik.
 
 \subsubsection{Korollar 3.20}\label{korollar-3.20}
 
-Gegeben seien $C$, $T$ und endliche Interpretation $I$. Man kann
+Gegeben seien $C$, $\MT$ und endliche Interpretation $\MI$. Man kann
 in polynomieller Zeit -- genauer: in Zeit
-$O(\left( \left| T \right| + \left| C \right| \right) \cdot \left| \Delta^{I} \right|)$
--- entscheiden, ob $I$ ein Modell von $C$ und $T$ ist.
+$O(\left( \left| T \right| + \left| C \right| \right) \cdot \left| \Delta^{\MI} \right|)$
+-- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
 
 \subsubsection{Theorem 3.21}\label{theorem-3.21}
 
