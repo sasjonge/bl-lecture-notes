@@ -1,19 +1,36 @@
+\subsection{Ziel}
+
+Automatisches Schlussfolgern spielt eine zentrale Rolle für BLen. Insbesondere ist die Ausdruckstärke von BLen stark darauf zugeschnitten.
+
+Dabei ist aber wichtig, dass die relevanten Schlussfolgerungsprobleme entscheidbar sind, sie ein möglichst geringe Komplexität haben und/oder Algorithmen existieren, die sich in der Praxis performant verhalten.
+
+Von uns wird hauptsächlich das Problem der Erfüllbarkeit betrachtet.
+
+In der Praxis haben sich hauptsächlich Tableau-Algorithmen und Resolutionsverfahren als effizient herausgestellt.
+
 \subsection{ALC ohne TBoxen}\label{alc-ohne-tboxen}
 
 \subsubsection{Negationsnormalform}\label{negationsnormalform}
 
+\begin{definition}{Negationsnormalform}
+
 Konzept ist in \emph{Negationsnormalform} (NNF) gdw. Negation nur auf
 Konzeptnamen angewendet wird.
+\end{definition}
 
-\subsubsection{Lemma 4.2}\label{lemma-4.2}
-
+\begin{lemma}
 Jedes Konzept kann in Linearzeit in ein äquivalentes Konzept in NNF
 umgewandelt werden.
+\end{lemma}
 
-Beweisskizze. Wende Gesetzte der doppelten Negation, de Morgan und
+\textbf{T4.1}
+
+Beweisskizze. Wende Gesetze der doppelten Negation, de Morgan und
 Dualität von $\exists$, $\forall$ an.
 
 \subsubsection{I-Baum}\label{i-baum}
+
+\begin{definition}{I-Baum}
 
 \emph{I-Baum} für $C_{0}$ (in NNF) ist knoten- und kantenbeschrifteter
 Baum $\left( V,E,L \right)$ mit
@@ -27,21 +44,28 @@ Baum $\left( V,E,L \right)$ mit
 \item
   $L$: $V \rightarrow 2^{sub(C_{0})}$
 \end{itemize}
+\end{definition}
+
+\textbf{T4.2}
+
+Bsp. $$C_0 = A \sqcap \forall r.(\neg A \sqcap \exists r.B)$$
+$$sub(C_0) = \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(\neg A \sqcap \exists r.B)\}$$
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/42ibaum.png}
 
 \subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
 
-Berechnet Folge $M_{0},M_{1},\ldots$ von Mengen von I-Bäumen:
+Berechnet Folge $$M_{0},M_{1},\ldots$$ von Mengen von I-Bäumen:
 
-$M_{0} = \left\{ B_{\text{ini}} \right\}$ mit $B_{\text{ini}}$
-\emph{initialer I-Baum} für $C_{0}$:
+$$M_{0} = \left\{ B_{\text{ini}} \right\}\ mit\ B_{\text{ini}}\ \emph{initialer I-Baum}\ fuer\ C_{0}:$$
 
 \begin{itemize}
 \item
-  $V \left\{ v_{\text{ini}} \right\}$
+  $V := \left\{ v_{\text{ini}} \right\}$
 \item
-  $E \varnothing$
+  $E := \emptyset$
 \item
-  $L\left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
+  $L := \left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
 \end{itemize}
 
 $M_{i + 1}$ entsteht aus $M_{i}$ durch Anwendung der Tableau-Regeln
@@ -101,6 +125,12 @@ zurück, falls es einen I-Baum ohne offensichtlichen Widerspruch
 ($\left\{ A,\neg A \right\} \subseteq L\left( v \right)$) gibt;
 „unerfüllbar`` sonst.
 
+\textbf{T4.3}
+
+Beispiel:
+
+\includegraphics[width=5.71910in,height=3.83200in]{media/43taleau.png}
+
 \subsubsection{Definition Rollentiefe}\label{definition-rollentiefe}
 
 Rollentiefe $\text{rd}\left( C \right)$ von Konzepten
@@ -115,24 +145,36 @@ $C \in sub\left( C_{0} \right)$ ist induktiv definiert:
   $\text{rd}\left( \exists r.C \right) = rd\left( \forall r.C \right) = 1 + rd\left( C \right)$
 \end{itemize}
 
-\paragraph{Lemma 4.4}\label{lemma-4.4}
-
+\begin{lemma}
 Für alle $C \in sub\left( C_{0} \right)$ gilt
 $\text{rd}\left( C \right) \leq \left| C \right|$.
+\end{lemma}
 
 \subsubsection{Multimengen}\label{multimengen}
 
-Multimengen sind Mengen, in denen Elemente mehrfach vorkommen dürfen.
-Formal: Abbildung $M:S\mathbb{\rightarrow N}$, welche jedes Element
-auf die Anzahl seines Vorkommens abbildet.
+Multimengen sind Mengen, in denen Elemente mehrfach vorkommen dürfen, z.B.:
+$$\{1,1,2,3,4,4,5,6,6,6\}$$
+
+Formal: Multimengen über die Menge $S$ ist Abbildung $$M:S\mathbb{\rightarrow N}$$, welche jedes Element auf die Anzahl seines Vorkommens abbildet.
+
+Die meisten Begriffe übertragen sich von Mengen auf Multimengen:
+
+\begin{itemize}
+	\item Leere Menge $\emptyset: s \mapsto 0$ für alle $s \in S$
+	\item Vereinigung $(M_1 \cup M_2)(s) := M_1(s) + M_2(s)$ 
+	\item Element: $s \in M\ gdw.\ M(s)>0$
+	\item Differenz: $(M_1 \setminus M_2)(s) = X(m,n) = \left\{\begin{array}{lr}
+        M_1(s) - M_2(s) &, wenn M_1(s) \geq M_2(s) \\
+        0 & sonst
+        \end{array}\right\}$
+\end{itemize}
 
 $MM(S)$ ist die Menge aller Multimengen über der Menge S.
 
 Gegeben strikte partielle Ordnung $\left( S, < \right)$, ist die
-Multimengenerweiterung
-$\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$ definiert
-als $M_{2} <_{\text{mul}}M_{1}$ gdw. $\exists X,Y \in MM(S)$, so
-dass
+\emph{Multimengenerweiterung} $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$ definiert als: 
+
+$M_{2} <_{\text{mul}}M_{1}$ gdw. $\exists X,Y \in MM(S)$, so dass
 
 \begin{itemize}
 \item
@@ -143,20 +185,31 @@ dass
   $\forall y \in Y\exists x \in X : x > y$
 \end{itemize}
 
+Also erhält man $M_2$ aus $M_1$, indem man einige Elemente entfernt und durch endlich viele \emph{kleinere} ersetzt.
+
 Beispiel:
+
 $\left\{ 3,1 \right\} >_{\text{mul}}\{ 2,2,2\} >_{\text{mul}}\{ 2,2\} >_{\text{mul}}\{ 2,1,1,1\}$
 
-\paragraph{Theorem 4.6}\label{theorem-4.6}
+Es ist leicht zu zeigen das diese Ordnung eine strikte partielle Ordnung ist.  Zudem ist sie wohlfundiert, wenn $(S,<)$ wohldefiniert ist: Es gibt keine unendlich $<$ absteigenden Ketten.
+
+\setcounter{definition}{5}
+\begin{theorem}
 
 Wenn $\left( S, < \right)$ wohlfundiert (hat keine unendlichen
-absteigenden Ketten) ist, dann ist auch
-$\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$
+absteigenden Ketten) ist, dann ist auch $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$
 wohlfundiert.
+\end{theorem}
 
-\hypertarget{proposition-4.5-terminierung}{\subsubsection{Proposition
-4.5 (Terminierung)}\label{proposition-4.5-terminierung}}
+\setcounter{definition}{4}
+
+\subsubsection{Terminierung}
+
+\begin{proposition}
 
 Der Tableau-Algorithmus stoppt nach endlicher Zeit.
+\end{proposition}
+\setcounter{definition}{6}
 
 Beweis in 4 Schritten:
 
@@ -165,22 +218,27 @@ Beweis in 4 Schritten:
 \item
   Es werden nur I-Bäume mit einem Verzweigungsgrad
   $\leq \left| C_{0} \right|$ generiert.
-\end{enumerate}
+
+\begin{quote}
+\textbf{T4.5a}
 
 Beweisskizze. Nur die $\exists$-Regel generiert Nachfolger, aber
 höchstens einen für jedes Konzept $\exists r.C \in sub(C_{0})$. Nach
 \protect\hyperlink{lemma-3.13}{Lemma 3.13} enthält
 $\text{sub}\left( C_{o} \right)$ höchstens $\left| C_{0} \right|$
 viele Konzepte.
+\end{quote}
 
-\begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   Es werden nur I-Bäume mit einer Tiefe $\leq \left| C_{0} \right|$
   generiert.
-\end{enumerate}
 
-Beweisskizze über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
+\begin{quote}
+\textbf{T4.5b}
+\begin{proof}
+
+Induktion über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
 Knoten mit Tiefe $i$ ist, dann gilt
 $\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
 $C \in L\left( v \right)$.
@@ -196,37 +254,42 @@ $\sqcap$, $\exists$):
 \def\labelenumi{\alph{enumi}.}
 \item
   $\sqcap$-Regel
-\end{enumerate}
 
-\begin{quote}
 $C \sqcap D \in L(v)$ und $L(v)$ wird durch $C$, $D$ erweitert.
 Nach I.V. gilt:
 $\text{rd}\left( C \sqcap D \right) \leq rd\left( C_{0} \right) - i$,
 also auch $\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$,
 weil $\text{rd}\left( C \right) \leq rd\left( C \sqcap D \right)$.
 Analog für $D$.
-\end{quote}
 
-\begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
 \item
   $\exists$-Regel
-\end{enumerate}
 
-\begin{quote}
 Dann $\exists r.C \in L\left( v \right)$ und es wird neues $v^{'}$
 auf Tiefe $i + 1$ generiert mit
 $L\left( v^{'} \right) = \left\{ C \right\}$. Es gilt
 $\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0} \right) - i - 1 = rd\left( C_{0} \right) - (i + 1)$
+ \end{enumerate}
+\end{proof}
 \end{quote}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{i}$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
-  $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$
-  Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+  $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+
+ \begin{quote}
+\textbf{T4.5d}
+
+Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der ``n-Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.''
+
+Weil $<$ auf $\mathcal{N}$ wohldefiniert ist, ist $<_{mul}$ auf $MM(\{0,\ldots,n\})$ wohldefiniert.
+
+Offenbar gilt $MM_{i+1} <_{mul} MM_i$ für alle $i \geq 0$ *. Also werden nur endlich oft Regeln angewendet.
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/45mm.png}
+\end{quote}
 \end{enumerate}
 
 \hypertarget{proposition-4.7-korrektheit}{\subsubsection{Proposition 4.7
