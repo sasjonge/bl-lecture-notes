@@ -357,65 +357,122 @@ Wir definieren den Begriff eines Typs:
   \item Einschränkung auf Teilkonzepte von $C$ und $\MT$ (um Endlichkeit zu erreichen)
 \end{itemize}
 
-\subsubsection{Teilkonzepte}\label{teilkonzepte}
+\subsubsection{Typ}\label{typ}
 
+\begin{definition}{Teilkonzepte}
 \begin{itemize}
 \item
   $\text{sub}\left( C \right)$ ist Menge der Teilkonzepte von $C$
   (einschließlich $C$)
 \item
-  $\text{sub}\left( T \right) \bigcup_{C \sqsubseteq D \in T}^{}{\text{sub}\left( C \right) \cup sub\left( D \right)}$
+  $\text{sub}\left( \MT \right) := \bigcup_{C \sqsubseteq D \in \MT}^{}{\text{sub}\left( C \right) \cup sub\left( D \right)}$
 \item
-  $\text{sub}\left( C,T \right) sub\left( C \right) \cup sub\left( D \right)$
+  $\text{sub}\left( C,\MT \right) := sub\left( C \right) \cup sub\left( \MT \right)$
 \end{itemize}
+\end{definition}
 
-\hypertarget{lemma-3.13}{\subsubsection{Lemma 3.13}\label{lemma-3.13}}
+\textbf{T3.10}
+
+Beispiele: $$sub(\forall r.\exists r.(A \sqcap B)) = \{A,B,A \sqcap B, \exists r.(A \sqcap B), \forall r.\exists r.(A \sqcap B)\}$$
+$$sub(\{A \sqsubseteq r.B, \forall r.B \sqsubseteq A\}) = \{A,B, \exists r.B, \forall r.B\}$$
+
+\begin{lemma}
 
 $\left| \text{sub}\left( C,T \right) \right| \leq \left| C \right| + \left| T \right|$
+\end{lemma}
 
-\subsubsection{Typ}\label{typ}
+\begin{definition}{Typ von $d$}
 
 Sei $\MI$ eine Interpretation, $d \in \Delta^{\MI}$. Der \emph{Typ}
 $t_{\MI}\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
-$t_{\MI}\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^{\MI}\}$.
-
-Erklärung: Alle Konzepte in $\MT$ und $C$, die ein Objekt $d$
+$$t_{\MI}\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^{\MI}\}$$.
+\end{definition}
+Erklärung: Alle Teilkonzepte von $\MT$ und $C$, die ein Objekt $d$
 erfüllt.
 
-\hypertarget{lemma-3.15}{\subsubsection{Lemma 3.15}\label{lemma-3.15}}
+\textbf{T3.11}
+
+Beispiel:
+
+Sei $$\MT=\{A \subseteq \exists r.A\}$$
+$$C = A \sqcap B$$
+$$sub(C,\MT)=\{A, \exists r.A, B, A \sqcap B\}$$
+
+\includegraphics[width=4.71910in,height=1.83200in]{media/314typ.png}
+
+$$t_{\MI}(d)=\{A, \exists r.A\}$$
+$$t_{\MI}(e)=\{A, \exists r.A\}$$
+$$t_{\MI}(f)=\{A, \exists r.A, A \sqcap B, B\}$$
+$$t_{\MI}(g)=\{A, \exists r.A\}$$ \\
+
+\begin{lemma}
 
 Für jede Interpretation $\MI$ gilt:
 $\#\left\{ t_{\MI}\left( d \right)\ |\ d \in \Delta^{\MI} \right\} \leq 2^{\left| C \right| + |T|}$
+\end{lemma}
 
 \subsubsection{Filtration}\label{filtration}
 
+Idee:
+
+\begin{itemize}
+  \item Gegeben Interpretation $\MI$, indentifiziere alle Elemente gleichen Typs
+  \item Danach kommt also jeder Typ nur einmal vor
+  \item Nach Lemma 3.15 gibt es nur $2^{|C|+|\MT|}$ viele Typen
+  \item Wenn $\MI$ Modell von $C$ und $\MT$, so auch das Resultat.
+\end{itemize}
+
+\begin{definition}{Filtration}
+
 Sei $\MI$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
-$\Delta^{\MI}$: $d \sim e$ gdw.
-$t_{\MI}\left( d \right) = t_{\MI}\left( e \right)$. Wir bezeichnen diese
-Äquivalenzklasse von $d \in \Delta^{\MI}$ bzgl. $\sim$ mit
-$\left\lbrack d \right\rbrack$. Die Filtration von $\MI$ bzgl. $C$
-und $\MT$ ist folgende Interpretation $\MJ$:
+$\Delta^{\MI}$: $$d \sim e\ gdw.\ t_{\MI}\left( d \right) = t_{\MI}\left( e \right)$$
+Wir bezeichnen diese Äquivalenzklasse von $d \in \Delta^{\MI}$ bzgl. $\sim$ mit $\left\lbrack d \right\rbrack$.
+
+Die Filtration von $\MI$ bzgl. $C$ und $\MT$ ist folgende Interpretation $\MJ$:
 
 \begin{itemize}
 \item
   $\Delta^{\MJ} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^{\MI} \right\}$
 \item
   $A^{\MJ} = \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^{\MI} \right\}$
-  für alle $A \in sub\left( C,T \right)$
+  für alle $A \in sub\left( C,\MT \right)$
 \item
   $r^{\MJ} = \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^{\MI} \right\}$
   für alle Rollennamen $r$
 \end{itemize}
 
-\hypertarget{theorem-3.17}{\paragraph{Theorem 3.17}\label{theorem-3.17}}
+Beachte: $A^{\MJ}$ ist wohldefiniert (Repräsentantenunabhängigkeit)
+\end{definition}
 
+\textbf{T3.11cont}
+
+Wenden wir diese Definition auf das Beispiel T3.11 an.
+
+$$[d]=\{d,e,g\}$$
+$$[f]=\{f\}$$
+
+Die Interpretation $\MJ$ sieht wie folgt aus:
+
+\includegraphics[width=1.21910in,height=2.33200in]{media/314typcont.png}
+
+Offensichtlich bringt Filtration aber nicht immer das minimalste Modell, denn folgende Interpretation wäre auch ein Modell:
+
+\includegraphics[width=1.0in,height=1.0in]{media/314typcont2.png}
+
+\begin{theorem} 
 Wenn $\MI$ Modell von $C$ und $\MT$, so auch $\MJ$, bzw. für alle
-$d \in \Delta^{\MI}$ und $D \in sub(C,T)$ gilt: $d \in D^{\MI}$ gdw.
-$\left\lbrack d \right\rbrack \in D^{\MJ}$
+$d \in \Delta^{\MI}$ und $D \in sub(C,\MT)$ gilt: $d \in D^{\MI}$ gdw.
+$\left\lbrack d \right\rbrack \in D^{\MJ}$.
+\end{theorem}
 
-Beweisskizze per Induktion über die Struktur von D.
+\textbf{T3.12}
 
-\textbf{I.A.} $C = A$ folgt aus Definition $A^{\MJ}$.
+\begin{proof}
+Beh.: Für alle $d \in \Delta^{\MI}$ und $D \in sub(C,\MT)$ gilt: $$d \in D^{\MI}\ gdw.\ \left\lbrack d \right\rbrack \in D^{\MJ}*$$
+
+Beweis per Induktion über die Struktur von $D$.
+
+\textbf{I.A.} $C = A$ * folgt aus Definition $A^{\MJ}$.
 
 \textbf{I.S.}
 
@@ -430,53 +487,52 @@ Beweisskizze per Induktion über die Struktur von D.
   \def\labelenumii{\alph{enumii}.}
   \item
     Hinrichtung
-  \end{enumerate}
-\end{enumerate}
 
 \begin{quote}
-$d \in \left( \exists r.E \right)^{\MI} \Leftrightarrow$ (Semantik) es
-gibt $e \in \Delta^{\MI}$ mit $\left( d,e \right) \in r^{\MI}$ und
-$e \in E^{\MI} \Rightarrow$ (Definition $r^{\MJ}$ und I.V.) es gibt
-$e \in \Delta^{\MI}$ mit
-$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$
-und $\left\lbrack e \right\rbrack \in E^{\MJ} \Leftrightarrow$ (Semantik
-$\exists$)
-$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}$
+$d \in \left( \exists r.E \right)^{\MI}$ \\
+$\Leftrightarrow$ (Semantik) es gibt $e \in \Delta^{\MI}$ mit $\left( d,e \right) \in r^{\MI}$ und $e \in E^{\MI}$ \\
+$\Rightarrow$ (Definition $r^{\MJ}$ und I.V.) es gibt $e \in \Delta^{\MI}$ mit $\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$ und $\left\lbrack e \right\rbrack \in E^{\MJ}$ \\
+$\Leftrightarrow$ (Semantik $\exists$) $\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}$
 \end{quote}
 
-\begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
 \item
   Rückrichtung
-\end{enumerate}
 
 \begin{quote}
-$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} \Leftrightarrow$
-(Semantik $\exists$) es gibt $e \in \Delta^{\MJ}$ mit
-$\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$
-und $\left\lbrack e \right\rbrack \in E^{\MJ} \Leftrightarrow$
-(Definition $r^{\MJ}$ und I.V.) es gibt $e \in \Delta^{\MJ}$, es gibt
-$d^{'} \in \left\lbrack d \right\rbrack$,
-$e^{'} \in \left\lbrack e \right\rbrack$,
-$\left( d^{'},\ e^{'} \right) \in r^{\MI}$ und
-$e^{'} \in E^{\MI} \Rightarrow$ (Semantik $\exists$)
-$d^{'} \in \left( \exists r.E \right)^{\MI} \Rightarrow$
-($d \sim d^{'}$) $d \in \left( \exists r.E \right)^{\MI}$
+$\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}$ \\
+$\Leftrightarrow$ (Semantik $\exists$) es gibt $[e] \in \Delta^{\MJ}$ mit $\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}$ und $\left\lbrack e \right\rbrack \in E^{\MJ}$ \\
+$\Leftrightarrow$ (Definition $r^{\MJ}$ und I.V.) es gibt $[e] \in \Delta^{\MJ}$, es gibt $d^{'} \in \left\lbrack d \right\rbrack$, $e^{'} \in \left\lbrack e \right\rbrack$, $\left( d^{'},\ e^{'} \right) \in r^{\MI}$ und $e^{'} \in E^{\MI}$ \\
+$\Rightarrow$ (Semantik $\exists$) $d^{'} \in \left( \exists r.E \right)^{\MI}$ \\
+$\Rightarrow$ ($d \sim d^{'}$) $d \in \left( \exists r.E \right)^{\MI}$
 \end{quote}
 
-\subsubsection{Theorem 3.11 -- Beschränkte
-Modelleigenschaft}\label{theorem-3.11-beschruxe4nkte-modelleigenschaft}
+\end{enumerate}
+\end{enumerate}
+\end{proof}
 
-Wenn ein Konzept $C$ bzgl. einer $\text{TBox}$ $\MT$ erfüllbar ist,
-dann haben $C$ und $\MT$ ein gemeinsames Modell der
-\emph{Kardinalität} $\leq 2^{\left| C \right| + |T|}$.
+Sei $d \in C^{\MI}$. Nach Behauptung gilt $[d] \in C^{\MJ}$, also ist $\MJ$ Modell von $C$.
 
-Beweis. Folgt aus \protect\hyperlink{theorem-3.17}{Theorem 3.17} und
-\protect\hyperlink{lemma-3.15}{Lemma 3.15}.
+$\MJ$ ist ebenfalls Modell von $\MT$:
 
-\subsubsection{Theorem 3.18}\label{theorem-3.18}
+Sei $C \sqsubseteq D$ in $\;T$, $[d] \in C^{\MJ}$ \\
+Nach Beh. gilt $d \in C^{\MI}$ \\
+Weil $\MI$ Modell von $C \sqsubseteq D$, gilt $d \in D^{\MI}$ \\
+Nach Beh. gilt $[d] \in D^{\MJ}$
 
+\subsubsection{Endliche/Beschränkte Modelleigenschaft}
+
+\textbf{Theorem 3.11} \\
+Wenn ein $\ALC$-Konzept $C$ bzgl. einer $\text{$\ALC$-TBox}$ $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der
+\emph{Kardinalität} $\leq 2^{\left| C \right| + |\MT|}$.
+
+Beweis. Folgt aus Theorem 3.17 und Lemma 3.15.
+
+Ähnliches (mit der selben Schranke) lässt sich für $\ALCI$ und $\ALCQ$ beweisen. (mit derselben Schranke)
+
+\begin{theorem}
 $\ALCQI$ hat nicht die endliche Modelleigenschaft.
+\end{theorem}
 
 Beweis: $A$ hat nur unendliche Modelle bzgl. folgender TBox:
 
@@ -487,31 +543,46 @@ Beweis: $A$ hat nur unendliche Modelle bzgl. folgender TBox:
   $T \sqsubseteq ( \leq 1\ r^{-}\ \top)$
 \end{itemize}
 
-\subsubsection{Theorem 3.11 --
-Erfüllbarkeit}\label{theorem-3.11-erfuxfcllbarkeit}
+\textbf{T3.13}
+
+\includegraphics[width=3.21910in,height=0.93200in]{media/318qi.png}
+
+Erklärung: Diese Interpretation müsste unendlich erweitert werden, damit es die TBox erfüllt.
+
+\subsubsection{Entscheidbarkeit}
+\textbf{Theorem 3.11}:
 
 Wenn $C$ erfüllbar bzgl. $\MT$, dann haben $C$ und $\MT$ Modell der
-Größe $\leq 2^{\left| C \right| + \left| T \right|}$. Erfüllbarkeit
-ist also entscheidbar (Erzeuge alle Interpretationen mit
-$\left| \Delta \right|^{\MI} \leq 2^{n}$ und prüfe, ob ein Modell
-darunter ist).
+Größe $\leq 2^{\left| C \right| + \left| T \right|}$.
 
-\subsubsection{Lemma 3.19}\label{lemma-3.19}
+Erfüllbarkeit ist also entscheidbar:
 
-Gegeben sei ein Konzept $C$ und endliche Interpretation $\MI$. Man
-kann in polynomieller Zeit -- genauer in Zeit
-$O\left( \left| C \right| \cdot \left| \Delta^{\MI} \right| \right)$ --
-die Extension $C^{\MI}$ berechnen.
+Gegeben $C$ und $\MT$, so dass $|C|+|\MT| = n$,
+\begin{itemize} 
+  \item erzeuge alle Interpretationen $\MI$ mit $\left| \Delta \right|^{\MI} \leq 2^{n}$ (es gibt höchstens $2^{2^{5n}}$ viele davon) 
+  \item und überprüfe, ob $\MI$ Modell von $C$ und $\MT$ ist. (in Zeit polynomiell in $\MI$, $C$, und $\MT$)
+\end{itemize}
 
-Beweis: Rekursiver Algorithmus über die Definition der Konzeptsemantik.
+\begin{lemma}
+Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer in Zeit $O\left( \left| C \right| \cdot \left| \Delta^{\MI} \right| \right)$ -- die Extension $C^{\MI}$ berechnen.
+\end{lemma}
 
-\subsubsection{Korollar 3.20}\label{korollar-3.20}
+Beweisskizze zu Lemma 3.19: Rekursiver Algorithmus über die Definition der Konzeptsemantik. Dessen Zeitaufwand ist $\mathcal{O}(|C| \cdot |\Delta^{\MI}|)$:
 
-Gegeben seien $C$, $\MT$ und endliche Interpretation $\MI$. Man kann
-in polynomieller Zeit -- genauer: in Zeit
-$O(\left( \left| T \right| + \left| C \right| \right) \cdot \left| \Delta^{\MI} \right|)$
--- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
+\begin{itemize}
+  \item Anzahl der (rekursiven Aufruf $= |sub(C)| \leq |C|$)
+  \item pro Aufruf Zeitaufwand $\mathcal{O}(|\Delta^{\MI}|)$: \\
+  simple Operationen auf $\leq 2$ Teilmengen von $\Delta^{\MI}$
+\end{itemize}
 
-\subsubsection{Theorem 3.21}\label{theorem-3.21}
+\begin{korollar}
+Gegeben seien $C$, $\MT$ in $\ALC$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer: in Zeit $O(\left( \left| \MT \right| + \left| C \right| \right) \cdot \left| \Delta^{\MI} \right|)$ -- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
+\end{korollar}
 
-In ALC ist Erfüllbarkeit bzgl. TBoxen entscheidbar.
+\begin{theorem}
+In $\ALC$ ist Erfüllbarkeit bzgl. TBoxen entscheidbar.
+\end{theorem}
+
+Die Komplexität liegt aber bei 2-ExpTime: 2-exponentiell viele Interpreationen müssen geprüft werden, jede Prüfung braucht polynomielle Zeit.
+
+Dieser Ansatz ist kaum tauglich für die Praxis.

@@ -42,6 +42,7 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{lemma}[definition]{Lemma}
+\newtheorem{korollar}[definition]{Korollar}
 
 
 
