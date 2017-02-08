@@ -68,8 +68,8 @@ $$M_{0} = \left\{ B_{\text{ini}} \right\}\ mit\ B_{\text{ini}}\ \emph{initialer 
   $L := \left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
 \end{itemize}
 
-$M_{i + 1}$ entsteht aus $M_{i}$ durch Anwendung der Tableau-Regeln
-auf irgendeinen I-Baum in $M_{i}$ und anschließendes Austauschen des
+$M_{i + 1}$ entsteht aus $M_{\MI}$ durch Anwendung der Tableau-Regeln
+auf irgendeinen I-Baum in $M_{\MI}$ und anschließendes Austauschen des
 verwendeten Baumes durch den neu erzeugten (Sei $\left( V,E,L \right)$
 I-Baum):
 
@@ -239,7 +239,7 @@ viele Konzepte.
 \begin{proof}
 
 Induktion über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
-Knoten mit Tiefe $i$ ist, dann gilt
+Knoten mit Tiefe $\MI$ ist, dann gilt
 $\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
 $C \in L\left( v \right)$.
 
@@ -275,115 +275,162 @@ $\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0
 \end{quote}
 
 \item
-  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{i}$ für
+  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{\MI}$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 
- \begin{quote}
+\end{enumerate}
+
+Nun kann die Terminierung mittel Behauptung 3 beweisen:
+
 \textbf{T4.5d}
 
-Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der ``n-Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.''
+\begin{proof}
+Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der ``n$-$Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.''
 
 Weil $<$ auf $\mathcal{N}$ wohldefiniert ist, ist $<_{mul}$ auf $MM(\{0,\ldots,n\})$ wohldefiniert.
 
 Offenbar gilt $MM_{i+1} <_{mul} MM_i$ für alle $i \geq 0$ *. Also werden nur endlich oft Regeln angewendet.
+\end{proof}
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/45mm.png}
-\end{quote}
-\end{enumerate}
 
-\hypertarget{proposition-4.7-korrektheit}{\subsubsection{Proposition 4.7
-(Korrektheit)}\label{proposition-4.7-korrektheit}}
+\subsubsection{Korrektheit und Vollständigkeit}
+
+\begin{proposition}
 
 Wenn der Tableau-Algorithmus „erfüllbar`` zurückgibt, so ist $C_{0}$
 erfüllbar.
+\end{proposition}
 
-Beweisskizze per Induktion über die Struktur von $C$.
+\textbf{T4.6}
+
+\begin{proof}
+
+Beweis per Induktion über die Struktur von $C$.
 „erfüllbar``-Ausgabe bedeutet widerspruchsfreier, vollständiger I-Baum
-$B = \left( V,E,L \right)$ gefunden. Konstruiere Interpretation $I$:
+$B = \left( V,E,L \right)$ gefunden. Konstruiere Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{I} = V$
+  $\Delta^{\MI} = V$
 \item
-  $r^{I} = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
+  $r^{\MI} = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
   für alle Rollennamen $r$
 \item
-  $A^{I} = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
+  $A^{\MI} = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
   alle Konzeptnamen $A$
 \end{itemize}
 
 Behauptung: Für alle Konzepte $C$ und $v \in V$ gilt
-$C \in L\left( v \right)$ impliziert $v \in C^{I}$. Da
-$C_{0} \in L\left( v_{\text{ini}} \right)$ in $B_{\text{ini}}$ gilt
+
+\begin{center}$C \in L\left( v \right)$ impliziert $v \in C^{\MI}$\end{center}
+
+Da $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B_{\text{ini}}$ gilt
 auch $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B$. Also
-$v_{\text{ini}} \in C_{0}^{I}$ nach Behauptung, weswegen dann
+$v_{\text{ini}} \in C_{0}^{\MI}$ nach Behauptung, weswegen dann
 $C_{0}$ erfüllbar.
 
-\textbf{I.A.} $C = A$ (Konzeptname) I.B. gilt nach Definition von
-$I$.
+\textbf{I.A.} $C = A$ (Konzeptname) Gilt nach Definition von
+$\MI$.
 
-\textbf{I.S.} An den Beispielen $\neg$, $\sqcap$
+\textbf{I.S.}
 
 \begin{itemize}
 \item
   $C = \neg A$
-\end{itemize}
 
+\begin{quote}
 $A$ Konzeptname. Da $B$ keinen offensichtlichen Widerspruch hat,
-folgt das $A \notin L(v)$. Nach Definition von $I$ gilt
-$v \notin A^{I}$. Also $v \in \left( \neg A \right)^{I}$.
+folgt das $A \notin L(v)$. Nach Definition von $\MI$ gilt
+$v \notin A^{\MI}$. Also $v \in \left( \neg A \right)^{\MI}$.
+\end{quote}
 
-\begin{itemize}
 \item
   $C = D \sqcap E$
+
+\begin{quote}
+$C \in L\left( v \right)$ 
+
+$\Rightarrow$ ($\sqcap$-Regel nicht anwendbar) $D \in L\left( v \right),\ E \in L\left( v \right)$ 
+
+$\Rightarrow$ (I.V.) $v \in D^{\MI},\ v \in E^{\MI}$ 
+
+$\Rightarrow$ (Semantik) $v \in \left( D \sqcap E \right)^{\MI}$
+\end{quote}
+
+\item $C = D \sqcup E$
+
+\begin{quote}
+analog.
+\end{quote}
+
+\item $C = \exists r.D$
+
+\begin{quote}
+Da die $\exists$-Regel nicht anwendbar ist, gibt es $v'\in V$ mit $(v,r,v') \in E$ und $D \in L(v')$
+
+Nach I.V.: $v' \in D^{\MI}$; nach Konstruktion $(v,v') \in r^{\MI}$. Nach Semantik gilt dann: $v \in (\exists r.D^{\MI})$
+\end{quote}
+
+\item $C = \forall r.D$
+\begin{quote}
+ähnlich.
+\end{quote}
 \end{itemize}
+\end{proof}
 
-$C \in L\left( v \right) \Rightarrow$ ($\sqcap$-Regel nicht
-anwendbar)
-$D \in L\left( v \right),\ E \in L\left( v \right) \Rightarrow$ (I.V.)
-$v \in D^{I},\ v \in E^{I} \Rightarrow$ (Semantik)
-$v \in \left( D \sqcap E \right)^{I}$
+\begin{definition}{Realisierbarkeit}
 
-\hypertarget{realisierbarkeit}{\subsubsection{Realisierbarkeit}\label{realisierbarkeit}}
-
-Sei $B = \left( V,E,L \right)$ ein I-Baum. Interpretation $I$
+Sei $B = \left( V,E,L \right)$ ein I-Baum. Interpretation $\MI$
 \emph{realisiert} $B$ gdw. es gibt eine Funktion
-$\pi\ :V \rightarrow \Delta^{I}$ so dass
+$\pi\ :V \rightarrow \Delta^{\MI}$ so dass
 
 \begin{itemize}
 \item
   $\left( v,r,v^{'} \right) \in E$ impliziert
-  $\left( \pi\left( v \right),\pi\left( v^{'} \right) \right) \in r^{I}$
+  $\left( \pi\left( v \right),\pi\left( v^{'} \right) \right) \in r^{\MI}$
 \item
   $C \in L\left( v \right)$ impliziert
-  $\pi\left( v \right) \in C^{I}$
+  $\pi\left( v \right) \in C^{\MI}$
 \end{itemize}
 
-B ist realisierbar, wenn es Interpretation $I$ gibt, die $B$
-realisiert. Menge $M$ von I-Bäumen ist realisierbar gdw. ein
+B ist \emph{realisierbar}, wenn es Interpretation $\MI$ gibt, die $B$
+realisiert. Menge $M$ von I-Bäumen ist \emph{realisierbar} gdw. ein
 $B \in M$ realisierbar.
+\end{definition}
 
-\subsubsection{Proposition 4.9
-(Vollständigkeit)}\label{proposition-4.9-vollstuxe4ndigkeit}
+Beachte: realisierbarer I-Baum enthält keinen offensichtlichen Widerspruch!
+
+\textbf{T4.7}
+
+\includegraphics[width=2.0in,height=4.0in]{media/47real.png}
+
+\begin{proposition}{Vollständigkeit}
 
 Wenn $C_{0}$ erfüllbar, so gibt der Tableau-Algorithmus „erfüllbar``
 zurück.
+\end{proposition}
 
-Beweisskizze per Induktion über $i$. Sei $C_{0}$ erfüllbar. Nach
-\protect\hyperlink{proposition-4.5-terminierung}{Proposition 4.5}
-berechnet der Algorithmus endlich Folge $M_{0},\ldots,M_{n}$. Wir
-zeigen: $M_{i}$ ist realisierbar für alle $0 \leq i \leq n$. Daraus
-folgt: Es gibt realisierbaren Baum $B \in M_{n}$ und damit enthält
-$B$ keinen offensichtlichen Widerspruch. Also gibt der Algorithmus
-„erfüllbar`` zurück.
+\textbf{T4.8}
+
+\begin{proof}
+
+Per Induktion über $\MI$. 
+
+Sei $C_{0}$ erfüllbar. Nach \protect\hyperlink{proposition-4.5-terminierung}{Proposition 4.5} berechnet der Algorithmus endlich Folge $M_{0},\ldots,M_{n}$. Wir
+zeigen: 
+
+$M_{i}$ ist realisierbar für alle $0 \leq i \leq n$. 
+
+Daraus folgt: Es gibt realisierbaren Baum $B \in M_{n}$ und damit enthält $B$ keinen offensichtlichen Widerspruch. Also gibt der Algorithmus „erfüllbar`` zurück.
 
 \textbf{I.A.} $i = 0$. $M_{0} = {\{ B}_{\text{ini}}\}$.
 $B_{\text{ini}}$ ist realisierbar, weil $C_{0}$ erfüllbar.
 
 \textbf{I.S.} Fallunterscheidung gemäß der Regel, mit der $M_{i + 1}$
-aus $M_{i}$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
-$M_{i}$, auf welchen Regel angewandt wird. Beispielhaft
+aus $M_{\MI}$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
+$M_i$, auf welchen Regel angewandt wird. Beispielhaft
 $\sqcup$-Regel:
 
 \begin{enumerate}
@@ -392,6 +439,7 @@ $\sqcup$-Regel:
   $\sqcup$-Regel
 \end{enumerate}
 
+\begin{quote}
 Dann wird $B = \left( V,E,L \right)$ ersetzt durch
 $B^{'} = \left( V,E,L^{'} \right) \in M_{i + 1}$ und
 $B^{''} = \left( V,E,L^{''} \right) \in M_{i + 1}$ und es gibt
@@ -409,32 +457,81 @@ $v \in V$ mit
 \end{itemize}
 
 Es genügt zu zeigen, dass wenn $B$ realisiertbar, dann $B'$ oder
-$B''$ realisierbar. Sei $\text{I\ }$Interpretation, die $B$
-realisiert und $\pi\ :V \rightarrow \Delta^{I}$ Abbildung wie in
-\protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt
-$\pi\left( v \right) \in \left( C \sqcup D \right)^{I}$. Nach
-Semantik: $\pi\left( v \right) \in C^{I}$ oder
-$\pi\left( v \right) \in D^{I}$. Also realisiert $I$ den Baum $B'$
-oder $B''$.
+$B''$ realisierbar. 
 
-\subsubsection{Praktikabilität}\label{praktikabilituxe4t}
+Sei $\MI$ Interpretation, die $B$ realisiert und $\pi\ :V \rightarrow \Delta^{\MI}$ Abbildung wie in \protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt $\pi\left( v \right) \in \left( C \sqcup D \right)^{\MI}$. Nach Semantik: $\pi\left( v \right) \in C^{\MI}$ oder $\pi\left( v \right) \in D^{\MI}$. Also realisiert $\MI$ den Baum $B'$ oder $B''$.
+\end{quote}
+\end{proof}
+
+\subsubsection{Komplexitätsanalyse}\label{praktikabilituxe4t}
+
+Wir beobachten: 
 
 I-Bäume können höchstens exponentiell groß werden.
 
+Dieser Fall kann tastsächlich eintreffen. Beispielhaft, der Erfüllbarkeitstest von:
+$$\bigsqcap_{i < n} \forall r^i .(\exists r.B \sqcap \exists r.\neg B)$$
+generiert Baum der Größe $2^n$.
+
+Also: exponentieller Zeit- und Platzverbrauch (sogar 2-exponentiell)
+
+\subsubsection{Praktikabilität}
+
+Offenbar wäre eine naive Implementierung nicht effizient. Dabei kann man aber einige Hinweise/Optimierungen bei der Implementierung beachten:
+
+\begin{itemize}
+	\item Es wird nur ein Baum zur Zeit generiert, keine Menge
+	\item bei der $\sqcup$-Regel muss man sich also entscheiden (Heuristik); ggf. Entscheidung revidiieren (Backtracking).
+	\item Es wird nur ein Teil des Baumes (Pfad) im Speicher gehalten.
+	\item Backjumping: Führe Buch über die ``Herkunft'' von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
+\end{itemize}
+
 \subsection{ALC mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
 
+Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in $\ALC$  \emph{bzgl. TBoxen}.
+
 Jede TBox $T$ ist äquivalent zu einer TBox der Form
-$\left\{ \top \sqcap C_{T} \right\}$. Setzte
-$C_{T} \prod_{C \sqsubseteq D \in T}^{}{\neg C \sqcup D}$.
+$\left\{ \top \sqsubseteq C_{\MT} \right\}$: 
+
+\begin{center}setze $C_{\MT} \prod_{C \sqsubseteq D \in \MT}^{}{\neg C \sqcup D}$.\end{center}
+
+\textbf{T4.11} Beispiel
+
+$$\MT = \{A \sqsubseteq \exists r.B, A \sqcup B \sqsubseteq \forall r.B\}$$
+
+Daraus wird
+
+$$\{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap (\neg (A \sqcup B) \sqcup \forall r.B)\}$$
+
+in NNF:
+
+$$\MT' = \{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap ((\neg A \sqcap \neg B) \sqcup \forall r.B)\}$$
+
+Desweiteren nehmen wir an, dass:
+
+\begin{itemize}
+	\item Eingabe $C_0$ in NNF;
+	\item Eingabe $\MT$ hat Form $\{\top \sqsubseteq C_{\MT}\}$ mit $C_{\MT}$ in NNF
+\end{itemize}
+
+Nun modifiziere den vorigen Algorithmus durch Hinzufügen folgender Regel:
 
 \subsubsection{TBox-Regel}\label{tbox-regel}
 
-Wähle $v \in V$ so dass $C_{T} \notin L\left( V \right)$ und
-erweitere $L\left( v \right)$ um $C_{T}$.
+Wähle $v \in V$ so dass $C_{\MT} \notin L\left( V \right)$ und
+erweitere $L\left( v \right)$ um $C_{\MT}$.
 
-Problem: Terminiert nicht.
+Problem: Terminiert nicht!
+
+\textbf{T4.12}
+
+\includegraphics[width=3.71910in,height=1.83200in]{media/412endl.png}
 
 \subsubsection{Blockieren}\label{blockieren}
+
+Dies lösen wir, indem wir nur ein endliches Anfangsstück eines Baummodells anhand dessen sich die Existenzeines vollständigen Modells entscheiden lässt konstruieren. Dazu müssen wir die Anwendung der $\exists$-Regel einschränken.
+
+\begin{definition}{Blockiert}
 
 Sei $\left( V,E,L \right)$ ein I-Baum und $u,v \in V$. Dann ist
 $v$ direkt blockiert durch $u$, wenn
@@ -449,6 +546,7 @@ $v$ direkt blockiert durch $u$, wenn
 
 $v$ ist blockiert, wenn $v$ direkt blockiert ist oder einen direkt
 blockierten Vorgänger hat.
+\end{definition}
 
 \subsubsection{\texorpdfstring{Neue $\exists$-Regel
 ($\exists^{'}$-Regel)}{Neue \textbackslash{}exists-Regel (\textbackslash{}exists\^{}\{'\}-Regel)}}\label{neue-exists-regel-exists-regel}
@@ -464,47 +562,52 @@ blockierten Vorgänger hat.
   $L\left( v^{'} \right) = \left\{ C \right\}$
 \end{itemize}
 
+\includegraphics[width=5.71910in,height=2.33200in]{media/414block.png}
+
 \subsubsection{Vollständigkeit}\label{vollstuxe4ndigkeit}
 
+\begin{proposition}
+Wenn $C_0$ erfüllbar bzgl. $\MT$, so gibt der Algorithmus erfüllbar zurück.
+\end{proposition}
+
 Beweis wie ohne TBoxen: Alle $M_{0},\ldots,\ M_{n}$ sind realisierbar
-bzgl. $I$ (Induktion), also enthält $M_{n}$ einen Baum ohne
-offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel
-und Realisierbarkeitsbegriff auf TBoxen erweitert).
+bzgl. $\MI$ (Induktion), also enthält $M_{n}$ einen Baum ohne
+offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel und Realisierbarkeitsbegriff auf TBoxen erweitert).
 
 \subsubsection{Korrektheit}\label{korrektheit}
 
 Beweisskizze per Induktion über die Struktur von $C$. Definiere
-Interpretation $I$:
+Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{I} = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
+  $\Delta^{\MI} = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
 \item
-  $r^{I} = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
+  $r^{\MI} = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
 \item
-  $A^{I} = \left\{ v \middle| A \in L\left( v \right) \right\}$
+  $A^{\MI} = \left\{ v \middle| A \in L\left( v \right) \right\}$
 \end{itemize}
 
-Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^{I}$ gilt:
-$C \in L\left( v \right) \Rightarrow v \in C^{I}$. Die Behauptung
+Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^{\MI}$ gilt:
+$C \in L\left( v \right) \Rightarrow v \in C^{\MI}$. Die Behauptung
 impliziert wie gewünscht, dass
 
 \begin{itemize}
 \item
-  $I$ Modell von $T$ ist.
+  $\MI$ Modell von $T$ ist.
 \end{itemize}
 
 Da die TBox-Regel nicht anwendbar ist, gilt
-$C_{T} \in L\left( v \right)$ für alle $v \in V$. Also
-$v \in C_{T}^{I}$ für alle $v \in \Delta^{I}$.
+$C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also
+$v \in C_{\MT}^{\MI}$ für alle $v \in \Delta^{\MI}$.
 
 \begin{itemize}
 \item
-  $I$ Modell von $C_{0}$ ist.
+  $\MI$ Modell von $C_{0}$ ist.
 \end{itemize}
 
 Da $C_{0} \in L\left( v_{\text{ini}} \right)$ gilt nach Behauptung
-$v_{\text{ini}} \in C_{0}^{I}$.
+$v_{\text{ini}} \in C_{0}^{\MI}$.
 
 \textbf{I.A.} Siehe Beweis zu
 \protect\hyperlink{proposition-4.7-korrektheit}{Proposition 4.7}.
@@ -524,9 +627,9 @@ Fallunterscheidung:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^{I}$
-  (Definition $I$), $v^{'} \in D^{I}$ (\textbf{I.V.})
-  $\Rightarrow v \in \left( \exists r.D \right)^{I}$
+  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^{\MI}$
+  (Definition $\MI$), $v^{'} \in D^{\MI}$ (\textbf{I.V.})
+  $\Rightarrow v \in \left( \exists r.D \right)^{\MI}$
 \item
   $v^{'}$ blockiert. Da der direkte Vorgänger $v$ von $v'$
   unblockiert ist, ist $v'$ direkt blockiert von unblockiertem
@@ -535,16 +638,16 @@ Fallunterscheidung:
 
 \begin{itemize}
 \item
-  $\left( v,u \right) \in r^{I}$ nach Definition $r^{I}$
+  $\left( v,u \right) \in r^{\MI}$ nach Definition $r^{\MI}$
 \item
   $D \in L\left( v \right) \subseteq L\left( u \right)$
   (Blockierungsbedingung)
 \item
-  $\Rightarrow u \in D^{I}$ (\textbf{I.V.})
+  $\Rightarrow u \in D^{\MI}$ (\textbf{I.V.})
 \end{itemize}
 
 \begin{quote}
-Also $v \in \left( \exists r.D \right)^{I}$.
+Also $v \in \left( \exists r.D \right)^{\MI}$.
 \end{quote}
 
 \begin{itemize}
