@@ -1,6 +1,6 @@
 # README #
 
-Hier soll ein kurzes (inoffizielles) Skript zur Vorlesung Beschreibungslogik von Thomas Schneider an der Universität Bremen entstehen.  
+Hier soll ein kurzes (inoffizielles) Skript zur Vorlesung [Beschreibungslogik](http://www.informatik.uni-bremen.de/tdki/lehre/ss16/bl/) von Thomas Schneider an der Universität Bremen entstehen.  
 
 Wenn ihr dieses Dokument erweitern oder verbessern wollt, schreibt mir und ich füge euch als Collaborator hinzu.
 
@@ -16,6 +16,11 @@ make
 
 aufzurufen. Dies wurde zumindest auf Ubuntu mit TeX Live Full getestet. Es kann sein, dass ihr Packete nachinstallieren müsst.
 
+# Hinweise zum Lesen #
+
+Beweise und Beispiele sind oftmals entsprechend der [Folien](http://www.informatik.uni-bremen.de/tdki/lehre/ss16/bl/) mit TX.X markiert. Nicht alle TX.X von den Folien sind im Dokument zu finden, es sollten aber mindestens die Beweise vollständig vorhanden sein.
+
+Absätze die mit "Erklärung:" beginnen, sind meist Zusammenfassungen vom vorherigen Inhalt in eigenen Worten.
 
 # Für Collaborator: #
 
