@@ -6,7 +6,7 @@ Wenn ihr dieses Dokument erweitern oder verbessern wollt, schreibt mir und ich f
 
 # PDF bauen #
 
-Eine fertige PDF liegt zudem im Hauptverzeichnis. Es kann aber vorkommen, dass diese nicht dem aktuellsten Stand entspricht (schaut dazu auf das letzte Änderungsdatum.)
+Eine [fertige PDF](main.pdf) liegt im Hauptverzeichnis. Es kann aber vorkommen, dass diese nicht dem aktuellsten Stand entspricht (schaut dazu auf das letzte Änderungsdatum.)
 
 Um das Dokument zu kompilieren reicht es im Hauptverzeichnis 
 
