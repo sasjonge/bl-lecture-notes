@@ -28,6 +28,7 @@
 \usepackage{pgfplots}
 \usepackage{tabto}
 \usepackage{todonotes}
+\usepackage{xcolor}
 
 \usepackage{xparse,nameref} % for chapref
 \NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}

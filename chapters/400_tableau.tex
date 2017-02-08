@@ -490,10 +490,10 @@ Offenbar wäre eine naive Implementierung nicht effizient. Dabei kann man aber e
 
 Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in $\ALC$  \emph{bzgl. TBoxen}.
 
-Jede TBox $T$ ist äquivalent zu einer TBox der Form
+Jede TBox $\MT$ ist äquivalent zu einer TBox der Form
 $\left\{ \top \sqsubseteq C_{\MT} \right\}$: 
 
-\begin{center}setze $C_{\MT} \prod_{C \sqsubseteq D \in \MT}^{}{\neg C \sqcup D}$.\end{center}
+\begin{center}setze $C_{\MT} := \prod_{C \sqsubseteq D \in \MT}^{}{\neg C \sqcup D}$.\end{center}
 
 \textbf{T4.11} Beispiel
 
@@ -576,6 +576,12 @@ offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel und Re
 
 \subsubsection{Korrektheit}\label{korrektheit}
 
+\begin{proposition}
+Wenn der Algorithmus ``erfüllbar'' zurückgibt, so ist $C_0$ erfüllbar bzgl. $\MT$
+\end{proposition}
+
+\textbf{T4.15}
+
 Beweisskizze per Induktion über die Struktur von $C$. Definiere
 Interpretation $\MI$:
 
@@ -589,25 +595,21 @@ Interpretation $\MI$:
 \end{itemize}
 
 Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^{\MI}$ gilt:
-$C \in L\left( v \right) \Rightarrow v \in C^{\MI}$. Die Behauptung
-impliziert wie gewünscht, dass
+$$C \in L\left( v \right) \Rightarrow v \in C^{\MI}$$
+Die Behauptung impliziert wie gewünscht, dass
 
 \begin{itemize}
 \item
-  $\MI$ Modell von $T$ ist.
-\end{itemize}
+  $\MI$ Modell von $\MT$ ist.
 
-Da die TBox-Regel nicht anwendbar ist, gilt
-$C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also
-$v \in C_{\MT}^{\MI}$ für alle $v \in \Delta^{\MI}$.
+Da die TBox-Regel nicht anwendbar ist, gilt $C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also $v \in C_{\MT}^{\MI}$ für alle $v \in \Delta^{\MI}$.
 
-\begin{itemize}
 \item
   $\MI$ Modell von $C_{0}$ ist.
-\end{itemize}
 
 Da $C_{0} \in L\left( v_{\text{ini}} \right)$ gilt nach Behauptung
 $v_{\text{ini}} \in C_{0}^{\MI}$.
+\end{itemize}
 
 \textbf{I.A.} Siehe Beweis zu
 \protect\hyperlink{proposition-4.7-korrektheit}{Proposition 4.7}.
@@ -659,4 +661,53 @@ Also $v \in \left( \exists r.D \right)^{\MI}$.
 
 \subsubsection{Terminierung}\label{terminierung}
 
-Beweis analog, aber mit Einbezug der TBox.
+\begin{proposition}
+Der Tableau-Algorithmus stoppt nach endlicher Zeit.
+\end{proposition}
+
+Beweis analog zu den ohne TBoxen (Prop. 4.5), aber mit Einbezug der TBox. Wir zeigen es also in den selben Schritten:
+
+Beweis in 4 Schritten:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Es werden nur I-Bäume mit einem Verzweigungsgrad $\leq \left| C_{0} \right| + \color{red} \left| \MT \right|$ generiert.
+\item
+  Es werden nur I-Bäume mit einer Tiefe $\color{red} 2^k$ generiert.
+  \begin{quote}
+  \textbf{T4.16}
+
+  Angenommen, es wird ein I-Baum der Tiefe $> 2^k$ erzeugt.
+
+  Dann wird irgendwann die $\exists '$-Regel auf einen Knoten $v$ der Tiefe $2^k$ angewendet.
+
+  Betrachte Pfad $v_0, \ldots , v_{2^k}$ von der Wurzel bis v. Dieser Pfad hat $2^k+1$ Knoten.
+
+  Weil es nur $2^k$ möglich Knotenbeschriftungen gibt, muss es auf dem Pfad zwei Knoten $v_i$ und $v_j$ geben, mit $0 \leq i < j \leq 2^k$, welche dieselben Knotenbeschriftungen haben, also $L(v_i) = L(v_j)$. Also ist $v_j$ durch $v_i$ blockiert, weswegen auch $v$ blockiert ist. $\lightning$
+
+  Widerspruch zur Anwendung der $\exists '$-Regel auf $v_j$, also ist die Annahme falsch.
+  \end{quote}
+\item
+  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{\MI}$ für
+  ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
+  $\color{red} k^{2^{k}} \cdot k \leq 2^{2^{3k}}= n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+\end{enumerate}
+
+Danach kann Terminierung wie gehabt mittels Behauptung 3 bewiesen werden.
+
+\subsubsection{Komplexität}
+
+Im Beweis zum 3. Schritt der Terminierung haben wir gesehen, dass die I-Bäume höchstens doppelt exponentiell groß werden.
+
+Dieser Worst-Case kann eintreten!
+
+\begin{lemma}
+Es gibt Eingabe $C_0$, $\MT$ für die der Tableau-Algorithmus einen Baum von exponentieller Tiefe generiert.
+\end{lemma}
+
+Also: 2-exponentieller Zeit- und Platzaufwand (sogar 3-exponentiell!).
+
+\subsubsection{Bemerkung zur TBox-Regel}
+
+\subsubsection{Erweiterungen}
