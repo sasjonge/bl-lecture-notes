@@ -710,4 +710,25 @@ Also: 2-exponentieller Zeit- und Platzaufwand (sogar 3-exponentiell!).
 
 \subsubsection{Bemerkung zur TBox-Regel}
 
+TBoxen führen zu Backtracking:
+
+\begin{center}Normalisierung von $\MT$ zu $\{\top \sqsubseteq \bigsqcap_{C \sqsubseteq D \in \MT} \neg C \sqcup D\}$\end{center}
+
+Daher wird jede $\sqcup$-Regel für \emph{Konzeptinklusion} auf \emph{jeden} Knoten angewendet!
+
+Also braucht man für eine effiziente Implementierung Optimerungstechniken, die die Dijsunktionen, soweit möglich, eliminieren (``Absorption'').
+
 \subsubsection{Erweiterungen}
+
+Der Algorithmus kann auch auf $\ALCI$, $\ALCQ$ und $\ALCQI$ erweitert werden.
+
+Das ist teilweise subtiler als erwartet, z.B.:
+
+\begin{itemize}
+	\item $\ALCI$
+	Offensichtlich: Hinzufügen von Regeln für $\exists r^{-}.C$ und $\forall r^-.C$
+
+	Weniger offensichtlich Blockierungsbedingungen muss verschärft werden, sonst ist Algorithmus nicht korrekt.
+\end{itemize}
+
+Für $\ALCQI$ ist eine noch aufwendigere Blockierungsbedingung nötig.
