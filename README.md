@@ -49,3 +49,10 @@ Eure Definition
 ```
 
 Statt definition könnt ihr einsetzten: theorem, lemma, proposition, korollar oder proof.
+
+# TO-DO #
+
+Mögliche Verbesserungspunkte:
+
+* Kapitel zu ABoxen schreiben
+* Graphen digitalisieren
