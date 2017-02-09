@@ -1,12 +1,29 @@
 \subsection{Komplexität mit TBoxen, obere
 Schranke}\label{komplexituxe4t-mit-tboxen-obere-schranke}
 
-\subsubsection{Theorem 5.1}\label{theorem-5.1}
+\subsubsection{Obere Schranke}
 
-In ALC ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
+Wir wollen zeigen:
+
+\begin{theorem}
+In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
 ExpTime-Vollständig.
+\end{theorem}
 
-\subsubsection{Definition 5.2 (Typ)}\label{definition-5.2-typ}
+Mit Lemma 2.9: Subsumtion und Äquivalenz ExpTime-Vollständig.
+
+Wir beginnen mit oberer Schranke (Enthaltensein in ExpTime):
+
+\begin{itemize}
+  \item wir verwenden ein Verfahren aus der Modallogik: Typelimination
+  \item basiert auf syntaktischem Typ-Begriff
+\end{itemize}
+
+\subsubsection{Syntaktische Typen}\label{synt-typ}
+
+Wir nehmen an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-TBox die Form $\{\top \sqsubseteq C_{\MT}\}$ hat mit $C_{\MT}$ in NNF.
+
+\begin{definition}{Typ}
 
 Ein Typ für $C_{0}$ und $T$ ist Teilmenge
 $t \subseteq sub\left( C_{0},T \right)$, so dass
@@ -25,8 +42,32 @@ $t \subseteq sub\left( C_{0},T \right)$, so dass
 \item
   $C_{T} \in t$
 \end{enumerate}
+\end{definition}
+
+\textbf{T5.1}
+
+Beispiel:
+
+$C_0 = A$, $\MT = \{\top \subseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
+
+Dann ist $$sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
+
+Sei $M = \{C_{\MT}, \exists r.\exists r. A, \forall r.A', \neg A \sqcup \neg A'\}$
+
+Die Typen für $C_0$ und $\MT$ sind:
+
+\begin{itemize}
+  \item $t_0 = M \cup \{\neg A, \neg A'\}$
+  \item $t_1 = M \cup \{\neg A, A'\}$
+  \item $t_2 = M \cup \{A, \neg A'\}$
+  \item $t_0' = M \cup \{\exists r.A\}$
+  \item $t_1' = M \cup \{\exists r.A\}$
+  \item $t_2' = M \cup \{\exists r.A\}$
+\end{itemize}
 
 \subsubsection{Typelimination}\label{typelimination}
+
+Die generelle Idee der Typelimination bei Eingabe $C_0$, $\MT$:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -41,21 +82,37 @@ $t \subseteq sub\left( C_{0},T \right)$, so dass
   Wenn ja, antworte „erfüllbar``, sonst „unerfüllbar``
 \end{enumerate}
 
-\subsubsection{Schlechter Typ}\label{schlechter-typ}
+\subsubsection{Schlechte Typen}\label{schlechter-typ}
 
-Sei $\Gamma$ Typenmenge und $t \in \Gamma$. Dann ist $t$
-\emph{schlecht in} $\Gamma$, wenn für ein $\exists r.C \in t$ gilt:
-Es gibt kein $t^{'} \in \Gamma$ mit
-$\left\{ C \right\} \cup \left\{ \text{D\ } \middle| \ \forall r.D \in t \right\} \subseteq t^{'}$.
+Wir formalisieren ``Typen, die in keinem Modell vorkommen können''.
 
-Erklärung: $t$ braucht einen Nachfolger, es gibt aber keinen
+\begin{definition}{schlechter Typ}
+
+Sei $\Gamma$ Typenmenge und $t \in \Gamma$.
+
+Dann ist $t$ \emph{schlecht in} $\Gamma$, wenn für ein $\exists r.C \in t$ gilt:
+
+\begin{center}Es gibt kein $t^{'} \in \Gamma$ mit
+$\left\{ C \right\} \cup \left\{ \text{D\ } \middle| \ \forall r.D \in t \right\} \subseteq t^{'}$.\end{center}
+\end{definition}
+
+Erklärung: $t$ braucht einen ``Zeugen'', es gibt aber keinen
 geeigneten.
 
-\paragraph{Proposition 5.4
-(Terminierung)}\label{proposition-5.4-terminierung}
+\textbf{T5.1cont}
 
-Beweisskizze. Sei $n = \left| C_{0} \right| + |T|$. Proposition folgt
-aus:
+Beispielsweise ist $t_0'$ schlecht in der Menge $\{t_0,t_1,t_2,t_0',t_1',t_2'\}$. Für $\exists r.A \in t_0'$ ist die Menge aus Definition 5.3 $\{A,A'\}$. Kein Typ enhält $A$ und $A'$. Analog: $t_1'$, $t_2'$ sind schlecht. Entfernt man diese drei so erhält man die Menge $\Gamma_1 = \{t_1,t_2,t_2\}$. 
+
+Nun sind aber $\{t_1,t_2,t_3\}$ schlecht in $\Gamma_1$: Sie enthalten $\exists r. \exists r.A$ , aber kein Typ in $\Gamma_1$ enthält $\exists r.A$.
+
+\begin{proposition}
+$\ALC$-Elim($C_0,\MT$) terminiert nach $2^{\mathcal{O}(|C_0|+|\MT|)}$ Schritten.
+\end{proposition}
+
+\textbf{T5.2}
+
+\begin{proof}
+Sei $n = \left| C_{0} \right| + |T|$. Proposition folgt aus:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -70,129 +127,175 @@ aus:
   Die restlichen Operationen (prüfen, ob ein Typ schlecht ist usw.)
   können leicht in Zeit $2^{O\left( n \right)}$ implementiert werden.
 \end{enumerate}
+\end{proof}
 
-\paragraph{Proposition 5.5}\label{proposition-5.5}
+\begin{proposition}
+$\ALC$-Elim($C_0,\MT$) antwortet ``erfüllbar'' gdw. $C_0$ erfüllbar bzgl. $\MT$
+\end{proposition}
 
-\textbf{Korrektheit}. Beweisskizze per Induktion über Struktur von
-$C$.
+\textbf{T5.3}. 
 
-Antworte $\text{ALC}\mathrm{-}Elim(C_{0},T)$ „erfüllbar`` und sei
+\textbf{Korrekt}
+
+Per Induktion über Struktur von $C$.
+
+Antworte $\text {$\ALC$}\mathrm{-}Elim(C_{0},T)$ „erfüllbar`` und sei
 $\Gamma_{i}$ die resultierende Typmenge. Dann gibt es
 $t_{0} \in \Gamma_{i}$ mit $C_{0} \in t_{0}$. Definiere
-Interpretation $I$:
+Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{I} = \Gamma_{i}$
+  $\Delta^{\MI} = \Gamma_{i}$
 \item
-  $A^{I} = \left\{ t \in \Gamma_{i} \middle| A \in t \right\}$
+  $A^{\MI} = \left\{ t \in \Gamma_{i} \middle| A \in t \right\}$
 \item
-  $r^{i} = \left\{ \left( t,t^{'} \right)\  \middle| \ \forall r.C \in t\ \mathrm{\text{und}}\ C \in t^{'} \right\}$
+  $r^{i} = \left\{ \left( t,t^{'} \right)\in \Gamma_i \times \Gamma_i\  \middle| \ \forall r.C \in t\ \mathrm{\text{impliziert}}\ C \in t^{'} \right\}$
+\end{itemize} 
+
+\paragraph{Beispiel}
+
+$C_0 = A$, $\MT = \{\top \sqsubseteq \forall r.\exists r.A \sqcap (\neg A \sqcup \exists r.A\}$
+
+$sub(C_0, \MT) = \{A,C_{\MT}, \forall r.\exists r.A, \neg A \sqcup \exists r.A, \exists r.A, \neg A\}$
+
+Sei $M = \{C_{\MT}, \forall r.\exists r.A, \neg A \sqcup \exists r.A\}$ 
+
+Typen:
+
+\begin{itemize}
+  \item $t_0 = M \cup \{\neg A\}$
+  \item $t_1 = M \cup \{A,\exists r.A\}$
+  \item $t_1 = M \cup \{\neg A,\exists r.A\}$
 \end{itemize}
 
-Zu zeigen: $I$ ist Modell von $C_{0}$ und $T$.
+Keine der Typen ist schlecht. Also $\Gamma_1 = \{t_0,t_1,t_2\}$
 
-Behauptung: Für alle $C \in sub\left( C_{0},T \right)$ und alle
-$t \in \Gamma_{i}$ gilt $C \in t \Rightarrow t \in C^{I}$. Daraus
-folgt:
+Interpretation $\MI$:
+
+\includegraphics[width=3.71910in,height=2.33200in]{media/52typelim.png}
+
+\paragraph{Beweis}
+
+Zu zeigen: $\MI$ ist Modell von $C_{0}$ und $\MT$ *.
+
+Behauptung: Für alle $C \in sub\left( C_{0},\MT \right)$ und alle
+$t \in \Gamma_{i}$:
+$$C \in t \Rightarrow t \in C^{\MI}$$
+
+Daraus folgt:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Wegen $C_{0} \in t_{0}$ ist $t_{0} \in C_{0}^{I}$
+  * Wegen $C_{0} \in t_{0}$ ist $t_{0} \in C_{0}^{\MI}$
 \item
   Wegen $C_{T} \in t$ für alle $t \in \Gamma_{i}$ folgt
-  $t \in C_{T}^{I}$.
+  $t \in C_{T}^{\MI}$. für alle $t \in \Gamma_{i}$ Also ist $\MI$ Modell von $\MT$.
 \end{enumerate}
 
-Also ist $I$ Modell von $\text{T.}$
-
-\textbf{I.A.} $C = A$. Folgt direkt aus Definition $I$.
+\textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
 
 $C = \neg A$. Nach Definition „Typ`` gilt $A \notin t$. Nach
-Definition $I$ ist $t \notin A^{I}$.
+Definition $\MI$ ist $t \notin A^{\MI}$.
 
 \textbf{I.S.} Fallunterscheidung:
 
 \begin{itemize}
 \item
   $C = D \sqcap D^{'}$
-\end{itemize}
 
 Nach Definition „Typ`` ist $D \in t$ und $D^{'} \in t$. Nach
-\textbf{I.V}.: $t \in D^{I}$ und $t \in \left( D^{'} \right)^{I}$.
-Nach Semantik: $t \in \left( D \sqcap D^{'} \right)^{I}$.
+\textbf{I.V}.: $t \in D^{\MI}$ und $t \in \left( D^{'} \right)^{\MI}$.
+Nach Semantik: $t \in \left( D \sqcap D^{'} \right)^{\MI}$.
 
-\begin{itemize}
 \item
   $C = D \sqcup D^{'}$
-\end{itemize}
 
 Analog.
 
-\begin{itemize}
 \item
   $C = \forall r.D$
-\end{itemize}
 
-Sei $\forall r.D \in t$ und $\left( t,t^{'} \right) \in r^{I}$. Nach
-Definition $r^{I}$ muss $D \in t^{'}$ gelten. Nach \textbf{I.V}.:
-$t^{'} \in D^{I}$, also $t \in \left( \forall r.D \right)^{I}$
+Sei $\forall r.D \in t$ und $\left( t,t^{'} \right) \in r^{\MI}$. Nach
+Definition $r^{\MI}$ muss $D \in t^{'}$ gelten. Nach \textbf{I.V}.:
+$t^{'} \in D^{\MI}$, also $t \in \left( \forall r.D \right)^{\MI}$
 
-\begin{itemize}
 \item
   $C = \exists r.D$
-\end{itemize}
 
 Sei $\exists r.D \in t$. Da $t \in \Gamma_{i}$ (also nicht
 schlecht), gibt es $t^{'} \in \Gamma_{i}$ mit $D \in t^{'}$ und
 $E \in t^{'}$ für alle $\forall r.E \in t$. Nach \textbf{I.V.} gilt
-$t^{'} \in D^{I}$ und nach Definition von $r^{I}$ gilt
-$\left( t,t^{'} \right) \in r^{I}$. Also
-$t \in \left( \exists r.D \right)^{I}$
+$t^{'} \in D^{\MI}$ und nach Definition von $r^{\MI}$ gilt
+$\left( t,t^{'} \right) \in r^{\MI}$. Also
+$t \in \left( \exists r.D \right)^{\MI}$
+\end{itemize}
 
-\textbf{Vollständigkeit}. Beweisskizze per Induktion über $i$.
+\textbf{Vollständigkeit}. 
 
-Sei $C_{0}$ erfüllbar bzgl. $T$ und sei $I$ Modell von $T$ mit
-$d_{0} \in C_{0}^{I}$. Sei
-$\Gamma = \left\{ t_{I}\left( d \right)\  \middle| \ d \in \Delta^{I} \right\}$.
-Sei $\Gamma_{0},\ldots,\Gamma_{k}$ die von
-$\text{ALC}\mathrm{-}\text{Elim}\left( C_{0},T \right)$ erzeugte
-Sequenz. Behauptung: $\Gamma \subseteq \Gamma_{i}$ für alle
-$i \geq 0$. Daraus folgt wegen $d_{0} \in C_{0}^{I}$, dass
-$C_{0} \in t_{i}\left( d_{0} \right) \in \Gamma \subseteq \Gamma_{k}$.
-Also gibt $\text{ALC}\mathrm{-}Elim(C_{0},T)$ „erfüllbar`` zurück.
+Beweisskizze per Induktion über i.
+
+Sei $C_{0}$ erfüllbar bzgl. $\MT$ und sei $\MI$ Modell von $\MT$ mit
+$d_{0} \in C_{0}^{\MI}$. 
+
+Sei $\Gamma = \left\{ t_{\MI}\left( d \right)\  \middle| \ d \in \Delta^{\MI} \right\}$.
+
+Sei $\Gamma_{0},\ldots,\Gamma_{k}$ die von $\text {$\ALC$}\mathrm{-}\text{Elim}\left( C_{0},\MT \right)$ erzeugte Sequenz. 
+
+Behauptung: $\Gamma \subseteq \Gamma_{i}$ für alle $i \geq 0$
+
+Daraus folgt wegen $d_{0} \in C_{0}^{\MI}$, dass $C_{0} \in t_{i}\left( d_{0} \right) \in \Gamma \subseteq \Gamma_{k}$.
+
+Also gibt $\text {$\ALC$}\mathrm{-}Elim(C_{0},\MT)$ „erfüllbar`` zurück.
 
 I.A. $i = 0$. Einfach jedes Element von $\Gamma$ (semantisch Typ)
-ist auch ein syntaktischer Schritt. \textbf{???}
+ist auch ein syntaktischer Typ.
 
 I.S. Gelte $\Gamma \subseteq \Gamma_{i}$ (I.V.). Zu zeigen:
-$\Gamma \subseteq \Gamma_{i + 1}$. Sei $t \in \Gamma$. Es genügt zu
-zeigen: $t$ ist nicht schlecht in $\Gamma_{i}$. Sei
-$\exists r.C \in t$ und
-$S = \left\{ C \right\} \cup \left\{ D \middle| \forall r.D \in T \right\}$.
-Da $t \in \Gamma$, gibt es $d \in \Delta^{I}$ mit
-$t_{i}\left( d \right) = t_{0}$. Also gibt es nach Semantik
-$e \in \Delta^{I}$, $\left( d,e \right) \in r^{I}$, $e \in D^{I}$
-für alle $D \in S$. $t's$ gilt also
-$S \subseteq t_{I}\left( e \right)$ und
-$t_{I}\left( e \right) \in \Gamma \subseteq \Gamma_{i}$. Es folgt:
+$\Gamma \subseteq \Gamma_{i + 1}$. 
+
+Sei $t \in \Gamma$. Es genügt zu zeigen: $t$ ist nicht schlecht in $\Gamma_{i}$. 
+
+Sei $\exists r.C \in t$ und $S = \left\{ C \right\} \cup \left\{ D \middle| \forall r.D \in T \right\}$.
+
+Da $t \in \Gamma$, gibt es $d \in \Delta^{\MI}$ mit $t_{\MI}\left( d \right) = t_{0}$. 
+
+Also gibt es nach Semantik $e \in \Delta^{\MI}$, $\left( d,e \right) \in r^{\MI}$, $e \in D^{\MI}$ für alle $D \in S$
+
+$t's$ gilt also $S \subseteq t_{\MI}\left( e \right)$ und $t_{\MI}\left( e \right) \in \Gamma \subseteq \Gamma_{i}$. Es folgt:
 $t$ nicht schlecht
 
-\hypertarget{theorem-5.6}{\subsubsection{Theorem
-5.6}\label{theorem-5.6}}
+\begin{theorem}
+In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in ExpTime.
+\end{theorem}
 
-In ALC ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in
-ExpTime.
+\subsubsection{Zusammenhang mit Tableau-Algorithmen}
 
-\subsection{Komplexität mit TBoxen, untere
-Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
+Offensichtliche Entsprechungen:
+
+\begin{itemize}
+  \item $\sqcap$-Regel, $\sqcup$-Regel, TBox-Regel finden sich wieder in der Definition eines Typs.
+  \item $\exists$-Regel und $\forall$-Regel finden sich wieder in Def. von ``schlecht''.
+  \item Freiheit von offensichtlichen Widersprüchen findet sich wieder in der Definition eines Typs
+\end{itemize}
+
+Unterschiede:
+
+\begin{itemize}
+  \item Tableau-Algorithmus benötigt im Worst Case dreifach exponentielle Laufzeit
+  \item Typelimination benötigt im Best Case exponentielle Laufzeit
+\end{itemize}
+
+\subsection{Komplexität mit TBoxen, untere Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
+
+Um die ExpTime-Härte zu zeigen, reduzieren wir auf ein spieltheoretisches Problem:
 
 \subsubsection{ExpTime-Spiele}\label{exptime-spiele}
 
 \begin{itemize}
 \item
-  Zwei Spieler spielen auf gegebener aussagenlogischer Formel
+  Zwei Spieler spielen auf gegebener aussagenlogischen Formel
   $\varphi$
 \item
   Jede Variable in $\varphi$ gehört entweder Spieler 1 oder Spieler 2
@@ -212,7 +315,7 @@ Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
   $\varphi$ wahr wird
 \end{itemize}
 
-\subsubsection{Definition 5.7}\label{definition-5.7}
+\begin{definition}{ExpTime-Spiele}
 
 \begin{itemize}
 \item
@@ -229,12 +332,23 @@ Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
   $\pi$ und $\pi^{'}$ unterscheiden sich nur in einer Variablen
   $p \in \Gamma_{j}$
 \end{itemize}
+\end{definition}
 
 „$\pi$ ist $j$-Variation von $\pi'$`` bedeutet: Spieler $j$ kann
 $\pi$ in $\pi'$ transformieren (oder umgekehrt).
 
-\subsubsection{Definition 5.8
-(Gewinnstrategie)}\label{definition-5.8-gewinnstrategie}
+Das hier relevante Entscheidungsproblem bezieht sich auf \emph{Gewinnstrategien} für Spieler 2.
+
+\subsubsection{Gewinnstrategie}\label{definition-5.8-gewinnstrategie}
+
+Intuitiv:
+
+\begin{itemize}
+  \item eine Gewinnstrategie sagt Spieler 2 nach jedem möglichen Spielverlauf wie er spielen muss um zu gewinnen.
+  \item wenn Spieler 2 eine Gewinnstrategie hat, so kann er das Spiel gewinnen
+\end{itemize}
+
+\begin{definition}{Gewinnstrategie}
 
 Gewinnstrategie für Spieler 2 in Spiel
 $\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{0} \right)$ ist unendlicher
@@ -259,54 +373,78 @@ $v \in V$ Konfiguration $l(v)$ zuweist so, dass
   wenn $l\left( v \right) = (i,\pi)$, dann nicht
   $\pi \vDash \varphi$
 \end{enumerate}
+\end{definition}
 
-\subsubsection{Definition 5.9}\label{definition-5.9}
+\subsubsection{ExpTime-Spiele als Entscheidungsproblem}
+
+\begin{definition}
 
 \emph{Spiel\textsubscript{1}} ist das folgende Problem: Gegeben Spiel
 $\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{1} \right)$, entscheide ob
 Spieler 2 eine Gewinnstrategie hat.
+\end{definition}
 
-\subsubsection{Theorem 5.10}\label{theorem-5.10}
-
+\begin{theorem}
 Spiel\textsubscript{1} ist ExpTime-Vollständig
+\end{theorem}
+
+Wir wollen nun die ExpTime-Härte von Erfüllbarkeit in $\ALC$ bzgl. TBoxen auf Spiel\textsubscript{1} reduzieren
 
 \subsubsection{Reduktion}\label{reduktion}
 
 Reduziere Spiel\textsubscript{1}: Gegeben Spiel
 $\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{0} \right)$, konstruiere in
-Polynomialzeit Konzept $C_{S}$ und TBox $T_{S}$ so, dass: Spieler 2
-hat Gewinnstrategie in $S$ gdw. $C_{S}$ erfüllbar bzgl. $T_{S}$.
+Polynomialzeit Konzept $C_{S}$ und TBox $\MT_{S}$ so, dass: 
 
-Beweisskizze.
+\begin{lemma}Spieler 2 hat Gewinnstrategie in $S$ gdw. $C_{S}$ erfüllbar bzgl. $\MT_{S}$.\end{lemma}
+
+Idee: (Baum)-Modelle von $C_S$ und $\MT_S$ kodieren Gewinnstrategien.
+
+Beweisskizze:
+
+Details der Reduktion:
+
+\includegraphics[width=3.71910in,height=2.33200in]{media/5red1.png}
+
+\includegraphics[width=3.71910in,height=2.33200in]{media/5red2.png}
+
+\includegraphics[width=3.71910in,height=2.33200in]{media/5red3.png}
+
+Setze $C_S = W$ 
 
 \begin{itemize}
 \item
-  Hinrichtung: Erzeuge aus der Gewinnstrategie Interpretation und zeige,
-  dass diese Modell ist. \textbf{Hinrichtung Sascha}
+  Hinrichtung: Erzeuge aus der Gewinnstrategie Interpretation und zeige, dass diese Modell ist.
 \item
   Rückrichtung: Nimm an es gibt Baummodell und erzeuge daraus
   Gewinnstrategie.
 \end{itemize}
 
-\subsubsection{ Theorem 5.12}\label{theorem-5.12}
+\begin{theorem}
+In $\ALC$ ist die Erfüllbarkeit von TBoxen ExpTime-hart.
+\end{theorem}
 
-In ALC ist die Erfüllbarkeit von TBoxen ExpTime-hart.
-
-Daraus ergibt sich zusammen mit \protect\hyperlink{theorem-5.6}{Theorem
-5.6} ExpTime-Vollständigkeit.
+Daraus ergibt sich zusammen mit \protect\hyperlink{theorem-5.6}{Theorem 5.6} ExpTime-Vollständigkeit.
 
 \subsection{Komplexität ohne TBoxen obere
 Schranke}\label{komplexituxe4t-ohne-tboxen-obere-schranke}
 
-\subsubsection{Theorem 5.13}\label{theorem-5.13}
+\subsubsection{Obere Schranke}
 
-In ALC ist die Erfüllbarkeit von Konzepten (ohne TBoxen)
+Wir wollen zeigen:
+
+\begin{theorem}
+In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen)
 PSpace-Vollständig.
+\end{theorem}
+
+Mit Lemma 2.8 sind dann auch Subsumtion und Äquivalenz PSpace-vollständig.
 
 \subsubsection{ALC-Worlds}\label{alc-worlds}
 
-Wenn $C$ erfüllbar, dann hat $C$ ein Baummodell. Ohne TBox ist
-dessen Tiefe mit $\left| C \right|$ beschränkt. In PSpace:
+Wenn $C$ erfüllbar, dann hat $C$ ein Baummodell (Theorem 3.4). Ohne TBox ist dessen Tiefe mit $\left| C \right|$ beschränkt. 
+
+In PSpace:
 
 \begin{itemize}
 \item
@@ -318,19 +456,19 @@ dessen Tiefe mit $\left| C \right|$ beschränkt. In PSpace:
   jeder Zeit nur einen Pfad des Baumes im Speicher
 \end{itemize}
 
-\paragraph{Theorem 5.14}\label{theorem-5.14}
-
+\begin{theorem}
 PSpace $=$ NPSpace
+\end{theorem}
 
-\paragraph{Definition 5.15
-(i-Konzepte)}\label{definition-5.15-i-konzepte}
+\begin{definition}{$i$-Konzepte}
 
 Für $i \geq 0$ ist die Menge der $i$-Konzepte definiert als:
-$\text{su}b_{i}\left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$.
+$$\sub_{i} := \left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
+\end{definition}
 
-\paragraph{Definition 6.16 (i-Typ)}\label{definition-6.16-i-typ}
+\begin{definition}{i-Typ}}
 
-Sei $i \geq 0$. $i$-Typ für $C_{0}$ ist Teilmenge
+Sei $i \geq 0$. $\MI$-Typ für $C_{0}$ ist Teilmenge
 $t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
 
 \begin{enumerate}
@@ -348,7 +486,7 @@ $t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
 
 \paragraph{ALC-Worlds}\label{alc-worlds-1}
 
-Rekursion über $i$-Typen.
+Rekursion über $\MI$-Typen.
 
 \paragraph{Proposition 5.17}\label{proposition-5.17}
 
@@ -363,12 +501,12 @@ Platzbedarf pro Aufruf ist polynomiell.
 
 Korrektheitsbeweis per Induktion über $C_{0}$:
 
-\textbf{I.A.} $C = A$. Folgt direkt aus Definition $I$.
+\textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
 
 $C = \neg A$. Da der Lauf erfolgreich ist, ist
 $p_{1}\left( v \right)$ Typ für $C_{0}$. Nach Definition „Typ`` gilt
-$A \notin p_{1}\left( v \right)$. Nach Definition $I$ ist
-$v \notin A^{I}$.
+$A \notin p_{1}\left( v \right)$. Nach Definition $\MI$ ist
+$v \notin A^{\MI}$.
 
 \textbf{I.S.} Fallunterscheidung:
 
@@ -378,9 +516,9 @@ $v \notin A^{I}$.
 \end{itemize}
 
 Nach Definition „Typ`` ist $D \in p_{1}\left( v \right)$ und
-$D^{'} \in p_{1}\left( v \right)$. Nach \textbf{I.V}.: $v \in D^{I}$
-und $v \in \left( D^{'} \right)^{I}$. Nach Semantik:
-$v \in \left( D \sqcap D^{'} \right)^{I}$.
+$D^{'} \in p_{1}\left( v \right)$. Nach \textbf{I.V}.: $v \in D^{\MI}$
+und $v \in \left( D^{'} \right)^{\MI}$. Nach Semantik:
+$v \in \left( D \sqcap D^{'} \right)^{\MI}$.
 
 \begin{itemize}
 \item
@@ -394,11 +532,11 @@ Analog.
   $C = \forall r.D$
 \end{itemize}
 
-Sei $\left( v,v^{'} \right) \in r^{I}$. Dann ist
+Sei $\left( v,v^{'} \right) \in r^{\MI}$. Dann ist
 $\left( v,v^{'} \right) \in E$ und $\sigma\left( v^{'} \right) = r$.
 Wegen $\forall r.D \in p_{1}(v)$ ist auch
 $D \in p_{1}\left( v^{'} \right)$. Nach I.V. gilt $v^{'} \in D$.
-Also $v \in \left( \forall r.D \right)^{I}$
+Also $v \in \left( \forall r.D \right)^{\MI}$
 
 \begin{itemize}
 \item
@@ -411,7 +549,7 @@ Also $v \in \left( \forall r.D \right)^{I}$
 
 \subsubsection{Theorem 5.19}\label{theorem-5.19}
 
-In ALC ist die Erfüllbarkeit von Konzepten in PSpace.
+In $\ALC$ ist die Erfüllbarkeit von Konzepten in PSpace.
 
 \subsection{Komplexität ohne TBoxen untere
 Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
@@ -452,7 +590,7 @@ $v \in V$ Konfiguration $l(v)$ zuweist, sodass
 
 \subsubsection{Theorem 5.25}\label{theorem-5.25}
 
-In ALC ist die Erfüllbarkeit von Konzepten bzgl. leerer TBoxen
+In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. leerer TBoxen
 PSpace-Hart.
 
 Beweisskizze. Konstruiere Konzept $C_{\varphi}$, so dass Spieler 1 hat
@@ -481,7 +619,7 @@ $P^{B} \subseteq \left( \Delta^{B} \right)^{n}$.
 Syntax)}\label{definition-5.27-alcb-syntax}
 
 Sei $B$ ein konkreter Bereich. Mit ALC($B$) bezeichnen wir die
-Erweiterung von ALC um $B$, d.h. um
+Erweiterung von $\ALC$ um $B$, d.h. um
 
 \begin{itemize}
 \item
@@ -498,17 +636,17 @@ $r_{j}$ Rollenname und $f$ Featurename.
 \subsubsection{Definition 5.28 (ALCB
 Semantik)}\label{definition-5.28-alcb-semantik}
 
-Eine Interpretation $I$ ordnet nun zusätzlich zu jedem Featurenamen
-$f$ eine Funktion $f^{I}:\Delta^{I} \rightarrow \Delta^{B}$ zu. Für
-jede Rollenkomposition $r = r_{1};\ldots r_{k};f$ bezeichnet $R^{I}$
+Eine Interpretation $\MI$ ordnet nun zusätzlich zu jedem Featurenamen
+$f$ eine Funktion $f^{\MI}:\Delta^{\MI} \rightarrow \Delta^{B}$ zu. Für
+jede Rollenkomposition $r = r_{1};\ldots r_{k};f$ bezeichnet $R^{\MI}$
 die Komposition der Interpretationen:
-$R^{I} = r_{1}^{I} \circ \ldots \circ r_{k}^{I} \circ f$
+$R^{\MI} = r_{1}^{\MI} \circ \ldots \circ r_{k}^{\MI} \circ f$
 
 Die Semantik der zusätzlichen Konstruktoren ist nun:
 
-\[\left( \exists R_{1},\ldots,\ R_{k}\text{.P} \right)^{I} = \left\{ d \in \Delta^{I}\ |\ \exists d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{I}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \exists R_{1},\ldots,\ R_{k}\text{.P} \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \exists d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{\MI}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
-\[\left( \forall R_{1},\ldots,\ R_{k}\text{.P} \right)^{I} = \left\{ d \in \Delta^{I}\ |\ \forall d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{I}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \forall R_{1},\ldots,\ R_{k}\text{.P} \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \forall d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{\MI}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
 \subsubsection{2-Registermaschinen}\label{registermaschinen}
 
@@ -569,7 +707,7 @@ Das Erfüllbarkeitsproblem in $ALC(B_{1})$ ist unentscheidbar.
 \end{itemize}
 
 Beweisskizze. Gegeben 2RM $M$,
-konstuiere$\text{ALC}\left( B_{1} \right)$-TBox $T_{M}$ und wähle
+konstuiere$\text {$\ALC$}\left( B_{1} \right)$-TBox $T_{M}$ und wähle
 einen Konzeptnamen $J$ sodass: $M$ hält auf $\left( 0,0 \right)$
 gdw. $J$ unerfüllbar bzgl. $T_{M}$. Zeige dies jeweils für
 Hinrichtung und Rückrichtung per Kontraposition. \textbf{Wo kommen i und
