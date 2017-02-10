@@ -1,0 +1,180 @@
+\subsection{Erfüllbarkeit in $\ALC$}
+
+\subsubsection{$\ALC$ bzgl. TBoxen}
+
+Komplexität: ExpTime-vollständig
+
+\paragraph{Obere Schranken}
+
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ bzgl. TBoxen in ExpTime liegt, haben wir den Algorithmus ``Typ-Elimination'' eingeführt.
+
+Für diesen habe wir syntaktische Typen definiert und dann gezeigt, dass dieser in $2^\{|C_0|+|\MT|\}$ Schritten terminiert.
+
+Die Korrektheit haben wir gezeigt, indem wir aus den Typen eine Interpretation gebildet haben und gezeigt haben, dass diese ein Modell von $C_0$ bzgl. $\MT$ ist.
+
+Die Vollständigkeit haben wir gezeigt, indem wir semantische Typen aus dem Modell $\MI$ gebildet haben. Dann haben wir (per Induktion über ) gezeigt, dass diese immer eine Teilmenge der Mengen von syntaktischen Typen die bei $\ALC$-Elim gebildet werden.
+
+\paragraph{Untere Schranke}
+
+Nun wollen wir zeigen, das das Erfüllbarkeitsproblem von $\ALC$ ExpTime-hart ist. Dazu reduzieren wir das ExpTime Spiel auf die Erfüllbarkeit von $\ALC$.
+
+\subsubsection{$\ALC$ ohne TBox}
+
+Komplexität: PSpace-vollständig
+
+\paragraph{Obere Schranken}
+
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ ohne TBoxen in PSpace liegt, haben wir den Algorithmus ``$\ALC$-Worlds'' eingeführt.
+
+Für diesen haben wir i-Typen definiert und dann gezeigt, dass der Algorithmus terminiert und in PSpace liegt. Dies liegt daran, dass der Algorithmus einen endlichen Baum bildet, und wir nur einen Pfad zur selben Zeit betrachten müssen, da wir per Tiefensuche prüfen.
+
+Korrektheit: Aus dem Rekursionsbaum bilden wir eine Interpreation $\MI$ und zeigen, dass diese ein Modell von $C_0$ ist.
+
+Vollständigkeit: Verwende $\MI$ um die nichtdeterministischen Entscheidungen des Algorithmus zu lenken.
+
+\paragraph{Untere Schranke}
+
+Nun wollen wir zeigen, dass das Erfüllbarkeitsproblem von  $\ALC$ ohne TBoxen PSpace-hart ist. Dies zeigen wir, indem wir das PSpace-Spiel auf die Erfüllbarkeit reduzieren. 
+
+\subsubsection{$\ALCI$, $\ALCQ$, $\ALCQI$}
+
+Für diese Variationen von $\ALC$ gelten die selben Komplexitäten wie für $\ALC$
+
+\subsubsection{Unentscheidbare Erweiterungen}
+
+Wir betrachten hier beispielhaft die Erweiterung von um konkrete Bereiche. Dazu reduzieren wir das Halteproblem für 2-Registermaschinen auf die Erfüllbarkeit dieser Erweiterung.
+
+\subsection{Erfüllbarkeit in $\EL$}
+
+Jedes $\EL$-Konzept ist erfüllbar bzgl. jeder TBox.
+
+\subsection{Subsumtion in $\EL$ ohne TBox}
+
+Subsumtion in $\EL$ kann in polynomieller Zeit entschieden werden:
+
+\begin{itemize}
+	\item Konstruiere $\MI_C$ und $\MI_D$ in polynomieller Zeit.
+	\item Überprüfe in polynomieller Zeit, ob $(\MI_D,d_W) \precsim (\MI_C,d_W)$
+	\begin{itemize}
+		\item Berechne maximale Simulation ($|C| \cdot |D|$-Schritte)
+		\item Teste ob $(d_w,d_w) \in \rho$
+	\end{itemize}
+\end{itemize}
+
+\subsection{Subsumtion von Konzeptnamen in $\EL$ bzgl. TBox}
+
+Zunächst wandeln wir eine $\EL$-TBox $\MT$ in linearer Zeit in eine TBox $\MT'$ in Normalform um, die eine konserative Erweiterung von $\MT$ ist. Dazu wenden wir erschöpfend die Regeln NF1 bis NF5 an.
+
+Nun kann der Algorithmus erschöpfend die Regeln R1 bis R4 anwenden. Die Konstruktion von $\MT$ terminiert nach $\mathcal{O}(|\MT|^2)$ vielen Regelanwendungen. Dies wird damit gezeigt, das nur begrenzt viele Konzeptinklusionen gezeigt werden.
+
+Die Korrektheit (Für alle Konzeptnamen $A,B$ gilt: $A \sqsubseteq B \in \MT*$ impliziert $\MT \models A \sqsubseteq B$) wird gezeigt, indem wir zeigen $\MT_i \models \MT_{i+1}$ für alle i = 0, ..., n-1. Dh. soll für alle $C \sqsubseteq D \in \MT_{i+1}$ gelten: $\MT_i \models C \sqsubseteq D$. Dabei argumentieren wir dann durch Analyse der Regeln. 
+
+Für den Beweis der Vollständigkeit (Für alle Konzeptbamen $A,B$ gilt $\MT \models A \sqsubseteq B$ impliziert $A \sqsubseteq B \in \MT *$) definieren wir die kanonische Interpretation $\MI$ wie folgt:
+
+\begin{itemize}
+\item
+  $\Delta^{I} = \left\{ d_{A}\ |\ A\ \mathrm{\text{Konzeptname\ in\ T}}* \right\} \cup \left\{ d_{\top} \right\}$
+\item
+  $A^{I} = \left\{ d_{\text{B\ }} \middle| \ B \sqsubseteq A \in T* \right\}$
+\item
+  $r^{I} = \left\{ \left( d_{A},d_{B} \right)\  \middle| \ A \sqsubseteq A^{'} \in T*\ \mathrm{\text{und}}\ A^{'} \sqsubseteq \exists r.B \in T*,\ A^{'}\ \mathrm{\text{Konzeptname}} \right\}$
+\end{itemize}
+
+Zunächst zeigen wir, dass die kanonische Interpretation $\MI$ ein Model von $\MT *$ ist.
+
+Nun können wir die Vollständigkeit zeigen. Dazu zeigen wir die Kontraposition: Für alle Konzeptbamen $A,B$ gilt $A \sqsubseteq B \not\in \MT *$ impliziert $\MT \not\models A \sqsubseteq B$.
+
+\subsubsection{Erweiterungen von $\EL$}
+
+\paragraph{$\EL\mathcal{U}_{\bot}$}
+
+ExpTime vollständig.
+
+Gezeigt per Reduktion auf Konzeptname $A$ bzgl. $ALC$-TBox $\MT$.
+
+Schritt 1: Ersetzte Werterestriktionen in $\MT$ durch Existenzrestriktionen.
+
+Schritt 2: Modifiziere $\MT$ so, dass Negation nur vor Konzeptnamen auftritt:
+
+z.B.: $$A \sqsubseteq \exists s.(B' \sqcup \neg r.B)$$
+
+wird zu
+
+$$A \sqsubseteq \exists s.(B' \sqcup X)$$
+$$X \equiv \exists r.B$$
+
+Schritt 3: Entferne Negation vollständig aus $\MT$ 
+
+\begin{itemize}
+	\item Ersetze jedes $\neg X$ durch $X'$ mit $X'$ neuer Konzeptname
+	\item Erwinge korrektes Verhalten von $X'$:
+	$$\top \sqsubseteq X \sqcup X'$$
+	$$X \sqcap X' \sqsubseteq \bot$$
+\end{itemize}
+
+Zeigen, dass $A$ erfüllbar bzgl. $\MT$ gdw. $A$ erfüllbar bzgl. der entstandenen TBox.
+
+\paragraph{$\EL\mathcal{U}$}
+
+ExpTime-vollständig
+
+Beweis: Reduktion von Erfüllbarkeit von Konzeptname $A$ bzgl. $\EL\mathcal{U}_{\bot}$-TBox $\MT$.
+
+\begin{itemize}
+\item Nimm o.B.d.A. an dass $\bot$ nur in der Form $C \sqsubseteq \bot$ vorkommt. Man kann zeigen, das jedes $\EL\mathcal{U}_{\bot}$-Konzept äquivalent zu $\EL\mathcal{U}$-Konzept oder $\bot$ ist. Die Äquivalenzen sind:
+$$C \sqcap \bot \equiv \bot$$
+$$C \sqcup \bot \equiv C$$
+$$\exists r.\bot \equiv \bot$$
+
+Dann sind alle Axiome von der Form:
+$$C\sqsubseteq D, \bot \sqsubseteq D, C \sqsubseteq \bot, \bot \sqsubseteq \bot$$
+
+Wobei die Form 2 und 4 immer erfüllt ist und daher gelöscht werden kann.
+
+
+\item Nun ersetzen wir $\bot$ durch neuen Konzeptnamen $L$
+
+\item und füge $\exists r.L \sqsubseteq L$ für alle Rollennamen $r$ in $\MT$ hinzu.
+\end{itemize}
+
+Nun kann man zeigen, das $A$ unerfüllbar bzgl. $\MT$ gdw. $\MT ' \models A \sqsubseteq L$
+
+\paragraph{$\EL^{\forall}$}
+
+ExpTime-vollständig
+
+Reduktion von Subsumition zwischen Konzeptnamen bzgl. $\EL\mathcal{U}$-TBox $\MT$
+
+Wir können annehmen, das Disjunktion nur in den folgenden Formen vorkommt:
+
+\begin{itemize}
+	\item $A_1 \sqcup A_2 \sqsubseteq$ wird in $\MT$' durch $A_1 \sqsubseteq A, A_2 \sqsubseteq A$ ersetzt
+	\item $A \sqsubseteq B_1 \sqcup B_2$ wird in $\MT$' ersetzt durch $A \sqcap \exists r.\top \sqsubseteq B_1$ und $A \sqcap \forall r.X \sqsubseteq B_2$ mit $r,X$ neu.
+\end{itemize}
+
+Nun zeigen wir $\MT \models A \sqsubseteq B$ gdw. $\MT' \models A \sqsubseteq B$
+
+\paragraph{$\EL^{\leq 2}$}
+
+ExpTime-vollständig
+
+Reduktion von Subsumition zwischen Konzeptnamen bzgl. $\EL\mathcal{U}$-TBox $\MT$
+
+Wir können annehmen, das Disjunktion nur in den folgenden Formen vorkommt:
+
+\begin{itemize}
+	\item $A_1 \sqcup A_2 \sqsubseteq$ wird in $\MT$' durch $A_1 \sqsubseteq A, A_2 \sqsubseteq A$ ersetzt
+	\item $A \sqsubseteq B_1 \sqcup B_2$ wird in $\MT$' ersetzt durch $A \sqsubseteq \exists r.X \sqcap \exists r.Y$, $A \sqcap \exists r.(X \sqcap Y) \sqsubseteq B_1$ und $A \sqcap (\geq 2 r) \sqsubseteq B_2$ mit $r,X$ neu.
+\end{itemize}
+
+Nun zeigen wir $\MT \models A \sqsubseteq B$ gdw. $\MT' \models A \sqsubseteq B$
+
+\paragraph{Konvexität}
+
+Jede nicht-konvexe Erweiterung von $\EL$ ist ExpTime-hart
+
+Leider sind aber auch konvexe Erweiterungen nicht zwangsläufig in PTime.
+
+Konvexe Erweiterungen sind Erweiterungen wenn für alle TBoxen $\MT$ und Konzepte $C,D_1,D_2$ gilt:
+
+$\MT \models C \sqsubseteq D_1 \sqcup D_2$ impliziert $\MT \models C \sqsubseteq D_i$ für ein $i \in \{1,2\}$

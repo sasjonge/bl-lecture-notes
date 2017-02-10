@@ -463,10 +463,10 @@ PSpace $=$ NPSpace
 \begin{definition}{$i$-Konzepte}
 
 Für $i \geq 0$ ist die Menge der $i$-Konzepte definiert als:
-$$\sub_{i} := \left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
+$$sub_{i} := \left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
 \end{definition}
 
-\begin{definition}{i-Typ}}
+\begin{definition}{i-Typ}
 
 Sei $i \geq 0$. $\MI$-Typ für $C_{0}$ ist Teilmenge
 $t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
@@ -483,23 +483,47 @@ $t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
   $C \sqcup D \in t$ gdw. $C \in t$ oder $D \in t$ für alle
   $C \sqcup D \in sub_{i}\left( C_{0} \right)$
 \end{enumerate}
+\end{definition}
 
 \paragraph{ALC-Worlds}\label{alc-worlds-1}
 
 Rekursion über $\MI$-Typen.
 
-\paragraph{Proposition 5.17}\label{proposition-5.17}
-
-ALC-Worlds($C_{0}$) terminiert und benötigt polynomiellen Platz.
+\begin{proposition}
+ALC-Worlds($C_{0}$) terminiert und benötigt polynomiellen Platz (in $|C_0|$).
+\end{proposition}
 
 Beweisskizze. Stelle als Rekursionsbaum dar. Verzweigungsgrad beschränkt
 durch Anzahl der $\exists$. Tiefe Beschränkt durch $rd(C_{0})$. Der
 Rekursionsstack hat höchstens Tiefe $\left| C_{0} \right|$ und der
 Platzbedarf pro Aufruf ist polynomiell.
 
-\subsubsection{Proposition 5.18}\label{proposition-5.18}
+\subsubsection{Korrektheit und Vollständigkeit}\label{proposition-5.18}
+
+\begin{proposition}
+$\ALC$-Worlds($C_0$) = true gdw. $C_0$ erfüllbar
+\end{proposition}
+
 
 Korrektheitsbeweis per Induktion über $C_{0}$:
+
+Zunächst definieren wir eine Interpretation $\MI$. Für jeden Knoten $v \in V_0 \setminus \{v_0\}$ sei $\sigma (v)$ der Rollenname $r$ des Konzeptes $\exists r.C$, für das der Aufruf $v$ gemacht wurde.
+
+Definiere $\MI$ nun wie folgt:
+
+\begin{itemize}
+  \item $\Delta^{\MI} = V$
+  \item $r^{\MI} = \{(v,v')\in E | \sigma (v') = r\}$
+  \item $A^{\MI} = \{v | A \in p_1(v)\}$
+\end{itemize}
+
+($p_1(v)$ = 1. Parameter in $l(v)$)
+
+Behauptung: Für alle $v \in V$ und $C \in sub(C_0)$ gilt $$C \in p_1(v)\ impliziert v \in C^{\MI}$$
+
+Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^{\MI}$; also ist $\MI$ ein Modell von $C_0$.
+
+\textbf{T5.9a}
 
 \textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
 
@@ -545,16 +569,22 @@ Also $v \in \left( \forall r.D \right)^{\MI}$
 
 Ähnlich
 
-\textbf{Vollständigkeitsbeweis Sascha}
+\textbf{Beweis der Vollständigkeit}
 
-\subsubsection{Theorem 5.19}\label{theorem-5.19}
+Sei $C_0$ erfüllbar und $\MI$ ein Modell von $C_0$ und $d_0 \in C_0^{\MI.}$
 
+Beweisidee:
+
+Verwenden $\MI$, um die nichtdeterministischen Entscheidungen von $\ALC$-Worlds($C_0$) zu einem erfolgreichen Lauf zu ``lenken''.
+
+\begin{theorem}
 In $\ALC$ ist die Erfüllbarkeit von Konzepten in PSpace.
+\end{theorem}
 
 \subsection{Komplexität ohne TBoxen untere
 Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 
-\subsubsection{Definition 5.20}\label{definition-5.20}
+\begin{definition}{PSpace-Spiel}
 
 \begin{itemize}
 \item
@@ -563,12 +593,14 @@ Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 \item
   \emph{Konfiguration}: Wort $\pi \in \left\{ 0,1 \right\}*$
 \end{itemize}
+\end{definition}
 
-\subsubsection{Definition 5.21}\label{definition-5.21}
+\begin{definition}{Gewinnstrategie}
 
 Gewinnstrategie für Spieler 1 in Spiel $\varphi$ ist endlicher
 knotenbeschrifteter Baum $(V,E,L)$, wobei $l$ jedem Koten
 $v \in V$ Konfiguration $l(v)$ zuweist, sodass
+\end{definition}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
