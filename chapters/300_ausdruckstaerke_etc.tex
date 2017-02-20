@@ -9,55 +9,55 @@ Bisimulation ist ein graphentheoretische Begriff, die ``Ähnlichkeit'' von Graph
 
 \begin{definition}{Bisimulation}
 
-Seien $I_{1}$ und $I_{2}$ Interpretationen. Relation
-$\rho \subseteq \Delta^{I_{1}} \times \Delta^{I_{2}}$ ist Bisimulation
-zwischen $I_{1}$ und $I_{2}$, wenn gilt:
+Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen. Relation
+$\rho \subseteq \Delta^{\MI_{1}} \times \Delta^{\MI_{2}}$ ist Bisimulation
+zwischen $\MI_{1}$ und $\MI_{2}$, wenn gilt:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$, dann gilt für alle
-  Konzeptnamen A: $d_{1} \in A^{I_{1}}$ gdw. $d_{2} \in A^{I_{2}}$.
+  Konzeptnamen A: $d_{1} \in A^{\MI_{1}}$ gdw. $d_{2} \in A^{\MI_{2}}$.
 \item
   Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$ und
-  $\left( d_{1},d_{1}^{'} \right) \in r^{I_{1}}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_{2}^{'} \in \Delta^{I_{2}}$
+  $\left( d_{1},d_{1}^{'} \right) \in r^{\MI_{1}}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_{2}^{'} \in \Delta^{\MI_{2}}$
   mit ${d'}_{1}\text{\ $\rho$}{\ d'}_{2}$ und
-  $\left( d_{2},d_{2}^{'} \right) \in r^{I_{2}}$.
+  $\left( d_{2},d_{2}^{'} \right) \in r^{\MI_{2}}$.
 \item
   Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$ und
-  $\left( d_{2},d_{2}^{'} \right) \in r^{I_{2}}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_{1}^{'} \in \Delta^{I_{1}}$
+  $\left( d_{2},d_{2}^{'} \right) \in r^{\MI_{2}}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_{1}^{'} \in \Delta^{\MI_{1}}$
   mit ${d'}_{1}\text{\ $\rho$}{\ d'}_{2}$ und
-  $\left( d_{1},d_{1}^{'} \right) \in r^{I_{1}}$.
+  $\left( d_{1},d_{1}^{'} \right) \in r^{\MI_{1}}$.
 \end{enumerate}
 \end{definition}
 
-Seien $I_{1}$ und $I_{2}$ Interpretationen,
-$d_{1} \in \Delta^{I_{1}}$, $d_{2} \in \Delta^{I_{2}}$:
+Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen,
+$d_{1} \in \Delta^{\MI_{1}}$, $d_{2} \in \Delta^{\MI_{2}}$:
 
-$(I_{1},d_{1}) \sim (I_{2},d_{2})$: Es gibt Bisimulation $\rho$
-zwischen $I_{1}$ und $I_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
+$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$: Es gibt Bisimulation $\rho$
+zwischen $\MI_{1}$ und $\MI_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
 Die leere Relation ist immer Bisimulation.
 
 \begin{theorem}
-Seien $I_{1}$, $I_{2}$ Interpretationen,
-$d_{1} \in \Delta^{I_{1}}$ und $d_{2} \in \Delta^{I_{2}}$. Wenn
-$(I_{1},d_{1}) \sim (I_{2},d_{2})$, dann gilt für alle ALC-Konzepte
+Seien $\MI_{1}$, $\MI_{2}$ Interpretationen,
+$d_{1} \in \Delta^{\MI_{1}}$ und $d_{2} \in \Delta^{\MI_{2}}$. Wenn
+$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$, dann gilt für alle ALC-Konzepte
 $C$:
 
-$$d_{1} \in C^{I_{1}}\ gdw.\ d_{2} \in C^{I_{2}}$$
+$$d_{1} \in C^{\MI_{1}}\ gdw.\ d_{2} \in C^{\MI_{2}}$$
 \end{theorem}
 
 \textbf{T3.2.}
 
 \begin{proof}
 Beweisskizze per Induktion über die Struktur von C. Sei $\rho$ eine
-Bisimulation zwischen $I_{1}$ und $I_{2}$ mit
+Bisimulation zwischen $\MI_{1}$ und $\MI_{2}$ mit
 $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
-Bisimulation gilt $$d_{1} \in A^{I_{1}}\ gdw.\ d_{2} \in A^{I_{2}}$$.
+Bisimulation gilt $$d_{1} \in A^{\MI_{1}}\ gdw.\ d_{2} \in A^{\MI_{2}}$$.
 
 \textbf{I.S.} Unterscheide Fälle gemäß des äußersten Konstruktes von C.
 Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
@@ -71,7 +71,7 @@ Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
 \begin{quote}
 \begin{equation}
 \begin{split}
-d_{1} \in C^{I_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
+d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
 &\stackrel{I.V.}{gdw.} d_{2} \notin D^{\MI_{2}} \\
 &\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
 \end{split}
@@ -145,7 +145,7 @@ In $\ALC$ ist nicht ausdrückbar:
 Beweisskizze. Finde Bisimulation für die dies nicht gilt.
 
 \begin{proof}
-\textbf{$\exists r.\top$}
+\textbf{$\exists r^{-}.\top$}
 
 Betrachte 2 Interpretationen $\MI$ und $\MJ$
 
@@ -167,16 +167,16 @@ Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv (\leq\ n\ r\ \top)$. D
 Man sieht, dass die Argumentation zum Beweis der Nicht-Ausdrückbarkeit immer auf dasselbe hinausläuft:
 \begin{theorem}
 
-Sei $E$ eine Eigenschaft. Wenn es Interpretation $I_{1}$, $I_{2}$
-und Elemente $d_{1} \in \Delta^{I_{1}}$ und
-$d_{2} \in \Delta^{I_{2}}$ gibt, so dass
+Sei $E$ eine Eigenschaft. Wenn es Interpretation $\MI_{1}$, $\MI_{2}$
+und Elemente $d_{1} \in \Delta^{\MI_{1}}$ und
+$d_{2} \in \Delta^{\MI_{2}}$ gibt, so dass
 
 \begin{itemize}
 \item
-  $\left( I_{1},d_{1} \right) \in E$ und
-  $\left( I_{2},d_{2} \right) \in E$ sowie
+  $\left( \MI_{1},d_{1} \right) \in E$ und
+  $\left( \MI_{2},d_{2} \right) \not\in E$ sowie
 \item
-  $(I_{1},d_{1}) \sim (I_{2},d_{2})$
+  $(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$
 \end{itemize}
 
 dann ist $E$ nicht in $\ALC$ ausdrückbar.
@@ -239,7 +239,7 @@ $$\text{end}\left( p \right) \in C^{\MI}\ gdw.\ p \in C^{\MJ}$$
 
 \begin{proof}
 Mit Theorem genügt es folgende Bisimulation zu zeigen:
-$$\left( I,end\left( p \right) \right)\sim\left( J,p \right)$$ Definiere Relation: $$\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^{\MI} \times \Delta^{\MJ}\  \right|\text{\ p\ }\mathrm{\text{ist}}\text{\ d}\mathrm{- Pfad}\}\ $$(Bilde
+$$\left( \MI,end\left( p \right) \right)\sim\left( J,p \right)$$ Definiere Relation: $$\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^{\MI} \times \Delta^{\MJ}\  \right|\text{\ p\ }\mathrm{\text{ist}}\text{\ d}\mathrm{- Pfad}\}\ $$(Bilde
 alle Knoten in $\MJ$ auf ihr Ende ab). 
 
 Zur Bisimulation:
@@ -325,7 +325,7 @@ definiert:
 
 \begin{itemize}
 \item
-  $\sum_{C \sqsubseteq D \in T}^{}{\left| C \right| + \left| D \right| + 1}$
+  $\sum_{C \sqsubseteq D \in T}^{\left| C \right| + \left| D \right| + 1}$
 \end{itemize}
 \end{definition}
 

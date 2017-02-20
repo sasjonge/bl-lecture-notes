@@ -111,9 +111,9 @@ Wir nennen
 
 \begin{itemize}
 \item
-  $C^{I}$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
+  $C^{\MI}$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
 \item
-  jedes $d \in C^{I}$ ist eine Instanz des Konzeptes $C$
+  jedes $d \in C^{\MI}$ ist eine Instanz des Konzeptes $C$
 \item
   $r$-Nachfolger, $r$-Vorgänger
 \end{itemize}
@@ -132,7 +132,7 @@ Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 
 \begin{itemize}
 \item
-  ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $I$ gibt mit
+  ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $\MI$ gibt mit
   $C^{\MI} \neq \varnothing$. $\MI$ ist dann ein \emph{Modell} von
   $C$.
 \item
@@ -164,13 +164,13 @@ Wir lesen $C \equiv D$ als ``$C$ impliziert $D$''.
 \subsubsection{TBox-Sematik}\label{tboxsemantik}
 
 \begin{definition}{TBox-Semantik} \\
-Eine Interpretation $I$
+Eine Interpretation $\MI$
 \begin{itemize}
 \item
   erfüllt Konzeptinklusion $C \sqsubseteq D$ gdw.
-  $C^{I} \subseteq D^{I}$
+  $C^{\MI} \subseteq D^{\MI}$
 \item
-  ist Modell von TBox $T$ gdw. $I$ alle Konzeptinklusionen in $T$
+  ist Modell von TBox $\MT$ gdw. $\MI$ alle Konzeptinklusionen in $\MT$
   erfüllt
 \end{itemize}
 \end{definition}
@@ -202,7 +202,7 @@ Seine $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 \end{itemize}
 \end{definition}
 
-Intuitiv gesprochen ist diese Definition wie in \protect\hyperlink{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}{2.1.5}, nur ist $I$ jeweils Modell von einer TBox $T$.
+Intuitiv gesprochen ist diese Definition wie in \protect\hyperlink{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}{2.1.5}, nur ist $\MI$ jeweils Modell von einer TBox $\MT$.
 
 \begin{itemize}
 \item
@@ -301,10 +301,10 @@ Die Entscheidungsprobleme sind wechselseitig polynomiell aufeinander reduzierbar
 \begin{lemma}
 \begin{enumerate}
 \item{\emph{Erfüllbarkeit} auf \emph{Nicht-Äquivalenz} \\
-$C$ erfüllbar bzgl. $T$ gdw. $T \not\vDash C \equiv \bot$}
+$C$ erfüllbar bzgl. $\MT$ gdw. $T \not\vDash C \equiv \bot$}
 \item{\emph{Subsumtion} auf \emph{Unerfüllbarkeit} \\
 $T \vDash C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
-$T$
+$\MT$
 \item{\emph{Äquivalenz} auf \emph{Subsumtion} \\}
 $T \vDash C \equiv D$ \emph{gdw.} $T \vDash \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
 \end{enumerate}
@@ -323,7 +323,7 @@ Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen 
 \begin{definition}{Inverse Rollen}
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
 Rolle} zu $r$. Wir definieren \\
-$\left( r^{-} \right)^{I} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{I}\}$
+$\left( r^{-} \right)^{\MI} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{\MI}\}$
 \end{definition}
 
 \subsubsection{Zahlenrestriktion ($\ALCQ$)}\label{zahlenrestriktion-alcq}
@@ -341,10 +341,10 @@ Die Semantik ist
 \begin{itemize}
 \item
   Höchstens-Restriktion:
-  $\left( \leq n\ r\ C \right)^{I} = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \leq n \right\}$
+  $\left( \leq n\ r\ C \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \leq n \right\}$
 \item
   Mindestens-Restriktion
-  $( \geq n\ r\ C) = \left\{ d \in \Delta^{I}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{I} \land e \in C^{I} \right\} \geq n \right\}$
+  $( \geq n\ r\ C) = \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \geq n \right\}$
 \end{itemize}
 \end{definition}
 
