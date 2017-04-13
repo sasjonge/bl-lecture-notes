@@ -33,7 +33,6 @@
 \usepackage{xparse,nameref} % for chapref
 \NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}
 
-\usepackage{textgreek} % Use for example textepsilon
 \setlength\parindent{0pt}
 \let\emptyset\varnothing
 %%%%%%%%%%%%%%%%%%%
