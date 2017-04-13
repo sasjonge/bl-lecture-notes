@@ -286,7 +286,7 @@ Nun kann die Terminierung mittel Behauptung 3 beweisen:
 \textbf{T4.5d}
 
 \begin{proof}
-Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der ``n$-$Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.''
+    Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der \enquote{n$-$Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.}
 
 Weil $<$ auf $\mathcal{N}$ wohldefiniert ist, ist $<_{mul}$ auf $MM(\{0,\ldots,n\})$ wohldefiniert.
 
@@ -483,7 +483,7 @@ Offenbar wäre eine naive Implementierung nicht effizient. Dabei kann man aber e
 	\item Es wird nur ein Baum zur Zeit generiert, keine Menge
 	\item bei der $\sqcup$-Regel muss man sich also entscheiden (Heuristik); ggf. Entscheidung revidiieren (Backtracking).
 	\item Es wird nur ein Teil des Baumes (Pfad) im Speicher gehalten.
-	\item Backjumping: Führe Buch über die ``Herkunft'' von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
+    \item Backjumping: Führe Buch über die \enquote{Herkunft} von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
 \end{itemize}
 
 \subsection{ALC mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
@@ -577,7 +577,7 @@ offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel und Re
 \subsubsection{Korrektheit}\label{korrektheit}
 
 \begin{proposition}
-Wenn der Algorithmus ``erfüllbar'' zurückgibt, so ist $C_0$ erfüllbar bzgl. $\MT$
+    Wenn der Algorithmus \enquote{erfüllbar} zurückgibt, so ist $C_0$ erfüllbar bzgl. $\MT$
 \end{proposition}
 
 \textbf{T4.15}
@@ -716,7 +716,7 @@ TBoxen führen zu Backtracking:
 
 Daher wird jede $\sqcup$-Regel für \emph{Konzeptinklusion} auf \emph{jeden} Knoten angewendet!
 
-Also braucht man für eine effiziente Implementierung Optimerungstechniken, die die Dijsunktionen, soweit möglich, eliminieren (``Absorption'').
+Also braucht man für eine effiziente Implementierung Optimerungstechniken, die die Dijsunktionen, soweit möglich, eliminieren (\enquote{Absorption}).
 
 \subsubsection{Erweiterungen}
 
