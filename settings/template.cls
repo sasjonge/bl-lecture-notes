@@ -7,7 +7,6 @@
 
 % The usepackage's should be cleaned one day...
 
-\usepackage{fancyhdr} 	% fancy header and footer
 \usepackage{graphicx} 	% show graphics
 \usepackage{listings} 	% show code listings
 \usepackage{tabularx} 	% different table-env
@@ -46,6 +45,15 @@
 \newtheorem{proposition}[definition]{Proposition}
 
 
+\usepackage[headsepline]{scrlayer-scrpage}
+\renewcommand\sectionmarkformat{\thesection\autodot\quad}
+%\setkomafont{pageheadfoot}{\footnotesize\scshape}
+\setheadsepline{.1pt}
+\automark{part}
+\automark*{section}
+\clearpairofpagestyles% entfernen der voreingestellten Inhalte
+\cfoot{\pagemark}
+\ihead{\rightbotmark}
 
 %%%%%%%%%%%%%
 % page size %
