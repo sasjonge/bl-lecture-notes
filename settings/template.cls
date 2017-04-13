@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{template}
+\ProvidesClass{settings/template}
 \LoadClass[12pt,a4paper,oneside]{scrartcl}
 
 \usepackage[utf8]{inputenc}
