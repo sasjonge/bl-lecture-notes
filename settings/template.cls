@@ -47,7 +47,7 @@
 \usepackage[headsepline]{scrlayer-scrpage}
 \renewcommand\sectionmarkformat{\thesection\autodot\quad}
 %\setkomafont{pageheadfoot}{\footnotesize\scshape}
-\setheadsepline{.1pt}
+\KOMAoption{headsepline}{.1pt:}
 \automark{part}
 \automark*{section}
 \clearpairofpagestyles% entfernen der voreingestellten Inhalte
