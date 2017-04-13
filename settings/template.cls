@@ -13,7 +13,6 @@
 \usepackage{hyperref} 	% use urls, link to sections, mail-addresses
 \usepackage{cite}		% for citation
 \usepackage{enumitem}   % for enumerate
-\usepackage{scrextend}  % for addmargin
 \usepackage{xargs}      % for more than one opt parameter in newcommands
                         % coloured text etc.
 \usepackage{amssymb}
