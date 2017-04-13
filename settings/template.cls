@@ -24,9 +24,6 @@
 \usepackage{xcolor}
 \usepackage{csquotes} % for \enquote
 
-\usepackage{xparse,nameref} % for chapref
-\NewDocumentCommand{\chapref}{s m}{~\ref{#2}\IfBooleanF{#1}{ \nameref{#2}}.}
-
 \setlength\parindent{0pt}
 \let\emptyset\varnothing
 %%%%%%%%%%%%%%%%%%%
