@@ -24,8 +24,6 @@
 \usepackage{xcolor}
 \usepackage{csquotes} % for \enquote
 
-\setlength\parindent{0pt}
-\let\emptyset\varnothing
 %%%%%%%%%%%%%%%%%%%
 % Define Theorems %
 %%%%%%%%%%%%%%%%%%%
@@ -50,26 +48,13 @@
 %%%%%%%%%%%%%
 % page size %
 %%%%%%%%%%%%%
-%\usepackage{showframe}  % show layout
-%\setlength{\topmargin}{-1cm}
-%\setlength{\headheight}{15pt}
-%\setlength{\evensidemargin}{0cm}
-%\setlength{\oddsidemargin}{0cm}
-%\setlength{\textheight}{24cm}
-%\setlength{\textwidth}{15cm}
-%\setlength{\marginparwidth}{2.5cm}
-%\setlength{\parskip}{1ex}
-%\setlength{\parindent}{0ex}
-
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 
 %%%%%%%%%%%%%
 % paragraph %
 %%%%%%%%%%%%%
-%\usepackage{setspace}
-%\doublespacing
-%\setlength\parindent{0.5cm}
 \setlength{\parskip}{2mm}
+\setlength\parindent{0pt}
 
 % TIKZ %
 \usepackage{tikz}
