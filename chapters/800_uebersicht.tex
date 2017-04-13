@@ -1,12 +1,12 @@
-\subsection{Erfüllbarkeit in $\ALC$}
+\subsection{Erfüllbarkeit in \texorpdfstring{$\ALC$}{ALC}}
 
-\subsubsection{$\ALC$ bzgl. TBoxen}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC} bzgl. TBoxen}
 
 Komplexität: ExpTime-vollständig
 
 \paragraph{Obere Schranken}
 
-Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ bzgl. TBoxen in ExpTime liegt, haben wir den Algorithmus ``Typ-Elimination'' eingeführt.
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ bzgl. TBoxen in ExpTime liegt, haben wir den Algorithmus \enquote{Typ-Elimination} eingeführt.
 
 Für diesen habe wir syntaktische Typen definiert und dann gezeigt, dass dieser in $2^\{|C_0|+|\MT|\}$ Schritten terminiert.
 
@@ -18,13 +18,13 @@ Die Vollständigkeit haben wir gezeigt, indem wir semantische Typen aus dem Mode
 
 Nun wollen wir zeigen, das das Erfüllbarkeitsproblem von $\ALC$ ExpTime-hart ist. Dazu reduzieren wir das ExpTime Spiel auf die Erfüllbarkeit von $\ALC$.
 
-\subsubsection{$\ALC$ ohne TBox}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC} ohne TBox}
 
 Komplexität: PSpace-vollständig
 
 \paragraph{Obere Schranken}
 
-Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ ohne TBoxen in PSpace liegt, haben wir den Algorithmus ``$\ALC$-Worlds'' eingeführt.
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ ohne TBoxen in PSpace liegt, haben wir den Algorithmus \enquote{$\ALC$-Worlds} eingeführt.
 
 Für diesen haben wir i-Typen definiert und dann gezeigt, dass der Algorithmus terminiert und in PSpace liegt. Dies liegt daran, dass der Algorithmus einen endlichen Baum bildet, und wir nur einen Pfad zur selben Zeit betrachten müssen, da wir per Tiefensuche prüfen.
 
@@ -36,7 +36,7 @@ Vollständigkeit: Verwende $\MI$ um die nichtdeterministischen Entscheidungen de
 
 Nun wollen wir zeigen, dass das Erfüllbarkeitsproblem von  $\ALC$ ohne TBoxen PSpace-hart ist. Dies zeigen wir, indem wir das PSpace-Spiel auf die Erfüllbarkeit reduzieren. 
 
-\subsubsection{$\ALCI$, $\ALCQ$, $\ALCQI$}
+\subsubsection{\texorpdfstring{$\ALCI$, $\ALCQ$, $\ALCQI$}{ALCI, ALCQ, ALCQI}}
 
 Für diese Variationen von $\ALC$ gelten die selben Komplexitäten wie für $\ALC$
 
@@ -44,11 +44,11 @@ Für diese Variationen von $\ALC$ gelten die selben Komplexitäten wie für $\AL
 
 Wir betrachten hier beispielhaft die Erweiterung von um konkrete Bereiche. Dazu reduzieren wir das Halteproblem für 2-Registermaschinen auf die Erfüllbarkeit dieser Erweiterung.
 
-\subsection{Erfüllbarkeit in $\EL$}
+\subsection{Erfüllbarkeit in \texorpdfstring{$\EL$}{EL}}
 
 Jedes $\EL$-Konzept ist erfüllbar bzgl. jeder TBox.
 
-\subsection{Subsumtion in $\EL$ ohne TBox}
+\subsection{Subsumtion in \texorpdfstring{$\EL$}{EL} ohne TBox}
 
 Subsumtion in $\EL$ kann in polynomieller Zeit entschieden werden:
 
@@ -61,7 +61,7 @@ Subsumtion in $\EL$ kann in polynomieller Zeit entschieden werden:
 	\end{itemize}
 \end{itemize}
 
-\subsection{Subsumtion von Konzeptnamen in $\EL$ bzgl. TBox}
+\subsection{Subsumtion von Konzeptnamen in \texorpdfstring{$\EL$} bzgl. TBox}
 
 Zunächst wandeln wir eine $\EL$-TBox $\MT$ in linearer Zeit in eine TBox $\MT'$ in Normalform um, die eine konserative Erweiterung von $\MT$ ist. Dazu wenden wir erschöpfend die Regeln NF1 bis NF5 an.
 
@@ -84,9 +84,9 @@ Zunächst zeigen wir, dass die kanonische Interpretation $\MI$ ein Model von $\M
 
 Nun können wir die Vollständigkeit zeigen. Dazu zeigen wir die Kontraposition: Für alle Konzeptbamen $A,B$ gilt $A \sqsubseteq B \not\in \MT *$ impliziert $\MT \not\models A \sqsubseteq B$.
 
-\subsubsection{Erweiterungen von $\EL$}
+\subsubsection{Erweiterungen von \texorpdfstring{$\EL$}{EL}}
 
-\paragraph{$\EL\mathcal{U}_{\bot}$}
+\paragraph{\texorpdfstring{$\EL\mathcal{U}_{\bot}$}{EL}}
 
 ExpTime vollständig.
 
@@ -114,7 +114,7 @@ Schritt 3: Entferne Negation vollständig aus $\MT$
 
 Zeigen, dass $A$ erfüllbar bzgl. $\MT$ gdw. $A$ erfüllbar bzgl. der entstandenen TBox.
 
-\paragraph{$\EL\mathcal{U}$}
+\paragraph{\texorpdfstring{$\EL\mathcal{U}$}{EL}}
 
 ExpTime-vollständig
 
@@ -139,7 +139,7 @@ Wobei die Form 2 und 4 immer erfüllt ist und daher gelöscht werden kann.
 
 Nun kann man zeigen, das $A$ unerfüllbar bzgl. $\MT$ gdw. $\MT ' \models A \sqsubseteq L$
 
-\paragraph{$\EL^{\forall}$}
+\paragraph{\texorpdfstring{$\EL^{\forall}$}{EL}}
 
 ExpTime-vollständig
 
@@ -154,7 +154,7 @@ Wir können annehmen, das Disjunktion nur in den folgenden Formen vorkommt:
 
 Nun zeigen wir $\MT \models A \sqsubseteq B$ gdw. $\MT' \models A \sqsubseteq B$
 
-\paragraph{$\EL^{\leq 2}$}
+\paragraph{\texorpdfstring{$\EL^{\leq 2}$}{EL}}
 
 ExpTime-vollständig
 
