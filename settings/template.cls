@@ -23,6 +23,7 @@
 \usepackage[sort]{natbib} % For quotationn
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
 \usepackage{tabto}
 \usepackage{todonotes}
 \usepackage{xcolor}
