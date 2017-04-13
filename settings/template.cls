@@ -8,20 +8,15 @@
 % The usepackage's should be cleaned one day...
 
 \usepackage{graphicx} 	% show graphics
-\usepackage{listings} 	% show code listings
-\usepackage{tabularx} 	% different table-env
 \usepackage{hyperref} 	% use urls, link to sections, mail-addresses
-\usepackage{enumitem}   % for enumerate
 \usepackage{xargs}      % for more than one opt parameter in newcommands
-                        % coloured text etc.
+
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
-\usepackage{wasysym}    % Box with checkmark
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{tabu} % for tables with defined width
 \usepackage[sort]{natbib} % For quotationn
-\usepackage{enumitem}% http://ctan.org/pkg/enumitem
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
 \usepackage{tabto}
