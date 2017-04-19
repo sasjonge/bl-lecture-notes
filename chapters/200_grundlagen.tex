@@ -26,7 +26,8 @@ Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- 
   \end{itemize}
 \end{definition}
 
-\textbf{T2.1 Beispiel}
+\setcounter{tafel}{0}
+\begin{tafel}[Beispiel]
 
 Hier einige Beispiel für diese Syntax:
 
@@ -36,7 +37,7 @@ $Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
 $VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
 $A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
 \end{center}
-
+\end{tafel}
 \textbf{Weiteres zur Syntax}
 
 Dabei verwenden wir folgende Symbole:
@@ -66,7 +67,7 @@ Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden:
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
-\begin{definition}[$\ALC$ Semantik] \\
+\begin{definition}[$\ALC$ Semantik]
 Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
   \begin{itemize}
     \item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
@@ -126,7 +127,7 @@ Menschen, die keine Kinder haben
 
 {\subsubsection{Erfüllbarkeit,Subsumtion,Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
 
-\begin{definition}[Erfüllbar, subsumiert, äquivalent] \\
+\begin{definition}[Erfüllbar, subsumiert, äquivalent]
 Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 
 \begin{itemize}
@@ -152,7 +153,7 @@ TBoxen definieren Konzepte und setzten diese zueinander in Beziehung.
 
 \subsubsection{TBox-Syntax}\label{tboxsyntax}
 
-\begin{definition}[TBox-Syntax] \\
+\begin{definition}[TBox-Syntax]
 \emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$ mit $C$, $D$ Konzepten. \\
 \emph{TBox} ist endliche Menge von Konzeptinklusionen. \\
 Wir verwenden $C \equiv D$ als Abkürzung für $C \sqsubseteq D$, $D \sqsubseteq C$. 
@@ -162,7 +163,7 @@ Wir lesen $C \equiv D$ als \enquote{$C$ impliziert $D$}.
 
 \subsubsection{TBox-Sematik}\label{tboxsemantik}
 
-\begin{definition}[TBox-Semantik] \\
+\begin{definition}[TBox-Semantik] 
 Eine Interpretation $\MI$
 \begin{itemize}
 \item
@@ -191,7 +192,7 @@ $$Professor \sqcap \exists hat.Lehrdeputat \sqsubseteq \exists haelt.Vorlesung$$
 
 \subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
 
-\begin{definition}[Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX] \\
+\begin{definition}[Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX] 
 Seine $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}

@@ -30,11 +30,11 @@
 %%%%%%%%%%%%%%%%%%%
 \theoremstyle{definition}
 \declaretheorem[numberwithin= section, name = Definition]{definition}
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{korollar}[definition]{Korollar}
-\newtheorem{proposition}[definition]{Proposition}
-
+\declaretheorem[numberwithin= section, name = Lemma]{lemma}
+\declaretheorem[numberwithin= section, name = Theorem]{theorem}
+\declaretheorem[numberwithin= section, name = Korollar]{korollar}
+\declaretheorem[numberwithin= section, name = Proposition]{proposition}
+\declaretheorem[numberwithin=section, name = T]{tafel}
 
 \usepackage[headsepline]{scrlayer-scrpage}
 \renewcommand\sectionmarkformat{\thesection\autodot\quad}
