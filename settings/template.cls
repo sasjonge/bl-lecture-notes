@@ -13,6 +13,7 @@
 
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{thmtools} %List of theorems
 \usepackage{mathtools}
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{tabu} % for tables with defined width
@@ -28,7 +29,7 @@
 % Define Theorems %
 %%%%%%%%%%%%%%%%%%%
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\declaretheorem[numberwithin= section, name = Definition]{definition}
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{lemma}[definition]{Lemma}
 \newtheorem{korollar}[definition]{Korollar}

@@ -7,8 +7,7 @@ Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- 
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Syntax}\label{alcsyntax}
 
-\theoremstyle{definition}
-\begin{definition}{$\ALC$-Konzepte} \\
+\begin{definition}[$\ALC$-Konzepte]
   Die Menge der $\ALC$-Konzepte is induktiv definiert:
   \begin{itemize}
     \item Jeder Konzeptname ist $\ALC$-Konzept
@@ -67,7 +66,7 @@ Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden:
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
-\begin{definition}{$\ALC$ Semantik} \\
+\begin{definition}[$\ALC$ Semantik] \\
 Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
   \begin{itemize}
     \item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
@@ -127,7 +126,7 @@ Menschen, die keine Kinder haben
 
 {\subsubsection{Erfüllbarkeit,Subsumtion,Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
 
-\begin{definition}{Erfüllbar, susumiert, äquivalent} \\
+\begin{definition}[Erfüllbar, subsumiert, äquivalent] \\
 Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 
 \begin{itemize}
@@ -153,7 +152,7 @@ TBoxen definieren Konzepte und setzten diese zueinander in Beziehung.
 
 \subsubsection{TBox-Syntax}\label{tboxsyntax}
 
-\begin{definition}{TBox-Syntax} \\
+\begin{definition}[TBox-Syntax] \\
 \emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$ mit $C$, $D$ Konzepten. \\
 \emph{TBox} ist endliche Menge von Konzeptinklusionen. \\
 Wir verwenden $C \equiv D$ als Abkürzung für $C \sqsubseteq D$, $D \sqsubseteq C$. 
@@ -163,7 +162,7 @@ Wir lesen $C \equiv D$ als \enquote{$C$ impliziert $D$}.
 
 \subsubsection{TBox-Sematik}\label{tboxsemantik}
 
-\begin{definition}{TBox-Semantik} \\
+\begin{definition}[TBox-Semantik] \\
 Eine Interpretation $\MI$
 \begin{itemize}
 \item
@@ -192,7 +191,7 @@ $$Professor \sqcap \exists hat.Lehrdeputat \sqsubseteq \exists haelt.Vorlesung$$
 
 \subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
 
-\begin{definition}{Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX} \\
+\begin{definition}[Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX] \\
 Seine $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
@@ -320,7 +319,7 @@ Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von $\A
 
 Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen in Existenz- und Werterestriktionen zu benutzen erweitert.
 
-\begin{definition}{Inverse Rollen}
+\begin{definition}[Inverse Rollen]
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
 Rolle} zu $r$. Wir definieren \\
 $\left( r^{-} \right)^{\MI} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{\MI}\}$
@@ -328,7 +327,7 @@ $\left( r^{-} \right)^{\MI} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \
 
 \subsubsection{Zahlenrestriktion (\texorpdfstring{$\ALCQ$}{ALCQ})}\label{zahlenrestriktion-alcq}
 
-\begin{definition}{Zahlenrestriktion}
+\begin{definition}[Zahlenrestriktion]
 Für jede natürliche Zahl $n$, jeden Rollennamen $r$ und
 jedes Konzept $C$:
 
