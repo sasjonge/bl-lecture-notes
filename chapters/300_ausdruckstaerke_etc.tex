@@ -7,7 +7,7 @@ charakterisieren.
 
 Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdruckstärke von $\ALC$ zusammenhängt.
 
-\begin{definition}{Bisimulation}
+\begin{definition}[Bisimulation]
 
 Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen. Relation
 $\rho \subseteq \Delta^{\MI_{1}} \times \Delta^{\MI_{2}}$ ist Bisimulation
@@ -116,7 +116,7 @@ Rückrichtung analog, nur mit der 3. Bedingung.
 
 \subsection{Ausdrucksstärke}\label{ausdrucksstuxe4rke}
 
-\begin{definition}{Eigenschaft, Ausdrückbarkeit}
+\begin{definition}[Eigenschaft, Ausdrückbarkeit]
 
 Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(\MI,d)$, wobei
 $\MI$ eine Interpretation und $d \in \Delta^{\MI}$ ein Element in $\MI$ ist.
@@ -208,7 +208,7 @@ $d$-Pfad in $\MI$: Sequenz $d_{0}d_{1}\ldots d_{n - 1}$, $n > 0$ mit
 Wir setzen
 $\text{end}\left( d_{0}\ldots d_{n - 1} \right) = d_{n - 1}$.
 
-\begin{definition}{Unravelling}
+\begin{definition}[Unravelling]
 
 Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 
@@ -306,7 +306,7 @@ In diesem Kapitel wird die endliche Modelleigenschaft und Filtration eingeführt
 \subsubsection{Größe von Konzepten und
 TBoxen}\label{gruxf6uxdfe-von-konzepten-und-tboxen}
 
-\begin{definition}{Größe}
+\begin{definition}[Größe]
 \emph{Größe} $\left| C \right|$ eines ALC-Konzeptes $C$ ist induktiv
 definiert:
 
@@ -359,7 +359,7 @@ Wir definieren den Begriff eines Typs:
 
 \subsubsection{Typ}\label{typ}
 
-\begin{definition}{Teilkonzepte}
+\begin{definition}[Teilkonzepte]
 \begin{itemize}
 \item
   $\text{sub}\left( C \right)$ ist Menge der Teilkonzepte von $C$
@@ -381,7 +381,7 @@ $$sub(\{A \sqsubseteq r.B, \forall r.B \sqsubseteq A\}) = \{A,B, \exists r.B, \f
 $\left| \text{sub}\left( C,T \right) \right| \leq \left| C \right| + \left| T \right|$
 \end{lemma}
 
-\begin{definition}{Typ von $d$}
+\begin{definition}[Typ von $d$]
 
 Sei $\MI$ eine Interpretation, $d \in \Delta^{\MI}$. Der \emph{Typ}
 $t_{\MI}\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
@@ -422,7 +422,7 @@ Idee:
   \item Wenn $\MI$ Modell von $C$ und $\MT$, so auch das Resultat.
 \end{itemize}
 
-\begin{definition}{Filtration}
+\begin{definition}[Filtration]
 
 Sei $\MI$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
 $\Delta^{\MI}$: $$d \sim e\ gdw.\ t_{\MI}\left( d \right) = t_{\MI}\left( e \right)$$

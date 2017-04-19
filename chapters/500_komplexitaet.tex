@@ -23,7 +23,7 @@ Wir beginnen mit oberer Schranke (Enthaltensein in ExpTime):
 
 Wir nehmen an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-TBox die Form $\{\top \sqsubseteq C_{\MT}\}$ hat mit $C_{\MT}$ in NNF.
 
-\begin{definition}{Typ}
+\begin{definition}[Typ]
 
 Ein Typ für $C_{0}$ und $T$ ist Teilmenge
 $t \subseteq sub\left( C_{0},T \right)$, so dass
@@ -86,7 +86,7 @@ Die generelle Idee der Typelimination bei Eingabe $C_0$, $\MT$:
 
 Wir formalisieren \enquote{Typen, die in keinem Modell vorkommen können}.
 
-\begin{definition}{schlechter Typ}
+\begin{definition}[schlechter Typ]
 
 Sei $\Gamma$ Typenmenge und $t \in \Gamma$.
 
@@ -315,7 +315,7 @@ Um die ExpTime-Härte zu zeigen, reduzieren wir auf ein spieltheoretisches Probl
   $\varphi$ wahr wird
 \end{itemize}
 
-\begin{definition}{ExpTime-Spiele}
+\begin{definition}[ExpTime-Spiele]
 
 \begin{itemize}
 \item
@@ -348,7 +348,7 @@ Intuitiv:
   \item wenn Spieler 2 eine Gewinnstrategie hat, so kann er das Spiel gewinnen
 \end{itemize}
 
-\begin{definition}{Gewinnstrategie}
+\begin{definition}[Gewinnstrategie]
 
 Gewinnstrategie für Spieler 2 in Spiel
 $\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{0} \right)$ ist unendlicher
@@ -460,13 +460,13 @@ In PSpace:
 PSpace $=$ NPSpace
 \end{theorem}
 
-\begin{definition}{$i$-Konzepte}
+\begin{definition}[$i$-Konzepte]
 
 Für $i \geq 0$ ist die Menge der $i$-Konzepte definiert als:
 $$sub_{i} := \left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
 \end{definition}
 
-\begin{definition}{i-Typ}
+\begin{definition}[$i$-Typ]
 
 Sei $i \geq 0$. $\MI$-Typ für $C_{0}$ ist Teilmenge
 $t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
@@ -580,7 +580,7 @@ In $\ALC$ ist die Erfüllbarkeit von Konzepten in PSpace.
 \subsection{Komplexität ohne TBoxen untere
 Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 
-\begin{definition}{PSpace-Spiel}
+\begin{definition}[PSpace-Spiel]
 
 \begin{itemize}
 \item
@@ -591,7 +591,7 @@ Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 \end{itemize}
 \end{definition}
 
-\begin{definition}{Gewinnstrategie}
+\begin{definition}[Gewinnstrategie]
 
 Gewinnstrategie für Spieler 1 in Spiel $\varphi$ ist endlicher
 knotenbeschrifteter Baum $(V,E,L)$, wobei $l$ jedem Koten
