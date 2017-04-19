@@ -36,6 +36,16 @@
 \declaretheorem[numberwithin= section, name = Proposition]{proposition}
 \declaretheorem[numberwithin=section, name = T]{tafel}
 
+%Look behind you! a three-headed hack!
+%Put the number after the theorem name in listoftheorems (e.g. Definition 3.4 instead of 3.4 Definition)
+\makeatletter
+\def\ll@definition{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+}
+\makeatother
+
 \usepackage[headsepline]{scrlayer-scrpage}
 \renewcommand\sectionmarkformat{\thesection\autodot\quad}
 %\setkomafont{pageheadfoot}{\footnotesize\scshape}
@@ -69,6 +79,7 @@
                           draw=black, align=center,
                           minimum size=1cm, anchor=center}
 }
+
 
 
 \endinput
