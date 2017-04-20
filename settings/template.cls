@@ -31,9 +31,9 @@
 \theoremstyle{definition}
 \declaretheorem[numberwithin= section, name = Definition]{definition}
 \declaretheorem[sibling=definition, name = Lemma]{lemma}
-\declaretheorem[numberwithin= section, name = Theorem]{theorem}
-\declaretheorem[numberwithin= section, name = Korollar]{korollar}
-\declaretheorem[numberwithin= section, name = Proposition]{proposition}
+\declaretheorem[sibling=definition, name = Theorem]{theorem}
+\declaretheorem[sibling=definition, name = Korollar]{korollar}
+\declaretheorem[sibling=definition, name = Proposition]{proposition}
 \declaretheorem[numberwithin=section, name = T]{tafel}
 
 %Look behind you! a three-headed hack!
