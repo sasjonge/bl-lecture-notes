@@ -164,8 +164,8 @@ Seien $C,D$ zwei beliebige $\text{EL}$-Konzepte und $T$ eine
 EL-TBox. Sei weiterhin
 $T^{'} = T \cup \left\{ A_{C} \sqsubseteq C,D \sqsubseteq A_{D} \right\}$.
 mit Konzeptnamen $A_{C},A_{D}$, die nicht in $C,D,T$ vorkommen. Dann
-gilt; $T \vDash C \sqsubseteq D$ gdw
-$T^{'} \vDash A_{C} \sqsubseteq A_{D}$.
+gilt; $T \models C \sqsubseteq D$ gdw
+$T^{'} \models A_{C} \sqsubseteq A_{D}$.
 
 \subsubsection{ Normalform}\label{normalform}
 
@@ -179,8 +179,8 @@ $A \sqsubseteq \exists r.A_1$ $\exists r.A \sqsubseteq A_1$
 
 Jede EL-TBox $T$ kann in polynomieller Zeit in eine TBox $T^{'}$ in
 Normalform gewandelt werden, so dass für alle Konzeptnamen $A,B$ in
-$T$ gilt: $T \vDash A \sqsubseteq B$ gdw
-$T \vDash A \sqsubseteq B$. Dann ist $T'$ \emph{konservative
+$T$ gilt: $T \models A \sqsubseteq B$ gdw
+$T \models A \sqsubseteq B$. Dann ist $T'$ \emph{konservative
 Erweiterung} von $T$.
 
 \subsubsection{Lemma 6.14}\label{lemma-6.14-1}
@@ -221,7 +221,7 @@ Regelanwendungen, die \emph{Saturierung}.
 \subsubsection{Theorem 6.16 }\label{theorem-6.16}
 
 Für alle Konzeptnamen $A,B$ in $T$ gilt:
-$T \vDash A \sqsubseteq B$ gdw $A \sqsubseteq B \in T*$
+$T \models A \sqsubseteq B$ gdw $A \sqsubseteq B \in T*$
 
 \paragraph{Terminierung}\label{terminierung-1}
 
@@ -233,7 +233,7 @@ endlich viele solcher Inklusionen.
 
 Beweisskizze. Sei $T = T_{0},\ \ldots,(T_{n} = T*)$ die durch
 Regelanwendungen erzeugte Folge von TBoxen. Es genügt zu zeigen:
-$T_{i} \vDash T_{i + 1}$. Zeige dies durch Vorbedingung der
+$T_{i} \models T_{i + 1}$. Zeige dies durch Vorbedingung der
 Regelanwendung und der Semantik.
 
 \paragraph{Vollständigkeit}\label{vollstuxe4ndigkeit-1}
@@ -270,7 +270,7 @@ $A \sqsubseteq A \in T*$, also nach Def. $I$: $d_{A} \in A^{I}$.
 Def. von $I$ und $A \sqsubseteq B \notin T*$ liefern
 $d_{A} \notin B$. Da $I$ Modell von $T*$
 (\protect\hyperlink{lemma-6.18}{Lemma 6.18}), und damit von $T$, folgt
-nicht $T \vDash A \sqsubseteq B$.
+nicht $T \models A \sqsubseteq B$.
 
 \subsection{Erweiterungen von EL}\label{erweiterungen-von-el}
 
