@@ -30,7 +30,7 @@
 %%%%%%%%%%%%%%%%%%%
 \theoremstyle{definition}
 \declaretheorem[numberwithin= section, name = Definition]{definition}
-\declaretheorem[numberwithin= section, name = Lemma]{lemma}
+\declaretheorem[sibling=definition, name = Lemma]{lemma}
 \declaretheorem[numberwithin= section, name = Theorem]{theorem}
 \declaretheorem[numberwithin= section, name = Korollar]{korollar}
 \declaretheorem[numberwithin= section, name = Proposition]{proposition}
