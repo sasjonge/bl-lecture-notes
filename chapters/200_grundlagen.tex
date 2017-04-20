@@ -9,7 +9,7 @@ Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- 
 
 \theoremstyle{definition}
 \begin{definition}{$\ALC$-Konzepte} \\
-  Die Menge der $\ALC$-Konzepte is induktiv definiert:
+  Die Menge der $\ALC$-Konzepte ist induktiv definiert:
   \begin{itemize}
     \item Jeder Konzeptname ist $\ALC$-Konzept
     \item Wenn $C$, $D$ $\ALC$-Konzepte, so auch
@@ -34,7 +34,7 @@ Hier einige Beispiel für diese Syntax:
 \begin{center}
 $Student \sqcap \exists studiert.Naturwissenschaft$ \\
 $Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
-$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
+$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe.(Einfach \sqcup Interessant)$ \\
 $A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
 \end{center}
 
@@ -63,7 +63,7 @@ Zudem benutzen zudem folgende Abkürzungen: wir schreiben
 
 Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\exists r.A) \sqcap B)$ und nicht für $\forall r.(\exists r.(A \sqcap B))$.
 
-Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
+Des Weiteren ist keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
@@ -89,7 +89,7 @@ Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
   \item $(\forall r.C)^{\MI} = \{d \in \Delta^{\MI} |$ für alle $ e \in \Delta^{\MI}$, $(d,e) \in r^{\MI}$ impliziert $e \in C^{\MI}\}$
 \end{itemize}
 
-Verwendete Simbole:
+Verwendete Symbole:
 
 \begin{itemize}
   \item $\MI$, $\MJ$ für Interpretationen
@@ -118,7 +118,7 @@ Wir nennen
   $r$-Nachfolger, $r$-Vorgänger
 \end{itemize}
 
-Beachte, das $\top^{\MI}$ für jede Interpretation $\MI$ identisch mit $\Delta^{\MI}$ ist. Intuitivt entspricht $\top$ die Menge alle Elemente. 
+Beachte, das $\top^{\MI}$ für jede Interpretation $\MI$ identisch mit $\Delta^{\MI}$ ist. Intuitivt entspricht $\top$ der Menge alle Elemente. 
 
 $\bot^{\MI}$ ist für jede Interpretation $\MI$ leer, repräsentiert also intuitiv, dass etwas unmöglich ist. Z.B.:
 
@@ -127,7 +127,7 @@ Menschen, die keine Kinder haben
 
 {\subsubsection{Erfüllbarkeit,Subsumtion,Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
 
-\begin{definition}{Erfüllbar, susumiert, äquivalent} \\
+\begin{definition}{Erfüllbar, subsumiert, äquivalent} \\
 Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 
 \begin{itemize}
@@ -175,7 +175,7 @@ Eine Interpretation $\MI$
 \end{itemize}
 \end{definition}
 
-Intuitiv entsprechen Interpretation mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten.
+Intuitiv entsprechen Interpretationen möglichen Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten.
 
 \subsubsection{Modellierung}\label{modellierung}
 
@@ -192,7 +192,7 @@ $$Professor \sqcap \exists hat.Lehrdeputat \sqsubseteq \exists haelt.Vorlesung$$
 
 \subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
 
-\begin{definition}{Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX} \\
+\begin{definition}{Erfüllbar, subsumiert, äquivalent bezüglich einer TBox} \\
 Seine $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
@@ -233,9 +233,18 @@ Seien $\MT_{1}$ und $\MT_{2}$ TBoxen mit $\MT_{1} \subseteq \MT_{2}$. Dann gilt:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-  \item \begin{proof} Sei $C$ erfüllbar bzgl. $\MT_{2}$. Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^{\MI} \neq \varnothing$. Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$. Also ist $\MI$ Modell von $\MT_1$ mit $C^{\MI} \neq \emptyset$. Also ist $C$ erfüllbar bzgl. $\MT_1$. \end{proof}
-  \item \begin{proof} Kontraposition: Wenn $\MT_2 \not\vDash C \sqsubseteq D$ dann $\MT_1 \not\vDash C \sqsubseteq D$. \\
-  Es gelte $\MT_2 \not\vDash C \sqsubseteq D$. D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^{\MI} \not\subseteq D^{\MI}$. Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$. Also $\MT_1 \not\vDash C \sqsubseteq D$\end{proof}
+  \item \begin{proof} 
+  Sei $C$ erfüllbar bzgl. $\MT_{2}$. 
+  Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^{\MI} \neq \varnothing$. 
+  Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$. 
+  Also ist $\MI$ Modell von $\MT_1$ mit $C^{\MI} \neq \emptyset$. Also ist $C$ erfüllbar bzgl. $\MT_1$. 
+  \end{proof}
+  \item \begin{proof} 
+  Kontraposition: Wenn $\MT_2 \not\vDash C \sqsubseteq D$ dann $\MT_1 \not\vDash C \sqsubseteq D$. \\
+  Es gelte $\MT_2 \not\vDash C \sqsubseteq D$. 
+  D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^{\MI} \not\subseteq D^{\MI}$. 
+  Wie im 1. Fall ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$. Also $\MT_1 \not\vDash C \sqsubseteq D$
+  \end{proof}
 \end{enumerate}
 
 Die umgekehrten Aussagen sind im Allgemeinen nicht richtig. Beispiel:
@@ -250,7 +259,7 @@ Eine Logik, die diese Eigenschaften erfüllt, nennt man \emph{monoton} (das Hinz
 
 \subsection{Schlussfolgerungsprobleme}\label{schlussfolgerungsprobleme}
 
-Schlussfolgern dient dazu aus explizit gegebenes Wissen neues Wissen abzuleiten, dass vorher nur implizit vorhanden war. Beschreibungslogiken sind so designt, dass sie so viel Ausdruckstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu Erlauben.
+Schlussfolgern dient dazu aus explizit gegebenem Wissen neues Wissen abzuleiten, das vorher nur implizit vorhanden war. Beschreibungslogiken sind so entworfen, dass sie so viel Ausdruckstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu erlauben.
 
 Die von uns betrachteten Schlussfolgerungsprobleme sind:
 
@@ -271,11 +280,11 @@ Die Schlussfolgerungsprobleme werden dazu genutzt Modellierungsfehler in Ontolog
 
 \begin{itemize}
   \item reflexiv ($\MT \vDash C \sqsubseteq C$) und
-  \item transitiv ($\MT \vDash C \sqsubseteq D$ und $\MT \vDash D \sqsubseteq E$ impliziert $\MT \vDash C \sqsubseteq E$
+  \item transitiv ($\MT \vDash C \sqsubseteq D$ und $\MT \vDash D \sqsubseteq E$ impliziert $\MT \vDash C \sqsubseteq E$)
 \end{itemize}
 \end{lemma}
 
-Bis auf die fehlende Antisymmetrie () ist $\sqsubseteq$ also partielle Ordnung.
+Bis auf die fehlende Antisymmetrie ($xRy \wedge yRx \rightarrow x = y$) ist $\sqsubseteq$ also eine partielle Ordnung.
 
 Man kann $\sqsubseteq$ als Hasse-Diagram darstellen, dessen Knoten mit Mengen von Konzepten beschriftet sind.
 
@@ -310,7 +319,7 @@ $T \vDash C \equiv D$ \emph{gdw.} $T \vDash \top \sqsubseteq \left( C \sqcap D \
 \end{enumerate}
 \end{lemma}
 
-Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die anderen beiden verwendet werden können. Alle drei Probleme haben dieselbe Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auch Erfüllbarkeit konzentrieren.
+Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die anderen beiden verwendet werden kann. Alle drei Probleme haben dieselbe Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auch Erfüllbarkeit konzentrieren.
 
 \subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{erweiterungen-von-alc}
 
