@@ -55,7 +55,7 @@ $$sub(C_0) = \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(
 
 \subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
 
-Berechnet Folge $$M_{0},M_{1},\ldots$$ von Mengen von I-Bäumen:
+Berechnet Folge $$M_{0},M_1,\ldots$$ von Mengen von I-Bäumen:
 
 $$M_{0} = \left\{ B_{\text{ini}} \right\}\ mit\ B_{\text{ini}}\ \emph{initialer I-Baum}\ fuer\ C_{0}:$$
 
@@ -174,13 +174,13 @@ $MM(S)$ ist die Menge aller Multimengen über der Menge S.
 Gegeben strikte partielle Ordnung $\left( S, < \right)$, ist die
 \emph{Multimengenerweiterung} $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$ definiert als: 
 
-$M_{2} <_{\text{mul}}M_{1}$ gdw. $\exists X,Y \in MM(S)$, so dass
+$M_2 <_{\text{mul}}M_1$ gdw. $\exists X,Y \in MM(S)$, so dass
 
 \begin{itemize}
 \item
-  $\varnothing \neq X \subseteq M_{1}$
+  $\varnothing \neq X \subseteq M_1$
 \item
-  $M_{2} = \left( M_{1} \smallsetminus X \right) \cup Y$
+  $M_2 = \left( M_1 \smallsetminus X \right) \cup Y$
 \item
   $\forall y \in Y\exists x \in X : x > y$
 \end{itemize}
@@ -275,7 +275,7 @@ $\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0
 \end{quote}
 
 \item
-  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_\MI$ für
+  Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 
@@ -689,7 +689,7 @@ Beweis in 4 Schritten:
   Widerspruch zur Anwendung der $\exists '$-Regel auf $v_j$, also ist die Annahme falsch.
   \end{quote}
 \item
-  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_\MI$ für
+  Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\color{red} k^{2^{k}} \cdot k \leq 2^{2^{3k}}= n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 \end{enumerate}

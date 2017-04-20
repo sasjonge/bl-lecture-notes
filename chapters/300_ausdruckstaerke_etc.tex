@@ -8,27 +8,27 @@ Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von
 
 \begin{definition}[Bisimulation]
 
-Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen. Relation
-$\rho \subseteq \Delta^{\MI_{1}} \times \Delta^{\MI_{2}}$ ist Bisimulation
-zwischen $\MI_{1}$ und $\MI_{2}$, wenn gilt:
+Seien $\MI_1$ und $\MI_2$ Interpretationen. Relation
+$\rho \subseteq \Delta^{\MI_1} \times \Delta^{\MI_2}$ ist Bisimulation
+zwischen $\MI_1$ und $\MI_2$, wenn gilt:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$, dann gilt für alle
-  Konzeptnamen A: $d_{1} \in A^{\MI_{1}}$ gdw. $d_{2} \in A^{\MI_{2}}$.
+  Wenn $d_1\text{\ $\rho$}\text{\ d}_2$, dann gilt für alle
+  Konzeptnamen A: $d_1 \in A^{\MI_1}$ gdw. $d_2 \in A^{\MI_2}$.
 \item
-  Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$ und
-  $\left( d_{1},d_{1}^{'} \right) \in r^{\MI_{1}}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_{2}^{'} \in \Delta^{\MI_{2}}$
-  mit ${d'}_{1}\text{\ $\rho$}{\ d'}_{2}$ und
-  $\left( d_{2},d_{2}^{'} \right) \in r^{\MI_{2}}$.
+  Wenn $d_1\text{\ $\rho$}\text{\ d}_2$ und
+  $\left( d_1,d_1^{'} \right) \in r^{\MI_1}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_2^{'} \in \Delta^{\MI_2}$
+  mit ${d'}_1\text{\ $\rho$}{\ d'}_2$ und
+  $\left( d_2,d_2^{'} \right) \in r^{\MI_2}$.
 \item
-  Wenn $d_{1}\text{\ $\rho$}\text{\ d}_{2}$ und
-  $\left( d_{2},d_{2}^{'} \right) \in r^{\MI_{2}}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_{1}^{'} \in \Delta^{\MI_{1}}$
-  mit ${d'}_{1}\text{\ $\rho$}{\ d'}_{2}$ und
-  $\left( d_{1},d_{1}^{'} \right) \in r^{\MI_{1}}$.
+  Wenn $d_1\text{\ $\rho$}\text{\ d}_2$ und
+  $\left( d_2,d_2^{'} \right) \in r^{\MI_2}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_1^{'} \in \Delta^{\MI_1}$
+  mit ${d'}_1\text{\ $\rho$}{\ d'}_2$ und
+  $\left( d_1,d_1^{'} \right) \in r^{\MI_1}$.
 \end{enumerate}
 \end{definition}
 
@@ -36,33 +36,33 @@ zwischen $\MI_{1}$ und $\MI_{2}$, wenn gilt:
     TODO
 \end{tafel}
 
-Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen,
-$d_{1} \in \Delta^{\MI_{1}}$, $d_{2} \in \Delta^{\MI_{2}}$.
+Seien $\MI_1$ und $\MI_2$ Interpretationen,
+$d_1 \in \Delta^{\MI_1}$, $d_2 \in \Delta^{\MI_2}$.
 
-$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$: Es gibt Bisimulation $\rho$
-zwischen $\MI_{1}$ und $\MI_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$. (Wir sagen \enquote{$d_1$ ist \emph{bisimilar zu} $d_2$}).
+$(\MI_1,d_1) \sim (\MI_2,d_2)$: Es gibt Bisimulation $\rho$
+zwischen $\MI_1$ und $\MI_2$ mit $d_1\text{\ $\rho$}\text{\ d}_2$. (Wir sagen \enquote{$d_1$ ist \emph{bisimilar zu} $d_2$}).
 Die leere Relation ist immer Bisimulation.
 
 \begin{theorem}[Bisimulationstheorem]
     \label{thm:bisim}
-Seien $\MI_{1}$, $\MI_{2}$ Interpretationen,
-$d_{1} \in \Delta^{\MI_{1}}$ und $d_{2} \in \Delta^{\MI_{2}}$. Wenn
-$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$, dann gilt für alle $\ALC$-Konzepte
+Seien $\MI_1$, $\MI_2$ Interpretationen,
+$d_1 \in \Delta^{\MI_1}$ und $d_2 \in \Delta^{\MI_2}$. Wenn
+$(\MI_1,d_1) \sim (\MI_2,d_2)$, dann gilt für alle $\ALC$-Konzepte
 $C$:
 
-$$d_{1} \in C^{\MI_{1}}\ gdw.\ d_{2} \in C^{\MI_{2}}$$
+$$d_1 \in C^{\MI_1}\ gdw.\ d_2 \in C^{\MI_2}$$
 \end{theorem}
 
 \begin{tafel}[Beweis des Bismulationstheorems] Beweis von \autoref{thm:bisim}
 \begin{proof}
 Beweisskizze per Induktion über die Struktur von $C$. Sei $\rho$ eine
-Bisimulation zwischen $\MI_{1}$ und $\MI_{2}$ mit
-$d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
+Bisimulation zwischen $\MI_1$ und $\MI_2$ mit
+$d_1\text{\ $\rho$}\text{\ d}_2$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
 Bisimulation gilt
 \begin{align*}
-    d_{1} \in A^{\MI_{1}}\ gdw.\ d_{2} \in A^{\MI_{2}}.
+    d_1 \in A^{\MI_1}\ gdw.\ d_2 \in A^{\MI_2}.
 \end{align*}
 
 
@@ -73,24 +73,24 @@ Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
 \item
   $C = \neg D$
     \begin{align*}
-        d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
-        &\stackrel{I.V.}{gdw.} d_{2} \notin D^{\MI_{2}} \\
-        &\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
+        d_1 \in C^{\MI_1} &\stackrel{Sem.}{gdw.} d_1 \notin D^{\MI_1}\\
+        &\stackrel{I.V.}{gdw.} d_2 \notin D^{\MI_2} \\
+        &\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
     \end{align*}
-\item $C = D_{1} \sqcap D_{2}$
+\item $C = D_1 \sqcap D_2$
   \begin{align*}
-d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \in D_{1}^{\MI_{1}}\ und\ d_{1} \in D_{2}^{\MI_{1}}\\
-&\stackrel{I.V.}{gdw.} d_{2} \in D_{1}^{\MI_{2}}\ und\ d_{2} \in D_{2}^{\MI_{2}} \\
-&\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
+d_1 \in C^{\MI_1} &\stackrel{Sem.}{gdw.} d_1 \in D_1^{\MI_1}\ und\ d_1 \in D_2^{\MI_1}\\
+&\stackrel{I.V.}{gdw.} d_2 \in D_1^{\MI_2}\ und\ d_2 \in D_2^{\MI_2} \\
+&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
 \end{align*}
 
 \item $C = \exists r.D$
   \begin{align*}
-d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{\Rightarrow} \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1}\\
+d_1 \in C^{\MI_1} &\stackrel{Sem.}{\Rightarrow} \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1}\\
 &\stackrel{2.Bed.}{\Rightarrow} \exists e_2 \in \Delta_2^{\MI_2}: (d_2,e_e) \in r^{\MI_2}\ und\ (e_1 \rho e_2) \\
 &\stackrel{I.V.}{\Rightarrow} e_2 \in D^{\MI_2} \\
-&\stackrel{Sem.}{\Rightarrow} d_{2} \in (\exists r.D)^{\MI_2} \\
-&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_{2}}
+&\stackrel{Sem.}{\Rightarrow} d_2 \in (\exists r.D)^{\MI_2} \\
+&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
 \end{align*}
 \end{enumerate}
 Rückrichtung analog, nur mit der 3. Bedingung.
@@ -159,16 +159,16 @@ Man sieht, dass die Argumentation zum Beweis der Nicht-Ausdrückbarkeit immer au
 
 \begin{theorem}[$\ALC$ Nicht-Ausdrückbarkeit]
     \label{thm:alc-nicht-ausdruck}
-Sei $E$ eine Eigenschaft. Wenn es Interpretation $\MI_{1}$, $\MI_{2}$
-und Elemente $d_{1} \in \Delta^{\MI_{1}}$ und
-$d_{2} \in \Delta^{\MI_{2}}$ gibt, so dass
+Sei $E$ eine Eigenschaft. Wenn es Interpretation $\MI_1$, $\MI_2$
+und Elemente $d_1 \in \Delta^{\MI_1}$ und
+$d_2 \in \Delta^{\MI_2}$ gibt, so dass
 
 \begin{itemize}
 \item
-  $\left( \MI_{1},d_{1} \right) \in E$ und
-  $\left( \MI_{2},d_{2} \right) \not\in E$ sowie
+  $\left( \MI_1,d_1 \right) \in E$ und
+  $\left( \MI_2,d_2 \right) \not\in E$ sowie
 \item
-  $(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$,
+  $(\MI_1,d_1) \sim (\MI_2,d_2)$,
 \end{itemize}
 
 dann ist $E$ nicht in $\ALC$ ausdrückbar.
@@ -201,7 +201,7 @@ Die Baummodelleigenschaft ist Grundlage für Algorithmen und erlaubt Aussagen ü
 
 Sei $\MI$ eine Interpretation und $d \in \Delta^\MI$. 
 
-$d$-Pfad in $\MI$: Sequenz $d_{1}\cdots d_n$, $n \geq 1$ mit $d_1 = d$ und
+$d$-Pfad in $\MI$: Sequenz $d_1\cdots d_n$, $n \geq 1$ mit $d_1 = d$ und
 für alle $i < n$: es gibt Rollenname $r$ mit $(d_i, d_{i + 1}) \in r^\MI$
 
 $\mathit{end}(d_1d_2\cdots d_n) = d_n$

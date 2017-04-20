@@ -320,9 +320,9 @@ Um die ExpTime-Härte zu zeigen, reduzieren wir auf ein spieltheoretisches Probl
 \begin{itemize}
 \item
   \emph{Spiel}: Tupel
-  $\left( \varphi,\ \Gamma_{1},\Gamma_{2},\pi_{0} \right)$ mit
-  $\Gamma_{1},\Gamma_{2}$ Partitionierung der Variablen in
-  $\varphi_{1}$ und $\pi_{0}$ Anfangsbelegung
+  $\left( \varphi,\ \Gamma_1,\Gamma_2,\pi_{0} \right)$ mit
+  $\Gamma_1,\Gamma_2$ Partitionierung der Variablen in
+  $\varphi_1$ und $\pi_{0}$ Anfangsbelegung
 \item
   \emph{Konfiguration}: Paar $(i,\pi)$ mit
   $i \in \left\{ 1,2 \right\}$ aktiver Spieler und $\pi$ Belegung
@@ -351,7 +351,7 @@ Intuitiv:
 \begin{definition}[Gewinnstrategie]
 
 Gewinnstrategie für Spieler 2 in Spiel
-$\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{0} \right)$ ist unendlicher
+$\left( \varphi,\Gamma_1,\Gamma_2,\pi_{0} \right)$ ist unendlicher
 knotenbeschrifteter Baum $(V,E,l)$, wobei $l$ jedem Knoten
 $v \in V$ Konfiguration $l(v)$ zuweist so, dass
 
@@ -365,9 +365,9 @@ $v \in V$ Konfiguration $l(v)$ zuweist so, dass
   $\pi^{'}$ $2$-Variation von $\pi$
 \item
   wenn $l\left( v \right) = (1,\pi)$, dann hat $v$ Nachfolger
-  $v_{0},\ldots,v_{\left| \Gamma_{1} \right|}$ mit
-  $l\left( v_{1} \right) = (2,\pi_{i})$ wobei
-  $\pi_{0},\ldots,\pi_{\left| \Gamma_{1} \right|}$ alle existierenden
+  $v_{0},\ldots,v_{\left| \Gamma_1 \right|}$ mit
+  $l\left( v_1 \right) = (2,\pi_{i})$ wobei
+  $\pi_{0},\ldots,\pi_{\left| \Gamma_1 \right|}$ alle existierenden
   $1$-Variationen von $\pi$
 \item
   wenn $l\left( v \right) = (i,\pi)$, dann nicht
@@ -380,7 +380,7 @@ $v \in V$ Konfiguration $l(v)$ zuweist so, dass
 \begin{definition}
 
 \emph{Spiel\textsubscript{1}} ist das folgende Problem: Gegeben Spiel
-$\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{1} \right)$, entscheide ob
+$\left( \varphi,\Gamma_1,\Gamma_2,\pi_1 \right)$, entscheide ob
 Spieler 2 eine Gewinnstrategie hat.
 \end{definition}
 
@@ -393,7 +393,7 @@ Wir wollen nun die ExpTime-Härte von Erfüllbarkeit in $\ALC$ bzgl. TBoxen auf 
 \subsubsection{Reduktion}\label{reduktion}
 
 Reduziere Spiel\textsubscript{1}: Gegeben Spiel
-$\left( \varphi,\Gamma_{1},\Gamma_{2},\pi_{0} \right)$, konstruiere in
+$\left( \varphi,\Gamma_1,\Gamma_2,\pi_{0} \right)$, konstruiere in
 Polynomialzeit Konzept $C_{S}$ und TBox $\MT_{S}$ so, dass: 
 
 \begin{lemma}Spieler 2 hat Gewinnstrategie in $S$ gdw. $C_{S}$ erfüllbar bzgl. $\MT_{S}$.\end{lemma}
@@ -524,8 +524,8 @@ Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^\MI$; also ist $\MI$ ein Modell von 
 \textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
 
 $C = \neg A$. Da der Lauf erfolgreich ist, ist
-$p_{1}\left( v \right)$ Typ für $C_{0}$. Nach Definition „Typ`` gilt
-$A \notin p_{1}\left( v \right)$. Nach Definition $\MI$ ist
+$p_1\left( v \right)$ Typ für $C_{0}$. Nach Definition „Typ`` gilt
+$A \notin p_1\left( v \right)$. Nach Definition $\MI$ ist
 $v \notin A^\MI$.
 
 \textbf{I.S.} Fallunterscheidung:
@@ -535,8 +535,8 @@ $v \notin A^\MI$.
   $C = D \sqcap D^{'}$
 \end{itemize}
 
-Nach Definition „Typ`` ist $D \in p_{1}\left( v \right)$ und
-$D^{'} \in p_{1}\left( v \right)$. Nach \textbf{I.V}.: $v \in D^\MI$
+Nach Definition „Typ`` ist $D \in p_1\left( v \right)$ und
+$D^{'} \in p_1\left( v \right)$. Nach \textbf{I.V}.: $v \in D^\MI$
 und $v \in \left( D^{'} \right)^\MI$. Nach Semantik:
 $v \in \left( D \sqcap D^{'} \right)^\MI$.
 
@@ -554,8 +554,8 @@ Analog.
 
 Sei $\left( v,v^{'} \right) \in r^\MI$. Dann ist
 $\left( v,v^{'} \right) \in E$ und $\sigma\left( v^{'} \right) = r$.
-Wegen $\forall r.D \in p_{1}(v)$ ist auch
-$D \in p_{1}\left( v^{'} \right)$. Nach I.V. gilt $v^{'} \in D$.
+Wegen $\forall r.D \in p_1(v)$ ist auch
+$D \in p_1\left( v^{'} \right)$. Nach I.V. gilt $v^{'} \in D$.
 Also $v \in \left( \forall r.D \right)^\MI$
 
 \begin{itemize}
@@ -585,7 +585,7 @@ Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 \begin{itemize}
 \item
   \emph{Spiel}: Aussagenlogische Formel $\varphi$ mit Variablen
-  $p_{1},\ldots,p_{n}$, $n$ gradzahlig
+  $p_1,\ldots,p_{n}$, $n$ gradzahlig
 \item
   \emph{Konfiguration}: Wort $\pi \in \left\{ 0,1 \right\}*$
 \end{itemize}
@@ -653,12 +653,12 @@ Erweiterung von $\ALC$ um $B$, d.h. um
 \item
   \emph{Featurenamen} (eine zusätzliche Art von Rolle) und
 \item
-  die Konstruktoren $\exists R_{1},\ldots,\ R_{n}\text{.P}$ und
-  $\forall R_{1},\ldots,R_{n}\text{.P}$
+  die Konstruktoren $\exists R_1,\ldots,\ R_{n}\text{.P}$ und
+  $\forall R_1,\ldots,R_{n}\text{.P}$
 \end{itemize}
 
 wobei $P \in \Phi^{B}$ $n$-Stellig ist und die $R_{i}$
-\emph{Rollenkomposition} der Form $r_{1};\ldots;r_{k};f$ sind mit
+\emph{Rollenkomposition} der Form $r_1;\ldots;r_{k};f$ sind mit
 $r_{j}$ Rollenname und $f$ Featurename.
 
 \subsubsection{Definition 5.28 (ALCB
@@ -666,15 +666,15 @@ Semantik)}\label{definition-5.28-alcb-semantik}
 
 Eine Interpretation $\MI$ ordnet nun zusätzlich zu jedem Featurenamen
 $f$ eine Funktion $f^\MI:\Delta^\MI \rightarrow \Delta^{B}$ zu. Für
-jede Rollenkomposition $r = r_{1};\ldots r_{k};f$ bezeichnet $R^\MI$
+jede Rollenkomposition $r = r_1;\ldots r_{k};f$ bezeichnet $R^\MI$
 die Komposition der Interpretationen:
-$R^\MI = r_{1}^\MI \circ \ldots \circ r_{k}^\MI \circ f$
+$R^\MI = r_1^\MI \circ \ldots \circ r_{k}^\MI \circ f$
 
 Die Semantik der zusätzlichen Konstruktoren ist nun:
 
-\[\left( \exists R_{1},\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \exists d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \exists R_1,\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \exists d_1,\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_1,\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
-\[\left( \forall R_{1},\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \forall d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \forall R_1,\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \forall d_1,\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_1,\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
 \subsubsection{2-Registermaschinen}\label{registermaschinen}
 
@@ -707,7 +707,7 @@ Instruktion ist $I_{i}$ hat eine der folgenden Formen:
 
 \begin{itemize}
 \item
-  $I_{i} = + (p,q_{1})$ mit $p \in \left\{ 1,2 \right\}$
+  $I_{i} = + (p,q_1)$ mit $p \in \left\{ 1,2 \right\}$
   \emph{Register} und $q_{j}$ Folgezustand: Inkrementierunsanweisung
 \item
   $I_{i} = - (p,q_{j},q_{k})$ mit $p \in \left\{ 1,2 \right\}$
@@ -724,18 +724,18 @@ eindeutige längste Konfigurationsfolge.
 
 \subsubsection{Theorem 5.29}\label{theorem-5.29}
 
-Das Erfüllbarkeitsproblem in $ALC(B_{1})$ ist unentscheidbar.
+Das Erfüllbarkeitsproblem in $ALC(B_1)$ ist unentscheidbar.
 
 \begin{itemize}
 \item
-  $\Delta^{B_{1}}\mathbb{= N}$
+  $\Delta^{B_1}\mathbb{= N}$
 \item
-  $\Phi^{B_{1}} = \left\{ =_{0}, = , +_{1} \right\}$, wobei $=_{0}$
+  $\Phi^{B_1} = \left\{ =_{0}, = , +_1 \right\}$, wobei $=_{0}$
   einstellig, die anderen Zweistellig.
 \end{itemize}
 
 Beweisskizze. Gegeben 2RM $M$,
-konstuiere$\text {$\ALC$}\left( B_{1} \right)$-TBox $T_{M}$ und wähle
+konstuiere$\text {$\ALC$}\left( B_1 \right)$-TBox $T_{M}$ und wähle
 einen Konzeptnamen $J$ sodass: $M$ hält auf $\left( 0,0 \right)$
 gdw. $J$ unerfüllbar bzgl. $T_{M}$. Zeige dies jeweils für
 Hinrichtung und Rückrichtung per Kontraposition. \textbf{Wo kommen i und

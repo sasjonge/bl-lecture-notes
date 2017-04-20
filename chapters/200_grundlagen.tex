@@ -250,23 +250,23 @@ Das Erweitern einer TBox um zusätzliche Konzeptinklusionen wirkt sich wie folgt
 %TODO: fix numbering
 \begin{lemma}[TBox Monotonie]
 \label{lem:tbox-monoton}
-Seien $\MT_{1}$ und $\MT_{2}$ TBoxen mit $\MT_{1} \subseteq \MT_{2}$. Dann gilt:
+Seien $\MT_1$ und $\MT_2$ TBoxen mit $\MT_1 \subseteq \MT_2$. Dann gilt:
 \begin{enumerate}
 \item
-  Wenn $C$ erfüllbar bzgl. $\MT_{2}$, dann ist $C$ erfüllbar bzgl.
-  $\MT_{1}$.
+  Wenn $C$ erfüllbar bzgl. $\MT_2$, dann ist $C$ erfüllbar bzgl.
+  $\MT_1$.
 \item
-  Wenn $\MT_{1} \models C \sqsubseteq D$, dann
-  $\MT_{2} \models C \sqsubseteq D$.
+  Wenn $\MT_1 \models C \sqsubseteq D$, dann
+  $\MT_2 \models C \sqsubseteq D$.
 \end{enumerate}
 \end{lemma}
 
 \begin{tafel}[Beweisskizze]Beweisskizze von \autoref{lem:tbox-monoton}
 \begin{enumerate}
   \item \begin{proof}
-      Sei $C$ erfüllbar bzgl. $\MT_{2}$.
-  Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^\MI \neq \emptyset$.
-  Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$.
+      Sei $C$ erfüllbar bzgl. $\MT_2$.
+  Dann gibt es Modell $\MI$ von $\MT_2$ mit $C^\MI \neq \emptyset$.
+  Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_2$ und wegen $\MT_1 \subseteq \MT_2$ auch alle Konzeptinklusionen in $\MT_1$.
   Also ist $\MI$ Modell von $\MT_1$ mit $C^\MI \neq \emptyset$.
   Also ist $C$ erfüllbar bzgl. $\MT_1$.
   \end{proof}

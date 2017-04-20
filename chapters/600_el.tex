@@ -7,25 +7,25 @@ $\top,\ $ $\sqcap$ und $\exists r.C$ verwendet werden.
 \subsection{Simulation}\label{simulation}
 
 Simulation ist gerichtete Bisimulation.
-$\left( I_{1},d_{1} \right) \precsim \left( I_{2},d_{2} \right)$: es
-gibt Simulation $p$ von $I_{1}$ nach $I_{2}$ mit
-$d_{1}\text{\ p\ }d_{2}$.
+$\left( I_1,d_1 \right) \precsim \left( I_2,d_2 \right)$: es
+gibt Simulation $p$ von $I_1$ nach $I_2$ mit
+$d_1\text{\ p\ }d_2$.
 
 \hypertarget{lemma-6.3}{\subsubsection{Lemma 6.3}\label{lemma-6.3}}
 
-Seien $I_{1},I_{2}$ Interpretationen, $d_{1} \in \Delta^{I_{1}}$ und
-$d_{2} \in \Delta^{I_{2}}$. Wenn
-$\left( I_{1},d_{1} \right) \precsim \left( I_{2},d_{2} \right)$, dann
-gilt für alle EL-Konzepte $C$: $d_{1} \in C^{I_{1}}$ impliziert
-$d_{2} \in C^{I_{2}}$.
+Seien $I_1,I_2$ Interpretationen, $d_1 \in \Delta^{I_1}$ und
+$d_2 \in \Delta^{I_2}$. Wenn
+$\left( I_1,d_1 \right) \precsim \left( I_2,d_2 \right)$, dann
+gilt für alle EL-Konzepte $C$: $d_1 \in C^{I_1}$ impliziert
+$d_2 \in C^{I_2}$.
 
 Beweisskizze per Induktion über die Struktur von $C$. Sei $\rho$
-eine Simulation zwischen $I_{1}$ und $I_{2}$ mit
-$d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
+eine Simulation zwischen $I_1$ und $I_2$ mit
+$d_1\text{\ $\rho$}\text{\ d}_2$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
-Bisimulation gilt $d_{1} \in A^{I_{1}}$ impliziert
-$d_{2} \in A^{I_{2}}$.
+Bisimulation gilt $d_1 \in A^{I_1}$ impliziert
+$d_2 \in A^{I_2}$.
 
 \textbf{I.S.} Unterscheide Fälle gemäß dem äußersten Konstrukt von
 $C$.
@@ -33,14 +33,14 @@ $C$.
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  $C = D_{1} \sqcap D_{2}$
+  $C = D_1 \sqcap D_2$
 \end{enumerate}
 
 \begin{quote}
-$d_{1} \in C^{I_{1}}$ gdw. $d_{1} \in D_{1}^{I_{1}}$und
-$d_{1} \in D_{2}^{I_{1}}$ (Semantik) impliziert.
-$d_{2} \in D_{1}^{I_{2}}$ und $d_{2} \in D_{2}^{I_{2}}$ (I.V.) gdw.
-$d_{2} \in C^{I_{2}}$ (Semantik)
+$d_1 \in C^{I_1}$ gdw. $d_1 \in D_1^{I_1}$und
+$d_1 \in D_2^{I_1}$ (Semantik) impliziert.
+$d_2 \in D_1^{I_2}$ und $d_2 \in D_2^{I_2}$ (I.V.) gdw.
+$d_2 \in C^{I_2}$ (Semantik)
 \end{quote}
 
 \begin{enumerate}
@@ -172,8 +172,8 @@ $T^{'} \vDash A_{C} \sqsubseteq A_{D}$.
 Eine TBox ist in \emph{Normalform}, wenn sie nur Inklusionen folgender
 Form enthält:
 
-$A_{1} \sqcap \ldots \sqcap A_{n} \sqsubseteq A$
-$A \sqsubseteq \exists r.A_{1}$ $\exists r.A \sqsubseteq A_{1}$
+$A_1 \sqcap \ldots \sqcap A_{n} \sqsubseteq A$
+$A \sqsubseteq \exists r.A_1$ $\exists r.A \sqsubseteq A_1$
 
 \subsubsection{Lemma 6.14}\label{lemma-6.14}
 
@@ -210,8 +210,8 @@ Wende Regeln erschöpfend an um alle Subsumptionen zu berechnen:
 $\frac{\ }{A \sqsubseteq A}$ (Wenn $A$ in $T$ vorkommt)
 $\frac{\ }{A \sqsubseteq \top}$ (Wenn $A$ in $T$ vorkommt)
 
-$\frac{A \sqsubseteq A_{1},\ldots,A \sqsubseteq A_{n},A_{1} \sqcap \ldots \sqcap A_{n} \sqsubseteq B}{A \sqsubseteq B}$
-$\frac{A \sqsubseteq \exists r.A_{1},\ A_{1} \sqsubseteq B_{1},\exists r.B_{1} \sqsubseteq B}{A \sqsubseteq B}$
+$\frac{A \sqsubseteq A_1,\ldots,A \sqsubseteq A_{n},A_1 \sqcap \ldots \sqcap A_{n} \sqsubseteq B}{A \sqsubseteq B}$
+$\frac{A \sqsubseteq \exists r.A_1,\ A_1 \sqsubseteq B_1,\exists r.B_1 \sqsubseteq B}{A \sqsubseteq B}$
 
 \textbf{Wo gehört das x hin Vorlesung 17?}
 
