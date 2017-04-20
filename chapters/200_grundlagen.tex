@@ -68,23 +68,23 @@ Des Weiteren ist keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worde
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
 \begin{definition}[$\ALC$ Semantik]
-Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
+Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^\MI$,$\cdot^\MI$) mit
   \begin{itemize}
-    \item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
-    \item{$\cdot^{\MI}$ \emph{Interpretationsfunktion} bildet ab:
+    \item{$\Delta^\MI$ nicht leere Menge (\emph{Domäne})}
+    \item{$\cdot^\MI$ \emph{Interpretationsfunktion} bildet ab:
      \begin{itemize}
-       \item{jeden Konzeptnamen $A$ auf Menge $A^{\MI} \subseteq \Delta^{\MI}$}
-       \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
+       \item{jeden Konzeptnamen $A$ auf Menge $A^\MI \subseteq \Delta^\MI$}
+       \item{jeden Rollennamen $r$ auf Relation $r^\MI \subseteq \Delta^\MI \times \Delta^\MI$}
      \end{itemize}}
   \end{itemize}
 
-Abbildung $\cdot^{\MI}$ wird induktiv auf zusammengesetzte Konzepte erweitert:
+Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
 \begin{itemize}
-  \item $(\neg C)^{\MI} = \Delta^{\MI} \setminus C^{\MI}$
-  \item $(C \sqcap D)^{\MI} = C^{\MI} \cap D^{\MI}$
-  \item $(C \sqcup D)^{\MI} = C^{\MI} \cup D^{\MI}$
-  \item $(\exists r.C)^{\MI} = \{d \in \Delta^{\MI} |$ es gibt $ e \in \Delta^{\MI}$ mit $(d,e) \in r^{\MI}$ und $e \in C^{\MI}\}$
-  \item $(\forall r.C)^{\MI} = \{d \in \Delta^{\MI} |$ für alle $ e \in \Delta^{\MI}$, $(d,e) \in r^{\MI}$ impliziert $e \in C^{\MI}\}$
+  \item $(\neg C)^\MI = \Delta^\MI \setminus C^\MI$
+  \item $(C \sqcap D)^\MI = C^\MI \cap D^\MI$
+  \item $(C \sqcup D)^\MI = C^\MI \cup D^\MI$
+  \item $(\exists r.C)^\MI = \{d \in \Delta^\MI |$ es gibt $ e \in \Delta^\MI$ mit $(d,e) \in r^\MI$ und $e \in C^\MI\}$
+  \item $(\forall r.C)^\MI = \{d \in \Delta^\MI |$ für alle $ e \in \Delta^\MI$, $(d,e) \in r^\MI$ impliziert $e \in C^\MI\}$
 \end{itemize}
 \end{definition}
 
@@ -103,10 +103,10 @@ Verwendete Symbole:
 Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 
 \begin{itemize}
-  \item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^{\MI}$
-  \item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^{\MI}$
+  \item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^\MI$
+  \item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^\MI$
   \item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern / Vorgängern
-  \item $\MI$ ist endlich gdw. $\Delta^{\MI}$ endlich ist.
+  \item $\MI$ ist endlich gdw. $\Delta^\MI$ endlich ist.
 \end{itemize}
 
 \subsubsection{Extension/Modell}
@@ -115,15 +115,15 @@ Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 Wir nennen
 \begin{itemize}
 \item
-  $C^{\MI}$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
+  $C^\MI$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
 \item
-    jedes $d \in C^{\MI}$ ist eine \emph{Instanz} des Konzeptes $C$
+    jedes $d \in C^\MI$ ist eine \emph{Instanz} des Konzeptes $C$
 \item $r^\MI$ die \emph{Extension} der Rolle r.
 \end{itemize}
 
-Beachte, das $\top^{\MI}$ für jede Interpretation $\MI$ identisch mit
-$\Delta^{\MI}$ ist. Intuitiv entspricht $\top$ der Menge alle Elemente.
-$\bot^{\MI}$ ist für jede Interpretation $\MI$ leer, repräsentiert also
+Beachte, das $\top^\MI$ für jede Interpretation $\MI$ identisch mit
+$\Delta^\MI$ ist. Intuitiv entspricht $\top$ der Menge alle Elemente.
+$\bot^\MI$ ist für jede Interpretation $\MI$ leer, repräsentiert also
 intuitiv, dass etwas unmöglich ist. Z.B.:
 
 \begin{align*}
@@ -145,13 +145,13 @@ intuitiv, dass etwas unmöglich ist. Z.B.:
 \begin{itemize}
 \item
   ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $\MI$ gibt mit
-  $C^{\MI} \neq \emptyset$. $\MI$ ist dann ein \emph{Modell} von
+  $C^\MI \neq \emptyset$. $\MI$ ist dann ein \emph{Modell} von
   $C$.
 \item
-  wird $C$ von $D$ \emph{subsumiert}, wenn $C^{\MI} \subseteq D^{\MI}$
+  wird $C$ von $D$ \emph{subsumiert}, wenn $C^\MI \subseteq D^\MI$
   in allen Interpretationen $\MI$ (Notation $C \sqsubseteq D$)
 \item
-  sind C und D \emph{äquivalent}, wenn $C^{\MI} = D^{\MI}$ in allen
+  sind C und D \emph{äquivalent}, wenn $C^\MI = D^\MI$ in allen
   Interpretationen $\MI$ (Notation $C \equiv D$)
 \end{itemize}
 \end{definition}
@@ -181,7 +181,7 @@ Eine Interpretation $\MI$
 \begin{itemize}
 \item
   erfüllt Konzeptinklusion $C \sqsubseteq D$ gdw.
-  $C^{\MI} \subseteq D^{\MI}$
+  $C^\MI \subseteq D^\MI$
 \item
   ist Modell von TBox $\MT$ gdw. $\MI$ alle Konzeptinklusionen in $\MT$
   erfüllt
@@ -221,9 +221,9 @@ Modellierungsmuster, die nicht in dieses Schema passen sind z.B.:
 Seien $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
-  \item ist $C$ \emph{erfüllbar bzgl.} $\MT$ gdw. $\MT$ Modell $\MI$ hat mit $C^{\MI} \neq \emptyset$
-  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$, wenn $C^{\MI} \subseteq D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \sqsubseteq D$)
-  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$, gdw. $C^{\MI} = D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \equiv D$)
+  \item ist $C$ \emph{erfüllbar bzgl.} $\MT$ gdw. $\MT$ Modell $\MI$ hat mit $C^\MI \neq \emptyset$
+  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$, wenn $C^\MI \subseteq D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \sqsubseteq D$)
+  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$, gdw. $C^\MI = D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \equiv D$)
 \end{itemize}
 \end{definition}
 
@@ -265,15 +265,15 @@ Seien $\MT_{1}$ und $\MT_{2}$ TBoxen mit $\MT_{1} \subseteq \MT_{2}$. Dann gilt:
 \begin{enumerate}
   \item \begin{proof}
       Sei $C$ erfüllbar bzgl. $\MT_{2}$.
-  Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^{\MI} \neq \emptyset$.
+  Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^\MI \neq \emptyset$.
   Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$.
-  Also ist $\MI$ Modell von $\MT_1$ mit $C^{\MI} \neq \emptyset$.
+  Also ist $\MI$ Modell von $\MT_1$ mit $C^\MI \neq \emptyset$.
   Also ist $C$ erfüllbar bzgl. $\MT_1$.
   \end{proof}
   \item \begin{proof}
     Kontraposition: Wenn $\MT_2 \not\models C \sqsubseteq D$ dann $\MT_1 \not\models C \sqsubseteq D$. \\
   Es gelte $\MT_2 \not\models C \sqsubseteq D$.
-  D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^{\MI} \not\subseteq D^{\MI}$.
+  D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^\MI \not\subseteq D^\MI$.
   Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$.
   Also $\MT_1 \not\models C \sqsubseteq D$
   \end{proof}
@@ -371,7 +371,7 @@ Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen 
 \begin{definition}[Inverse Rollen]
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
 Rolle} zu $r$. Wir definieren
-$\left( r^{-} \right)^{\MI} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{\MI}\}$
+$\left( r^{-} \right)^\MI = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^\MI\}$
 \end{definition}
 
 \begin{tafel}
@@ -391,8 +391,8 @@ jedes Konzept $C$:
 \end{itemize}
 
 Die Semantik ist \begin{align*}
-    \left( \leq n\ r\ C \right)^{\MI} &= \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \leq n \right\}\\
-    ( \geq n\ r\ C)^\MI &= \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \geq n \right\}
+    \left( \leq n\ r\ C \right)^\MI &= \left\{ d \in \Delta^\MI\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^\MI \land e \in C^\MI \right\} \leq n \right\}\\
+    ( \geq n\ r\ C)^\MI &= \left\{ d \in \Delta^\MI\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^\MI \land e \in C^\MI \right\} \geq n \right\}
 \end{align*}
 \end{definition}
 

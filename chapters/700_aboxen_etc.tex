@@ -40,8 +40,8 @@ Mit $Ind(\MA)$ bezeichnen wir die Menge der in $\MA$ verwendeten Individuen.
 Interpretation $\MI$
 
 \begin{itemize}
-	\item \emph{erfüllt} $A(a)$, wenn $a \in A^{\MI}$;
-	\item \emph{erüfllt} $r(a,b)$, wenn $(a,b) \in r^{\MI}$.
+	\item \emph{erfüllt} $A(a)$, wenn $a \in A^\MI$;
+	\item \emph{erüfllt} $r(a,b)$, wenn $(a,b) \in r^\MI$.
 \end{itemize}
 
 $\MI$ ist \emph{Modell} von $\MA$, wenn $\MI$ alle Assertionen in $\MA$ erfüllt.
@@ -94,15 +94,15 @@ sei $\MA' = \MA \cup \{hoert(klaus,blVL)\}$.
 
 Sei $\MI$ Modell von $\MK'$. 
 
-$\MA'$ liefert $klaus \in Person^{\MI}$, $(klaus,blVL) \in hoert^{\MI}$ und $blVL \in TheorieVL^{\MI}$.
+$\MA'$ liefert $klaus \in Person^\MI$, $(klaus,blVL) \in hoert^\MI$ und $blVL \in TheorieVL^\MI$.
 
-KI2 von $\MT$ liefert $blVL \in VL^{\MI}$
+KI2 von $\MT$ liefert $blVL \in VL^\MI$
 
-KI1 von $\MT$ liefert $klaus \in StudentIn^{\MI}$
+KI1 von $\MT$ liefert $klaus \in StudentIn^\MI$
 
 (3) $\MK \not\models TheorieVL(logikVL)$
 
-    ist zwar in $\MI$ aus T7.1 erfüllt, aber setzt man $TheorieVL^{\MI} = \{blVL \}$ so hat man immer noch ein Modell von $\MA,\MT$ 
+    ist zwar in $\MI$ aus T7.1 erfüllt, aber setzt man $TheorieVL^\MI = \{blVL \}$ so hat man immer noch ein Modell von $\MA,\MT$ 
 
 \textbf{Konsistenzproblem}:
 
@@ -130,15 +130,15 @@ Konsistenz- und (Nicht-)Instanzproblem wechselseitig polynomiell reduzierbar:
 
 gdw. $\MK$ hat Modell
 
-gdw. $\MK$ hat Modell $\MI$ mit $a \not\in A^{\MI}$
+gdw. $\MK$ hat Modell $\MI$ mit $a \not\in A^\MI$
 
 gdw. $\MK \not\models A(a)$
 
 (2) $(\MT, \MA) \not\models A(a)$
 
-gdw. es gibt Modell $\MI$ von $(\MT, \MA)$ mit $a \not\in A^{\MI}$ (Def. 7.4)
+gdw. es gibt Modell $\MI$ von $(\MT, \MA)$ mit $a \not\in A^\MI$ (Def. 7.4)
 
-gdw. es gibt Modell $\MI$ von $(\MT \cup \{\overline{A} \equiv \neg A\}, \MA)$ mit $a \not\in A^{\MI}$
+gdw. es gibt Modell $\MI$ von $(\MT \cup \{\overline{A} \equiv \neg A\}, \MA)$ mit $a \not\in A^\MI$
 
 gdw. es gibt Modell $\MI$ von $(\MT \cup \{\overline{A} \equiv \neg A\}, \MA \cup \{\overline{A}(a)\})$
 
@@ -158,17 +158,17 @@ TheorieVl
 
 $\MI$ aus Bsp. 7.1
 
-$\Delta^{\MI} = \{hanna, klaus, wilma, blVL, logikVL\}$
+$\Delta^\MI = \{hanna, klaus, wilma, blVL, logikVL\}$
 
-$Person^{\MI} = \{hanna,klaus,wilma\}$
+$Person^\MI = \{hanna,klaus,wilma\}$
 
-$StudentIn^{\MI} = \{hanna,klaus\}$
+$StudentIn^\MI = \{hanna,klaus\}$
 
-$TheoVL^{\MI} = VL^{\MI} = \{blVL, logikVL\}$
+$TheoVL^\MI = VL^\MI = \{blVL, logikVL\}$
 
-$bekMit^{\MI} = \{(hanna,klaus), (klaus, hanna), (klaus, wilma), (wilma, klaus)\}$
+$bekMit^\MI = \{(hanna,klaus), (klaus, hanna), (klaus, wilma), (wilma, klaus)\}$
 
-$hoert^{\MI} = \{(hanna, blVL), (klaus,blVL), (klaus,logikVL)\}$
+$hoert^\MI = \{(hanna, blVL), (klaus,blVL), (klaus,logikVL)\}$
 
 \begin{tabular}{c | c}
 Person & col1 \\ \hline
@@ -184,7 +184,7 @@ StudentIn & col1 \\ \hline
 \end{tabular}
 
 \begin{tabular}{c | c | c}
-$bekMit^{\MI}$ & col1 & col2 \\ \hline
+$bekMit^\MI$ & col1 & col2 \\ \hline
  & hanna & klaus\\
  & klaus & hanna\\
  & klaus & wilma \\
@@ -246,19 +246,19 @@ Es gilt: $cert(Q, \MA) = \{h\}$
 
 Gelte $\MA \not\models Q$. Dann gibt es Modell $\MI$ von $\MT$ und $\MA$ mit $\MI \not\models q$.
 
-Also $D^{\MI} \neq \emptyset$. Für jedes $a \in Ind(\MA)$ setze $f(a) = X$ für ein beliebiges $X \in{R,G,B}$ mit $a \in X^{\MI}$. Wegen der letzten der drei KIs in $\MT$ und $D^{\MI}$ ist $f$ eine 3-Färbung von $\MA$.
+Also $D^\MI \neq \emptyset$. Für jedes $a \in Ind(\MA)$ setze $f(a) = X$ für ein beliebiges $X \in{R,G,B}$ mit $a \in X^\MI$. Wegen der letzten der drei KIs in $\MT$ und $D^\MI$ ist $f$ eine 3-Färbung von $\MA$.
 
 "`$\Rightarrow$"'
 
 Habe $\MA$ eine 3-Färbung $f$. Definiere Interpreation $\MI$:
 
-$\Delta^{\MI} = Ind(\MA)$
+$\Delta^\MI = Ind(\MA)$
 
-$r^{\MI} = \{(a,b) | r(a,b) \in \MA \}$
+$r^\MI = \{(a,b) | r(a,b) \in \MA \}$
 
-$X^{\MI} = \{a | f(a) = X\}, X \in \{R,G,B\}$
+$X^\MI = \{a | f(a) = X\}, X \in \{R,G,B\}$
 
-$D^{\MI} = \emptyset$
+$D^\MI = \emptyset$
 
 Man sieht leicht: $\MI \not\models q$ und $\MI$ ist Modell von $\MT$ und $\MA$
 

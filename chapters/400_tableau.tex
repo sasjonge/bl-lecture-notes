@@ -68,8 +68,8 @@ $$M_{0} = \left\{ B_{\text{ini}} \right\}\ mit\ B_{\text{ini}}\ \emph{initialer 
   $L := \left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
 \end{itemize}
 
-$M_{i + 1}$ entsteht aus $M_{\MI}$ durch Anwendung der Tableau-Regeln
-auf irgendeinen I-Baum in $M_{\MI}$ und anschließendes Austauschen des
+$M_{i + 1}$ entsteht aus $M_\MI$ durch Anwendung der Tableau-Regeln
+auf irgendeinen I-Baum in $M_\MI$ und anschließendes Austauschen des
 verwendeten Baumes durch den neu erzeugten (Sei $\left( V,E,L \right)$
 I-Baum):
 
@@ -275,7 +275,7 @@ $\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0
 \end{quote}
 
 \item
-  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{\MI}$ für
+  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 
@@ -313,22 +313,22 @@ $B = \left( V,E,L \right)$ gefunden. Konstruiere Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{\MI} = V$
+  $\Delta^\MI = V$
 \item
-  $r^{\MI} = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
+  $r^\MI = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
   für alle Rollennamen $r$
 \item
-  $A^{\MI} = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
+  $A^\MI = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
   alle Konzeptnamen $A$
 \end{itemize}
 
 Behauptung: Für alle Konzepte $C$ und $v \in V$ gilt
 
-\begin{center}$C \in L\left( v \right)$ impliziert $v \in C^{\MI}$\end{center}
+\begin{center}$C \in L\left( v \right)$ impliziert $v \in C^\MI$\end{center}
 
 Da $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B_{\text{ini}}$ gilt
 auch $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B$. Also
-$v_{\text{ini}} \in C_{0}^{\MI}$ nach Behauptung, weswegen dann
+$v_{\text{ini}} \in C_{0}^\MI$ nach Behauptung, weswegen dann
 $C_{0}$ erfüllbar.
 
 \textbf{I.A.} $C = A$ (Konzeptname) Gilt nach Definition von
@@ -343,7 +343,7 @@ $\MI$.
 \begin{quote}
 $A$ Konzeptname. Da $B$ keinen offensichtlichen Widerspruch hat,
 folgt das $A \notin L(v)$. Nach Definition von $\MI$ gilt
-$v \notin A^{\MI}$. Also $v \in \left( \neg A \right)^{\MI}$.
+$v \notin A^\MI$. Also $v \in \left( \neg A \right)^\MI$.
 \end{quote}
 
 \item
@@ -354,9 +354,9 @@ $C \in L\left( v \right)$
 
 $\Rightarrow$ ($\sqcap$-Regel nicht anwendbar) $D \in L\left( v \right),\ E \in L\left( v \right)$ 
 
-$\Rightarrow$ (I.V.) $v \in D^{\MI},\ v \in E^{\MI}$ 
+$\Rightarrow$ (I.V.) $v \in D^\MI,\ v \in E^\MI$ 
 
-$\Rightarrow$ (Semantik) $v \in \left( D \sqcap E \right)^{\MI}$
+$\Rightarrow$ (Semantik) $v \in \left( D \sqcap E \right)^\MI$
 \end{quote}
 
 \item $C = D \sqcup E$
@@ -370,7 +370,7 @@ analog.
 \begin{quote}
 Da die $\exists$-Regel nicht anwendbar ist, gibt es $v'\in V$ mit $(v,r,v') \in E$ und $D \in L(v')$
 
-Nach I.V.: $v' \in D^{\MI}$; nach Konstruktion $(v,v') \in r^{\MI}$. Nach Semantik gilt dann: $v \in (\exists r.D^{\MI})$
+Nach I.V.: $v' \in D^\MI$; nach Konstruktion $(v,v') \in r^\MI$. Nach Semantik gilt dann: $v \in (\exists r.D^\MI)$
 \end{quote}
 
 \item $C = \forall r.D$
@@ -384,15 +384,15 @@ Nach I.V.: $v' \in D^{\MI}$; nach Konstruktion $(v,v') \in r^{\MI}$. Nach Semant
 
 Sei $B = \left( V,E,L \right)$ ein I-Baum. Interpretation $\MI$
 \emph{realisiert} $B$ gdw. es gibt eine Funktion
-$\pi\ :V \rightarrow \Delta^{\MI}$ so dass
+$\pi\ :V \rightarrow \Delta^\MI$ so dass
 
 \begin{itemize}
 \item
   $\left( v,r,v^{'} \right) \in E$ impliziert
-  $\left( \pi\left( v \right),\pi\left( v^{'} \right) \right) \in r^{\MI}$
+  $\left( \pi\left( v \right),\pi\left( v^{'} \right) \right) \in r^\MI$
 \item
   $C \in L\left( v \right)$ impliziert
-  $\pi\left( v \right) \in C^{\MI}$
+  $\pi\left( v \right) \in C^\MI$
 \end{itemize}
 
 B ist \emph{realisierbar}, wenn es Interpretation $\MI$ gibt, die $B$
@@ -429,7 +429,7 @@ Daraus folgt: Es gibt realisierbaren Baum $B \in M_{n}$ und damit enthält $B$ k
 $B_{\text{ini}}$ ist realisierbar, weil $C_{0}$ erfüllbar.
 
 \textbf{I.S.} Fallunterscheidung gemäß der Regel, mit der $M_{i + 1}$
-aus $M_{\MI}$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
+aus $M_\MI$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
 $M_i$, auf welchen Regel angewandt wird. Beispielhaft
 $\sqcup$-Regel:
 
@@ -459,7 +459,7 @@ $v \in V$ mit
 Es genügt zu zeigen, dass wenn $B$ realisiertbar, dann $B'$ oder
 $B''$ realisierbar. 
 
-Sei $\MI$ Interpretation, die $B$ realisiert und $\pi\ :V \rightarrow \Delta^{\MI}$ Abbildung wie in \protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt $\pi\left( v \right) \in \left( C \sqcup D \right)^{\MI}$. Nach Semantik: $\pi\left( v \right) \in C^{\MI}$ oder $\pi\left( v \right) \in D^{\MI}$. Also realisiert $\MI$ den Baum $B'$ oder $B''$.
+Sei $\MI$ Interpretation, die $B$ realisiert und $\pi\ :V \rightarrow \Delta^\MI$ Abbildung wie in \protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt $\pi\left( v \right) \in \left( C \sqcup D \right)^\MI$. Nach Semantik: $\pi\left( v \right) \in C^\MI$ oder $\pi\left( v \right) \in D^\MI$. Also realisiert $\MI$ den Baum $B'$ oder $B''$.
 \end{quote}
 \end{proof}
 
@@ -587,28 +587,28 @@ Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{\MI} = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
+  $\Delta^\MI = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
 \item
-  $r^{\MI} = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
+  $r^\MI = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
 \item
-  $A^{\MI} = \left\{ v \middle| A \in L\left( v \right) \right\}$
+  $A^\MI = \left\{ v \middle| A \in L\left( v \right) \right\}$
 \end{itemize}
 
-Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^{\MI}$ gilt:
-$$C \in L\left( v \right) \Rightarrow v \in C^{\MI}$$
+Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^\MI$ gilt:
+$$C \in L\left( v \right) \Rightarrow v \in C^\MI$$
 Die Behauptung impliziert wie gewünscht, dass
 
 \begin{itemize}
 \item
   $\MI$ Modell von $\MT$ ist.
 
-Da die TBox-Regel nicht anwendbar ist, gilt $C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also $v \in C_{\MT}^{\MI}$ für alle $v \in \Delta^{\MI}$.
+Da die TBox-Regel nicht anwendbar ist, gilt $C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also $v \in C_{\MT}^\MI$ für alle $v \in \Delta^\MI$.
 
 \item
   $\MI$ Modell von $C_{0}$ ist.
 
 Da $C_{0} \in L\left( v_{\text{ini}} \right)$ gilt nach Behauptung
-$v_{\text{ini}} \in C_{0}^{\MI}$.
+$v_{\text{ini}} \in C_{0}^\MI$.
 \end{itemize}
 
 \textbf{I.A.} Siehe Beweis zu
@@ -629,9 +629,9 @@ Fallunterscheidung:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^{\MI}$
-  (Definition $\MI$), $v^{'} \in D^{\MI}$ (\textbf{I.V.})
-  $\Rightarrow v \in \left( \exists r.D \right)^{\MI}$
+  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^\MI$
+  (Definition $\MI$), $v^{'} \in D^\MI$ (\textbf{I.V.})
+  $\Rightarrow v \in \left( \exists r.D \right)^\MI$
 \item
   $v^{'}$ blockiert. Da der direkte Vorgänger $v$ von $v'$
   unblockiert ist, ist $v'$ direkt blockiert von unblockiertem
@@ -640,16 +640,16 @@ Fallunterscheidung:
 
 \begin{itemize}
 \item
-  $\left( v,u \right) \in r^{\MI}$ nach Definition $r^{\MI}$
+  $\left( v,u \right) \in r^\MI$ nach Definition $r^\MI$
 \item
   $D \in L\left( v \right) \subseteq L\left( u \right)$
   (Blockierungsbedingung)
 \item
-  $\Rightarrow u \in D^{\MI}$ (\textbf{I.V.})
+  $\Rightarrow u \in D^\MI$ (\textbf{I.V.})
 \end{itemize}
 
 \begin{quote}
-Also $v \in \left( \exists r.D \right)^{\MI}$.
+Also $v \in \left( \exists r.D \right)^\MI$.
 \end{quote}
 
 \begin{itemize}
@@ -689,7 +689,7 @@ Beweis in 4 Schritten:
   Widerspruch zur Anwendung der $\exists '$-Regel auf $v_j$, also ist die Annahme falsch.
   \end{quote}
 \item
-  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_{\MI}$ für
+  Sei $M_{0},M_{1},\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\color{red} k^{2^{k}} \cdot k \leq 2^{2^{3k}}= n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 \end{enumerate}

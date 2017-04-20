@@ -104,11 +104,11 @@ Intuitiv gesprochen kann $\ALC$ nicht zwischen $d_1$ und $d_2$ \enquote{untersch
 \begin{definition}[Eigenschaft, Ausdrückbarkeit]
 
 Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(\MI,d)$, wobei
-$\MI$ eine Interpretation und $d \in \Delta^{\MI}$ ein Element in $\MI$ ist.
+$\MI$ eine Interpretation und $d \in \Delta^\MI$ ein Element in $\MI$ ist.
 
 $E$ ist \emph{ausdrückbar in $\ALC$}, wenn es ein $\ALC$-Konzept $C$
-gibt, so dass für alle $\MI$ und $d \in \Delta^{\MI}$ gilt: \begin{align*}
-\left( \MI,\ d \right) \in E\ gdw.\ d \in C^{\MI}
+gibt, so dass für alle $\MI$ und $d \in \Delta^\MI$ gilt: \begin{align*}
+\left( \MI,\ d \right) \in E\ gdw.\ d \in C^\MI
 \end{align*}
 \end{definition}
 
@@ -142,7 +142,7 @@ In $\ALC$ ist nicht ausdrückbar:
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/33inv.png}
 
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^{\MI}$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
+Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
 \end{proof} 
 
 \begin{proof} $\leq n\ r.\top$
@@ -151,7 +151,7 @@ Betrachte 2 Interpretationen $\MI$ und $\MJ$
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/33low.png}
 
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^{\MI}$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
+Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
 \end{proof}
 \end{tafel}
 
@@ -176,7 +176,7 @@ dann ist $E$ nicht in $\ALC$ ausdrückbar.
 
 \subsubsection{Anwendungen von Bisimulation II}
 
-Eine Interpretation ist ein \emph{Baum} gdw. $(\Delta^{\MI}, \cdot^{\MI})$
+Eine Interpretation ist ein \emph{Baum} gdw. $(\Delta^\MI, \cdot^\MI)$
 Baum (endlich oder unendlich). Konzept $C$ und TBox $\MT$ haben
 \emph{gemeinsames Baummodell} $\MI$, wenn $\MI$ Modell von $\MT$ und Baum mit
 Wurzel $d$ sowie $d \in C^\MI$.
@@ -188,7 +188,7 @@ $\ALC$ hat die \emph{Baummodelleigenschaft}.
     \label{theorem-3.6}
     \label{thm:baummodell}
 Wenn ein ALC-Konzept $C$ bzgl. einer ALC-TBox $\MT$ erfüllbar ist,
-dann haben $C$ und $\MT$ ein \emph{gemeinsames Baummodell} $\MI$. (mit $\MI$ Baum, Wurzel in $C^{\MI}$.)
+dann haben $C$ und $\MT$ ein \emph{gemeinsames Baummodell} $\MI$. (mit $\MI$ Baum, Wurzel in $C^\MI$.)
 \end{theorem}
 
 \begin{tafel}[TODO]
@@ -199,7 +199,7 @@ Die Baummodelleigenschaft ist Grundlage für Algorithmen und erlaubt Aussagen ü
 
 \subsubsection{Unravelling}\label{unravelling}
 
-Sei $\MI$ eine Interpretation und $d \in \Delta^{\MI}$. 
+Sei $\MI$ eine Interpretation und $d \in \Delta^\MI$. 
 
 $d$-Pfad in $\MI$: Sequenz $d_{1}\cdots d_n$, $n \geq 1$ mit $d_1 = d$ und
 für alle $i < n$: es gibt Rollenname $r$ mit $(d_i, d_{i + 1}) \in r^\MI$
@@ -210,8 +210,8 @@ $\mathit{end}(d_1d_2\cdots d_n) = d_n$
 Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 \begin{align*}
     \Delta^{\MJ} &= \text{Menge aller }d\text{-Pfade in }\MI\\
-    A^{\MJ} &= \left\{ p \in \Delta^{\MJ}\  \right|\text{\ end}\left( p \right) \in A^{\MI}\}\\
-    r^{\MJ} &= \left\{ \left( p,p' \right) \in \Delta^{\MJ} \times \Delta^{\MJ}\ |\ \exists e:p^{'} = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^{\MI} \right\}
+    A^{\MJ} &= \left\{ p \in \Delta^{\MJ}\  \right|\text{\ end}\left( p \right) \in A^\MI\}\\
+    r^{\MJ} &= \left\{ \left( p,p' \right) \in \Delta^{\MJ} \times \Delta^{\MJ}\ |\ \exists e:p^{'} = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^\MI \right\}
 \end{align*}
 für alle Konzeptnamen $A$ und Rollennamen $r$
 \end{definition}
@@ -231,7 +231,7 @@ erzeuge Kanten die den weiterführenden Rollen entsprechen.
     \label{lem:unravelling}
 Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle $\ALC$-Konzepte $C$ und alle $p \in \Delta^{\MJ}$ gilt:
 \begin{align*}
-\text{end}\left( p \right) \in C^{\MI}\ gdw.\ p \in C^{\MJ}
+\text{end}\left( p \right) \in C^\MI\ gdw.\ p \in C^{\MJ}
 \end{align*}
 \end{lemma}
 
@@ -243,7 +243,7 @@ Mit Theorem genügt es folgende Bisimulation zu zeigen:
 \end{align*}
 Definiere Relation:
 \begin{align*}
-\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^{\MI}
+\rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^\MI
         \times \Delta^{\MJ}\  \mid|\text{\ p\ }\mathrm{\text{ist}}\text{\ d}\mathrm{- Pfad}\right\}
 \end{align*}
 (Bilde alle Knoten in $\MJ$ auf ihr Ende ab). 
@@ -253,8 +253,8 @@ Zur Bisimulation:
 \item gilt per Definition von $\MJ$.
 \item
   Angenommen $e$ $\rho$ $p$ und
-  $\left( e,e^{'} \right) \in r^{\MI}$. Dann $e = end\left( p \right)$
-  per Konstruktion von $\MJ$. Wegen $\left( e,e^{'} \right) \in r^{\MI}$
+  $\left( e,e^{'} \right) \in r^\MI$. Dann $e = end\left( p \right)$
+  per Konstruktion von $\MJ$. Wegen $\left( e,e^{'} \right) \in r^\MI$
   ist $pe'$ Pfad. Nach Konstruktion von $\MJ$ gilt
   $\left( p,pe^{'} \right) \in r^{\MJ}$.
 \end{enumerate}
@@ -269,14 +269,14 @@ Nun folgt \autoref{thm:baummodell}.:
 \begin{tafel}
 \begin{proof}
 Sei $C$ erfüllbar bezüglich $\MT$. Dann gibt es Modell $\MI$ von $C$ und $\MT$. Sei $\MJ$ das Unravelling von $\MI$ an der Stelle
-$d_0 \in C^{\MI}$.
+$d_0 \in C^\MI$.
 
 Mit \autoref{lem:unravelling} ist die Wurzel $d_0$ von $\MJ$ in $C^{\MJ}$. Noch zu zeigen: $\MJ$ ist Modell von $\MT$. 
 
 Sei $D \sqsubseteq E$ in $\MT$ und $p \in D^{\MJ}$. Nach
-\autoref{lem:unravelling} ist dann $\text{end}\left( p \right) \in D^{\MI}$
+\autoref{lem:unravelling} ist dann $\text{end}\left( p \right) \in D^\MI$
 und weil $\MI$ Modell von $\MT$ folgt $\text{end}\left( p \right) \in
-E^{\MI}$. Mit \autoref{lem:unravelling} folgt $p \in E^{\MJ}
+E^\MI$. Mit \autoref{lem:unravelling} folgt $p \in E^{\MJ}
 \Rightarrow J \models D \sqsubseteq E$. %TODO: J seems wrong here
 \end{proof}
 \end{tafel}
@@ -285,7 +285,7 @@ E^{\MI}$. Mit \autoref{lem:unravelling} folgt $p \in E^{\MJ}
 
 Bisimulation entspricht nicht der Ausdrucksstärke von $\ALC$, denn die Gegenrichtung von \autoref{thm:bisim} (also auch von \autoref{thm:alc-nicht-ausdruck}) gilt nicht:
 
-Es gibt Interpretationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^{\MI}$ gdw. $x \in C^{\MJ}$ für alle $\ALC$-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
+Es gibt Interpretationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^\MI$ gdw. $x \in C^{\MJ}$ für alle $\ALC$-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
 
 \begin{tafel}[Gegenbeispiel Bisimulation gleich Ausdrucksstärke]
 Beispiel:
@@ -295,8 +295,8 @@ Beispiel:
 Es gilt:
 
 \begin{itemize}
-  \item $d \in C^{\MI}$ gdw. $x \in C^{\MJ}$, falls ALC-Konzept C
-  \item $(\MI,d) \not\sim (\MJ,x)$: für $y$ in $\MJ$ gibt es kein adäquates Element $e \in \Delta^{\MI}$ mit $e\ \rho\ y$
+  \item $d \in C^\MI$ gdw. $x \in C^{\MJ}$, falls ALC-Konzept C
+  \item $(\MI,d) \not\sim (\MJ,x)$: für $y$ in $\MJ$ gibt es kein adäquates Element $e \in \Delta^\MI$ mit $e\ \rho\ y$
 \end{itemize}
 \end{tafel}
 
@@ -363,7 +363,7 @@ Wir definieren den Begriff eines Typs:
 
 \begin{itemize}
   \item ist Menge von Konzepten
-  \item beschreibt einen Punkt $d \in \Delta^{\MI}$ in einer Interpreatation $\MI$
+  \item beschreibt einen Punkt $d \in \Delta^\MI$ in einer Interpreatation $\MI$
   \item ist eingeschränkt auf Teilkonzepte von $C$ und $\MT$ (um Endlichkeit zu erreichen)
 \end{itemize}
 
@@ -397,10 +397,10 @@ Beispiele:
 Beweis per Induktion über $C$.
 
 \begin{definition}[Typ von $d$]
-Sei $\MI$ eine Interpretation, $d \in \Delta^{\MI}$. Der \emph{Typ}
-$t_{\MI}\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
+Sei $\MI$ eine Interpretation, $d \in \Delta^\MI$. Der \emph{Typ}
+$t_\MI\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
 \begin{align*}
-t_{\MI}\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^{\MI}\}.
+t_\MI\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^\MI\}.
 \end{align*}
 \end{definition}
 Erklärung: Alle Teilkonzepte von $\MT$ und $C$, die ein Objekt $d$
@@ -419,10 +419,10 @@ Sei
 
 \includegraphics[width=4.71910in,height=1.83200in]{media/314typ.png}
 \begin{align*}
-    t_{\MI}(d)&=\{A, \exists r.A\}\\
-    t_{\MI}(e)&=\{A, \exists r.A\}\\
-    t_{\MI}(f)&=\{A, \exists r.A, A \sqcap B, B\}\\
-    t_{\MI}(g)&=\{A, \exists r.A\}
+    t_\MI(d)&=\{A, \exists r.A\}\\
+    t_\MI(e)&=\{A, \exists r.A\}\\
+    t_\MI(f)&=\{A, \exists r.A, A \sqcap B, B\}\\
+    t_\MI(g)&=\{A, \exists r.A\}
 \end{align*}
 \end{tafel}
 
@@ -430,7 +430,7 @@ Sei
     \label{lem:num-typ}
 Für jede Interpretation $\MI$ gilt:
 \begin{align*}
-\#\left\{ t_{\MI}\left( d \right)\ |\ d \in \Delta^{\MI} \right\} \leq 2^{\left| C \right| + |T|}
+\#\left\{ t_\MI\left( d \right)\ |\ d \in \Delta^\MI \right\} \leq 2^{\left| C \right| + |T|}
 \end{align*}
 \end{lemma}
 (direkte Konsequenz aus \autoref{lem:num-sub})
@@ -448,15 +448,15 @@ Idee:
 \begin{definition}[Filtration]
 
 Sei $\MI$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
-$\Delta^{\MI}$: $$d \sim e\ gdw.\ t_{\MI}\left( d \right) = t_{\MI}\left( e \right)$$
-Wir bezeichnen diese Äquivalenzklasse von $d \in \Delta^{\MI}$ bzgl. $\sim$ mit $\left\lbrack d \right\rbrack$.
+$\Delta^\MI$: $$d \sim e\ gdw.\ t_\MI\left( d \right) = t_\MI\left( e \right)$$
+Wir bezeichnen diese Äquivalenzklasse von $d \in \Delta^\MI$ bzgl. $\sim$ mit $\left\lbrack d \right\rbrack$.
 
 Die Filtration von $\MI$ bzgl. $C$ und $\MT$ ist folgende Interpretation $\MJ$:
 \begin{align*}
-    \Delta^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^{\MI} \right\}\\
-    A^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^{\MI} \right\}
+    \Delta^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^\MI \right\}\\
+    A^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^\MI \right\}
   \text{ für alle }A \in sub\left( C,\MT \right)\\
-  r^{\MJ} &= \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^{\MI} \right\}
+  r^{\MJ} &= \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^\MI \right\}
   \text{ für alle Rollennamen } r
 \end{align*}
 
@@ -488,9 +488,9 @@ Wenn $\MI$ Modell von $C$ und $\MT$, so auch $\MJ$.
 \begin{tafel}[Beweis Filtrations Modell]\mbox{}
 \begin{proof}
     Behauptung:
-Für alle $d \in \Delta^{\MI}$ und $D \in sub(C,\MT)$ gilt:
+Für alle $d \in \Delta^\MI$ und $D \in sub(C,\MT)$ gilt:
 \begin{align*}
-d \in D^{\MI}\ gdw.\ \left\lbrack d \right\rbrack \in D^{\MJ}
+d \in D^\MI\ gdw.\ \left\lbrack d \right\rbrack \in D^{\MJ}
 \end{align*}
 Beweis der Behauptung per Induktion über die Struktur von $D$.
 
@@ -506,9 +506,9 @@ Beweis der Behauptung per Induktion über die Struktur von $D$.
   \def\labelenumii{\alph{enumii}.}
   \item Hinrichtung
       \begin{align*}
-          &d \in \left( \exists r.E \right)^{\MI}\\
-          \Leftrightarrow &(\text{Semantik})\text{ es gibt }e \in \Delta^{\MI} \text{ mit } \left( d,e \right) \in r^{\MI} \text{ und } e \in E^{\MI} \\
-          \Rightarrow &(\text{Definition }r^{\MJ} \text{ und } I.V.) \text{ es gibt }e \in \Delta^{\MI} \text{ mit }\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ} und \left\lbrack e \right\rbrack \in E^{\MJ} \\
+          &d \in \left( \exists r.E \right)^\MI\\
+          \Leftrightarrow &(\text{Semantik})\text{ es gibt }e \in \Delta^\MI \text{ mit } \left( d,e \right) \in r^\MI \text{ und } e \in E^\MI \\
+          \Rightarrow &(\text{Definition }r^{\MJ} \text{ und } I.V.) \text{ es gibt }e \in \Delta^\MI \text{ mit }\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ} und \left\lbrack e \right\rbrack \in E^{\MJ} \\
           \Leftrightarrow &(\text{Semantik } \exists) \left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}
       \end{align*}
     \item Rückrichtung
@@ -516,20 +516,20 @@ Beweis der Behauptung per Induktion über die Struktur von $D$.
             &\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} \\
             &\Leftrightarrow (\text{Semantik }\exists) \text{ es gibt }[e] \in \Delta^{\MJ} \text{ mit } \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}\text{ und }\left\lbrack e \right\rbrack \in E^{\MJ} \\
             &\Leftrightarrow (\text{Definition }r^{\MJ} \text{ und }I.V.) \text{ es gibt }[e] \in \Delta^{\MJ},\\
-            &\quad\quad\text{ es gibt }d^{'} \in \left\lbrack d \right\rbrack, e^{'} \in \left\lbrack e \right\rbrack, \left( d^{'},\ e^{'} \right) \in r^{\MI} \text{ und }e^{'} \in E^{\MI} \\
-            &\Rightarrow (\text{Semantik }\exists) d^{'} \in \left( \exists r.E \right)^{\MI} \\
-            &\Rightarrow (d \sim d^{'}) d \in \left( \exists r.E \right)^{\MI}
+            &\quad\quad\text{ es gibt }d^{'} \in \left\lbrack d \right\rbrack, e^{'} \in \left\lbrack e \right\rbrack, \left( d^{'},\ e^{'} \right) \in r^\MI \text{ und }e^{'} \in E^\MI \\
+            &\Rightarrow (\text{Semantik }\exists) d^{'} \in \left( \exists r.E \right)^\MI \\
+            &\Rightarrow (d \sim d^{'}) d \in \left( \exists r.E \right)^\MI
         \end{align*}
 \end{enumerate}
 \end{enumerate}
 \end{proof}
-Sei $d \in C^{\MI}$. Nach bewiesener Behauptung gilt $[d] \in C^{\MJ}$, also ist $\MJ$ Modell von $C$.
+Sei $d \in C^\MI$. Nach bewiesener Behauptung gilt $[d] \in C^{\MJ}$, also ist $\MJ$ Modell von $C$.
 
 $\MJ$ ist ebenfalls Modell von $\MT$
 \begin{proof}
 Sei $C \sqsubseteq D$ in $\;T$, $[d] \in C^{\MJ}$.
-Nach Behauptung gilt $d \in C^{\MI}$. \\
-Weil $\MI$ Modell von $C \sqsubseteq D$, gilt $d \in D^{\MI}$.
+Nach Behauptung gilt $d \in C^\MI$. \\
+Weil $\MI$ Modell von $C \sqsubseteq D$, gilt $d \in D^\MI$.
 Nach Behauptung gilt $[d] \in D^{\MJ}$.
 \end{proof}
 \end{tafel}
@@ -578,7 +578,7 @@ Daraus folgt, dass Erfüllbarkeit entscheidbar ist:
 \textbf{Algorithmus für Erfüllbarkeit:}
 Gegeben $C$ und $\MT$, so dass $|C|+|\MT| = n$,
 \begin{itemize} 
-  \item erzeuge alle Interpretationen $\MI$ mit $\left| \Delta \right|^{\MI} \leq 2^{n}$ (es gibt höchstens $2^{2^{5n}}$ viele davon) 
+  \item erzeuge alle Interpretationen $\MI$ mit $\left| \Delta \right|^\MI \leq 2^{n}$ (es gibt höchstens $2^{2^{5n}}$ viele davon) 
   \item und überprüfe, ob $\MI$ Modell von $C$ und $\MT$ ist (in Zeit polynomiell in $\MI$, $C$, und $\MT$).
 \end{itemize}
 
@@ -602,7 +602,7 @@ Gegeben $C$ und $\MT$, so dass $|C|+|\MT| = n$,
 
 \begin{lemma}[Laufzeit Extensionsberechnung]
     \label{lem:extensionsberechnung}
-Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer in Zeit $O\left( \left| C \right| \cdot \left| \Delta^{\MI} \right| \right)$ -- die Extension $C^{\MI}$ berechnen.
+Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer in Zeit $O\left( \left| C \right| \cdot \left| \Delta^\MI \right| \right)$ -- die Extension $C^\MI$ berechnen.
 \end{lemma}
 
 \begin{proof}
@@ -624,16 +624,16 @@ Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann i
     \end{tabular}\\
     \texttt{endcase}
 
-    Zeitaufwand des Algorithmus ist $\mathcal{O}(|C| \cdot |\Delta^{\MI}|)$:
+    Zeitaufwand des Algorithmus ist $\mathcal{O}(|C| \cdot |\Delta^\MI|)$:
     \begin{itemize}
         \item Anzahl der (rekursiven Aufruf $= |sub(C)| \leq |C|$)
-        \item pro Aufruf Zeitaufwand $\mathcal{O}(|\Delta^{\MI}|)$: \\
-            simple Operationen auf $\leq 2$ Teilmengen von $\Delta^{\MI}$
+        \item pro Aufruf Zeitaufwand $\mathcal{O}(|\Delta^\MI|)$: \\
+            simple Operationen auf $\leq 2$ Teilmengen von $\Delta^\MI$
     \end{itemize}
 \end{proof}
 
 \begin{korollar}
-Gegeben seien $C$, $\MT$ in $\ALC$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer: in Zeit $O(\left( \left| \MT \right| + \left| C \right| \right) \cdot \left| \Delta^{\MI} \right|)$ -- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
+Gegeben seien $C$, $\MT$ in $\ALC$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer: in Zeit $O(\left( \left| \MT \right| + \left| C \right| \right) \cdot \left| \Delta^\MI \right|)$ -- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
 \end{korollar}
 
 \begin{theorem}[$\ALC$ Erfüllbarkeit ist entscheidbar]

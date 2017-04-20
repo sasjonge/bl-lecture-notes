@@ -61,13 +61,13 @@ Desweiteren is keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden:
 \subsection{$\ALC$: Semantik}
 
 \begin{definition}{$\ALC$ Semantik} \\
-Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
+Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^\MI$,$\cdot^\MI$) mit
 	\begin{itemize}
-		\item{$\Delta^{\MI}$ nicht leere Menge (\emph{Domäne})}
-		\item{$\cdot^{\MI}$ \emph{Interpretationsfunktion} bildet ab:
+		\item{$\Delta^\MI$ nicht leere Menge (\emph{Domäne})}
+		\item{$\cdot^\MI$ \emph{Interpretationsfunktion} bildet ab:
 		 \begin{itemize}
-			 \item{jeden Konzeptnamen $A$ auf Menge $A^{\MI} \subseteq \Delta^{\MI}$}
-			 \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
+			 \item{jeden Konzeptnamen $A$ auf Menge $A^\MI \subseteq \Delta^\MI$}
+			 \item{jeden Rollennamen $r$ auf Relation $r^\MI \subseteq \Delta^\MI \times \Delta^\MI$}
 		 \end{itemize}}
 	\end{itemize}
 \end{definition}
@@ -76,14 +76,14 @@ Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
 
 \todo{T2.2 einfügen}
 
-Abbildung $\cdot^{\MI}$ wird induktiv auf zusammengesetzte Konzepte erweitert:
+Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
 
 \begin{itemize}
-	\item $(\neg C)^{\MI} = \Delta^{\MI} \setminus C^{\MI}$
-	\item $(C \sqcap D)^{\MI} = C^{\MI} \cap D^{\MI}$
-	\item $(C \sqcup D)^{\MI} = C^{\MI} \cup D^{\MI}$
-	\item $(\exists r.C)^{\MI} = \{d \in \Delta^{\MI} |$ es gibt $ e \in \Delta^{\MI}$ mit $(d,e) \in r^{\MI}$ und $e \in C^{\MI}\}$
-	\item $(\forall r.C)^{\MI} = \{d \in \Delta^{\MI} |$ für alle $ e \in \Delta^{\MI}$, $(d,e) \in r^{\MI}$ impliziert $e \in C^{\MI}\}$
+	\item $(\neg C)^\MI = \Delta^\MI \setminus C^\MI$
+	\item $(C \sqcap D)^\MI = C^\MI \cap D^\MI$
+	\item $(C \sqcup D)^\MI = C^\MI \cup D^\MI$
+	\item $(\exists r.C)^\MI = \{d \in \Delta^\MI |$ es gibt $ e \in \Delta^\MI$ mit $(d,e) \in r^\MI$ und $e \in C^\MI\}$
+	\item $(\forall r.C)^\MI = \{d \in \Delta^\MI |$ für alle $ e \in \Delta^\MI$, $(d,e) \in r^\MI$ impliziert $e \in C^\MI\}$
 \end{itemize}
 
 Verwendete Simbole:
@@ -96,10 +96,10 @@ Verwendete Simbole:
 Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 
 \begin{itemize}
-	\item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^{\MI}
-	\item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^{\MI}
+	\item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^\MI
+	\item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^\MI
 	\item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern / Vorgängern
-	\item $\MI$ ist endlich gdw. $\Delta^{\MI}$ endlich ist.
+	\item $\MI$ ist endlich gdw. $\Delta^\MI$ endlich ist.
 \end{itemize}
 
 \subsection{Extension / Modell}
@@ -107,9 +107,9 @@ Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 Wir nennen
 
 \begin{itemize}
-	\item $C^{\MI}$ die Extension des Konzeptes $C$
-	\item jedes $d \in C^{\MI} eine Instanz des Konzeptes $C$
-	\item $r^{\MI}$ die Extension der Rolle $r$
+	\item $C^\MI$ die Extension des Konzeptes $C$
+	\item jedes $d \in C^\MI eine Instanz des Konzeptes $C$
+	\item $r^\MI$ die Extension der Rolle $r$
 \end{itemize}
 
 Beachte:

@@ -146,9 +146,9 @@ Interpretation $\MI$:
 
 \begin{itemize}
 \item
-  $\Delta^{\MI} = \Gamma_{i}$
+  $\Delta^\MI = \Gamma_{i}$
 \item
-  $A^{\MI} = \left\{ t \in \Gamma_{i} \middle| A \in t \right\}$
+  $A^\MI = \left\{ t \in \Gamma_{i} \middle| A \in t \right\}$
 \item
   $r^{i} = \left\{ \left( t,t^{'} \right)\in \Gamma_i \times \Gamma_i\  \middle| \ \forall r.C \in t\ \mathrm{\text{impliziert}}\ C \in t^{'} \right\}$
 \end{itemize} 
@@ -181,23 +181,23 @@ Zu zeigen: $\MI$ ist Modell von $C_{0}$ und $\MT$ *.
 
 Behauptung: Für alle $C \in sub\left( C_{0},\MT \right)$ und alle
 $t \in \Gamma_{i}$:
-$$C \in t \Rightarrow t \in C^{\MI}$$
+$$C \in t \Rightarrow t \in C^\MI$$
 
 Daraus folgt:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  * Wegen $C_{0} \in t_{0}$ ist $t_{0} \in C_{0}^{\MI}$
+  * Wegen $C_{0} \in t_{0}$ ist $t_{0} \in C_{0}^\MI$
 \item
   Wegen $C_{T} \in t$ für alle $t \in \Gamma_{i}$ folgt
-  $t \in C_{T}^{\MI}$. für alle $t \in \Gamma_{i}$ Also ist $\MI$ Modell von $\MT$.
+  $t \in C_{T}^\MI$. für alle $t \in \Gamma_{i}$ Also ist $\MI$ Modell von $\MT$.
 \end{enumerate}
 
 \textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
 
 $C = \neg A$. Nach Definition „Typ`` gilt $A \notin t$. Nach
-Definition $\MI$ ist $t \notin A^{\MI}$.
+Definition $\MI$ ist $t \notin A^\MI$.
 
 \textbf{I.S.} Fallunterscheidung:
 
@@ -206,8 +206,8 @@ Definition $\MI$ ist $t \notin A^{\MI}$.
   $C = D \sqcap D^{'}$
 
 Nach Definition „Typ`` ist $D \in t$ und $D^{'} \in t$. Nach
-\textbf{I.V}.: $t \in D^{\MI}$ und $t \in \left( D^{'} \right)^{\MI}$.
-Nach Semantik: $t \in \left( D \sqcap D^{'} \right)^{\MI}$.
+\textbf{I.V}.: $t \in D^\MI$ und $t \in \left( D^{'} \right)^\MI$.
+Nach Semantik: $t \in \left( D \sqcap D^{'} \right)^\MI$.
 
 \item
   $C = D \sqcup D^{'}$
@@ -217,9 +217,9 @@ Analog.
 \item
   $C = \forall r.D$
 
-Sei $\forall r.D \in t$ und $\left( t,t^{'} \right) \in r^{\MI}$. Nach
-Definition $r^{\MI}$ muss $D \in t^{'}$ gelten. Nach \textbf{I.V}.:
-$t^{'} \in D^{\MI}$, also $t \in \left( \forall r.D \right)^{\MI}$
+Sei $\forall r.D \in t$ und $\left( t,t^{'} \right) \in r^\MI$. Nach
+Definition $r^\MI$ muss $D \in t^{'}$ gelten. Nach \textbf{I.V}.:
+$t^{'} \in D^\MI$, also $t \in \left( \forall r.D \right)^\MI$
 
 \item
   $C = \exists r.D$
@@ -227,9 +227,9 @@ $t^{'} \in D^{\MI}$, also $t \in \left( \forall r.D \right)^{\MI}$
 Sei $\exists r.D \in t$. Da $t \in \Gamma_{i}$ (also nicht
 schlecht), gibt es $t^{'} \in \Gamma_{i}$ mit $D \in t^{'}$ und
 $E \in t^{'}$ für alle $\forall r.E \in t$. Nach \textbf{I.V.} gilt
-$t^{'} \in D^{\MI}$ und nach Definition von $r^{\MI}$ gilt
-$\left( t,t^{'} \right) \in r^{\MI}$. Also
-$t \in \left( \exists r.D \right)^{\MI}$
+$t^{'} \in D^\MI$ und nach Definition von $r^\MI$ gilt
+$\left( t,t^{'} \right) \in r^\MI$. Also
+$t \in \left( \exists r.D \right)^\MI$
 \end{itemize}
 
 \textbf{Vollständigkeit}. 
@@ -237,15 +237,15 @@ $t \in \left( \exists r.D \right)^{\MI}$
 Beweisskizze per Induktion über i.
 
 Sei $C_{0}$ erfüllbar bzgl. $\MT$ und sei $\MI$ Modell von $\MT$ mit
-$d_{0} \in C_{0}^{\MI}$. 
+$d_{0} \in C_{0}^\MI$. 
 
-Sei $\Gamma = \left\{ t_{\MI}\left( d \right)\  \middle| \ d \in \Delta^{\MI} \right\}$.
+Sei $\Gamma = \left\{ t_\MI\left( d \right)\  \middle| \ d \in \Delta^\MI \right\}$.
 
 Sei $\Gamma_{0},\ldots,\Gamma_{k}$ die von $\text {$\ALC$}\mathrm{-}\text{Elim}\left( C_{0},\MT \right)$ erzeugte Sequenz. 
 
 Behauptung: $\Gamma \subseteq \Gamma_{i}$ für alle $i \geq 0$
 
-Daraus folgt wegen $d_{0} \in C_{0}^{\MI}$, dass $C_{0} \in t_{i}\left( d_{0} \right) \in \Gamma \subseteq \Gamma_{k}$.
+Daraus folgt wegen $d_{0} \in C_{0}^\MI$, dass $C_{0} \in t_{i}\left( d_{0} \right) \in \Gamma \subseteq \Gamma_{k}$.
 
 Also gibt $\text {$\ALC$}\mathrm{-}Elim(C_{0},\MT)$ „erfüllbar`` zurück.
 
@@ -259,11 +259,11 @@ Sei $t \in \Gamma$. Es genügt zu zeigen: $t$ ist nicht schlecht in $\Gamma_{i}$
 
 Sei $\exists r.C \in t$ und $S = \left\{ C \right\} \cup \left\{ D \middle| \forall r.D \in T \right\}$.
 
-Da $t \in \Gamma$, gibt es $d \in \Delta^{\MI}$ mit $t_{\MI}\left( d \right) = t_{0}$. 
+Da $t \in \Gamma$, gibt es $d \in \Delta^\MI$ mit $t_\MI\left( d \right) = t_{0}$. 
 
-Also gibt es nach Semantik $e \in \Delta^{\MI}$, $\left( d,e \right) \in r^{\MI}$, $e \in D^{\MI}$ für alle $D \in S$
+Also gibt es nach Semantik $e \in \Delta^\MI$, $\left( d,e \right) \in r^\MI$, $e \in D^\MI$ für alle $D \in S$
 
-$t's$ gilt also $S \subseteq t_{\MI}\left( e \right)$ und $t_{\MI}\left( e \right) \in \Gamma \subseteq \Gamma_{i}$. Es folgt:
+$t's$ gilt also $S \subseteq t_\MI\left( e \right)$ und $t_\MI\left( e \right) \in \Gamma \subseteq \Gamma_{i}$. Es folgt:
 $t$ nicht schlecht
 
 \begin{theorem}
@@ -508,16 +508,16 @@ Zunächst definieren wir eine Interpretation $\MI$. Für jeden Knoten $v \in V_0
 Definiere $\MI$ nun wie folgt:
 
 \begin{itemize}
-  \item $\Delta^{\MI} = V$
-  \item $r^{\MI} = \{(v,v')\in E | \sigma (v') = r\}$
-  \item $A^{\MI} = \{v | A \in p_1(v)\}$
+  \item $\Delta^\MI = V$
+  \item $r^\MI = \{(v,v')\in E | \sigma (v') = r\}$
+  \item $A^\MI = \{v | A \in p_1(v)\}$
 \end{itemize}
 
 ($p_1(v)$ = 1. Parameter in $l(v)$)
 
-Behauptung: Für alle $v \in V$ und $C \in sub(C_0)$ gilt $$C \in p_1(v)\ impliziert v \in C^{\MI}$$
+Behauptung: Für alle $v \in V$ und $C \in sub(C_0)$ gilt $$C \in p_1(v)\ impliziert v \in C^\MI$$
 
-Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^{\MI}$; also ist $\MI$ ein Modell von $C_0$.
+Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^\MI$; also ist $\MI$ ein Modell von $C_0$.
 
 \textbf{T5.9a}
 
@@ -526,7 +526,7 @@ Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^{\MI}$; also ist $\MI$ ein Modell vo
 $C = \neg A$. Da der Lauf erfolgreich ist, ist
 $p_{1}\left( v \right)$ Typ für $C_{0}$. Nach Definition „Typ`` gilt
 $A \notin p_{1}\left( v \right)$. Nach Definition $\MI$ ist
-$v \notin A^{\MI}$.
+$v \notin A^\MI$.
 
 \textbf{I.S.} Fallunterscheidung:
 
@@ -536,9 +536,9 @@ $v \notin A^{\MI}$.
 \end{itemize}
 
 Nach Definition „Typ`` ist $D \in p_{1}\left( v \right)$ und
-$D^{'} \in p_{1}\left( v \right)$. Nach \textbf{I.V}.: $v \in D^{\MI}$
-und $v \in \left( D^{'} \right)^{\MI}$. Nach Semantik:
-$v \in \left( D \sqcap D^{'} \right)^{\MI}$.
+$D^{'} \in p_{1}\left( v \right)$. Nach \textbf{I.V}.: $v \in D^\MI$
+und $v \in \left( D^{'} \right)^\MI$. Nach Semantik:
+$v \in \left( D \sqcap D^{'} \right)^\MI$.
 
 \begin{itemize}
 \item
@@ -552,11 +552,11 @@ Analog.
   $C = \forall r.D$
 \end{itemize}
 
-Sei $\left( v,v^{'} \right) \in r^{\MI}$. Dann ist
+Sei $\left( v,v^{'} \right) \in r^\MI$. Dann ist
 $\left( v,v^{'} \right) \in E$ und $\sigma\left( v^{'} \right) = r$.
 Wegen $\forall r.D \in p_{1}(v)$ ist auch
 $D \in p_{1}\left( v^{'} \right)$. Nach I.V. gilt $v^{'} \in D$.
-Also $v \in \left( \forall r.D \right)^{\MI}$
+Also $v \in \left( \forall r.D \right)^\MI$
 
 \begin{itemize}
 \item
@@ -665,16 +665,16 @@ $r_{j}$ Rollenname und $f$ Featurename.
 Semantik)}\label{definition-5.28-alcb-semantik}
 
 Eine Interpretation $\MI$ ordnet nun zusätzlich zu jedem Featurenamen
-$f$ eine Funktion $f^{\MI}:\Delta^{\MI} \rightarrow \Delta^{B}$ zu. Für
-jede Rollenkomposition $r = r_{1};\ldots r_{k};f$ bezeichnet $R^{\MI}$
+$f$ eine Funktion $f^\MI:\Delta^\MI \rightarrow \Delta^{B}$ zu. Für
+jede Rollenkomposition $r = r_{1};\ldots r_{k};f$ bezeichnet $R^\MI$
 die Komposition der Interpretationen:
-$R^{\MI} = r_{1}^{\MI} \circ \ldots \circ r_{k}^{\MI} \circ f$
+$R^\MI = r_{1}^\MI \circ \ldots \circ r_{k}^\MI \circ f$
 
 Die Semantik der zusätzlichen Konstruktoren ist nun:
 
-\[\left( \exists R_{1},\ldots,\ R_{k}\text{.P} \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \exists d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{\MI}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \exists R_{1},\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \exists d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
-\[\left( \forall R_{1},\ldots,\ R_{k}\text{.P} \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \forall d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^{\MI}\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\[\left( \forall R_{1},\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \forall d_{1},\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_{1},\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
 \subsubsection{2-Registermaschinen}\label{registermaschinen}
 
