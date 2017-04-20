@@ -30,29 +30,29 @@ Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- 
 \begin{tafel}[Beispiel]
 
 Hier einige Beispiel für diese Syntax:
-
-\begin{center}
-$Student \sqcap \exists studiert.Naturwissenschaft$ \\
-$Professor \sqcap Emeritus \sqcap \forall haelt.\neg PlichtVL$ \\
-$VL \sqcap \neg PlichtVL \sqcap \forall hatUebungsaufgabe(Einfach \sqcup Interessant)$ \\
-$A \sqcap \exists r.(\neg B \sqcup \forall r.A)$
-\end{center}
+\begin{align*}
+    &\mathit{Student} \sqcap \exists \mathit{studiert}.\mathit{Naturwissenschaften}\\
+    &\mathit{Professor} \sqcap \mathit{Emeritus} \sqcap \forall \mathit{haelt}.\neg \mathit{PflichtVL}\\
+    &\mathit{VL} \sqcap \neg \mathit{PflichtVL} \sqcap \forall \mathit{hatUebungsaufgabe}.(\mathit{Einfach} \sqcup \mathit{Interessant})\\
+&A \sqcap \exists r.(\neg B \sqcup \forall r.A)
+\end{align*}
 \end{tafel}
+
 \textbf{Weiteres zur Syntax}
 
 Dabei verwenden wir folgende Symbole:
 
 \begin{itemize}
-  \item{$A$,$B$ für Konzeptnamen}
-  \item{$C$,$D$ für zusammengesetzte Konzepte}
-  \item{$r$,$s$ für Rollennamen}
+  \item $A$,$B$ für Konzeptnamen
+  \item $C$,$D$ für zusammengesetzte Konzepte
+  \item $r$,$s$ für Rollennamen
 \end{itemize}
 
 Zudem benutzen zudem folgende Abkürzungen: wir schreiben
 
 \begin{itemize}
-  \item{$\top$ für $A \sqcup \neg A$}
-  \item{$\bot$ für $A \sqcap \neg A$}
+  \item $\top$ für $A \sqcup \neg A$
+  \item $\bot$ für $A \sqcap \neg A$
 \end{itemize}
 
 \textbf{Präzedenzregel}
@@ -77,10 +77,8 @@ Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
        \item{jeden Rollennamen $r$ auf Relation $r^{\MI} \subseteq \Delta^{\MI} \times \Delta^{\MI}$}
      \end{itemize}}
   \end{itemize}
-\end{definition}
 
-\noindent Abbildung $\cdot^{\MI}$ wird induktiv auf zusammengesetzte Konzepte erweitert:
-
+Abbildung $\cdot^{\MI}$ wird induktiv auf zusammengesetzte Konzepte erweitert:
 \begin{itemize}
   \item $(\neg C)^{\MI} = \Delta^{\MI} \setminus C^{\MI}$
   \item $(C \sqcap D)^{\MI} = C^{\MI} \cap D^{\MI}$
@@ -88,8 +86,14 @@ Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^{\MI}$,$\cdot^{\MI}$) mit
   \item $(\exists r.C)^{\MI} = \{d \in \Delta^{\MI} |$ es gibt $ e \in \Delta^{\MI}$ mit $(d,e) \in r^{\MI}$ und $e \in C^{\MI}\}$
   \item $(\forall r.C)^{\MI} = \{d \in \Delta^{\MI} |$ für alle $ e \in \Delta^{\MI}$, $(d,e) \in r^{\MI}$ impliziert $e \in C^{\MI}\}$
 \end{itemize}
+\end{definition}
 
-Verwendete Simbole:
+\begin{tafel}
+    %TODO
+    TODO
+\end{tafel}
+
+Verwendete Symbole:
 
 \begin{itemize}
   \item $\MI$, $\MJ$ für Interpretationen
@@ -101,39 +105,47 @@ Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 \begin{itemize}
   \item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^{\MI}$
   \item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^{\MI}$
-  \item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern / Vorgängern
+  \item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern/Vorgängern
   \item $\MI$ ist endlich gdw. $\Delta^{\MI}$ endlich ist.
 \end{itemize}
 
-\subsubsection{Extension/Modell}\label{exetension}
+\subsubsection{Extension/Modell}
+\label{sec:exetension}
 
 Wir nennen
-
 \begin{itemize}
 \item
   $C^{\MI}$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
 \item
-  jedes $d \in C^{\MI}$ ist eine Instanz des Konzeptes $C$
-\item
-  $r$-Nachfolger, $r$-Vorgänger
+    jedes $d \in C^{\MI}$ ist eine \emph{Instanz} des Konzeptes $C$
+\item $r^\MI$ die \emph{Extension} der Rolle r.
 \end{itemize}
 
-Beachte, das $\top^{\MI}$ für jede Interpretation $\MI$ identisch mit $\Delta^{\MI}$ ist. Intuitivt entspricht $\top$ die Menge alle Elemente. 
+Beachte, das $\top^{\MI}$ für jede Interpretation $\MI$ identisch mit
+$\Delta^{\MI}$ ist. Intuitiv entspricht $\top$ der Menge alle Elemente.
+$\bot^{\MI}$ ist für jede Interpretation $\MI$ leer, repräsentiert also
+intuitiv, dass etwas unmöglich ist. Z.B.:
 
-$\bot^{\MI}$ ist für jede Interpretation $\MI$ leer, repräsentiert also intuitiv, dass etwas unmöglich ist. Z.B.:
+\begin{align*}
+    &\mathit{Mensch} \sqcap \forall \mathit{hatKind}.\bot\\
+    &\text{Menschen, die keine Kinder haben}
+\end{align*}
 
-Mensch $\sqcap$ $\forall$hatKind.$\bot$
-Menschen, die keine Kinder haben
+\begin{tafel}
+    %TODO
+    TODO
+\end{tafel}
 
-{\subsubsection{Erfüllbarkeit,Subsumtion,Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}}
+\subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}
+\label{sec:erfull-subsum-equiv}
+\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}
 
 \begin{definition}[Erfüllbar, subsumiert, äquivalent]
-Seien $C$ und $D$ $\ALC$-Konzepte. Dann
-
+    \mbox{}\\Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 \begin{itemize}
 \item
   ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $\MI$ gibt mit
-  $C^{\MI} \neq \varnothing$. $\MI$ ist dann ein \emph{Modell} von
+  $C^{\MI} \neq \emptyset$. $\MI$ ist dann ein \emph{Modell} von
   $C$.
 \item
   wird $C$ von $D$ \emph{subsumiert}, wenn $C^{\MI} \subseteq D^{\MI}$
@@ -144,26 +156,27 @@ Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 \end{itemize}
 \end{definition}
 
-Es gelten die üblichen aussagenlogischen Äquivalenten, wie z.B. de
-Morgan.
+\begin{tafel}
+    %TODO
+    TODO
+\end{tafel}
+
+Es gelten die üblichen aussagenlogischen Äquivalenzen, wie z.B. das de
+Morgansche Gesetz.
 
 \subsection{TBoxen}\label{tboxen}
+\label{sec:tbox}
 
-TBoxen definieren Konzepte und setzten diese zueinander in Beziehung.
-
-\subsubsection{TBox-Syntax}\label{tboxsyntax}
+TBoxen(\enquote{terminologische Boxen}) definieren Konzepte und setzen diese zueinander in Beziehung.
 
 \begin{definition}[TBox-Syntax]
-\emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$ mit $C$, $D$ Konzepten. \\
-\emph{TBox} ist endliche Menge von Konzeptinklusionen. \\
-Wir verwenden $C \equiv D$ als Abkürzung für $C \sqsubseteq D$, $D \sqsubseteq C$. 
-
-Wir lesen $C \equiv D$ als \enquote{$C$ impliziert $D$}.
+\emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$ mit $C$, $D$ Konzepten.
+Eine \emph{TBox} ist eine endliche Menge von Konzeptinklusionen.  Wir
+verwenden $C \equiv D$ als Abkürzung für $C \sqsubseteq D$, $D \sqsubseteq C$.
 \end{definition}
+Wir lesen $C \sqsubseteq D$ als \enquote{$C$ impliziert $D$}.
 
-\subsubsection{TBox-Sematik}\label{tboxsemantik}
-
-\begin{definition}[TBox-Semantik] 
+\begin{definition}[TBox, Semantik] 
 Eine Interpretation $\MI$
 \begin{itemize}
 \item
@@ -175,89 +188,107 @@ Eine Interpretation $\MI$
 \end{itemize}
 \end{definition}
 
-Intuitiv entsprechen Interpretation mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten.
+\begin{tafel}
+    TODO
+    %TODO
+\end{tafel}
+
+Intuitiv entsprechen Interpretation mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} unerwünschte Interpretationen.
 
 \subsubsection{Modellierung}\label{modellierung}
 
 In der Praxis bestehen TBoxen zu einem großen Teil aus:
 
 \begin{itemize}
-\item Konzeptinklusion $A \sqsubseteq C$, mit $A$ ein Konzeptname: $C$ ist notwendige Bedingung dafür, eine Instanz von $A$ zu sein
-\item Konzeptdefinition $A \equiv C$, mit $A$ ein Konzeptname: $C$ ist notwendige und hinreichende Bedingung dafür, eine Instanz von $A$ zu sein.
+\item Konzeptinklusion $A \sqsubseteq C$, wobei $A$ ein Konzeptname ist: $C$ ist notwendige Bedingung dafür, eine Instanz von $A$ zu sein
+\item Konzeptdefinition $A \equiv C$, wobei $A$ ein Konzeptname ist: $C$ ist notwendige und hinreichende Bedingung dafür, eine Instanz von $A$ zu sein.
+    Hinreichende Bedingungen sind für viele Konzepte schwer zu finden.
+    \end{itemize}
+Modellierungsmuster, die nicht in dieses Schema passen sind z.B.:
+\begin{itemize}
 \item Disjunktheitsconstraints $C \sqcap D \sqsubseteq \bot$: Kein Objekt kann gleichzeitig zu $C$ und $D$ gehören
 \item Komplexe Zusammenhänge zwischen mehreren Konzepten. Zum Beispiel:
+    \begin{align*}
+        \mathit{Professor} \sqcap \exists \mathit{hat}.\mathit{Lehrdeputat} \sqsubseteq \exists \mathit{haelt}.\mathit{Vorlesung}
+    \end{align*}
 \end{itemize}
 
-$$Professor \sqcap \exists hat.Lehrdeputat \sqsubseteq \exists haelt.Vorlesung$$
-
-\subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
+\subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}
+\label{sec:tbox-erfuellbarkeit}
+\label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
 
 \begin{definition}[Erfüllbar, subsumiert, äquivalent bezüglich einer TBOX] 
-Seine $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
+Seien $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
   \item ist $C$ \emph{erfüllbar bzgl.} $\MT$ gdw. $\MT$ Modell $\MI$ hat mit $C^{\MI} \neq \emptyset$
-  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$, wenn $C^{\MI} \subseteq D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \vDash C \sqsubseteq D$)
-  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$, gdw. $C^{\MI} = D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \vDash C \equiv D$)
+  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$, wenn $C^{\MI} \subseteq D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \sqsubseteq D$)
+  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$, gdw. $C^{\MI} = D^{\MI}$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \equiv D$)
 \end{itemize}
 \end{definition}
 
-Intuitiv gesprochen ist diese Definition wie in \protect\hyperlink{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}{2.1.5}, nur ist $\MI$ jeweils Modell von einer TBox $\MT$.
+Intuitiv gesprochen ist diese Definition wie in
+\autoref{sec:erfull-subsum-equiv}, nur ist $\MI$ jeweils Modell von einer TBox
+$\MT$.
 
+\begin{tafel}
+    TODO
+    %TODO
+\end{tafel}
+
+Hinweise für Beweisstrategien:
 \begin{itemize}
-\item
-  Erfüllbarkeit zeigen: Modell angeben
-\item
-  Unerfüllbarkeit / Subsumption zeigen: semantisch Argumentieren
-\item
-  Nicht-Subsumtion zeigen: Gegenmodell angeben
+\item Erfüllbarkeit zeigen: Modell angeben
+\item Unerfüllbarkeit zeigen: semantisch argumentieren
+\item Subsumtion zeigen: semantisch Argumentieren
+\item Nicht-Subsumtion zeigen: Gegenmodell angeben
 \end{itemize}
 
 \subsubsection{Monotonie}\label{monotonie}
+Das Erweitern einer TBox um zusätzliche Konzeptinklusionen wirkt sich wie folgt auf Erfüllbarkeit und Subsumtion aus:
 
-\begin{lemma}
+%TODO: fix numbering
+\begin{lemma}[TBox Monotonie]
+\label{lem:tbox-monoton}
 Seien $\MT_{1}$ und $\MT_{2}$ TBoxen mit $\MT_{1} \subseteq \MT_{2}$. Dann gilt:
-\end{lemma}
-
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   Wenn $C$ erfüllbar bzgl. $\MT_{2}$, dann ist $C$ erfüllbar bzgl.
   $\MT_{1}$.
 \item
-  Wenn $\MT_{1} \vDash C \sqsubseteq D$, dann
-  $\MT_{2} \vDash C \sqsubseteq D$.
+  Wenn $\MT_{1} \models C \sqsubseteq D$, dann
+  $\MT_{2} \models C \sqsubseteq D$.
 \end{enumerate}
+\end{lemma}
 
-\textbf{T2.8.} Beweisskizze.
-
+\begin{tafel}[Beweisskizze]Beweisskizze von \autoref{lem:tbox-monoton}
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-  \item \begin{proof} Sei $C$ erfüllbar bzgl. $\MT_{2}$. Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^{\MI} \neq \varnothing$. Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$. Also ist $\MI$ Modell von $\MT_1$ mit $C^{\MI} \neq \emptyset$. Also ist $C$ erfüllbar bzgl. $\MT_1$. \end{proof}
-  \item \begin{proof} Kontraposition: Wenn $\MT_2 \not\vDash C \sqsubseteq D$ dann $\MT_1 \not\vDash C \sqsubseteq D$. \\
-  Es gelte $\MT_2 \not\vDash C \sqsubseteq D$. D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^{\MI} \not\subseteq D^{\MI}$. Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$. Also $\MT_1 \not\vDash C \sqsubseteq D$\end{proof}
+  \item \begin{proof} Sei $C$ erfüllbar bzgl. $\MT_{2}$. Dann gibt es Modell $\MI$ von $\MT_{2}$ mit $C^{\MI} \neq \emptyset$. Also erfüllt $\MI$ alle Konzeptinklusionen in $\MT_{2}$ und wegen $\MT_{1} \subseteq \MT_{2}$ auch alle Konzeptinklusionen in $\MT_{1}$. Also ist $\MI$ Modell von $\MT_1$ mit $C^{\MI} \neq \emptyset$. Also ist $C$ erfüllbar bzgl. $\MT_1$. \end{proof}
+  \item \begin{proof} Kontraposition: Wenn $\MT_2 \not\models C \sqsubseteq D$ dann $\MT_1 \not\models C \sqsubseteq D$. \\
+  Es gelte $\MT_2 \not\models C \sqsubseteq D$. D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^{\MI} \not\subseteq D^{\MI}$. Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$. Also $\MT_1 \not\models C \sqsubseteq D$\end{proof}
 \end{enumerate}
 
 Die umgekehrten Aussagen sind im Allgemeinen nicht richtig. Beispiel:
-
-$\MT_1 = \emptyset$, $\MT_2 = \{A \sqsubseteq B\}$ 
-
-$\MT_1 \subseteq \MT_2$ \\
-$\MT_2 \vDash A \sqsubseteq B$\\
-$\MT_1 \vDash A \sqsubseteq B$\\
+\begin{align*}
+    &\MT_1 = \emptyset, \MT_2 = \{A \sqsubseteq B\}\\
+    &\MT_1 \subseteq \MT_2 \\
+    &\MT_2 \models A \sqsubseteq B\\
+    &\MT_1 \models A \sqsubseteq B
+\end{align*}
+\end{tafel}
 
 Eine Logik, die diese Eigenschaften erfüllt, nennt man \emph{monoton} (das Hinzunehmen von Formeln kann nur zu \emph{zusätzlichen} Konsequenzen, führen, aber nicht dazu, dass Konsequenzen ungültig werden)
 
 \subsection{Schlussfolgerungsprobleme}\label{schlussfolgerungsprobleme}
 
-Schlussfolgern dient dazu aus explizit gegebenes Wissen neues Wissen abzuleiten, dass vorher nur implizit vorhanden war. Beschreibungslogiken sind so designt, dass sie so viel Ausdruckstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu Erlauben.
+Schlussfolgern dient dazu aus explizit gegebenes Wissen neues Wissen abzuleiten, dass vorher nur implizit vorhanden war. Beschreibungslogiken sind so designed, dass sie so viel Ausdrucksstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu Erlauben.
 
 Die von uns betrachteten Schlussfolgerungsprobleme sind:
 
 \begin{itemize}
   \item \textbf{Erfüllbarkeitsproblem}: Gegeben $C$ und $\MT$, entscheide ob $C$ erfüllbar bzgl. $\MT$.
-  \item \textbf{Subsumtionsproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \vDash C \sqsubseteq D$
-  \item \textbf{Äquivalenzproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \vDash C \equiv D$
+  \item \textbf{Subsumtionsproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \sqsubseteq D$
+  \item \textbf{Äquivalenzproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \equiv D$
 \end{itemize}
 
 Diese Entscheidungsprobleme können auch mit leerer TBox $\MT = \emptyset$ betrachtet werden.
@@ -266,23 +297,22 @@ Die Schlussfolgerungsprobleme werden dazu genutzt Modellierungsfehler in Ontolog
 
 \subsubsection{Subsumtion als Ordnungsrelation}\label{subordn}
 
-\begin{lemma} 
+\begin{lemma}[TBox Subsumtion ist fast partielle Ordnung]
     Für jede TBox $\MT$ ist die Relation \enquote{$\sqsubseteq$ bzgl. $\MT$}
 
 \begin{itemize}
-  \item reflexiv ($\MT \vDash C \sqsubseteq C$) und
-  \item transitiv ($\MT \vDash C \sqsubseteq D$ und $\MT \vDash D \sqsubseteq E$ impliziert $\MT \vDash C \sqsubseteq E$
+  \item reflexiv ($\MT \models C \sqsubseteq C$) und
+  \item transitiv ($\MT \models C \sqsubseteq D$ und $\MT \models D \sqsubseteq E$ impliziert $\MT \models C \sqsubseteq E$).
 \end{itemize}
+Bis auf die fehlende Antisymmetrie ist $\sqsubseteq$ also partielle Ordnung.
 \end{lemma}
 
-Bis auf die fehlende Antisymmetrie () ist $\sqsubseteq$ also partielle Ordnung.
 
 Man kann $\sqsubseteq$ als Hasse-Diagram darstellen, dessen Knoten mit Mengen von Konzepten beschriftet sind.
 
-\textbf{2.9}
-
+\begin{tafel}[Hasse-Diagram]\mbox{}\\
 \includegraphics[width=3.71910in,height=1.83200in]{media/haase.png}
-
+\end{tafel}
 
 \subsubsection{Klassifikation}
 
@@ -292,25 +322,30 @@ Ein weiteres Schlussforlgerungsproblem:
   \item \textbf{Klassifikation}: Gegeben $\MT$, berechne das Hasse Diagramm für $\sqsubseteq$ bzgl. $\MT$, eingeschränkt auf Konzeptnamen in $\MT$.
 \end{itemize}
 
-Dies ist ein Berechnungsproblem (kein Entscheidungsproblem), das in der Praxis durch $n^2$ Subsumtionsberchnungen berechenbar ist und für das zahlreiche Optimierungen verfügbar sind.
+Dies ist ein Berechnungsproblem (kein Entscheidungsproblem), das in der Praxis durch $n^2$ Subsumtionsberchnungen berechenbar ist und für das zahlreiche Optimierungen verfügbar sind ($n$ = Anzahl der Konzeptnamen in $\MT$).
 
 \subsubsection{Reduktion}
 
-Die Entscheidungsprobleme sind wechselseitig polynomiell aufeinander reduzierbar:
+Die Schlussfolgerungsprobleme sind wechselseitig polynomiell aufeinander reduzierbar:
 
-\begin{lemma}
+\begin{lemma}[Schlussfolgerungsprobleme sind wechselseitig reduzierbar]\mbox{}
 \begin{enumerate}
 \item{\emph{Erfüllbarkeit} auf \emph{Nicht-Äquivalenz} \\
-$C$ erfüllbar bzgl. $\MT$ gdw. $T \not\vDash C \equiv \bot$}
+$C$ erfüllbar bzgl. $\MT$ gdw. $T \not\models C \equiv \bot$}
 \item{\emph{Subsumtion} auf \emph{Unerfüllbarkeit} \\
-$T \vDash C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
+$T \models C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
 $\MT$
 \item{\emph{Äquivalenz} auf \emph{Subsumtion} \\}
-$T \vDash C \equiv D$ \emph{gdw.} $T \vDash \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
+$T \models C \equiv D$ \emph{gdw.} $T \models \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
 \end{enumerate}
 \end{lemma}
 
-Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die anderen beiden verwendet werden können. Alle drei Probleme haben dieselbe Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auch Erfüllbarkeit konzentrieren.
+Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die anderen beiden verwendet werden können. Alle drei Probleme haben dieselbe Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auf Erfüllbarkeit konzentrieren.
+
+\begin{tafel}
+    TODO
+    %TODO
+\end{tafel}
 
 \subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{erweiterungen-von-alc}
 
@@ -322,9 +357,14 @@ Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen 
 
 \begin{definition}[Inverse Rollen]
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
-Rolle} zu $r$. Wir definieren \\
+Rolle} zu $r$. Wir definieren
 $\left( r^{-} \right)^{\MI} = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^{\MI}\}$
 \end{definition}
+
+\begin{tafel}
+    TODO
+    %TODO
+\end{tafel}
 
 \subsubsection{Zahlenrestriktion (\texorpdfstring{$\ALCQ$}{ALCQ})}\label{zahlenrestriktion-alcq}
 
@@ -337,16 +377,16 @@ jedes Konzept $C$:
   \item $\left( \geq n\ r\ C \right)$ (Mindestens-Restriktion)
 \end{itemize}
 
-Die Semantik ist
-\begin{itemize}
-\item
-  Höchstens-Restriktion:
-  $\left( \leq n\ r\ C \right)^{\MI} = \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \leq n \right\}$
-\item
-  Mindestens-Restriktion
-  $( \geq n\ r\ C) = \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \geq n \right\}$
-\end{itemize}
+Die Semantik ist \begin{align*}
+    \left( \leq n\ r\ C \right)^{\MI} &= \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \leq n \right\}\\
+    ( \geq n\ r\ C)^\MI &= \left\{ d \in \Delta^{\MI}\ |\ \#\left\{ e\ |\ \left( d,e \right) \in r^{\MI} \land e \in C^{\MI} \right\} \geq n \right\}
+\end{align*}
 \end{definition}
+
+\begin{tafel}
+    TODO
+    %TODO
+\end{tafel}
 
 Beachte:
 
