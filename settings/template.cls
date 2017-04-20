@@ -13,6 +13,7 @@
 
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{thmtools} %List of theorems
 \usepackage{mathtools}
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{tabu} % for tables with defined width
@@ -28,12 +29,22 @@
 % Define Theorems %
 %%%%%%%%%%%%%%%%%%%
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{korollar}[definition]{Korollar}
-\newtheorem{proposition}[definition]{Proposition}
+\declaretheorem[numberwithin= section, name = Definition]{definition}
+\declaretheorem[sibling=definition, name = Lemma]{lemma}
+\declaretheorem[numberwithin= section, name = Theorem]{theorem}
+\declaretheorem[numberwithin= section, name = Korollar]{korollar}
+\declaretheorem[numberwithin= section, name = Proposition]{proposition}
+\declaretheorem[numberwithin=section, name = T]{tafel}
 
+%Look behind you! a three-headed hack!
+%Put the number after the theorem name in listoftheorems (e.g. Definition 3.4 instead of 3.4 Definition)
+\makeatletter
+\def\ll@definition{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+}
+\makeatother
 
 \usepackage[headsepline]{scrlayer-scrpage}
 \renewcommand\sectionmarkformat{\thesection\autodot\quad}
@@ -68,6 +79,7 @@
                           draw=black, align=center,
                           minimum size=1cm, anchor=center}
 }
+
 
 
 \endinput
