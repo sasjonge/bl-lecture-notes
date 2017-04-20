@@ -44,6 +44,33 @@
  \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
  }\fi
 }
+\def\ll@theorem{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+ }
+
+\def\ll@tafel{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+ }
+
+\def\ll@lemma{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+ }
+\def\ll@korolar{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+ }
+\def\ll@proposition{%
+ \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
+ \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
+ }\fi
+ }
 \makeatother
 
 \usepackage[headsepline]{scrlayer-scrpage}
