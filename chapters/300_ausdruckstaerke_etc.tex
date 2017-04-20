@@ -1,11 +1,10 @@
 Die wichtigsten Eigenschaften einer Beschreibungslogik sind
-\emph{Ausdrucksstärke} und \emph{Komplexität}. Ausdruckstärke kann man
-nicht linear quantifizieren, sondern nur beschreiben und
-charakterisieren.
+\emph{Ausdrucksstärke} und \emph{Komplexität}. Ausdrucksstärke kann man nicht
+linear quantifizieren, sondern nur beschreiben und charakterisieren.
 
 \subsection{Bisimulation}\label{bisimulation}
 
-Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdruckstärke von $\ALC$ zusammenhängt.
+Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdrucksstärke von $\ALC$ zusammenhängt.
 
 \begin{definition}[Bisimulation]
 
@@ -33,86 +32,70 @@ zwischen $\MI_{1}$ und $\MI_{2}$, wenn gilt:
 \end{enumerate}
 \end{definition}
 
+\begin{tafel}[TODO]
+    TODO
+\end{tafel}
+
 Seien $\MI_{1}$ und $\MI_{2}$ Interpretationen,
-$d_{1} \in \Delta^{\MI_{1}}$, $d_{2} \in \Delta^{\MI_{2}}$:
+$d_{1} \in \Delta^{\MI_{1}}$, $d_{2} \in \Delta^{\MI_{2}}$.
 
 $(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$: Es gibt Bisimulation $\rho$
-zwischen $\MI_{1}$ und $\MI_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
+zwischen $\MI_{1}$ und $\MI_{2}$ mit $d_{1}\text{\ $\rho$}\text{\ d}_{2}$. (Wir sagen \enquote{$d_1$ ist \emph{bisimilar zu} $d_2$}).
 Die leere Relation ist immer Bisimulation.
 
-\begin{theorem}
+\begin{theorem}[Bisimulationstheorem]
+    \label{thm:bisim}
 Seien $\MI_{1}$, $\MI_{2}$ Interpretationen,
 $d_{1} \in \Delta^{\MI_{1}}$ und $d_{2} \in \Delta^{\MI_{2}}$. Wenn
-$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$, dann gilt für alle ALC-Konzepte
+$(\MI_{1},d_{1}) \sim (\MI_{2},d_{2})$, dann gilt für alle $\ALC$-Konzepte
 $C$:
 
 $$d_{1} \in C^{\MI_{1}}\ gdw.\ d_{2} \in C^{\MI_{2}}$$
 \end{theorem}
 
-\textbf{T3.2.}
-
+\begin{tafel}[Beweis des Bismulationstheorems] Beweis von \autoref{thm:bisim}
 \begin{proof}
-Beweisskizze per Induktion über die Struktur von C. Sei $\rho$ eine
+Beweisskizze per Induktion über die Struktur von $C$. Sei $\rho$ eine
 Bisimulation zwischen $\MI_{1}$ und $\MI_{2}$ mit
 $d_{1}\text{\ $\rho$}\text{\ d}_{2}$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
-Bisimulation gilt $$d_{1} \in A^{\MI_{1}}\ gdw.\ d_{2} \in A^{\MI_{2}}$$.
+Bisimulation gilt
+\begin{align*}
+    d_{1} \in A^{\MI_{1}}\ gdw.\ d_{2} \in A^{\MI_{2}}.
+\end{align*}
+
 
 \textbf{I.S.} Unterscheide Fälle gemäß des äußersten Konstruktes von C.
 Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   $C = \neg D$
-\end{enumerate}
-
-\begin{quote}
-\begin{equation}
-\begin{split}
-d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
-&\stackrel{I.V.}{gdw.} d_{2} \notin D^{\MI_{2}} \\
-&\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
-\end{split}
-\end{equation}
-\end{quote}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $C = D_{1} \sqcap D_{2}$
-\end{enumerate}
-
-\begin{quote}
-\begin{equation}
-\begin{split}
+    \begin{align*}
+        d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \notin D^{\MI_{1}}\\
+        &\stackrel{I.V.}{gdw.} d_{2} \notin D^{\MI_{2}} \\
+        &\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
+    \end{align*}
+\item $C = D_{1} \sqcap D_{2}$
+  \begin{align*}
 d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{gdw.} d_{1} \in D_{1}^{\MI_{1}}\ und\ d_{1} \in D_{2}^{\MI_{1}}\\
 &\stackrel{I.V.}{gdw.} d_{2} \in D_{1}^{\MI_{2}}\ und\ d_{2} \in D_{2}^{\MI_{2}} \\
 &\stackrel{Sem.}{gdw.} d_{2} \in C^{\MI_{2}}
-\end{split}
-\end{equation}
-\end{quote}
+\end{align*}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $C = \exists r.D$
-\end{enumerate}
-
-\begin{quote}
-\begin{equation}
-\begin{split}
+\item $C = \exists r.D$
+  \begin{align*}
 d_{1} \in C^{\MI_{1}} &\stackrel{Sem.}{\Rightarrow} \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1}\\
 &\stackrel{2.Bed.}{\Rightarrow} \exists e_2 \in \Delta_2^{\MI_2}: (d_2,e_e) \in r^{\MI_2}\ und\ (e_1 \rho e_2) \\
 &\stackrel{I.V.}{\Rightarrow} e_2 \in D^{\MI_2} \\
 &\stackrel{Sem.}{\Rightarrow} d_{2} \in (\exists r.D)^{\MI_2} \\
 &\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_{2}}
-\end{split}
-\end{equation}
+\end{align*}
+\end{enumerate}
 Rückrichtung analog, nur mit der 3. Bedingung.
-\end{quote}
 \end{proof}
+\end{tafel}
 
 \subsection{Ausdrucksstärke}\label{ausdrucksstuxe4rke}
 
