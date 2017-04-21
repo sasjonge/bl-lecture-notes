@@ -48,12 +48,31 @@ Für das Dokument stehen also verschiedene Commands bereit. Einige nützliche da
 Zudem sind Umgebungen für Definitionen, Theoreme, Lemma, Propositionen und Korollare definiert. Diese nutzt man wie folgt:
 
 ```
-\begin{definition}
+\begin{definition}[Name]
 Eure Definition
 \end{definition}
 ```
 
 Statt definition könnt ihr einsetzten: theorem, lemma, proposition, korollar oder proof.
+
+Tafelabschnitte werden in der tafel-Umgebung geschrieben.
+
+```
+\begin{tafel}[Name]
+Tafel
+\end{tafel}
+```
+
+Die Namen der Definitionen und Tafelabschnitte sollten ausdrucksstark genug,
+sein, damit man im entsprechenden Verzeichnis finden kann, was man sucht.
+
+Folgende Struktur für Abschnitte sollte eingehalten werden
+
+* \section - für Foliensätze
+* \subsection - für Kapitel innerhalb eines Foliensatzes
+* \subsubsection - für eine oder mehrere Folien. Generell ist es nicht sinnvoll
+  für eine Folie, die nur eine Definition enthält eine neue subsubsection
+  anzulegen.
 
 # TO-DO #
 
