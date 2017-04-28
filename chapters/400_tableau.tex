@@ -256,16 +256,14 @@ Beweis in 4 Schritten:
         viele Teilkonzepte.
     \end{proof}\end{tafel}
 \item Behauptung 2.
-  Es werden nur I-Bäume mit einer Tiefe $\leq \left| C_{0} \right|$
+  Es werden nur I-Bäume mit einer Tiefe von maximal $\left| C_{0} \right|$
   generiert.
     \begin{tafel} \begin{proof}
+        Hilfsaussage: Wenn $v$ Knoten mit Tiefe $i$ ist, dann $\rd(C) \leq \rd(C_0) - i$ für alle $C \in \ML(v)$. Daraus folgt Behauptung 2, denn jeder Knoten ist mit mindestens einem Konzept beschriftet. Wenn es einen Knoten in Tiefe $k > \rd(C_0)$ gäbe, dann gäbe es auch $C\in \ML(v)$ und wegen der Hilfsaussage wäre die Rollentiefe negativ, was per Definition der Rollentiefe unmöglich ist.
 
-Induktion über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
-Knoten mit Tiefe $\MI$ ist, dann gilt
-$\rd\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
-$C \in L\left( v \right)$.
+        Beweis der Hilfsaussage per Induktion über Anzahl an Regelanwendungen:
 
-\textbf{I.A.} Es gibt nur Knoten $v_{\text{ini}}$ mit
+        \textbf{I.A.} Es gibt nur den Knoten $v_{\text{ini}}$ mit
 $L\left( v_{\text{ini}} \right) = \left\{ C_{0} \right\}$. I.V. gilt,
 da $i = 0$.
 
@@ -273,35 +271,35 @@ da $i = 0$.
 $\sqcap$, $\exists$):
 
 \begin{enumerate}
-\item $\sqcap$-Regel
-
-    $C \sqcap D \in L(v)$ und $L(v)$ wird durch $C$, $D$ erweitert.
-Nach I.V. gilt:
-$\rd\left( C \sqcap D \right) \leq rd\left( C_{0} \right) - i$,
+\item $\sqcap$-Regel. Dann $C \sqcap D \in L(v)$ und $L(v)$ wird um $C$ und $D$ erweitert.
+Nach I.V. gilt: $\rd\left( C \sqcap D \right) \leq \rd\left( C_{0} \right) - i$,
 also auch $\rd\left( C \right) \leq rd\left( C_{0} \right) - i$,
-weil $\rd\left( C \right) \leq rd\left( C \sqcap D \right)$.
+weil $\rd\left( C \right) \leq \rd\left( C \sqcap D \right)$.
 Analog für $D$.
 
-\item $\exists$-Regel
-
-Dann $\exists r.C \in L\left( v \right)$ und es wird neues $v^{'}$
-auf Tiefe $i + 1$ generiert mit
-$L\left( v^{'} \right) = \left\{ C \right\}$. Es gilt
-$\rd\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0} \right) - i - 1 = rd\left( C_{0} \right) - (i + 1)$
- \end{enumerate}
-\end{proof}
+\item $\exists$-Regel. Dann $\exists r.C \in L\left( v \right)$ und es wird
+    ein neuer Knoten $v'$ auf Tiefe $i + 1$ generiert mit
+$\ML\left( v' \right) = \left\{ C \right\}$. Es gilt
+\begin{align*}
+    \rd\left( C \right) &= \rd\left( \exists r.C \right) - 1 & \text{(Def rd.)}\\
+                        &\leq \rd\left( C_{0} \right) - i - 1 & \text{(IV)}\\
+                        &= \rd\left( C_{0} \right) - (i + 1)
+\end{align*} \end{enumerate} \end{proof}
 \end{tafel}
 
 \item Behauptung 3.
-  Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
+  Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_i$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
-  $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+  \begin{align*}
+      \underbrace{\left| C_{0} \right|^{\left| C_{0} \right|}}_\text{\# Knoten im Baum} \cdot \underbrace{\left| C_{0} \right|}_\text{Größe Knotenbeschriftungen} \leq 2^{2\left| C_{0} \right|^{2}} =: n
+  \end{align*}
+  Regeln entstanden. (folgt kombinatorisch aus Behauptung 1 und 2)
 
 \end{itemize}
 
 Nun kann die Terminierung mittel Behauptung 3 beweisen:
 
-\textbf{T4.5d}
+\begin{tafel}[Beweis Terminerung Tableau-Algorithmus]
 
 \begin{proof}
     Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der \enquote{n$-$Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.}
@@ -312,6 +310,7 @@ Offenbar gilt $MM_{i+1} <_{mul} MM_i$ für alle $i \geq 0$ *. Also werden nur en
 \end{proof}
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/45mm.png}
+\end{tafel}
 
 \subsubsection{Korrektheit und Vollständigkeit}
 
