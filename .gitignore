@@ -17,3 +17,5 @@ pythontex*
 *.fdb_latexmk
 *.fls
 *.loe
+*.bcf
+*.run.xml
