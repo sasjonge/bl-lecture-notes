@@ -108,5 +108,15 @@
 }
 
 
+\DeclareMathOperator{\rd}{rd}
+\DeclareMathOperator{\sub}{sub}
+% This is an attempt to fix spacing around \left( and \right)
+% See https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\usepackage{enumitem}
 
 \endinput

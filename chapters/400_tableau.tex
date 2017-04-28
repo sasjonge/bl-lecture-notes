@@ -135,6 +135,12 @@ Berechnung von $M_{i + 1}$ aus $M_i$ erfolgt durch Auswahl eines $B \in M$ und
 Anwendung einer der vier Regeln. Eine Regelanwendung ersetzt $B$ durch einen
 neuen I-Baum bzw.\ zwei neue I-Bäume ($\sqcup$-Regel). Ein I-Baum ist \emph{vollständig}, wenn keine Regel darauf anwendbar ist. Intuitiv machen Regelanwendungen implizites Wissen explizit.
 
+Der Algorithmus stoppt, wenn alle I-Bäume vollständig sind. Anschließend wird
+\begin{itemize}
+    \item \enquote{erfüllbar} zurückgegeben, wenn ein I-Baum gefunden wurde, der keinen \emph{offensichtlichen Widerspruch} enthält. Ein offensichtlicher Widerspruch liegt vor, wenn es einen Knoten $v$ gibt mit $\left\{A, \neg A\right\} \subseteq \ML(v)$ für einen Konzeptnamen $A$.
+    \item \enquote{unerfüllbar} andernfalls, also wenn es in \emph{allen} vollständigen I-Bäumen einen offensichtlichen Widerspruch gibt.
+\end{itemize}
+
 \begin{tafel}[Beispielanwendung des Tableau-Algorithmus]
 
 Beispiel:
@@ -143,25 +149,36 @@ Beispiel:
 
 \end{tafel}
 
-Der Algorithmus stoppt, wenn alle I-Bäume vollständig sind. 
+Wir müssen nun zeigen, dass der Algorithmus
+\begin{enumerate}
+    \item terminiert:
+        Nach endlicher Zeit sind alle I-Bäume vollständig und der Algorithmus kann stoppen und eine Antwort (\enquote{erfüllbar}/\enquote{unerfüllbar}) zurückgeben.
+    \item korrekt(\enquote{sound}) ist:
+        Wenn der Algorithmus \enquote{erfüllbar} zurückgibt, dann ist das Eingabekonzept auch tatsächlich Erfüllbar.
+    \item vollständig(\enquote{complete}) ist:
+        Wenn das Eingabekonzept erfüllbar ist, dann gibt der Algorithmus auch \enquote{erfüllbar} zurück.
+\end{enumerate}
 
-\subsubsection{Definition Rollentiefe}\label{definition-rollentiefe}
+Wir beginnen mit Terminierung.
 
-Rollentiefe $\text{rd}\left( C \right)$ von Konzepten
-$C \in sub\left( C_{0} \right)$ ist induktiv definiert:
+\subsubsection{Rollentiefe}
+\label{sec:def-rollentiefe}
+
+Die Rollentiefe $\rd\left(C\right)$ von Konzepten
+$C \in \sub\left( C_{0} \right)$ ist induktiv definiert:
 
 \begin{itemize}
 \item
-  $\text{rd}\left( A \right) = rd\left( \neg A \right) = 0$
+  $\rd\left( A \right) = \rd\left( \neg A \right) = 0$
 \item
-  $\text{rd}\left( C \sqcap D \right) = rd\left( C \sqcup D \right) = \max\left( \text{rd}\left( C \right),rd\left( D \right) \right)$
+  $\rd\left( C \sqcap D \right) = \rd\left( C \sqcup D \right) = \max\left( \rd\left( C \right),\rd\left( D \right) \right)$
 \item
-  $\text{rd}\left( \exists r.C \right) = rd\left( \forall r.C \right) = 1 + rd\left( C \right)$
+  $\rd\left( \exists r.C \right) = \rd\left( \forall r.C \right) = 1 + \rd\left( C \right)$
 \end{itemize}
 
 \begin{lemma}
-Für alle $C \in sub\left( C_{0} \right)$ gilt
-$\text{rd}\left( C \right) \leq \left| C \right|$.
+Für alle $C \in \sub\left( C_{0} \right)$ gilt
+$\rd\left( C \right) \leq \left| C \right|$.
 \end{lemma}
 
 \subsubsection{Multimengen}\label{multimengen}
@@ -169,92 +186,83 @@ $\text{rd}\left( C \right) \leq \left| C \right|$.
 Multimengen sind Mengen, in denen Elemente mehrfach vorkommen dürfen, z.B.:
 $$\{1,1,2,3,4,4,5,6,6,6\}$$
 
-Formal: Multimengen über die Menge $S$ ist Abbildung $$M:S\mathbb{\rightarrow N}$$, welche jedes Element auf die Anzahl seines Vorkommens abbildet.
-
+Eine Multimengen über einer Menge $S$ ist Abbildung $$M:S\rightarrow\mathbb{N}$$, die die Anzahl des Vorkommen der Elemente aus $S$ beschreibt.
 Die meisten Begriffe übertragen sich von Mengen auf Multimengen:
 
 \begin{itemize}
 	\item Leere Menge $\emptyset: s \mapsto 0$ für alle $s \in S$
-	\item Vereinigung $(M_1 \cup M_2)(s) := M_1(s) + M_2(s)$ 
+	\item Vereinigung: $(M_1 \cup M_2)(s) := M_1(s) + M_2(s)$ 
 	\item Element: $s \in M\ gdw.\ M(s)>0$
-	\item Differenz: $(M_1 \setminus M_2)(s) = X(m,n) = \left\{\begin{array}{lr}
-        M_1(s) - M_2(s) &, wenn M_1(s) \geq M_2(s) \\
-        0 & sonst
-        \end{array}\right\}$
+    \item Differenz: $(M_1 \setminus M_2)(s) =
+        \begin{cases}
+                M_1(s) - M_2(s) & \text{wenn } M_1(s) \geq M_2(s)\\
+                0 & \text{sonst}
+        \end{cases}$
 \end{itemize}
 
-$MM(S)$ ist die Menge aller Multimengen über der Menge S.
+$MM(S)$ bezeichnet die Menge aller Multimengen über der Menge S.
 
-Gegeben strikte partielle Ordnung $\left( S, < \right)$, ist die
+Gegeben eine strikte partielle Ordnung $\left( S, < \right)$, ist die
 \emph{Multimengenerweiterung} $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$ definiert als: 
 
 $M_2 <_{\text{mul}}M_1$ gdw. $\exists X,Y \in MM(S)$, so dass
 
 \begin{itemize}
 \item
-  $\varnothing \neq X \subseteq M_1$
+  $\emptyset \neq X \subseteq M_1$
 \item
-  $M_2 = \left( M_1 \smallsetminus X \right) \cup Y$
+  $M_2 = \left( M_1 \setminus X \right) \cup Y$
 \item
-  $\forall y \in Y\exists x \in X : x > y$
+    Für alle $y \in Y$ gibt es ein $x \in X$ mit $x > y$.
 \end{itemize}
 
 Also erhält man $M_2$ aus $M_1$, indem man einige Elemente entfernt und durch endlich viele \emph{kleinere} ersetzt.
-
 Beispiel:
-
-$\left\{ 3,1 \right\} >_{\text{mul}}\{ 2,2,2\} >_{\text{mul}}\{ 2,2\} >_{\text{mul}}\{ 2,1,1,1\}$
-
-Es ist leicht zu zeigen das diese Ordnung eine strikte partielle Ordnung ist.  Zudem ist sie wohlfundiert, wenn $(S,<)$ wohldefiniert ist: Es gibt keine unendlich $<$ absteigenden Ketten.
+\begin{align*}
+\left\{ 3,1 \right\} >_{\text{mul}}\{ 2,2,2\} >_{\text{mul}}\{ 2,2\} >_{\text{mul}}\{ 2,1,1,1\}
+\end{align*}
 
 \setcounter{definition}{5}
-\begin{theorem}
+\begin{lemma}
+    Auch $(MM(S), <_{\text{mul}}$ ist eine strikte partielle Ordnung.
+\end{lemma}
 
-Wenn $\left( S, < \right)$ wohlfundiert (hat keine unendlichen
-absteigenden Ketten) ist, dann ist auch $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$
+Eine partielle Ordnung $<$ heißt wohlfundiert, wenn $<$ keine unendlichen absteigenden Ketten hat. Zum Beispiel ist $(\mathbb{N}, <)$ wohlfundiert, aber $(\mathbb{Z}, <)$ und $(\left[0, 1\right]_{\mathbb{R}})$ nicht.
+
+\begin{theorem}[Wohlfundiertheit von $(MM(S), <_{\text{mul}}$]
+Wenn $\left( S, < \right)$ wohlfundiert ist, dann ist auch $\left( \text{MM}\left( S \right), <_{\text{mul}} \right)$
 wohlfundiert.
 \end{theorem}
 
-\setcounter{definition}{4}
 
 \subsubsection{Terminierung}
 
-\begin{proposition}
-
+\setcounter{definition}{4}
+\begin{theorem}[Terminierung des Tableau-Algorithmus]
 Der Tableau-Algorithmus stoppt nach endlicher Zeit.
-\end{proposition}
+\end{theorem}
 \setcounter{definition}{6}
 
 Beweis in 4 Schritten:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
+\begin{itemize}
+    \item Behauptung 1.
   Es werden nur I-Bäume mit einem Verzweigungsgrad
-  $\leq \left| C_{0} \right|$ generiert.
-
-\begin{quote}
-\textbf{T4.5a}
-
-Beweisskizze. Nur die $\exists$-Regel generiert Nachfolger, aber
-höchstens einen für jedes Konzept $\exists r.C \in sub(C_{0})$. Nach
-\protect\hyperlink{lemma-3.13}{Lemma 3.13} enthält
-$\text{sub}\left( C_{o} \right)$ höchstens $\left| C_{0} \right|$
-viele Konzepte.
-\end{quote}
-
-\def\labelenumi{\arabic{enumi}.}
-\item
+  von maximal $|C_0|$ generiert.
+  \begin{tafel} \begin{proof}
+        Nur die $\exists$-Regel generiert Nachfolgeknoten, aber
+        höchstens einen pro Konzept $\exists r.C \in \sub(C_0)$. Nach
+        \autoref{lem:num-sub}  enthält
+        $\text{sub}\left( C_{o} \right)$ höchstens $\left| C_{0} \right|$
+        viele Teilkonzepte.
+    \end{proof}\end{tafel}
+\item Behauptung 2.
   Es werden nur I-Bäume mit einer Tiefe $\leq \left| C_{0} \right|$
   generiert.
-
-\begin{quote}
-\textbf{T4.5b}
-\begin{proof}
+    \begin{tafel} \begin{proof}
 
 Induktion über die Anzahl der Regelanwendungen. Zu zeigen: Wenn $v$
 Knoten mit Tiefe $\MI$ ist, dann gilt
-$\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
+$\rd\left( C \right) \leq rd\left( C_{0} \right) - i$ für alle
 $C \in L\left( v \right)$.
 
 \textbf{I.A.} Es gibt nur Knoten $v_{\text{ini}}$ mit
@@ -265,35 +273,31 @@ da $i = 0$.
 $\sqcap$, $\exists$):
 
 \begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\item
-  $\sqcap$-Regel
+\item $\sqcap$-Regel
 
-$C \sqcap D \in L(v)$ und $L(v)$ wird durch $C$, $D$ erweitert.
+    $C \sqcap D \in L(v)$ und $L(v)$ wird durch $C$, $D$ erweitert.
 Nach I.V. gilt:
-$\text{rd}\left( C \sqcap D \right) \leq rd\left( C_{0} \right) - i$,
-also auch $\text{rd}\left( C \right) \leq rd\left( C_{0} \right) - i$,
-weil $\text{rd}\left( C \right) \leq rd\left( C \sqcap D \right)$.
+$\rd\left( C \sqcap D \right) \leq rd\left( C_{0} \right) - i$,
+also auch $\rd\left( C \right) \leq rd\left( C_{0} \right) - i$,
+weil $\rd\left( C \right) \leq rd\left( C \sqcap D \right)$.
 Analog für $D$.
 
-\def\labelenumi{\alph{enumi}.}
-\item
-  $\exists$-Regel
+\item $\exists$-Regel
 
 Dann $\exists r.C \in L\left( v \right)$ und es wird neues $v^{'}$
 auf Tiefe $i + 1$ generiert mit
 $L\left( v^{'} \right) = \left\{ C \right\}$. Es gilt
-$\text{rd}\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0} \right) - i - 1 = rd\left( C_{0} \right) - (i + 1)$
+$\rd\left( C \right) = rd\left( \exists r.C \right) - 1 \leq rd\left( C_{0} \right) - i - 1 = rd\left( C_{0} \right) - (i + 1)$
  \end{enumerate}
 \end{proof}
-\end{quote}
+\end{tafel}
 
-\item
+\item Behauptung 3.
   Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
   $\left| C_{0} \right|^{\left| C_{0} \right|} \cdot \left| C_{0} \right| \leq 2^{2\left| C_{0} \right|^{2}} = n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
 
-\end{enumerate}
+\end{itemize}
 
 Nun kann die Terminierung mittel Behauptung 3 beweisen:
 
