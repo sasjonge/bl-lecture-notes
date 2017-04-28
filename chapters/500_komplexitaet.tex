@@ -26,19 +26,19 @@ Wir nehmen an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-TBox di
 \begin{definition}[Typ]
 
 Ein Typ für $C_{0}$ und $T$ ist Teilmenge
-$t \subseteq sub\left( C_{0},T \right)$, so dass
+$t \subseteq \sub\left( C_{0},T \right)$, so dass
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   $A \in t$ gdw. $\neg A \notin t$ für alle
-  $\neg A \notin sub\left( C_{0},T \right)$
+  $\neg A \notin \sub\left( C_{0},T \right)$
 \item
   $C \sqcap D \in t$ gdw. $C \in t$ und $D \in t$ für alle
-  $C \sqcap D \in sub\left( C_{0},T \right)$
+  $C \sqcap D \in \sub\left( C_{0},T \right)$
 \item
   $C \sqcup D \in t$ gdw. $C \in t$ oder $D \in t$ für alle
-  $C \sqcup D \in sub\left( C_{0},T \right)$
+  $C \sqcup D \in \sub\left( C_{0},T \right)$
 \item
   $C_{T} \in t$
 \end{enumerate}
@@ -179,7 +179,7 @@ Interpretation $\MI$:
 
 Zu zeigen: $\MI$ ist Modell von $C_{0}$ und $\MT$ *.
 
-Behauptung: Für alle $C \in sub\left( C_{0},\MT \right)$ und alle
+Behauptung: Für alle $C \in \sub\left( C_{0},\MT \right)$ und alle
 $t \in \Gamma_{i}$:
 $$C \in t \Rightarrow t \in C^\MI$$
 
@@ -463,25 +463,25 @@ PSpace $=$ NPSpace
 \begin{definition}[$i$-Konzepte]
 
 Für $i \geq 0$ ist die Menge der $i$-Konzepte definiert als:
-$$sub_{i} := \left( C_{0} \right) \left\{ C \in sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
+$$sub_{i} := \left( C_{0} \right) \left\{ C \in \sub\left( C_{0} \right)\  \middle| \text{\ rd}\left( C \right) \leq i \right\}$$
 \end{definition}
 
 \begin{definition}[$i$-Typ]
 
 Sei $i \geq 0$. $\MI$-Typ für $C_{0}$ ist Teilmenge
-$t \subseteq sub_{i}\left( C_{0} \right)$ so, dass
+$t \subseteq \sub_{i}\left( C_{0} \right)$ so, dass
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   $A \in t$ gdw. $\neg A \notin t$ für alle
-  $\neg A \in sub_{i}\left( C_{0} \right)$
+  $\neg A \in \sub_{i}\left( C_{0} \right)$
 \item
   $C \sqcap D \in t$ gdw. $C \in t$ und $D \in t$ für alle
-  $C \sqcap D \in sub_{i}\left( C_{0} \right)$
+  $C \sqcap D \in \sub_{i}\left( C_{0} \right)$
 \item
   $C \sqcup D \in t$ gdw. $C \in t$ oder $D \in t$ für alle
-  $C \sqcup D \in sub_{i}\left( C_{0} \right)$
+  $C \sqcup D \in \sub_{i}\left( C_{0} \right)$
 \end{enumerate}
 \end{definition}
 
@@ -515,7 +515,7 @@ Definiere $\MI$ nun wie folgt:
 
 ($p_1(v)$ = 1. Parameter in $l(v)$)
 
-Behauptung: Für alle $v \in V$ und $C \in sub(C_0)$ gilt $$C \in p_1(v)\ impliziert v \in C^\MI$$
+Behauptung: Für alle $v \in V$ und $C \in \sub(C_0)$ gilt $$C \in p_1(v)\ impliziert v \in C^\MI$$
 
 Da $C_0 \in p_1(v_0)$ ist auch $v_0 \in C_0^\MI$; also ist $\MI$ ein Modell von $C_0$.
 

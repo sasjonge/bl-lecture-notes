@@ -374,17 +374,17 @@ Wir definieren den Begriff eines Typs:
   $\sub\left( C \right)$ ist Menge der Teilkonzepte von $C$
   (einschließlich $C$)
 \item
-  $\displaystyle \sub\left( \MT \right) := \bigcup_{C \sqsubseteq D \in \MT}^{}{\sub\left( C \right) \cup sub\left( D \right)}$
+  $\displaystyle \sub\left( \MT \right) := \bigcup_{C \sqsubseteq D \in \MT}^{}{\sub\left( C \right) \cup \sub\left( D \right)}$
 \item
-  $\sub\left( C,\MT \right) := sub\left( C \right) \cup sub\left( \MT \right)$
+  $\sub\left( C,\MT \right) := \sub\left( C \right) \cup \sub\left( \MT \right)$
 \end{itemize}
 \end{definition}
 
 \begin{tafel}[Beispiel Teilkonzepte]
 Beispiele:
 \begin{align*}
-    sub(\forall r.\exists r.(A \sqcap B)) &= \{A,B,A \sqcap B, \exists r.(A \sqcap B), \forall r.\exists r.(A \sqcap B)\}\\
-    sub(\{A \sqsubseteq r.B, \forall r.B \sqsubseteq A\}) &= \{A,B, \exists r.B, \forall r.B\}
+    \sub(\forall r.\exists r.(A \sqcap B)) &= \{A,B,A \sqcap B, \exists r.(A \sqcap B), \forall r.\exists r.(A \sqcap B)\}\\
+    \sub(\{A \sqsubseteq r.B, \forall r.B \sqsubseteq A\}) &= \{A,B, \exists r.B, \forall r.B\}
 \end{align*}
 \end{tafel}
 
@@ -400,7 +400,7 @@ Beweis per Induktion über $C$.
 Sei $\MI$ eine Interpretation, $d \in \Delta^\MI$. Der \emph{Typ}
 $t_\MI\left( d \right)$ \emph{von} $d$ \emph{in} $\MI$ ist
 \begin{align*}
-t_\MI\left( d \right) = \left\{ D \in sub\left( C,T \right)\  \right|\ d \in D^\MI\}.
+t_\MI\left( d \right) = \left\{ D \in \sub\left( C,T \right)\  \right|\ d \in D^\MI\}.
 \end{align*}
 \end{definition}
 Erklärung: Alle Teilkonzepte von $\MT$ und $C$, die ein Objekt $d$
@@ -414,7 +414,7 @@ Sei
 \begin{align*}
     \MT &=\{A \sqsubseteq \exists r.A\}\\
     C &= A \sqcap B\\
-    sub(C,\MT) &= \{A, \exists r.A, B, A \sqcap B\}
+    \sub(C,\MT) &= \{A, \exists r.A, B, A \sqcap B\}
 \end{align*}
 
 \includegraphics[width=4.71910in,height=1.83200in]{media/314typ.png}
@@ -455,7 +455,7 @@ Die Filtration von $\MI$ bzgl. $C$ und $\MT$ ist folgende Interpretation $\MJ$:
 \begin{align*}
     \Delta^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^\MI \right\}\\
     A^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^\MI \right\}
-  \text{ für alle }A \in sub\left( C,\MT \right)\\
+  \text{ für alle }A \in \sub\left( C,\MT \right)\\
   r^{\MJ} &= \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^\MI \right\}
   \text{ für alle Rollennamen } r
 \end{align*}
@@ -488,7 +488,7 @@ Wenn $\MI$ Modell von $C$ und $\MT$, so auch $\MJ$.
 \begin{tafel}[Beweis Filtrations Modell]\mbox{}
 \begin{proof}
     Behauptung:
-Für alle $d \in \Delta^\MI$ und $D \in sub(C,\MT)$ gilt:
+Für alle $d \in \Delta^\MI$ und $D \in \sub(C,\MT)$ gilt:
 \begin{align*}
 d \in D^\MI\ gdw.\ \left\lbrack d \right\rbrack \in D^{\MJ}
 \end{align*}
@@ -585,7 +585,7 @@ Gegeben $C$ und $\MT$, so dass $|C|+|\MT| = n$,
 \begin{tafel}[Obergrenze für Anzahl Interpretationen]\mbox{}\\
     Anzahl der Interpretationen $\MI$ mit $|\Delta^\MI| = 2^n$.
     
-    Für alle $A \in sub(C, \MT)$ kann jedes $d \in \Delta^\MI$ eine Instanz von $A^\MI$ sein oder nicht.
+    Für alle $A \in \sub(C, \MT)$ kann jedes $d \in \Delta^\MI$ eine Instanz von $A^\MI$ sein oder nicht.
     \begin{align*}
         \text{insgesamt } = 2^{2^{n} \cdot n}
     \end{align*}
