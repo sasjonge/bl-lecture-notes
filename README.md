@@ -6,7 +6,7 @@ Wenn ihr dieses Dokument erweitern oder verbessern wollt, schreibt mir und ich f
 
 # PDF bauen #
 
-Eine [fertige PDF](main.pdf) liegt im Hauptverzeichnis. Es kann aber vorkommen, dass diese nicht dem aktuellsten Stand entspricht (schaut dazu auf das letzte Änderungsdatum.)
+Fertige PDFs von findet ihr in den [Github Releases](https://github.com/sasjonge/bl-lecture-notes/releases). Diese entsprechen nicht unbedingt dem aktuellen Stand.
 
 Um das Dokument zu kompilieren reicht es im Hauptverzeichnis 
 
