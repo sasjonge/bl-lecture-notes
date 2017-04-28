@@ -371,12 +371,12 @@ Wir definieren den Begriff eines Typs:
 
 \begin{itemize}
 \item
-  $\text{sub}\left( C \right)$ ist Menge der Teilkonzepte von $C$
+  $\sub\left( C \right)$ ist Menge der Teilkonzepte von $C$
   (einschließlich $C$)
 \item
-  $\displaystyle \text{sub}\left( \MT \right) := \bigcup_{C \sqsubseteq D \in \MT}^{}{\text{sub}\left( C \right) \cup sub\left( D \right)}$
+  $\displaystyle \sub\left( \MT \right) := \bigcup_{C \sqsubseteq D \in \MT}^{}{\sub\left( C \right) \cup sub\left( D \right)}$
 \item
-  $\text{sub}\left( C,\MT \right) := sub\left( C \right) \cup sub\left( \MT \right)$
+  $\sub\left( C,\MT \right) := sub\left( C \right) \cup sub\left( \MT \right)$
 \end{itemize}
 \end{definition}
 
@@ -391,7 +391,7 @@ Beispiele:
 \begin{lemma}[Anzahl an Teilkonzepten]
     \label{lem:num-sub}
     \begin{align*}
-\left| \text{sub}\left( C,T \right) \right| \leq \left| C \right| + \left| T \right|
+\left| \sub\left( C,T \right) \right| \leq \left| C \right| + \left| T \right|
 \end{align*}
 \end{lemma}
 Beweis per Induktion über $C$.
