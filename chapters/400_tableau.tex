@@ -1,135 +1,149 @@
-\subsection{Ziel}
-
-Automatisches Schlussfolgern spielt eine zentrale Rolle für BLen. Insbesondere ist die Ausdruckstärke von BLen stark darauf zugeschnitten.
-
-Dabei ist aber wichtig, dass die relevanten Schlussfolgerungsprobleme entscheidbar sind, sie ein möglichst geringe Komplexität haben und/oder Algorithmen existieren, die sich in der Praxis performant verhalten.
-
+Automatisches Schlussfolgern spielt eine zentrale Rolle für
+Beschreibungslogiken. Insbesondere ist die Ausdrucksstärke von
+Beschreibungslogiken stark darauf zugeschnitten.
+Dabei ist aber wichtig, dass die relevanten Schlussfolgerungsprobleme
+entscheidbar sind, sie ein möglichst geringe Komplexität haben und
+Algorithmen existieren, die sich in der Praxis performant verhalten.
 Von uns wird hauptsächlich das Problem der Erfüllbarkeit betrachtet.
 
-In der Praxis haben sich hauptsächlich Tableau-Algorithmen und Resolutionsverfahren als effizient herausgestellt.
+In der Praxis haben sich hauptsächlich Tableau-Algorithmen und
+Resolutionsverfahren als effizient herausgestellt.
 
-\subsection{ALC ohne TBoxen}\label{alc-ohne-tboxen}
+\subsection{\texorpdfstring{$\ALC$}{ALC} ohne TBoxen}\label{alc-ohne-tboxen}
 
 \subsubsection{Negationsnormalform}\label{negationsnormalform}
 
 \begin{definition}[Negationsnormalform]
-
-Konzept ist in \emph{Negationsnormalform} (NNF) gdw. Negation nur auf
-Konzeptnamen angewendet wird.
+Ein Konzept ist in \emph{Negationsnormalform} (NNF) gdw. Negation nur auf
+Konzeptnamen (also nicht auf zusammengesetzte Konzepte) angewendet wird.
 \end{definition}
 
-\begin{lemma}
-Jedes Konzept kann in Linearzeit in ein äquivalentes Konzept in NNF
-umgewandelt werden.
+\begin{lemma}[Linearzeit Umwandlung in NNF]
+Jedes Konzept kann in Linearzeit in ein äquivalentes Konzept in
+Negationsnormalform umgewandelt werden.
 \end{lemma}
 
-\textbf{T4.1}
+\begin{tafel}[Beweis von Linearzeit Umwandlung in NNF]
 
-Beweisskizze. Wende Gesetze der doppelten Negation, de Morgan und
-Dualität von $\exists$, $\forall$ an.
+    \begin{proof}
+        Jedes Konzept kann in NNF umgewandelt werden durch erschöpfendes Anwenden von folgenden Regeln
+        \begin{itemize}
+            \item doppelte Negation: $\neg \neg C \rightsquigarrow C$
+            \item de Morgan: \begin{align*}
+                    \neg (C \sqcap D) \rightsquigarrow \neg C \sqcup \neg D\\
+                    \neg (C \sqcup D) \rightsquigarrow \neg C \sqcap \neg D
+                \end{align*}
+            \item Dualität: \begin{align*}
+                    \neg \exists r.C \rightsquigarrow \forall r.\neg C\\
+                    \neg \forall r.C \rightsquigarrow \exists r.\neg C
+                \end{align*}
+        \end{itemize}
+        Jede Regelanwendung ist äquivalenzerhaltend und schiebt Negation immer
+        weiter nach innen. Man kann zeigen, dass linear viele Regelanwendungen
+        ausreichen.
+    \end{proof}
+\end{tafel}
+
 
 \subsubsection{I-Baum}\label{i-baum}
 
+I-Bäume bilde eine Datenstruktur, die ein (partielles) Baummodell
+repräsentieren.
+
 \begin{definition}[I-Baum]
 
-\emph{I-Baum} für $C_{0}$ (in NNF) ist knoten- und kantenbeschrifteter
-Baum $\left( V,E,L \right)$ mit
+Ein \emph{I-Baum} für $C_{0}$ (in NNF) ist knoten- und kantenbeschrifteter
+Baum $\left( V,E,\ML \right)$ mit
 
 \begin{itemize}
-\item
-  $V$ Knotenmenge
-\item
-  $E$ ist Menge beschrifteter Kanten $\left( v,r,v^{'} \right)$ mit
+\item $V$ Knotenmenge
+\item $E$ ist Menge beschrifteter Kanten $\left( v,r,v^{'} \right)$ mit
   $v$,$\ v^{'} \in V$, $r$ Rollenname
-\item
-  $L$: $V \rightarrow 2^{sub(C_{0})}$
+\item $\ML$: $V \rightarrow 2^{sub(C_{0})}$ ist eine Knotenbeschriftung aus den Teilkonzepten von $C_0$.
 \end{itemize}
 \end{definition}
 
-\textbf{T4.2}
+\begin{tafel}[Beispiel I-Baum]
+    Beispiel:
+    \begin{align*}
+        C_0 &= A \sqcap \forall r.(\neg A \sqcap \exists r.B)\\
+        sub(C_0) &= \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(\neg A \sqcap \exists r.B), C_0\}
+    \end{align*}
 
-Bsp. $$C_0 = A \sqcap \forall r.(\neg A \sqcap \exists r.B)$$
-$$sub(C_0) = \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(\neg A \sqcap \exists r.B)\}$$
-
-\includegraphics[width=3.71910in,height=1.83200in]{media/42ibaum.png}
+    \includegraphics[width=3.71910in,height=1.83200in]{media/42ibaum.png}
+\end{tafel}
 
 \subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
 
-Berechnet Folge $$M_{0},M_1,\ldots$$ von Mengen von I-Bäumen:
-
-$$M_{0} = \left\{ B_{\text{ini}} \right\}\ mit\ B_{\text{ini}}\ \emph{initialer I-Baum}\ fuer\ C_{0}:$$
-
+Der Tableau-Algorithmus berechnet eine Folge $$M_0,M_1,\ldots$$ von Mengen von I-Bäumen:
 \begin{itemize}
-\item
-  $V := \left\{ v_{\text{ini}} \right\}$
-\item
-  $E := \emptyset$
-\item
-  $L := \left( v_{\text{ini}} \right) \left\{ C_{0} \right\}$
+    \item $M_0 = \left\{ B_{\text{ini}} \right\}$ wobei $B_{\text{ini}}$ der \emph{initiale I-Baum} für $C_0$ ist:
+        \begin{align*}
+            V &:= \left\{ v_{\text{ini}} \right\}\\
+            E &:= \emptyset\\
+            \ML\left(v_{\text{ini}}\right) &:= \left\{ C_0 \right\}
+        \end{align*}
+    \item $M_{i + 1}$ entsteht aus $M_i$ durch Anwendung einer Tableau-Regel
+        auf einen der I-Bäume in $M_i$, die einen oder mehrere neue I-Bäume
+        erzeugt, die den Baum ersetzen.
 \end{itemize}
 
-$M_{i + 1}$ entsteht aus $M_\MI$ durch Anwendung der Tableau-Regeln
-auf irgendeinen I-Baum in $M_\MI$ und anschließendes Austauschen des
-verwendeten Baumes durch den neu erzeugten (Sei $\left( V,E,L \right)$
-I-Baum):
+Sei $\left( V,E,\ML \right)$ ein I-Baum.
 
 \begin{itemize}
-\item
-  $\sqcap$-Regel
-
+\item $\sqcap$-Regel
   \begin{itemize}
   \item
-    Wähle $v \in V$ und $C \sqcap D \in L\left( v \right)$ so dass
-    \emph{nicht} $\left\{ C,D \right\}\  \subseteq L\left( v \right)$
+    Wähle $v \in V$ und $C \sqcap D \in \ML\left( v \right)$ so dass
+    $\left\{ C,D \right\}\  \not\subseteq \ML\left( v \right)$
   \item
-    erweitere $L(v)$ um $C$ und $D$
+    erweitere $\ML(v)$ um $C$ und $D$
   \end{itemize}
-\item
-  $\sqcup$-Regel
+\item $\sqcup$-Regel
 
   \begin{itemize}
   \item
-    Wähle $v \in V$ und $C \sqcup D \in L\left( v \right)$ so dass
-    $\left\{ C,D \right\}\  \cap L\left( v \right) = \varnothing$
+    Wähle $v \in V$ und $C \sqcup D \in \ML\left( v \right)$ so dass
+    $\left\{ C,D \right\} \cap \ML\left( v \right) = \emptyset$
   \item
-    erweitere $L(v)$ um $C$ oder $D$ (ergibt zwei I-Bäume)
+      erweitere $L(v)$ um $C$ \emph{oder} um $D$ (ergibt \emph{zwei} I-Bäume)
   \end{itemize}
-\item
-  $\exists$-Regel
+\item $\exists$-Regel
 
   \begin{itemize}
   \item
-    Wähle $v \in V$ und $\exists r.C \in L\left( v \right)$ so dass
-    es kein $v^{'} \in V$ gibt mit $\left( v,r,v^{'} \right) \in E$
-    und $C\  \in L\left( v' \right)$
+    Wähle $v \in V$ und $\exists r.C \in \ML\left( v \right)$ so dass
+    es kein $v' \in V$ gibt mit $\left( v,r,v' \right) \in E$
+    und $C \in \ML\left( v' \right)$
   \item
-    erweitere V um neuen Konten $v^{'}$ und $E$ um
-    $\left( v,r,v^{'} \right)$; setze
-    $L\left( v^{'} \right) = \left\{ C \right\}$
+    erweitere V um neuen Konten $v'$ und $E$ um
+    $\left( v,r,v' \right)$, setze
+    $\ML\left( v' \right) = \left\{ C \right\}$
   \end{itemize}
-\item
-  $\forall$-Regel
-
+\item $\forall$-Regel
   \begin{itemize}
   \item
-    Wähle $v,v^{'} \in V$ und $\forall r.C \in L\left( v \right)$ so
-    dass $\left( v,r,v^{'} \right) \in E$ und
-    $C\  \notin L\left( v \right)$
+    Wähle $v,v' \in V$ und $\forall r.C \in \ML\left( v \right)$ so
+    dass $\left( v,r,v' \right) \in E$ und
+    $C\  \notin \ML\left( v \right)$
   \item
-    erweitere $L(v')$ um $C$
+    erweitere $\ML(v')$ um $C$
   \end{itemize}
 \end{itemize}
 
-Stoppe, wenn alle Regeln erschöpfend angewandt wurden. Gib „erfüllbar``
-zurück, falls es einen I-Baum ohne offensichtlichen Widerspruch
-($\left\{ A,\neg A \right\} \subseteq L\left( v \right)$) gibt;
-„unerfüllbar`` sonst.
+Berechnung von $M_{i + 1}$ aus $M_i$ erfolgt durch Auswahl eines $B \in M$ und
+Anwendung einer der vier Regeln. Eine Regelanwendung ersetzt $B$ durch einen
+neuen I-Baum bzw.\ zwei neue I-Bäume ($\sqcup$-Regel). Ein I-Baum ist \emph{vollständig}, wenn keine Regel darauf anwendbar ist. Intuitiv machen Regelanwendungen implizites Wissen explizit.
 
-\textbf{T4.3}
+\begin{tafel}[Beispielanwendung des Tableau-Algorithmus]
 
 Beispiel:
 
 \includegraphics[width=5.71910in,height=3.83200in]{media/43taleau.png}
+
+\end{tafel}
+
+Der Algorithmus stoppt, wenn alle I-Bäume vollständig sind. 
 
 \subsubsection{Definition Rollentiefe}\label{definition-rollentiefe}
 
