@@ -36,43 +36,6 @@
 \declaretheorem[sibling=definition, name = Proposition]{proposition}
 \declaretheorem[numberwithin=section, name = T]{tafel}
 
-%Look behind you! a three-headed hack!
-%Put the number after the theorem name in listoftheorems (e.g. Definition 3.4 instead of 3.4 Definition)
-\makeatletter
-\def\ll@definition{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
-}
-\def\ll@theorem{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
- }
-
-\def\ll@tafel{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
- }
-
-\def\ll@lemma{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
- }
-\def\ll@korolar{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
- }
-\def\ll@proposition{%
- \thmt@thmname \  \protect\numberline{\csname the\thmt@envname \endcsname}\ifx
- \@empty \thmt@shortoptarg \else \protect \thmtformatoptarg {\thmt@shortoptarg 
- }\fi
- }
-\makeatother
-
 \usepackage[headsepline]{scrlayer-scrpage}
 \renewcommand\sectionmarkformat{\thesection\autodot\quad}
 %\setkomafont{pageheadfoot}{\footnotesize\scshape}
