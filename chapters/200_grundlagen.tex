@@ -263,7 +263,7 @@ Eine Interpretation $\MI$
     $\MI$ erfüllt auch $\text{Student} \sqsubseteq \exists \text{bekanntMit}.\text{Mensch}$ und $\text{VL} \equiv \text{PlfichtVL}$.
 \end{tafel}
 
-Intuitiv entsprechen Interpretationen mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} unerwünschte Interpretationen.
+Intuitiv entsprechen Interpretationen mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} un\-erwünsch\-te Interpretationen.
 
 \subsubsection{Modellierung}\label{modellierung}
 
@@ -322,7 +322,7 @@ $\MT$.
     \end{center}
 \item Sei $\MT$ wieder aus \autoref{t25} und $C = \text{Student} \sqcap \exists \text{hört}.\text{PflichtVL} \sqcap \forall \text{hört}.\text{WahlVL}$.
     $C$ ist unerfüllbar bezüglich $\MT$: Nimm im Gegenteil an $C$ sei erfüllbar bezüglich $\MT$, dann gibt es Modell $\MI$ und Instanz $d\in C^\MI$. Nach Semantik von $\sqcap$ gilt $d \in (\exists \text{hört}.\text{PflichtVL})^\MI$. Also gibt es ein $e \in (\text{PflichtVL})^\MI$ mit $(d, e) \in \text{hört}^\MI$. Wegen $d \in (\forall \text{hört}.\text{WahlVL})^\MI$ gilt $e \in \text{WahlVL}^\MI$. Also ist $e \in (\text{PflichtVL} \sqcap \text{WahlVL})^\MI$, was $(\text{PflichtVL} \sqcap \text{WahlVL}) \in \bot$ verletzt. Folglich kann es keine Interpretation geben.
-\item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$. Es gilt $\MT \models C \sqsubseteq D$. Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$. Gezeigt werden muss $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$. Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$. Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
+\item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$. Es gilt $\MT \models C \sqsubseteq D$. Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$. Zu zeigen $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$. Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$. Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
     \end{enumerate}
 \end{tafel}
 
