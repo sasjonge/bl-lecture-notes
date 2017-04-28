@@ -98,14 +98,14 @@ Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
     \end{align*}
     \begin{center}
     \begin{tikzpicture}
-        \begin{scope}[every node/.style={circle,draw}]
+        \begin{scope}[every node/.style={circle,draw,thick}]
             \node (s1) at (0, 2) {$s_1$};
             \node (s2) at (3, 2) {$s_2$};
             \node (s3) at (-3, 2) {$s_3$};
             \node (v1) at (1, 0) {$v_1$};
             \node (v2) at (3, 0) {$v_2$};
         \end{scope}
-        \begin{scope}[every node/.style={fill=white,plain}]
+        \begin{scope}[every node/.style={fill=white}]
             \path [->] (s1) edge node {\scriptsize{hört}} (v1);
             \path [->] (s2) edge node {\scriptsize{hört}} (v1);
             \path [->] (s3) edge node {\scriptsize{hört}} (v1);
@@ -158,16 +158,18 @@ Wir nennen
 Beachte, das $\top^\MI$ für jede Interpretation $\MI$ identisch mit
 $\Delta^\MI$ ist. Intuitiv entspricht $\top$ der Menge alle Elemente.
 $\bot^\MI$ ist für jede Interpretation $\MI$ leer, repräsentiert also
-intuitiv, dass etwas unmöglich ist. Z.B.:
-
+intuitiv, dass etwas unmöglich ist, z.B.:
 \begin{align*}
-    &\mathit{Mensch} \sqcap \forall \mathit{hatKind}.\bot\\
+    &\text{Mensch} \sqcap \forall \text{hatKind}.\bot\\
     &\text{Menschen, die keine Kinder haben}
 \end{align*}
 
-\begin{tafel}
-    %TODO
-    TODO
+\begin{tafel}[Beweis $\top^\MI = \Delta^\MI$]
+    \begin{align*}
+        \top^\MI &= (A \sqcup \neq A)^\MI = A^\MI \cup (\neg A)^\MI\\
+                 &= A^\MI \cup (\Delta^\MI \setminus A^\MI)\\
+                 &= \Delta^\MI
+    \end{align*}
 \end{tafel}
 
 \subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}
@@ -190,9 +192,17 @@ intuitiv, dass etwas unmöglich ist. Z.B.:
 \end{itemize}
 \end{definition}
 
-\begin{tafel}
-    %TODO
-    TODO
+\begin{tafel} [Beispiel nicht Erfüllbarkeit und Subsumtion]\mbox{}
+    \begin{enumerate}[label=\alph*)]
+        \item $C = \exists r.A \sqcap \forall r.\neg A$ ist nicht erfüllbar.
+            \begin{proof}
+                Angenommen es gibt eine Interpretation $\MI$ mit $C^\MI \neq \emptyset$. Sei $d\in C^\MI$, wegen $d \in (\exists r.A)^\MI$ gibt es $e \in A^\MI$ mit $(d, e) \in r^\MI$. Wegen $d \in (\forall r.\neg A)^\MI$ gilt $e\in \neg A^\MI$. Folglich kann es kein Element $d \in C^\MI$ geben.
+            \end{proof}
+        \item $\exists r.(A\sqcap B) \sqsubseteq  \exists r.A \sqcap \exists r.B$
+            \begin{proof}
+                Sei $\MI$ Interpretation und $d \in (\exists r. (A\sqcap B))^\MI$. Dann gibt es $e \in (A\sqcap B)^\MI$ mit $(d, e) \in r^\MI$, wegen $e \in A^\MI$ gilt $d \in (\exists r.A)^\MI$ und wegen $e \in B^\MI$ gilt $d \in (\exists r.B)^\MI$. Folglich gilt auch $d \in (\exists r.A \sqcap \exists r.B)^\MI$.
+            \end{proof}
+    \end{enumerate}
 \end{tafel}
 
 Es gelten die üblichen aussagenlogischen Äquivalenzen, wie z.B. das de
@@ -222,9 +232,35 @@ Eine Interpretation $\MI$
 \end{itemize}
 \end{definition}
 
-\begin{tafel}
-    TODO
-    %TODO
+\begin{tafel}[Beispiel Model von $\MT$]
+    \label{t25}
+    \begin{align*}
+        \MT = \{& \text{Student} \equiv \text{Mensch} \sqcap \exists \text{hört}.\text{VL},\\
+                &\text{VL} \equiv \text{PflichtVL} \sqcup \text{WahlVL},\\
+                &\text{Student} \sqcap \exists \text{hört}.\text{VL} \sqsubseteq \exists \text{bekanntMit}.\text{Student},\\
+                &\text{PflichtVL} \sqcap \text{WahlVL} \sqsubseteq \bot\}
+    \end{align*}
+    Model $\MI$ von $\MT$:
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (s3) at (0, -2) {};
+            \node (s1) at (0, 0) {};
+            \node (s2) at (3, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {\scriptsize{hört}} (s3);
+            \path [->] (s1) edge node {\scriptsize{bekannt}} (s2);
+            \path [->] (s1) edge [loop left] node {\scriptsize{bekannt}} (s1);
+            \node (l1) at (s1) [above = 1mm of s1] {\small{Mensch}};
+            \node at (l1) [above = 0mm of l1] {\small{Student}};
+            \node at (s2) [above = 1mm of s2] {\small{Mensch}};
+            \node (l2) at (s3) [left = 1mm of s3] {\small{VL}};
+            \node at (l2) [below = 0mm of l2] {\small{PflichtVL}};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    $\MI$ erfüllt auch $\text{Student} \sqsubseteq \exists \text{bekanntMit}.\text{Mensch}$ und $\text{VL} \equiv \text{PlfichtVL}$.
 \end{tafel}
 
 Intuitiv entsprechen Interpretationen mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} unerwünschte Interpretationen.
@@ -265,9 +301,29 @@ Intuitiv gesprochen ist diese Definition wie in
 \autoref{sec:erfull-subsum-equiv}, nur ist $\MI$ jeweils Modell von einer TBox
 $\MT$.
 
-\begin{tafel}
-    TODO
-    %TODO
+\begin{tafel}[Beispiel Erfüllbarkeit, Subsumtion, Äquivalenz bezüglich $\MT$]\mbox{}
+    \begin{enumerate}[label=\alph*)]
+    \item Sei $\MT$ die TBox aus \autoref{t25} und $C = \text{Student} \sqcap \forall \text{hört}.\text{PflichtVL}$. $C$ ist erfüllbar bezüglich $\MT$, denn folgende Interpretation $\MI$ ist Modell von $\MT$ mit $C^\MI$
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (s3) at (0, -2) {};
+            \node (s1) at (0, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {\scriptsize{hört}} (s3);
+            \path [->] (s1) edge [loop right] node {\scriptsize{bekannt}} (s1);
+            \node at (s1) [left = 1mm of s1] {\small{Mensch}};
+            \node at (s1) [below left = 1mm of s1] {\small{Student}};
+            \node at (s3) [left = 1mm of s3] {\small{VL}};
+            \node at (s3) [below left = 1mm of s3] {\small{PflichtVL}};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+\item Sei $\MT$ wieder aus \autoref{t25} und $C = \text{Student} \sqcap \exists \text{hört}.\text{PflichtVL} \sqcap \forall \text{hört}.\text{WahlVL}$.
+    $C$ ist unerfüllbar bezüglich $\MT$: Nimm im Gegenteil an $C$ sei erfüllbar bezüglich $\MT$, dann gibt es Modell $\MI$ und Instanz $d\in C^\MI$. Nach Semantik von $\sqcap$ gilt $d \in (\exists \text{hört}.\text{PflichtVL})^\MI$. Also gibt es ein $e \in (\text{PflichtVL})^\MI$ mit $(d, e) \in \text{hört}^\MI$. Wegen $d \in (\forall \text{hört}.\text{WahlVL})^\MI$ gilt $e \in \text{WahlVL}^\MI$. Also ist $e \in (\text{PflichtVL} \sqcap \text{WahlVL})^\MI$, was $(\text{PflichtVL} \sqcap \text{WahlVL}) \in \bot$ verletzt. Folglich kann es keine Interpretation geben.
+\item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$. Es gilt $\MT \models C \sqsubseteq D$. Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$. Gezeigt werden muss $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$. Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$. Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
+    \end{enumerate}
 \end{tafel}
 
 Hinweise für Beweisstrategien:
@@ -281,7 +337,6 @@ Hinweise für Beweisstrategien:
 \subsubsection{Monotonie}\label{monotonie}
 Das Erweitern einer TBox um zusätzliche Konzeptinklusionen wirkt sich wie folgt auf Erfüllbarkeit und Subsumtion aus:
 
-%TODO: fix numbering
 \begin{lemma}[TBox Monotonie]
 \label{lem:tbox-monoton}
 Seien $\MT_1$ und $\MT_2$ TBoxen mit $\MT_1 \subseteq \MT_2$. Dann gilt:
@@ -354,8 +409,27 @@ Bis auf die fehlende Antisymmetrie ($xRy \wedge yRx \rightarrow x = y$) ist $\sq
 
 Man kann $\sqsubseteq$ als Hasse-Diagram darstellen, dessen Knoten mit Mengen von Konzepten beschriftet sind.
 
-\begin{tafel}[Hasse-Diagram]\mbox{}\\
-\includegraphics[width=3.71910in,height=1.83200in]{media/haase.png}
+\begin{tafel}[Beispiel Hasse-Diagram]\mbox{}
+    \begin{align*}
+        \MT = \{&\text{Mensch} \equiv \text{Mann} \sqcup \text{Frau}, \text{Mensch} \sqsubseteq \text{Säugetier}\\
+               &\text{Frau} \sqsubseteq \neg\text{Mann}\\
+               &\text{NMM} \equiv \text{Mensch} \sqcap \neg\text{Mann}\}
+    \end{align*}
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={fill=white}]
+            \node (s1) at (0, 0) {Mann};
+            \node (s2) at (3, 0) {Frau};
+            \node (s3) at (1.5, 1.5) {Mensch};
+            \node (s4) at (1.5, 3) {Säugetier};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [-] (s1) edge node [rotate=45] {$\sqsubseteq$} (s3);
+            \path [-] (s2) edge node [rotate=135] {$\sqsubseteq$} (s3);
+            \path [-] (s3) edge node [rotate=90] {$\sqsubseteq$} (s4);
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
 \end{tafel}
 
 \subsubsection{Klassifikation}
@@ -375,12 +449,12 @@ Die Schlussfolgerungsprobleme sind wechselseitig polynomiell aufeinander reduzie
 \begin{lemma}[Schlussfolgerungsprobleme sind wechselseitig reduzierbar]\mbox{}
 \begin{enumerate}
 \item{\emph{Erfüllbarkeit} auf \emph{Nicht-Äquivalenz} \\
-$C$ erfüllbar bzgl. $\MT$ gdw. $T \not\models C \equiv \bot$}
+$C$ erfüllbar bzgl. $\MT$ gdw. $\MT \not\models C \equiv \bot$}
 \item{\emph{Subsumtion} auf \emph{Unerfüllbarkeit} \\
-$T \models C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
+$\MT \models C \sqsubseteq D$ gdw. $C \sqcap \neg D$ unerfüllbar bzgl.
 $\MT$
 \item{\emph{Äquivalenz} auf \emph{Subsumtion} \\}
-$T \models C \equiv D$ \emph{gdw.} $T \models \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
+$\MT \models C \equiv D$ gdw. $\MT \models \top \sqsubseteq \left( C \sqcap D \right) \sqcup \left( \neg C \sqcap \neg D \right)$}
 \end{enumerate}
 \end{lemma}
 
@@ -389,9 +463,14 @@ anderen beiden verwendet werden kann. Alle drei Probleme haben dieselbe
 Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auf
 Erfüllbarkeit konzentrieren.
 
-\begin{tafel}
-    TODO
-    %TODO
+\begin{tafel}[Exemplarische Reduktion von Schlussfolgerungsproblemen]\mbox{}
+    \begin{center} \begin{tabular}{ll}
+        $T \models C \sqsubseteq D$ & gdw. für alle Modelle $\MI$ von $\MT$ $C^\MI \subseteq D^\MI$\\
+                                    & gdw. es gibt kein Modell $\MI$ von $\MT$ bei dem $C^\MI \not\subseteq D^\MI$\\
+                                    & gdw. es gibt kein Modell $\MI$ von $\MT$ bei dem $(C \sqcap \neg D)^\MI \neq \emptyset$\\
+                                    & gdw. $C \sqcap \neg D$ unerfüllbar bezüglich $\MT$\\
+    \end{tabular}
+\end{center}
 \end{tafel}
 
 \subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{erweiterungen-von-alc}
@@ -408,9 +487,30 @@ Rolle} zu $r$. Wir definieren
 $\left( r^{-} \right)^\MI = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^\MI\}$
 \end{definition}
 
-\begin{tafel}
-    TODO
-    %TODO
+\begin{tafel}[Beispiel Nützlichkeit von Inversen]
+    \begin{align*}
+        \MT = \{& \text{Professor} \sqsubseteq \text{Verrückt} \sqcap \exists  \text{gibt}.\text{Vorlesung}\\
+                & \text{Vorlesung} \sqsubseteq \forall \text{wirdGegebenVon}.\neg\text{Verrückt}\}
+    \end{align*}
+    Das folgende ist ein Modell von $\MT$, da es keine wirdGegebenVon-Kante gibt und man die intuitive Bedeutung der Kante in $\ALC$ nicht erzwingen kann.
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (s1) at (0, 0) {};
+            \node (s2) at (2, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {\scriptsize{gibt}} (s2);
+            \node at (s1) [left = 1mm of s1] {\small{Professor}};
+            \node at (s1) [below left = 1mm of s1] {\small{Verrückt}};
+            \node at (s2) [right = 1mm of s2] {\small{Vorlesung}};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    Mit der Verwendung von Inversen lässt sich Zeile 2 von $\MT$ neu definieren, wodurch das Modell $\MT$ nicht mehr erfüllt.
+    \begin{align*}
+        \text{Vorlesung} \sqsubseteq \forall \text{gibt}^-.\neg\text{Verrückt}
+    \end{align*}
 \end{tafel}
 
 \subsubsection{Zahlenrestriktion (\texorpdfstring{$\ALCQ$}{ALCQ})}\label{zahlenrestriktion-alcq}
@@ -430,8 +530,7 @@ Die Semantik ist \begin{align*}
 \end{align*}
 \end{definition}
 
-\begin{tafel}
-    TODO
+\begin{tafel}[TODO]
     %TODO
 \end{tafel}
 
