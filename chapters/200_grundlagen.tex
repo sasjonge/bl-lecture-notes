@@ -88,9 +88,43 @@ Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
 \end{itemize}
 \end{definition}
 
-\begin{tafel}
-    %TODO
-    TODO
+\begin{tafel}[Beispiel Semantik]
+    \begin{align*}
+        \Delta^\MI &= \left\{s_1, s_2, s_3, v_1, v_3 \right\}\\
+        \text{Mensch}^\MI &= \left\{s_1, s_2, s_3\right\} \quad\text{Student}^\MI = \{s_1, s_2, s_3\}\\
+        \text{VL}^\MI &= \{ v_1, v_2 \} \quad \text{PflichtVL}^\MI = \{ v_1 \} \quad \text{WahlVL}^\MI = \{v_2 \}\\
+        \text{hört}^\MI &= \{ (s_1, v_1), (s_2, v_1), (s_2, v_2), (s_3, v_1)\}\\
+        \text{bekanntMit}^\MI &= \{ (s_1, s_2), (s_2, s_1), (s_1, s_1), (s_2, s_2), (s_3, s_3)\}
+    \end{align*}
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw}]
+            \node (s1) at (0, 2) {$s_1$};
+            \node (s2) at (3, 2) {$s_2$};
+            \node (s3) at (-3, 2) {$s_3$};
+            \node (v1) at (1, 0) {$v_1$};
+            \node (v2) at (3, 0) {$v_2$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white,plain}]
+            \path [->] (s1) edge node {\scriptsize{hört}} (v1);
+            \path [->] (s2) edge node {\scriptsize{hört}} (v1);
+            \path [->] (s3) edge node {\scriptsize{hört}} (v1);
+            \path [->] (s2) edge node {\scriptsize{hört}} (v2);
+            \path [<->] (s1) edge node {\scriptsize{bekannt}} (s2);
+            \path [->] (s1) edge [loop above] node {\scriptsize{bekannt}} (s1);
+            \path [->] (s2) edge [loop above] node {\scriptsize{bekannt}} (s2);
+            \path [->] (s3) edge [loop above] node {\scriptsize{bekannt}} (s3);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    \begin{align*}
+        (\text{VL} \sqcap \text{PflichtVL})^\MI &= \{v_1, v_2\} \cap \{v_1\} = \{v_1\}\\
+        \neg\text{VL}^\MI &= \{s_1, s_2, s_3\}\\
+        (\text{Student} \sqcup \text{VL})^\MI &= \Delta^\MI\\
+        (\exists \text{bekanntMit}.\text{Student})^\MI &= \{s_1, s_2, s_3\}\\
+        (\exists \text{bekanntMit}.\exists\text{bekanntMit}.\text{Student})^\MI &= \{s_1, s_2, s_3\}\\
+        (\forall \text{hört}.\text{PflichtVL})^\MI &= \{s_1, s_3, v_1, v_2\}
+    \end{align*}
 \end{tafel}
 
 Verwendete Symbole:

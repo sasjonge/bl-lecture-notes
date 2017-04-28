@@ -17,7 +17,6 @@
 \usepackage{mathtools}
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{tabu} % for tables with defined width
-%\usepackage[sort]{natbib} % For quotationn
 \usepackage{biblatex}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
@@ -61,15 +60,7 @@
 % TIKZ %
 \usepackage{tikz}
 
-\usetikzlibrary{shapes.geometric,arrows,fit,matrix,positioning}
-\tikzset
-{
-    treenode/.style = {circle, draw=black, align=center,
-                          minimum size=1cm, anchor=center},
-    subtree/.style  = {regular polygon, regular polygon sides=3,
-                          draw=black, align=center,
-                          minimum size=1cm, anchor=center}
-}
+\usetikzlibrary{arrows.meta}
 
 
 \DeclareMathOperator{\rd}{rd}
