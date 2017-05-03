@@ -1,11 +1,15 @@
 FILENAME=main
+INFILES= main.tex $(wildcard settings/*) $(wildcard chapters/*) bibtex/bibliography.bib
 
-pdf:
-	make clean
+main.pdf: $(INFILES)
 	pdflatex $(FILENAME)
-	bibtex $(FILENAME)
+	biber $(FILENAME)
 	pdflatex $(FILENAME)
-	make clean
+	pdflatex $(FILENAME)
 
+very-clean: clean
+	rm -f main.pdf
+
+.PHONY: clean
 clean:
-	rm -rf *~ *.aux *.out *.log *.gz *.toc *.bbl *.blg *.tdo *.lof *.lot
+	rm -f *~ *.aux *.out *.log *.gz *.toc *.bbl *.bcf *.blg *.tdo *.lof *.lot *.loe *.run.xml

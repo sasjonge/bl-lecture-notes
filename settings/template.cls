@@ -32,9 +32,9 @@
 \declaretheorem[numberwithin=section, name = T]{tafel}
 
 \usepackage[headsepline]{scrlayer-scrpage}
-\renewcommand\sectionmarkformat{\thesection\autodot\quad}
-%\setkomafont{pageheadfoot}{\footnotesize\scshape}
 \KOMAoption{headsepline}{.1pt:}
+
+\renewcommand\sectionmarkformat{\thesection\autodot\quad}
 \automark{part}
 \automark*{section}
 \clearpairofpagestyles% entfernen der voreingestellten Inhalte
