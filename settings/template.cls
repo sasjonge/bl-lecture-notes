@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 
-% The usepackage's should be cleaned one day...
+\usepackage{microtype} % Microtypesetting for better layout
 
 \usepackage{graphicx} 	% show graphics
 \usepackage{hyperref} 	% use urls, link to sections, mail-addresses
@@ -13,7 +13,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{thmtools} %List of theorems
-\usepackage{mathtools}
+\usepackage{mathtools} %\DeclareMathOperator
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{biblatex}
 \usepackage{tabto}
@@ -57,6 +57,7 @@
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{positioning}
 
+%This has to be in the preamble
 \DeclareMathOperator{\rd}{rd}
 \DeclareMathOperator{\sub}{sub}
 % This is an attempt to fix spacing around \left( and \right)
