@@ -39,7 +39,7 @@
 \automark*{section}
 \clearpairofpagestyles% entfernen der voreingestellten Inhalte
 \cfoot{\pagemark}
-\ihead{\rightbotmark}
+\ihead{\headmark}
 
 %%%%%%%%%%%%%
 % page size %
