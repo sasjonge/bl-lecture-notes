@@ -1,14 +1,3 @@
-% Use of todos
-\newcommandx{\info}[2][1=] {
-	\todo[noprepend,linecolor=OliveGreen,backgroundcolor=OliveGreen!25,
-		  bordercolor=OliveGreen,#1]{#2}
-	\PackageWarning{[INFO]]}{#2}
-}
-\newcommandx{\missing}[2][1=] {
-	\todo[noprepend,linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}
-	\PackageWarning{[MISSING]}{#2}
-}
-
 % Backslash
 \newcommand{\bs} {\textbackslash}
 \newcommand{\MA}{\mathcal{A}}
@@ -24,8 +13,3 @@
 \newcommand{\ALCQ}{\mathcal{A}\mathcal{L}\mathcal{C}\mathcal{Q}}
 \newcommand{\ALCQI}{\mathcal{A}\mathcal{L}\mathcal{Q}\mathcal{I}}
 \let\emptyset\varnothing
-
-% leftragged tablecontent with size
-\newcolumntype{E}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}
-

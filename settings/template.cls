@@ -9,17 +9,14 @@
 
 \usepackage{graphicx} 	% show graphics
 \usepackage{hyperref} 	% use urls, link to sections, mail-addresses
-\usepackage{xargs}      % for more than one opt parameter in newcommands
 
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{thmtools} %List of theorems
 \usepackage{mathtools}
 \usepackage{stmaryrd} % for bigsqcap
-\usepackage{tabu} % for tables with defined width
 \usepackage{biblatex}
 \usepackage{tabto}
-\usepackage{todonotes}
 \usepackage{xcolor}
 \usepackage{csquotes} % for \enquote
 
@@ -57,9 +54,8 @@
 
 % TIKZ %
 \usepackage{tikz}
-
 \usetikzlibrary{arrows.meta}
-
+\usetikzlibrary{positioning}
 
 \DeclareMathOperator{\rd}{rd}
 \DeclareMathOperator{\sub}{sub}
