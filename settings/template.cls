@@ -18,8 +18,6 @@
 \usepackage{stmaryrd} % for bigsqcap
 \usepackage{tabu} % for tables with defined width
 \usepackage{biblatex}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.14}
 \usepackage{tabto}
 \usepackage{todonotes}
 \usepackage{xcolor}
