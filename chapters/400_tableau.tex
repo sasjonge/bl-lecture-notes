@@ -186,8 +186,10 @@ $\rd\left( C \right) \leq \left| C \right|$.
 Multimengen sind Mengen, in denen Elemente mehrfach vorkommen dürfen, z.B.:
 $$\{1,1,2,3,4,4,5,6,6,6\}$$
 
-Eine Multimengen über einer Menge $S$ ist Abbildung $$M:S\rightarrow\mathbb{N}$$, die die Anzahl des Vorkommen der Elemente aus $S$ beschreibt.
-Die meisten Begriffe übertragen sich von Mengen auf Multimengen:
+Eine Multimengen über einer Menge $S$ ist eine Abbildung
+$$M:S\rightarrow\mathbb{N}$$, die die Anzahl des Vorkommen der Elemente aus
+$S$ beschreibt.  Die meisten Begriffe übertragen sich von Mengen auf
+Multimengen:
 
 \begin{itemize}
 	\item Leere Menge $\emptyset: s \mapsto 0$ für alle $s \in S$
@@ -241,7 +243,7 @@ wohlfundiert.
 \begin{theorem}[Terminierung des Tableau-Algorithmus]
 Der Tableau-Algorithmus stoppt nach endlicher Zeit.
 \end{theorem}
-\setcounter{definition}{6}
+\setcounter{definition}{7}
 
 Beweis in 4 Schritten:
 \begin{itemize}
@@ -297,16 +299,17 @@ $\ML\left( v' \right) = \left\{ C \right\}$. Es gilt
 
 \end{itemize}
 
-Nun kann die Terminierung mittel Behauptung 3 beweisen:
+Nun kann die Terminierung mittels Behauptung 3 beweisen werden:
 
 \begin{tafel}[Beweis Terminerung Tableau-Algorithmus]
 
 \begin{proof}
-    Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jedes $B \in M_i$ enthält $MM_i$ die Zahl der \enquote{n$-$Anzahl der Regelanwendungen, mittels derer $B$ generiert wurde.}
+    Wir ordnen jedem $M_i$ eine Multimenge $MM_i$ zu. Für jeden Baum $B \in
+    M_i$ enthält $MM_i$ die Zahl der Regelanwendungen, mittels derer B
+    generiert wurde.
+    Weil $<$ auf $\mathbb{N}$ wohldefiniert ist, ist $<_{\text{mul}}$ auf $MM(\{0,\ldots,n\})$ wohldefiniert.
 
-Weil $<$ auf $\mathcal{N}$ wohldefiniert ist, ist $<_{mul}$ auf $MM(\{0,\ldots,n\})$ wohldefiniert.
-
-Offenbar gilt $MM_{i+1} <_{mul} MM_i$ für alle $i \geq 0$ *. Also werden nur endlich oft Regeln angewendet.
+    Offenbar gilt $MM_{i+1} <_{\text{mul}} MM_i$ für alle $i \geq 0$. Also ist die Folge der $MM_i$ endlich.
 \end{proof}
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/45mm.png}
@@ -314,95 +317,80 @@ Offenbar gilt $MM_{i+1} <_{mul} MM_i$ für alle $i \geq 0$ *. Also werden nur en
 
 \subsubsection{Korrektheit und Vollständigkeit}
 
-\begin{proposition}
-
-Wenn der Tableau-Algorithmus „erfüllbar`` zurückgibt, so ist $C_{0}$
+\begin{theorem}
+    Wenn der Tableau-Algorithmus \enquote{erfüllbar} zurückgibt, dann ist $C_{0}$
 erfüllbar.
-\end{proposition}
-
-\textbf{T4.6}
+\end{theorem}
 
 \begin{proof}
+    Wenn der Algorithmus \enquote{erfüllbar} zurückgibt, so hat er einen
+    \emph{vollständigen} I-Baum $B = (V, E, \ML)$ \emph{ohne offensichtlichen
+    Widerspruch} gefunden. Aus $B$ konstruieren wir Interpretation $\MI$ wie
+    folgt:
+    \begin{align*}
+        \Delta^\MI &= V\\
+        r^\MI &= \left\{(v, v') \middle| (v, r, v') \in E\right\} & \text{für alle Rollennamen $r$}\\
+        A^\MI &= \left\{v \middle| A \in \ML(v)\right\} & \text{für alle Konzeptnamen $A$}
+    \end{align*}
+    Die Erfüllbarkeit von $C_0$ folgt dann aus:
 
-Beweis per Induktion über die Struktur von $C$.
-„erfüllbar``-Ausgabe bedeutet widerspruchsfreier, vollständiger I-Baum
-$B = \left( V,E,L \right)$ gefunden. Konstruiere Interpretation $\MI$:
+    \emph{Behauptung}: Für alle Konzepte $C$ und $v \in V$ gilt
 
-\begin{itemize}
-\item
-  $\Delta^\MI = V$
-\item
-  $r^\MI = \left\{ \left( v,v^{'} \right) \middle| \left( v,r,v^{'} \right) \in E \right\}$
-  für alle Rollennamen $r$
-\item
-  $A^\MI = \left\{ v \middle| A \in L\left( v \right) \right\}$ für
-  alle Konzeptnamen $A$
-\end{itemize}
+    \begin{center}$C \in L\left( v \right)$ impliziert $v \in C^\MI$\end{center}
+\end{proof}
 
-Behauptung: Für alle Konzepte $C$ und $v \in V$ gilt
-
-\begin{center}$C \in L\left( v \right)$ impliziert $v \in C^\MI$\end{center}
-
-Da $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B_{\text{ini}}$ gilt
-auch $C_{0} \in L\left( v_{\text{ini}} \right)$ in $B$. Also
-$v_{\text{ini}} \in C_{0}^\MI$ nach Behauptung, weswegen dann
-$C_{0}$ erfüllbar.
-
-\textbf{I.A.} $C = A$ (Konzeptname) Gilt nach Definition von
-$\MI$.
-
-\textbf{I.S.}
+\begin{tafel}[Beweis der Behauptung für Korrektheit]
+        Die Behauptung impliziert Erfüllbarkeit von $C_0$. Da $C_0 \in \ML(v_{ini})$ in $B_{ini}$ ist, gilt auch $C_0 \in \ML(v_{ini})$ in $B$. Knotenbeschriftungen werden nie gelöscht. Also ist $v_{ini} \in C_0^\MI$ nach der Behauptung, folglich ist $C_0$ erfüllbar.
+    \begin{proof}
+        Beweis der Behauptung per Induktion über Struktur von $C$.
+        
+        \textbf{I.A.} $C = A$ (Konzeptname) Gilt nach Definition von
+        $\MI$.
+        
+        \textbf{I.S.}
 
 \begin{itemize}
-\item
-  $C = \neg A$
+\item $C = \neg A$
 
-\begin{quote}
-$A$ Konzeptname. Da $B$ keinen offensichtlichen Widerspruch hat,
-folgt das $A \notin L(v)$. Nach Definition von $\MI$ gilt
-$v \notin A^\MI$. Also $v \in \left( \neg A \right)^\MI$.
-\end{quote}
+$A$ ist ein Konzeptname. Da $B$ keinen offensichtlichen Widerspruch enthält,
+folgt aus $\neg A \in \ML(v)$, dass i $A \notin \ML(v)$. Nach Definition von
+$\MI$ gilt $v \notin A^\MI$. Also $v \in \left( \neg A \right)^\MI$.
 
-\item
-  $C = D \sqcap E$
-
-\begin{quote}
-$C \in L\left( v \right)$ 
-
-$\Rightarrow$ ($\sqcap$-Regel nicht anwendbar) $D \in L\left( v \right),\ E \in L\left( v \right)$ 
-
-$\Rightarrow$ (I.V.) $v \in D^\MI,\ v \in E^\MI$ 
-
-$\Rightarrow$ (Semantik) $v \in \left( D \sqcap E \right)^\MI$
-\end{quote}
+\item $C = D \sqcap E$
+    \begin{align*}
+        &C \in \ML(v)\\
+        &\implies (\sqcap\text{-Regel nicht anwendbar}) D \in \ML(v), E \in \ML(v)\\
+        &\implies (\text{I.V.}) v \in D^\MI,\ v \in E^\MI\\
+        &\implies (\text{Semantik}) v \in \left( D \sqcap E \right)^\MI
+    \end{align*}
 
 \item $C = D \sqcup E$
 
-\begin{quote}
-analog.
-\end{quote}
+analog zu $\sqcap$.
 
 \item $C = \exists r.D$
 
-\begin{quote}
-Da die $\exists$-Regel nicht anwendbar ist, gibt es $v'\in V$ mit $(v,r,v') \in E$ und $D \in L(v')$
+Da die $\exists$-Regel nicht anwendbar ist, gibt es $v'\in V$ mit $(v,r,v')
+\in E$ und $D \in \ML(v')$
 
-Nach I.V.: $v' \in D^\MI$; nach Konstruktion $(v,v') \in r^\MI$. Nach Semantik gilt dann: $v \in (\exists r.D^\MI)$
-\end{quote}
+Nach I.V. gilt $v' \in D^\MI$; nach Konstruktion $(v,v') \in r^\MI$, woraus
+$v \in (\exists r.D^\MI)$ folgt.
 
 \item $C = \forall r.D$
-\begin{quote}
-ähnlich.
-\end{quote}
+
+analog zu $\exists$.
 \end{itemize}
-\end{proof}
+    \end{proof}
+\end{tafel}
 
 \begin{definition}[Realisierbarkeit]
 
-Sei $B = \left( V,E,L \right)$ ein I-Baum. Interpretation $\MI$
-\emph{realisiert} $B$ gdw. es gibt eine Funktion
-$\pi\ :V \rightarrow \Delta^\MI$ so dass
-
+Sei $B = \left( V,E,\ML \right)$ ein I-Baum und $\MI$ eine Interpretation. $\MI$
+\emph{realisiert} $B$, wenn es eine Funktion
+\begin{align*}
+    \pi : V \rightarrow \Delta^\MI
+\end{align*}
+gibt, so dass gilt:
 \begin{itemize}
 \item
   $\left( v,r,v^{'} \right) \in E$ impliziert
@@ -412,22 +400,22 @@ $\pi\ :V \rightarrow \Delta^\MI$ so dass
   $\pi\left( v \right) \in C^\MI$
 \end{itemize}
 
-B ist \emph{realisierbar}, wenn es Interpretation $\MI$ gibt, die $B$
-realisiert. Menge $M$ von I-Bäumen ist \emph{realisierbar} gdw. ein
+$B$ ist \emph{realisierbar}, wenn es Interpretation $\MI$ gibt, die $B$
+realisiert. Eine Menge $M$ von I-Bäumen ist \emph{realisierbar} gdw. ein
 $B \in M$ realisierbar.
 \end{definition}
 
-Beachte: realisierbarer I-Baum enthält keinen offensichtlichen Widerspruch!
+Beachte: ein realisierbarer I-Baum enthält keinen offensichtlichen Widerspruch.
 
-\textbf{T4.7}
+\begin{tafel}[Beispiel Realisierbarkeit]\mbox{}\\
 
 \includegraphics[width=2.0in,height=4.0in]{media/47real.png}
+\end{tafel}
 
-\begin{proposition}{Vollständigkeit}
-
-Wenn $C_{0}$ erfüllbar, so gibt der Tableau-Algorithmus „erfüllbar``
+\begin{theorem}[Vollständigkeit]
+    Wenn $C_{0}$ erfüllbar ist, so gibt der Tableau-Algorithmus \enquote{erfüllbar}
 zurück.
-\end{proposition}
+\end{theorem}
 
 \textbf{T4.8}
 
