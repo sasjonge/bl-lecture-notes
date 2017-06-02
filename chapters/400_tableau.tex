@@ -241,6 +241,7 @@ wohlfundiert.
 
 \setcounter{definition}{4}
 \begin{theorem}[Terminierung des Tableau-Algorithmus]
+    \label{thm:termination}
 Der Tableau-Algorithmus stoppt nach endlicher Zeit.
 \end{theorem}
 \setcounter{definition}{7}
@@ -384,7 +385,7 @@ analog zu $\exists$.
 \end{tafel}
 
 \begin{definition}[Realisierbarkeit]
-
+    \label{def:realisierbarkeit}
 Sei $B = \left( V,E,\ML \right)$ ein I-Baum und $\MI$ eine Interpretation. $\MI$
 \emph{realisiert} $B$, wenn es eine Funktion
 \begin{align*}
@@ -412,81 +413,77 @@ Beachte: ein realisierbarer I-Baum enthält keinen offensichtlichen Widerspruch.
 \includegraphics[width=2.0in,height=4.0in]{media/47real.png}
 \end{tafel}
 
-\begin{theorem}[Vollständigkeit]
-    Wenn $C_{0}$ erfüllbar ist, so gibt der Tableau-Algorithmus \enquote{erfüllbar}
+\begin{theorem}[Vollständigkeit des Tableau Algorithmus]
+    Wenn $C_{0}$ erfüllbar ist, dann gibt der Tableau-Algorithmus \enquote{erfüllbar}
 zurück.
 \end{theorem}
 
-\textbf{T4.8}
-
 \begin{proof}
+    Sei $C_0$ erfüllbar. Nach \autoref{thm:termination} berechnet der Algorithmus eine \emph{endliche} Folge
+    \begin{align*}
+        M_0,\ldots,M_n
+    \end{align*}
+von Mengen von I-Bäumen. Behauptung: Für alle $i\leq n$ ist $M_i$ realisierbar.
 
-Per Induktion über $\MI$. 
+\begin{tafel}
+Beweis der Behauptung per Induktion über $i$.
 
-Sei $C_{0}$ erfüllbar. Nach \protect\hyperlink{proposition-4.5-terminierung}{Proposition 4.5} berechnet der Algorithmus endlich Folge $M_{0},\ldots,M_{n}$. Wir
-zeigen: 
+\textbf{I.A.} $i = 0, M_0 = \{ B_{ini}\}$. $B_{ini}$ ist realisierbar, da $C_0$ erfüllbar ist.
 
-$M_{i}$ ist realisierbar für alle $0 \leq i \leq n$. 
+\textbf{I.S.} $i \rightarrow i + 1$. Fallunterscheidung gemäß der Regel mit der $M_{i + 1}$ aus $M_i$ erzeugt wird. Sei B ein realisierbar Baum aus $M_i$, auf den eine Regel angewandt wird. Zu zeigen: veränderter Baum ist auch realisierbar.
 
-Daraus folgt: Es gibt realisierbaren Baum $B \in M_{n}$ und damit enthält $B$ keinen offensichtlichen Widerspruch. Also gibt der Algorithmus „erfüllbar`` zurück.
-
-\textbf{I.A.} $i = 0$. $M_{0} = {\{ B}_{\text{ini}}\}$.
-$B_{\text{ini}}$ ist realisierbar, weil $C_{0}$ erfüllbar.
-
-\textbf{I.S.} Fallunterscheidung gemäß der Regel, mit der $M_{i + 1}$
-aus $M_\MI$ erzeugt wurde. Sei $B$ realisierbarer Baum aus
-$M_i$, auf welchen Regel angewandt wird. Beispielhaft
-$\sqcup$-Regel:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $\sqcup$-Regel
-\end{enumerate}
-
-\begin{quote}
-Dann wird $B = \left( V,E,L \right)$ ersetzt durch
-$B^{'} = \left( V,E,L^{'} \right) \in M_{i + 1}$ und
-$B^{''} = \left( V,E,L^{''} \right) \in M_{i + 1}$ und es gibt
-$v \in V$ mit
-
+Exemplarisch an zwei Regeln:
 \begin{itemize}
-\item
-  $\left( C \sqcup D \right) \in L(v)$
-\item
-  $L^{'}\left( v \right) = L\left( v \right) \cup \left\{ C \right\}$,
-  $L^{''}\left( v \right) = L\left( v \right) \cup \left\{ D \right\}$
-\item
-  $L^{'}\left( u \right) = L^{''}\left( u \right) = L\left( u \right)$
-  für alle $u \neq v$
+    \item $\sqcup$-Regel: Dann wird $B = (V, E, \ML) \in M_i$ ersetzt durch $B' = (V, E, \ML') \in M_{i + 1}$, $B'' = (V, E, \ML'') \in M_{i + 1}$ und es gibt $v \in V$ mit 
+        \begin{align*}
+            &C \sqcup D \in \ML(v)\\
+            \ML'(v) &= \ML(v) \cup \{C\}\\
+            \ML''(v) &= \ML(v) \cup \{D\}\\
+            \ML(u) &= \ML'(u) = \ML''(u) \text{ für alle } u \neq v
+        \end{align*}
+        Es genügt zu zeigen, dass wenn $B$ realisierbar ist, dann ist $B'$ oder $B''$ realisierbar. Sei $\MI$ eine Interpretation, die $B$ realisiert und $\pi: V \rightarrow \Delta^\MI$ eine Abbildung wie in \autoref{def:realisierbarkeit}. Dann gilt $\pi(v) \in (C \cup D)^\MI$. Nach Semantik ist $\pi(v) \in C^\MI \vee \pi(v) \in D^\MI$. Im ersten Fall realisiert $\MI$ den Baum $B'$, im zweiten $B''$.
+    \item $\exists$-Regel: Dann wird $B$ ersetzt durch $B' = (V', E', \ML') \in M_{i + 1}$ und es gibt $v, v' \in V$ mit
+        \begin{align*}
+            &\exists r.C \in \ML(v)\\
+            V' &= V \cup \{V'\}\\
+            E' &= E \cup \{(v, r, v')\}\\
+            \ML'(v') &= \{c\}\\
+            \ML'(u) &= \ML(u) \text{ für alle } u \in V
+        \end{align*}
+        Es genügt zu zeigen, dass wenn $B$ realisierbar ist, auch $B'$ realisierbar ist. Sei $\MI$ eine Interpretation, die $B$ realisiert und $\pi$ eine Abbildung wie in \autoref{def:realisierbarkeit}. Dann gilt $\pi(v) \in (\exists r.C)^\MI$, dann gibt es $d \in \Delta^\MI$ mit $(\pi(u), d) \in r^\MI$ und $d \in C^\MI$. $\pi$ erweitert um $\pi(v') = d$ bezeugt, dass $\MI$ $B'$ realisiert.
+        %TODO: there is a mistake in the above
+
 \end{itemize}
 
-Es genügt zu zeigen, dass wenn $B$ realisiertbar, dann $B'$ oder
-$B''$ realisierbar. 
+\end{tafel}
 
-Sei $\MI$ Interpretation, die $B$ realisiert und $\pi\ :V \rightarrow \Delta^\MI$ Abbildung wie in \protect\hyperlink{realisierbarkeit}{Definition 4.8}. Dann gilt $\pi\left( v \right) \in \left( C \sqcup D \right)^\MI$. Nach Semantik: $\pi\left( v \right) \in C^\MI$ oder $\pi\left( v \right) \in D^\MI$. Also realisiert $\MI$ den Baum $B'$ oder $B''$.
-\end{quote}
+
 \end{proof}
 
 \subsubsection{Komplexitätsanalyse}\label{praktikabilituxe4t}
 
-Wir beobachten: 
+Nach dem Beweis von \autoref{thm:termination}, können im Tableau Algorithmus die I-Bäume höchstens exponentiell groß werden. Dieser Fall kann tatsächlich eintreffen:
+\begin{itemize}
+    \item Sei $\forall r^i.C$ eine Abkürzung für $\underbrace{\forall r.\ldots \forall r.}_{i\text{-mal}}C$
+    \item Dann generiert der Erfüllbarkeitstest von
+        \begin{align*}
+            \bigsqcap_{i < n} \forall r^i.(\exists r.B \sqcap \exists r.\neg B)
+        \end{align*}
+        einen Baum der Größe $2^n$.
+\end{itemize}
+\begin{tafel}[TODO]
 
-I-Bäume können höchstens exponentiell groß werden.
+\end{tafel}
 
-Dieser Fall kann tastsächlich eintreffen. Beispielhaft, der Erfüllbarkeitstest von:
-$$\bigsqcap_{i < n} \forall r^i .(\exists r.B \sqcap \exists r.\neg B)$$
-generiert Baum der Größe $2^n$.
-
-Also: exponentieller Zeit- und Platzverbrauch (sogar 2-exponentiell)
+Also: mindestens \emph{exponentieller} Zeit- und Platzverbrauch (wegen der Baum\emph{mengen} sogar \emph{doppelt} exponentiell, also $2^2^n$).
 
 \subsubsection{Praktikabilität}
 
-Offenbar wäre eine naive Implementierung nicht effizient. Dabei kann man aber einige Hinweise/Optimierungen bei der Implementierung beachten:
+Offenbar ist eine naive Implementierung nicht effizient. Dabei kann man aber einige Hinweise/Optimierungen bei der Implementierung beachten:
 
 \begin{itemize}
 	\item Es wird nur ein Baum zur Zeit generiert, keine Menge
-	\item bei der $\sqcup$-Regel muss man sich also entscheiden (Heuristik); ggf. Entscheidung revidiieren (Backtracking).
+	\item bei der $\sqcup$-Regel muss man sich entscheiden (Heuristik); ggf. Entscheidung revidieren (Backtracking).
 	\item Es wird nur ein Teil des Baumes (Pfad) im Speicher gehalten.
     \item Backjumping: Führe Buch über die \enquote{Herkunft} von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
 \end{itemize}
