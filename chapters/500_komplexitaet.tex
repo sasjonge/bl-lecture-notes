@@ -31,8 +31,8 @@ $t \subseteq \sub\left( C_{0},T \right)$, so dass
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  $A \in t$ gdw. $\neg A \notin t$ für alle
-  $\neg A \notin \sub\left( C_{0},T \right)$
+  $A \in t$ gdw. $\neg A \in t$ für alle
+  $\neg A \in \sub\left( C_{0},T \right)$
 \item
   $C \sqcap D \in t$ gdw. $C \in t$ und $D \in t$ für alle
   $C \sqcap D \in \sub\left( C_{0},T \right)$
@@ -48,7 +48,7 @@ $t \subseteq \sub\left( C_{0},T \right)$, so dass
 
 Beispiel:
 
-$C_0 = A$, $\MT = \{\top \subseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
+$C_0 = A$, $\MT = \{\top \sqsubseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
 
 Dann ist $$sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
 
@@ -166,7 +166,7 @@ Typen:
 \begin{itemize}
   \item $t_0 = M \cup \{\neg A\}$
   \item $t_1 = M \cup \{A,\exists r.A\}$
-  \item $t_1 = M \cup \{\neg A,\exists r.A\}$
+  \item $t_2 = M \cup \{\neg A,\exists r.A\}$
 \end{itemize}
 
 Keine der Typen ist schlecht. Also $\Gamma_1 = \{t_0,t_1,t_2\}$
