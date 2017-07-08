@@ -318,7 +318,7 @@ Nun kann die Terminierung mittels Behauptung 3 beweisen werden:
 
 \subsubsection{Korrektheit und Vollständigkeit}
 
-\begin{theorem}
+\begin{theorem}\label{thm-korrektheit1}
     Wenn der Tableau-Algorithmus \enquote{erfüllbar} zurückgibt, dann ist $C_{0}$
 erfüllbar.
 \end{theorem}
@@ -475,7 +475,7 @@ Nach dem Beweis von \autoref{thm:termination}, können im Tableau Algorithmus di
 
 \end{tafel}
 
-Also: mindestens \emph{exponentieller} Zeit- und Platzverbrauch (wegen der Baum\emph{mengen} sogar \emph{doppelt} exponentiell, also $2^2^n$).
+Also: mindestens \emph{exponentieller} Zeit- und Platzverbrauch (wegen der Baum\emph{mengen} sogar \emph{doppelt} exponentiell, also $2^{2^n}$).
 
 \subsubsection{Praktikabilität}
 
@@ -488,239 +488,296 @@ Offenbar ist eine naive Implementierung nicht effizient. Dabei kann man aber ein
     \item Backjumping: Führe Buch über die \enquote{Herkunft} von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
 \end{itemize}
 
-\subsection{ALC mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
+\begin{tafel}[Demonstration des Vorteils von Backumping]
+    Sei 
+    \begin{align*}
+    \ML(v) = \{\overbrace{\exists r.A \sqcup B}^1, \overbrace{A_1 \sqcup A_1'}^2, \ldots, \overbrace{A_n \sqcup A_n'}^{n + 1}, \forall r.\neg A\}
+    \end{align*}
+    und angenommen der Tableau-Algorithmus verarbeitet die Konzepte aus $\ML(x)$ der Reihe nach und wählt immer zuerst das linke Disjunkt.
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s1) at (0, 3) {$v$};
+            \node (s2) at (0, 0) {$v'$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {\scriptsize{r}} (s2);
+            \node at (s1) [right = 0mm of s1]
+            {$\ML(v) \cup \{\overbrace{\exists r.A}^1, \overbrace{A_1}^2, \ldots, \overbrace{A_n}^{n + 1}\}$};
+            \node at (s2) [right = 0mm of s2] {$\{A, \neg A\}$};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    Standard Backtracking probiert $2^n$ sinnlose Alternativen bevor die Ursache des Problems gefunden wird ($2, \ldots, n + 1$). Mit Backjumping wird Buch über dir Herkunft von Konzepten geführt und direkt zur Ursache des Problems zurückgesprungen ($1$).
+\end{tafel}
 
-Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in $\ALC$  \emph{bzgl. TBoxen}.
+\subsection{\texorpdfstring{$\ALC$}{ALC} mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
 
-Jede TBox $\MT$ ist äquivalent zu einer TBox der Form
-$\left\{ \top \sqsubseteq C_{\MT} \right\}$: 
+Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in $\ALC$  \emph{bzgl. TBoxen}. Wir beobachten, dass jede TBox $\MT$ äquivalent ist zu einer TBox der Form
+$\left\{ \top \sqsubseteq C_{\MT} \right\}$ mit: 
+\begin{align*}
+C_{\MT} := \bigsqcap_{C \sqsubseteq D \in \MT}\neg C \sqcup D
+\end{align*}
 
-\begin{center}setze $C_{\MT} := \prod_{C \sqsubseteq D \in \MT}^{}{\neg C \sqcup D}$.\end{center}
-
-\textbf{T4.11} Beispiel
+\begin{tafel}[Beispiel TBox Normalisierung]
 
 $$\MT = \{A \sqsubseteq \exists r.B, A \sqcup B \sqsubseteq \forall r.B\}$$
 
 Daraus wird
 
-$$\{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap (\neg (A \sqcup B) \sqcup \forall r.B)\}$$
+$$\MT' = \{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap (\neg (A \sqcup B) \sqcup \forall r.B)\}$$
 
 in NNF:
 
-$$\MT' = \{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap ((\neg A \sqcap \neg B) \sqcup \forall r.B)\}$$
+$$\MT'' = \{\top \sqsubseteq (\neg A \sqcup \exists r.B) \sqcap ((\neg A \sqcap \neg B) \sqcup \forall r.B)\}$$
+\end{tafel}
 
-Desweiteren nehmen wir an, dass:
+Daher können wir im Folgenden annehmen:
 
 \begin{itemize}
-	\item Eingabe $C_0$ in NNF;
-	\item Eingabe $\MT$ hat Form $\{\top \sqsubseteq C_{\MT}\}$ mit $C_{\MT}$ in NNF
+	\item die Eingabe $C_0$ ist in NNF und
+	\item die Eingabe $\MT$ hat Form $\{\top \sqsubseteq C_{\MT}\}$ mit $C_{\MT}$ in NNF
 \end{itemize}
 
 Nun modifiziere den vorigen Algorithmus durch Hinzufügen folgender Regel:
 
-\subsubsection{TBox-Regel}\label{tbox-regel}
-
-Wähle $v \in V$ so dass $C_{\MT} \notin L\left( V \right)$ und
+\begin{center}
+\emph{TBox-Regel}: wähle $v \in V$ so dass $C_{\MT} \notin L\left( V \right)$ und
 erweitere $L\left( v \right)$ um $C_{\MT}$.
+\end{center}
 
-Problem: Terminiert nicht!
+Problem: der resultierende Algorithmus Terminiert nicht!
 
-\textbf{T4.12}
+\begin{tafel}[Beispiel Nicht-Terminierung]\mbox{}\\
+    Sei $C_0 = A$ und $\MT = \{\top \sqsubseteq \exists r.A\}$.
 
-\includegraphics[width=3.71910in,height=1.83200in]{media/412endl.png}
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (s1) at (0, 3) {};
+            \node (s2) at (0, 1.5) {};
+            \node (s3) at (0, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {r} (s2);
+            \path [->] (s2) edge node {r} (s3);
+            \node at (s1) [right = 1mm of s1] {$A, \exists r.A$};
+            \node at (s2) [right = 1mm of s2] {$A, \exists r.A$};
+            \node at (s3) [right = 1mm of s3] {$A, \exists r.A$};
+            \node (s8) at (0, -0.7) {$\vdots$};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+\end{tafel}
 
 \subsubsection{Blockieren}\label{blockieren}
 
-Dies lösen wir, indem wir nur ein endliches Anfangsstück eines Baummodells anhand dessen sich die Existenzeines vollständigen Modells entscheiden lässt konstruieren. Dazu müssen wir die Anwendung der $\exists$-Regel einschränken.
+Der Algorithmus terminiert nicht, da die Tiefe der Baummodelle unendlich sein kann. Dies lösen wir, indem wir nur ein \emph{endliches Anfangsstück} eines Baummodells anhand dessen sich die Existenz eines vollständigen Modells entscheiden lässt konstruieren. Dazu müssen wir die Anwendung der $\exists$-Regel einschränken.
 
-\begin{definition}[Blockiert]
+\begin{definition}[Blockieren]
 
-Sei $\left( V,E,L \right)$ ein I-Baum und $u,v \in V$. Dann ist
-$v$ direkt blockiert durch $u$, wenn
+Sei $\left( V,E,\ML \right)$ ein I-Baum und $u,v \in V$. Dann ist
+$v$ \emph{direkt blockiert durch} $u$, wenn
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $u$ Vorgänger von $v$ in $B$ ist und
-\item
-  $L\left( v \right) \subseteq L\left( u \right)$
+\item $u$ Vorgänger von $v$ in $B$ ist und
+\item $L\left( v \right) \subseteq L\left( u \right)$
 \end{enumerate}
 
-$v$ ist blockiert, wenn $v$ direkt blockiert ist oder einen direkt
-blockierten Vorgänger hat.
+$v$ ist \emph{blockiert}, wenn $v$ direkt blockiert ist oder einen direkt
+blockierten Vorgänger hat. Beachte, dass \enquote{Vorgänger} kein direkter Vorgänger sein muss.
 \end{definition}
 
-\subsubsection{\texorpdfstring{Neue $\exists$-Regel
-($\exists^{'}$-Regel)}{Neue \textbackslash{}exists-Regel (\textbackslash{}exists\^{}\{'\}-Regel)}}\label{neue-exists-regel-exists-regel}
+\begin{tafel}[Beispiel Blockieren]\mbox{}\\
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (v0) at (1, 1.5) {$v_0$};
+            \node (v1) at (0, 0) {$v_1$};
+            \node (v2) at (2, 0) {$v_2$};
+            \node (v3) at (2, -1.5) {$v_3$};
+            \node (v4) at (2, -3) {$v_4$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (v0) edge node {r} (v1);
+            \path [->] (v0) edge node {r} (v2);
+            \path [->] (v2) edge node {r} (v3);
+            \path [->] (v3) edge node {r} (v4);
+            \node at (v0) [right = 1mm of v0]
+            {$A \sqcap \exists r.A, A, \exists r.A, \exists r.\exists r.(A\sqcap \exists r.A)$};
+            \node at (v1) [left = 1mm of v1] {$A$};
+            \node at (v2) [right = 1mm of v2] {$\exists r.(A\sqcap \exists r.A)$};
+            \node at (v3) [right = 1mm of v3] {$A \sqcap \exists r.A, A, \exists r.A$};
+            \node at (v4) [right = 1mm of v4] {$A, B$};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    Dann ist 
+    \begin{itemize}
+        \item $v_1$ direkt blockiert durch $v_0$,
+        \item $v_3$ direkt blockiert durch $v_0$,
+        \item $v_1, v_3, v_4$ sind blockiert und
+        \item $v_0, v_2$ sind nicht blockiert.
+    \end{itemize}
+\end{tafel}
 
+\emph{$\exists'$-Regel}
 \begin{itemize}
 \item
-  Wähle $v \in V$ und $\exists r.C \in L\left( v \right)$ so dass
-  $v$ \emph{nicht blockiert ist und} es kein $v^{'} \in V$ gibt mit
-  $\left( v,r,v^{'} \right) \in E$ und $C\  \in L\left( v' \right)$
+  Wähle $v \in V$ und $\exists r.C \in \ML\left( v \right)$ so dass
+  $v$ \emph{nicht blockiert ist und} es kein $v' \in V$ gibt mit
+  $\left( v,r,v' \right) \in E$ und $C \in \ML\left( v' \right)$
 \item
-  erweitere V um neuen Konten $v^{'}$ und $E$ um
-  $\left( v,r,v^{'} \right)$; setze
-  $L\left( v^{'} \right) = \left\{ C \right\}$
+  erweitere V um neuen Knoten $v'$ und $E$ um
+  $\left( v,r,v' \right)$; setze
+  $\ML\left( v' \right) = \left\{ C \right\}$
 \end{itemize}
+
+\begin{tafel}[Beispiel $\exists'$-Regel]\mbox{}\\
 
 \includegraphics[width=5.71910in,height=2.33200in]{media/414block.png}
 
+\end{tafel}
+
 \subsubsection{Vollständigkeit}\label{vollstuxe4ndigkeit}
 
-\begin{proposition}
-Wenn $C_0$ erfüllbar bzgl. $\MT$, so gibt der Algorithmus erfüllbar zurück.
-\end{proposition}
+\begin{theorem}
+    Wenn $C_0$ bezüglich $\MT$ ist, dann gibt der Algorithmus \enquote{erfüllbar} zurück.
+\end{theorem}
 
 Beweis wie ohne TBoxen: Alle $M_{0},\ldots,\ M_{n}$ sind realisierbar
 bzgl. $\MI$ (Induktion), also enthält $M_{n}$ einen Baum ohne
-offensichtlichen Widerspruch (Nur neue Fallunterscheidung für TBox-Regel und Realisierbarkeitsbegriff auf TBoxen erweitert).
+offensichtlichen Widerspruch. Unterschied hierbei ist, dass Realisierbarkeit bezüglich Modellen von $\MT$ definiert ist und es einen neuen Fall für die TBox-Regel gibt.
 
 \subsubsection{Korrektheit}\label{korrektheit}
 
-\begin{proposition}
+\begin{theorem}
     Wenn der Algorithmus \enquote{erfüllbar} zurückgibt, so ist $C_0$ erfüllbar bzgl. $\MT$
-\end{proposition}
+\end{theorem}
 
-\textbf{T4.15}
-
-Beweisskizze per Induktion über die Struktur von $C$. Definiere
-Interpretation $\MI$:
-
-\begin{itemize}
-\item
-  $\Delta^\MI = \left\{ v \in V \middle| \text{v\ }\mathrm{\text{nicht\ blockiert}} \right\}$
-\item
-  $r^\MI = \left\{ \left( v,v^{'} \right)\  \middle| \ \left( v,r,v^{'} \right) \in E \right\} \cup \left\{ \left( v,u \right)\  \middle| \ \exists\left( v,r,v^{'} \right) \in E\mathrm{\ }\mathrm{\text{und}}\mathrm{\ }v^{'}\mathrm{\ }\mathrm{\text{direkt\ blockiert\ durch}}\mathrm{\ }u \right\}$
-\item
-  $A^\MI = \left\{ v \middle| A \in L\left( v \right) \right\}$
-\end{itemize}
-
-Behauptung: Für alle ALC-Konzepte $C$ und $v \in \Delta^\MI$ gilt:
-$$C \in L\left( v \right) \Rightarrow v \in C^\MI$$
-Die Behauptung impliziert wie gewünscht, dass
-
-\begin{itemize}
-\item
-  $\MI$ Modell von $\MT$ ist.
-
-Da die TBox-Regel nicht anwendbar ist, gilt $C_{\MT} \in L\left( v \right)$ für alle $v \in V$. Also $v \in C_{\MT}^\MI$ für alle $v \in \Delta^\MI$.
-
-\item
-  $\MI$ Modell von $C_{0}$ ist.
-
-Da $C_{0} \in L\left( v_{\text{ini}} \right)$ gilt nach Behauptung
-$v_{\text{ini}} \in C_{0}^\MI$.
-\end{itemize}
-
-\textbf{I.A.} Siehe Beweis zu
-\protect\hyperlink{proposition-4.7-korrektheit}{Proposition 4.7}.
-
-\textbf{I.S.} Schritte wie in Beweis zu Proposition 4.7, außer:
-
-\begin{itemize}
-\item
-  $C = \exists r.D$
-\end{itemize}
-
-Sei $\exists r.D \in L\left( v \right)$. Da die $\exists'$-Regel
-nicht anwendbar ist, gibt es $v^{'} \in V$ mit
-$\left( v,r,v^{'} \right) \in E$ und $D \in L\left( v \right)$.
-Fallunterscheidung:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $v'$ unblockiert. Dann $\left( v,v^{'} \right) \in r^\MI$
-  (Definition $\MI$), $v^{'} \in D^\MI$ (\textbf{I.V.})
-  $\Rightarrow v \in \left( \exists r.D \right)^\MI$
-\item
-  $v^{'}$ blockiert. Da der direkte Vorgänger $v$ von $v'$
-  unblockiert ist, ist $v'$ direkt blockiert von unblockiertem
-  Vorgänger $u$. Es gilt:
-\end{enumerate}
-
-\begin{itemize}
-\item
-  $\left( v,u \right) \in r^\MI$ nach Definition $r^\MI$
-\item
-  $D \in L\left( v \right) \subseteq L\left( u \right)$
-  (Blockierungsbedingung)
-\item
-  $\Rightarrow u \in D^\MI$ (\textbf{I.V.})
-\end{itemize}
-
-\begin{quote}
-Also $v \in \left( \exists r.D \right)^\MI$.
-\end{quote}
-
-\begin{itemize}
-\item
-  $C = \forall r.D$
-\end{itemize}
-
-Ähnlich zu oberem Fall.
+\begin{proof}
+    Analog zu \autoref{thm-korrektheit1} konstruieren wir aus einem vollständigen I-Baum $B = (V, E, \ML)$ ohne offensichtlichen Widerspruch ein Modell $\MI$:
+    \begin{align*}
+        \Delta^\MI = &\{ v \in V \mid v \text{ unblockiert } \}\\
+        r^\MI = &\{(v, v') \in \Delta^\MI \times \Delta^\MI \mid (v, r, v') \in E\}\\
+                &\cup \{(v, u) \in \Delta^\MI \times \Delta^\MI \mid \exists (v, r, v') \in E, v' \text{ direkt blockiert von u }\}\\
+        A^\MI = & \{ v \mid A \in \ML(v)\}
+    \end{align*}
+    Behauptung: Für alle Konzepte $C$ und Knoten $v \in \Delta^\MI$ gilt:
+    \begin{align*}
+        C \in \ML(v) \text{ impliziert } v \in C^\MI 
+    \end{align*}
+    \begin{tafel}
+    Die Behauptung impliziert, dass $C_0$ bezüglich $\MT$ erfüllbar ist:
+    \begin{itemize}
+        \item Da $C_0 \in \ML(v_{\text{ini}}) \implies v_{\text{ini}} \in C^\MI$
+        \item Da die TBox-Regel nicht anwendbar ist, gilt $C_\MT \in \ML(v)$ für alle $v$, also $v \in C^\MI_\MT$
+        \item Also ist $\MI$ Modell von $\MT$ ($\MI \models \MT$).
+    \end{itemize}
+    Beweis der Behauptung per Induktion über Struktur von $C$. Die Fälle $C = A$, $C=\neg A$, $C=D\sqcap E$, $C = D\sqcup E$ sind analog zum Fall ohne TBoxen.
+    \begin{itemize}
+        \item $C = \exists r.D$:  Sei $\exists r.D \in \ML(v)$, zu zeigen $v \in {(\exists r.D)}^\MI$.
+            Da die $\exists'$-Regel nicht mehr anwendbar ist, gibt es $v' \in V$ mit $(v, r, v') \in E$ und $D \in \ML(v')$.
+            \begin{itemize}
+                \item 1.Fall $v'$ unblockiert. Dann  $(v, v') \in r^\MI$ (Definition von $\MI$) und $v' \in D^\MI$ (IV).
+                \item 2.Fall $v'$ ist blockiert. Da $v'$ direkter Nachfolger von $v$, ist $v'$ direkt blockiert von unblockierten Vorgänger $u$ von $v$ (oder $u = v$). Es gilt $(v, u) \in r^\MI$ (Definition $\MI$), außerdem $D \in \ML(v') \subseteq \ML(u)$, also $u \in D^\MI$ nach IV.
+            \end{itemize}
+        \item $C = \forall r.D$:  Sei $(v, u) \in r^\MI$ zu zeigen $u \in D^\MI$. Sei $(\forall r.D) \in \ML(v)$.
+            \begin{itemize}
+                \item 1.Fall $(v, r, u) \in E$ $u$ unblockiert. Da $\forall$-Regel nicht anwendbar ist, gilt $D \in \ML(u)$, also $u \in D^\MI$ nach IV.
+                \item 2.Fall $(v, r, v') \in E$, $v'$ direkt blockiert von $u$. Da $\forall$-Regel nicht anwendbar, gilt $D \in \ML(v')$. Da $\ML(v') \subseteq \ML(u)$ gilt $D \in \ML(u)$, also auch $u \in D^\MI$ nach IV.
+            \end{itemize}
+    \end{itemize}
+    \end{tafel}
+\end{proof}
 
 \subsubsection{Terminierung}\label{terminierung}
 
-\begin{proposition}
+\begin{theorem}[Terminierung]
+    \label{thm:termination2}
 Der Tableau-Algorithmus stoppt nach endlicher Zeit.
-\end{proposition}
+\end{theorem}
 
-Beweis analog zu den ohne TBoxen (Prop. 4.5), aber mit Einbezug der TBox. Wir zeigen es also in den selben Schritten:
-
-Beweis in 4 Schritten:
+\begin{proof}
+    Beweis analog zu den ohne TBoxen (\autoref{thm:termination}), aber mit Einbezug der TBox. Wir zeigen es also in den selben Schritten:
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
-  Es werden nur I-Bäume mit einem Verzweigungsgrad $\leq \left| C_{0} \right| + \color{red} \left| \MT \right|$ generiert.
+  Es werden nur I-Bäume mit einem Verzweigungsgrad $\leq k := \left| C_0 \right| + \left| \MT \right|$ generiert.
 \item
-  Es werden nur I-Bäume mit einer Tiefe $\color{red} 2^k$ generiert.
-  \begin{quote}
-  \textbf{T4.16}
-
-  Angenommen, es wird ein I-Baum der Tiefe $> 2^k$ erzeugt.
-
-  Dann wird irgendwann die $\exists '$-Regel auf einen Knoten $v$ der Tiefe $2^k$ angewendet.
+  Es werden nur I-Bäume mit einer Tiefe von maximal $2^k$ generiert.
+  \begin{tafel}
+  Angenommen, es wird ein I-Baum der Tiefe $> 2^k$ erzeugt. Dann wird irgendwann die $\exists '$-Regel auf einen Knoten $v$ der Tiefe $2^k$ angewendet.
 
   Betrachte Pfad $v_0, \ldots , v_{2^k}$ von der Wurzel bis v. Dieser Pfad hat $2^k+1$ Knoten.
 
   Weil es nur $2^k$ möglich Knotenbeschriftungen gibt, muss es auf dem Pfad zwei Knoten $v_i$ und $v_j$ geben, mit $0 \leq i < j \leq 2^k$, welche dieselben Knotenbeschriftungen haben, also $L(v_i) = L(v_j)$. Also ist $v_j$ durch $v_i$ blockiert, weswegen auch $v$ blockiert ist. $\lightning$
 
   Widerspruch zur Anwendung der $\exists '$-Regel auf $v_j$, also ist die Annahme falsch.
-  \end{quote}
+  \end{tafel}
 \item
-  Sei $M_{0},M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
+  Sei $M_0,M_1,\ldots$ die erzeugte Folge und $B \in M_\MI$ für
   ein $i \geq 0$. Dann ist $B$ durch die Anwendung von maximal
-  $\color{red} k^{2^{k}} \cdot k \leq 2^{2^{3k}}= n$ Regeln entstanden (Knoten im Baum mal Größe Knotenbeschriftung).
+  \begin{align*}
+      \underbrace{k^{2^k}}_\text{Knoten im Baum} \cdot
+      \underbrace{k}_\text{Größe Knotenbeschriftungen} \leq 2^{2^{3k}}
+  \end{align*}
+  Regeln entstanden.
 \end{enumerate}
 
-Danach kann Terminierung wie gehabt mittels Behauptung 3 bewiesen werden.
+Danach kann Terminierung wie gehabt mittels Behauptung 3 und einer Multimengen-Ordnung bewiesen werden.
 
-\subsubsection{Komplexität}
+\end{proof}
 
-Im Beweis zum 3. Schritt der Terminierung haben wir gesehen, dass die I-Bäume höchstens doppelt exponentiell groß werden.
+\subsubsection{Komplexitätsanalyse}
 
-Dieser Worst-Case kann eintreten!
+Es kann beobachtet werden, dass die I-Bäume höchstens \emph{doppelt} exponentiell groß werden. (Beweis von \autoref{thm:termination2})
+
+Dieser Worst-Case kann eintreten:
 
 \begin{lemma}
-Es gibt Eingabe $C_0$, $\MT$ für die der Tableau-Algorithmus einen Baum von exponentieller Tiefe generiert.
+Es gibt Eingabe $C_0$, $\MT$, für die der Tableau-Algorithmus einen Baum von exponentieller Tiefe generiert.
 \end{lemma}
 
-Also: 2-exponentieller Zeit- und Platzaufwand (sogar 3-exponentiell!).
+Idee: Verwende Konzeptnamen $A_0,\ldots, A_{n - 1}$ als Bits eines binären Zählers. Setze
+\begin{align*}
+    \top \sqsubseteq \exists r. \top \sqcap \exists s.\top
+\end{align*}
+und erzwinge, dass der Zähler entlang der r/s-Kanten inkrementiert wird (modulo $2^n$). Dann wiederholt sich erst nach $2^n + 1$ Schritten der Wert des Zählers und es kann blockiert werden.
+Setze also $C_0 = \neg A_0 \sqcap \dots \sqcap \neg A_{n - 1}$ und
+\begin{align*}
+    \MT = \{&\top \sqsubseteq \exists r.\top \sqcap \exists s.\top \sqcap\\
+            &\bigsqcap_{k<n} (\overbrace{(A_0 \sqcap \dots \sqcap A_{k - 1} \implies \forall r/s.\neg A_k)}^1\\
+            & \overbrace{(A_0\sqcap \dots \sqcap A_{k - 1} \sqcap \neg A_k \implies \forall r/s. A_k)}^2\\
+            & \overbrace{((\neg A_0 \sqcup \dots \sqcup \neg A_{k - 1}) \sqcap A_k \implies \forall r/s A_k)}^3\\
+            & \overbrace{((\neg A_0 \sqcup \dots \sqcup \neg A_{k - 1}) \sqcap \neg A_k \implies \forall r/s \neg A_k)}^4)
+\end{align*}
+
+1 + 2: k-tes Bit wird geändert falls alle Bits $0 \ldots k-1$ den Wert 1 haben. 3 + 4: sonst bleibt das k-te Bit gleich.
+\begin{align*}
+    \left| \MT \right| = \mathcal{O}(n^2)\\
+    \left| C \right| = \mathcal{O}(n)
+\end{align*}
+
+
+Also: mindestens 2-exponentieller Zeit- und Platzaufwand (wegen der Baummengen sogar sogar 3-exponentiell!).
 
 \subsubsection{Bemerkung zur TBox-Regel}
 
-TBoxen führen zu Backtracking:
-
-\begin{center}Normalisierung von $\MT$ zu $\{\top \sqsubseteq \bigsqcap_{C \sqsubseteq D \in \MT} \neg C \sqcup D\}$\end{center}
+TBoxen führen zu erheblich mehr Backtracking:
+\begin{align*}
+    \text{Normalisierung von }\MT\text{ zu }\{\top \sqsubseteq \bigsqcap_{C \sqsubseteq D \in \MT} \neg C \sqcup D\}
+\end{align*}
 
 Daher wird jede $\sqcup$-Regel für \emph{Konzeptinklusion} auf \emph{jeden} Knoten angewendet!
 
-Also braucht man für eine effiziente Implementierung Optimerungstechniken, die die Dijsunktionen, soweit möglich, eliminieren (\enquote{Absorption}).
+Also braucht man für eine effiziente Implementierung Optimerungstechniken, die die \enquote{TBox-Disjunktionen}, soweit möglich, eliminieren (\enquote{Absorption}).
 
-\subsubsection{Erweiterungen}
+\begin{tafel}[Absorption --- TODO]
+
+\end{tafel}
+
+\subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}
 
 Der Algorithmus kann auch auf $\ALCI$, $\ALCQ$ und $\ALCQI$ erweitert werden.
 
