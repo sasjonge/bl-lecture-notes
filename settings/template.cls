@@ -69,8 +69,7 @@
 
 \usepackage{enumitem}
 
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[noend]{algpseudocode}
 
 
 \endinput
