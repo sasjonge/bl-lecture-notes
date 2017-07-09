@@ -10,18 +10,18 @@ In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
 ExpTime-Vollständig.
 \end{theorem}
 
-Mit Lemma 2.9: Subsumtion und Äquivalenz ExpTime-Vollständig.
+Mit Lemma 2.9: Subsumtion und Äquivalenz ExpTime-vollständig.
 
-Wir beginnen mit oberer Schranke (Enthaltensein in ExpTime):
+Wir beginnen mit der oberer Schranke (Enthaltensein in ExpTime):
 
 \begin{itemize}
   \item wir verwenden ein Verfahren aus der Modallogik: Typelimination
-  \item basiert auf syntaktischem Typ-Begriff
+  \item basiert auf \emph{syntaktischem} Typ-Begriff
 \end{itemize}
 
 \subsubsection{Syntaktische Typen}\label{synt-typ}
 
-Wir nehmen an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-TBox die Form $\{\top \sqsubseteq C_{\MT}\}$ hat mit $C_{\MT}$ in NNF.
+Wir nehmen oBdA. an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-TBox die Form $\{\top \sqsubseteq C_{\MT}\}$ hat mit $C_{\MT}$ in NNF.
 
 \begin{definition}[Typ]
 
@@ -29,10 +29,9 @@ Ein Typ für $C_{0}$ und $T$ ist Teilmenge
 $t \subseteq \sub\left( C_{0},T \right)$, so dass
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \item
   $A \in t$ gdw. $\neg A \notin t$ für alle
-  $\neg A \notin \sub\left( C_{0},T \right)$
+  $\neg A \in \sub\left( C_{0},T \right)$
 \item
   $C \sqcap D \in t$ gdw. $C \in t$ und $D \in t$ für alle
   $C \sqcap D \in \sub\left( C_{0},T \right)$
@@ -44,227 +43,232 @@ $t \subseteq \sub\left( C_{0},T \right)$, so dass
 \end{enumerate}
 \end{definition}
 
-\textbf{T5.1}
+\begin{tafel}[Beispiel syntaktischer Typ]
+Sei $C_0 = A$, $\MT = \{\top \subseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
 
-Beispiel:
-
-$C_0 = A$, $\MT = \{\top \subseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
-
-Dann ist $$sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
+Dann ist $$\sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
 
 Sei $M = \{C_{\MT}, \exists r.\exists r. A, \forall r.A', \neg A \sqcup \neg A'\}$
 
 Die Typen für $C_0$ und $\MT$ sind:
 
-\begin{itemize}
-  \item $t_0 = M \cup \{\neg A, \neg A'\}$
-  \item $t_1 = M \cup \{\neg A, A'\}$
-  \item $t_2 = M \cup \{A, \neg A'\}$
-  \item $t_0' = M \cup \{\exists r.A\}$
-  \item $t_1' = M \cup \{\exists r.A\}$
-  \item $t_2' = M \cup \{\exists r.A\}$
-\end{itemize}
+\begin{tabular}{ll}
+    $t_0 = M \cup \{\neg A, \neg A'\}$ &  $t_0' = M \cup \{ \neg A, \neg A', \exists r.A\}$\\
+    $t_1 = M \cup \{\neg A, A'\}$ & $t_1' = M \cup \{\neg A, A', \exists r.A\}$ \\
+    $t_2 = M \cup \{A, \neg A'\}$ & $t_2' = M \cup \{A, \neg A', \exists r.A\}$\\
+\end{tabular}
+\end{tafel}
 
 \subsubsection{Typelimination}\label{typelimination}
 
-Die generelle Idee der Typelimination bei Eingabe $C_0$, $\MT$:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+Die generelle Idee der Typelimination bei Eingabe $C_0, \MT$:
+\begin{itemize}
 \item
-  Generiere alle Typen für $C_{0}$ und $T$ (exponentiell viele)
+  Generiere alle Typen für $C_{0}$ und $\MT$ (exponentiell viele)
 \item
-  Eliminiere wiederholt Typen, die in keinem Modell von $T$ vorkommen
+  Eliminiere wiederholt Typen, die in keinem Modell von $\MT$ vorkommen
   können
 \item
   Überprüfe, ob ein Typ überlebt hat, der $C_{0}$ enthält
 \item
-  Wenn ja, antworte „erfüllbar``, sonst „unerfüllbar``
-\end{enumerate}
+    Wenn ja, antworte \enquote{erfüllbar}, sonst \enquote{unerfüllbar}
+\end{itemize}
 
 \subsubsection{Schlechte Typen}\label{schlechter-typ}
 
 Wir formalisieren \enquote{Typen, die in keinem Modell vorkommen können}.
 
-\begin{definition}[schlechter Typ]
+\begin{definition}[schlechter Typ]\label{def-badtype}
 
 Sei $\Gamma$ Typenmenge und $t \in \Gamma$.
 
 Dann ist $t$ \emph{schlecht in} $\Gamma$, wenn für ein $\exists r.C \in t$ gilt:
 
 \begin{center}Es gibt kein $t^{'} \in \Gamma$ mit
-$\left\{ C \right\} \cup \left\{ \text{D\ } \middle| \ \forall r.D \in t \right\} \subseteq t^{'}$.\end{center}
+$\left\{ C \right\} \cup \left\{ \text{D\ } \middle| \ \forall r.D \in t \right\} \subseteq t'$.\end{center}
 \end{definition}
 
 Erklärung: $t$ braucht einen \enquote{Zeugen}, es gibt aber keinen
 geeigneten.
 
-\textbf{T5.1cont}
+%TODO: fix this
+\setcounter{tafel}{0}
+\begin{tafel}[Fortsetzung]
 
-Beispielsweise ist $t_0'$ schlecht in der Menge $\{t_0,t_1,t_2,t_0',t_1',t_2'\}$. Für $\exists r.A \in t_0'$ ist die Menge aus Definition 5.3 $\{A,A'\}$. Kein Typ enhält $A$ und $A'$. Analog: $t_1'$, $t_2'$ sind schlecht. Entfernt man diese drei so erhält man die Menge $\Gamma_1 = \{t_1,t_2,t_2\}$. 
+    Beispielsweise ist $t_0'$ schlecht in der Menge $\{t_0,t_1,t_2,t_0',t_1',t_2'\}$. Für $\exists r.A \in t_0'$ ist die Menge aus \autoref{def-badtype} $\{A,A'\}$. Kein Typ enhält $A$ und $A'$. Analog: $t_1'$, $t_2'$ sind schlecht. Entfernt man diese drei so erhält man die Menge $\Gamma_1 = \{t_1,t_2,t_2\}$. 
 
-Nun sind aber $\{t_1,t_2,t_3\}$ schlecht in $\Gamma_1$: Sie enthalten $\exists r. \exists r.A$ , aber kein Typ in $\Gamma_1$ enthält $\exists r.A$.
+Nun sind aber $\{t_1,t_2,t_3\}$ schlecht in $\Gamma_1$: Sie enthalten $\exists r. \exists r.A$, aber kein Typ in $\Gamma_1$ enthält $\exists r.A$.
+\end{tafel}
 
-\begin{proposition}
-$\ALC$-Elim($C_0,\MT$) terminiert nach $2^{\mathcal{O}(|C_0|+|\MT|)}$ Schritten.
-\end{proposition}
+\begin{algorithmic}
+    \Procedure{$\ALC$-Elim}{}
+    \State \textbf{input}: $\ALC$-Konzept $C_0$, $\ALC$-TBox $\MT$
+    \State \textbf{output}: \enquote{erfüllbar} / \enquote{unerfüllbar}
+    \State Berechne $\Gamma_0$: Menge aller Typen für $C_0$ und $\MT$
+    \State $i := 0$
+    \Repeat
+        \State $i := i + 1$
+        \State $\Gamma_i := \{ t \in \Gamma_{i - 1} \mid t \text{ nicht schlecht in } \Gamma_{i - 1}\}$
+    \Until $\Gamma_i = \Gamma_{i - 1}$
+    \If{es gibt $t \in \Gamma_i$ mit $C_0 \in t$}
+        \Return \enquote{erfüllbar}
+    \Else{}
+        \Return \enquote{unerfüllbar}
+    \EndIf
+    \EndProcedure{}
+\end{algorithmic}
 
-\textbf{T5.2}
+%TODO: fix this
+\setcounter{tafel}{0}
+\begin{tafel}[Fortsetzung 2]
+    Mit dem Beispiel aus T 5.1 enstehen folgende $\Gamma_i$:
+    \begin{align*}
+        \Gamma_0 &= \{t_0, t_1, t_2, t_0', t_1', t_2'\}\\
+        \Gamma_1 &= \{t_0, t_1, t_2\}\\
+        \Gamma_2 &= \emptyset
+    \end{align*}
+\end{tafel}
+
+Wir müssen nun zeigen, dass der Algorithmus
+\begin{enumerate}
+    \item in exponentieller Zeit terminiert,
+    \item korrekt ist,
+    \item vollständig ist.
+\end{enumerate}
+
+\begin{lemma}
+    $\ALC$-Elim($C_0,\MT$) terminiert nach $2^{\text{poly}(|C_0|+|\MT|)}$ Schritten.
+\end{lemma}
 
 \begin{proof}
-Sei $n = \left| C_{0} \right| + |T|$. Proposition folgt aus:
+Sei $n = \left| C_{0} \right| + |T|$. Dann gilt:
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\item Es gibt nur $2^{n}$ Typen (\autoref{lem:num-sub} $|\sub(C, \MT)| \leq |C| + |\MT|$)
 \item
-  Es gibt nur $2^{n}$ Typen mit $n \left| C_{0} \right| + T$
-  (\protect\hyperlink{lemma-3.15}{Lemma 3.15})
-\item
-  In jedem Schritt, der repeat-Schleife wird mindestens ein Typ
-  eliminiert; die Schleife terminiert spätestens nach $2^{n}$
+  In jedem Schritt der repeat-Schleife wird mindestens ein Typ
+  eliminiert; die Schleife terminiert nach maximal $2^{n}$
   Durchläufen.
 \item
   Die restlichen Operationen (prüfen, ob ein Typ schlecht ist usw.)
-  können leicht in Zeit $2^{O\left( n \right)}$ implementiert werden.
+  können leicht in Zeit $2^{\text{poly}\left( n \right)}$ implementiert werden.
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}
-    $\ALC$-Elim($C_0,\MT$) antwortet \enquote{erfüllbar} gdw. $C_0$ erfüllbar bzgl. $\MT$
-\end{proposition}
+\begin{lemma}
+    Wenn $\ALC$-Elim($C_0,\MT$) \enquote{erfüllbar} zurückgibt, dann ist $C_0$ erfüllbar bzgl. $\MT$.
+\end{lemma}
 
-\textbf{T5.3}. 
+\begin{proof}
+    Wenn der Algorithmus \enquote{erfüllbar} zurückgibt, dann gibt es in der resultierenden Typenmenge $\Gamma_i$ einen Typen $t_0 \in \Gamma_i$ mit $C_0 \in t_0$. Aus $\Gamma_i$ konstruieren wir Interpretation $\MI$ wie folgt:
+\begin{align*}
+    \Delta^\MI &= \Gamma_{i}\\
+    A^\MI &= \{ t \in \Gamma_{i} \mid A \in t \} \text{ für alle Konzeptnamen } A\\
+    r^\MI &= \{ (t,t') \mid \forall r.C \in t \text{ impliziert }C \in t' \} \text{ für alle Rollennamen } r
+\end{align*} 
 
-\textbf{Korrekt}
+\begin{tafel}[Beispiel Modellkonstruktion]
+    \begin{align*}
+        C_0 &= A, \MT = \{ \top \sqsubseteq \forall r.\exists r.A \sqcap(\neg A \sqcup \exists r.A)\}\\
+        \sub(C_0, \MT) &= \{ A, C_\MT, \forall r.\exists r.A, \neg A \sqcup \exists r.A, \exists r.A, \neg A\}\\
+        M &= \{C_\MT, \forall r.\exists r.A, \neg A \sqcup \exists r.A\}\\
+        t_0 &= M \cup \{\neg A\}\\
+        t_1 &= M \cup \{\neg A, \exists r.A\}\\
+        t_2 &= M \cup \{A, \exists r.A\}\\
+    \end{align*}
 
-Per Induktion über Struktur von $C$.
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,thick,draw}]
+            \node (s1) at (1.5, 2) {$t_0$};
+            \node (s2) at (0, 0) {$t_1$};
+            \node (s3) at (3, 0) {$t_2$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge node {r} (s2);
+            \path [->] (s1) edge node {r} (s3);
+            \node at (s3) [right = 1mm of s3] {$A$};
+            \path [->] (s2) edge [bend left] node {r} (s3);
+            \path [->] (s3) edge [bend left] node {r} (s2);
+            \path [->] (s2) edge [loop left] node {r} (s2);
+            \path [->] (s3) edge [loop below] node {r} (s3);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+\end{tafel}
 
-Antworte $\text {$\ALC$}\mathrm{-}Elim(C_{0},T)$ „erfüllbar`` und sei
-$\Gamma_{i}$ die resultierende Typmenge. Dann gibt es
-$t_{0} \in \Gamma_{i}$ mit $C_{0} \in t_{0}$. Definiere
-Interpretation $\MI$:
+Die Erfüllbarkeit von $C_0$ bezüglich $\MT$ folgt dann aus:
 
+Behauptung: Für alle $C \in \sub(C_0, \MT)$ und alle $t \in \Gamma_i$ gilt:
+\begin{align*}
+    C \in t \implies t \in C^\MI
+\end{align*}
+
+\setcounter{tafel}{1}
+\begin{tafel}[Beweis der Behauptung]
+    Die Behauptung impliziert das Lemma.
+    \begin{enumerate}
+        \item Wegen $C_0 \in t_0$ ist $t_0 \in C_0^\MI$
+        \item Wegen $C_\MT \in t$ für alle $t \in \Gamma_i$ folgt $t \in C_\MT^\MI$ für alle $t \in \Gamma_i$. Also ist $\MI$ auch Modell von $\MT$.
+    \end{enumerate}
+    Beweis der Behauptung per Induktion über Struktur von $C$:
+
+\textbf{I.A.}
 \begin{itemize}
-\item
-  $\Delta^\MI = \Gamma_{i}$
-\item
-  $A^\MI = \left\{ t \in \Gamma_{i} \middle| A \in t \right\}$
-\item
-  $r^{i} = \left\{ \left( t,t^{'} \right)\in \Gamma_i \times \Gamma_i\  \middle| \ \forall r.C \in t\ \mathrm{\text{impliziert}}\ C \in t^{'} \right\}$
-\end{itemize} 
-
-\paragraph{Beispiel}
-
-$C_0 = A$, $\MT = \{\top \sqsubseteq \forall r.\exists r.A \sqcap (\neg A \sqcup \exists r.A\}$
-
-$sub(C_0, \MT) = \{A,C_{\MT}, \forall r.\exists r.A, \neg A \sqcup \exists r.A, \exists r.A, \neg A\}$
-
-Sei $M = \{C_{\MT}, \forall r.\exists r.A, \neg A \sqcup \exists r.A\}$ 
-
-Typen:
-
-\begin{itemize}
-  \item $t_0 = M \cup \{\neg A\}$
-  \item $t_1 = M \cup \{A,\exists r.A\}$
-  \item $t_1 = M \cup \{\neg A,\exists r.A\}$
+    \item $C = A$. Folgt direkt aus Definition $\MI$.
+    \item $C = \neg A$. Wenn $\neg A \in t$, dann ist nach der Definition von Typ (a) $A \notin t$. Nach Definition von $\MI$ ist $t \in {(\neg A)}^\MI$.
 \end{itemize}
-
-Keine der Typen ist schlecht. Also $\Gamma_1 = \{t_0,t_1,t_2\}$
-
-Interpretation $\MI$:
-
-\includegraphics[width=3.71910in,height=2.33200in]{media/52typelim.png}
-
-\paragraph{Beweis}
-
-Zu zeigen: $\MI$ ist Modell von $C_{0}$ und $\MT$ *.
-
-Behauptung: Für alle $C \in \sub\left( C_{0},\MT \right)$ und alle
-$t \in \Gamma_{i}$:
-$$C \in t \Rightarrow t \in C^\MI$$
-
-Daraus folgt:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  * Wegen $C_{0} \in t_{0}$ ist $t_{0} \in C_{0}^\MI$
-\item
-  Wegen $C_{T} \in t$ für alle $t \in \Gamma_{i}$ folgt
-  $t \in C_{T}^\MI$. für alle $t \in \Gamma_{i}$ Also ist $\MI$ Modell von $\MT$.
-\end{enumerate}
-
-\textbf{I.A.} $C = A$. Folgt direkt aus Definition $\MI$.
-
-$C = \neg A$. Nach Definition „Typ`` gilt $A \notin t$. Nach
-Definition $\MI$ ist $t \notin A^\MI$.
-
-\textbf{I.S.} Fallunterscheidung:
-
+\textbf{I.S.}
 \begin{itemize}
-\item
-  $C = D \sqcap D^{'}$
+    \item $C = D \sqcap D'$: Wenn $C \in t$, dann ist nach der Definition von  Typ (b) $D, D' \in t$. Nach IV ist $t \in D^\MI$ und $t \in D'^\MI$. Also ist $t$ auch Instanz von ${(D \sqcap D')}^\MI$
+    \item $C = D \sqcup D'$: analog.
 
-Nach Definition „Typ`` ist $D \in t$ und $D^{'} \in t$. Nach
-\textbf{I.V}.: $t \in D^\MI$ und $t \in \left( D^{'} \right)^\MI$.
-Nach Semantik: $t \in \left( D \sqcap D^{'} \right)^\MI$.
+\item $C = \forall r.D$:
+Sei $\forall r.D \in t$ und $\left( t,t' \right) \in r^\MI$. Nach
+Definition $r^\MI$ gilt $D \in t'$. Nach I.V.:
+$t' \in D^\MI$, also $t \in {( \forall r.D )}^\MI$
 
-\item
-  $C = D \sqcup D^{'}$
-
-Analog.
-
-\item
-  $C = \forall r.D$
-
-Sei $\forall r.D \in t$ und $\left( t,t^{'} \right) \in r^\MI$. Nach
-Definition $r^\MI$ muss $D \in t^{'}$ gelten. Nach \textbf{I.V}.:
-$t^{'} \in D^\MI$, also $t \in \left( \forall r.D \right)^\MI$
-
-\item
-  $C = \exists r.D$
-
+\item $C = \exists r.D$:
 Sei $\exists r.D \in t$. Da $t \in \Gamma_{i}$ (also nicht
-schlecht), gibt es $t^{'} \in \Gamma_{i}$ mit $D \in t^{'}$ und
-$E \in t^{'}$ für alle $\forall r.E \in t$. Nach \textbf{I.V.} gilt
-$t^{'} \in D^\MI$ und nach Definition von $r^\MI$ gilt
-$\left( t,t^{'} \right) \in r^\MI$. Also
-$t \in \left( \exists r.D \right)^\MI$
+schlecht), gibt es $t' \in \Gamma_{i}$ mit $D \in t'$ und
+$E \in t'$ für alle $\forall r.E \in t$. Nach I.V. gilt
+$t' \in D^\MI$ und nach Definition von $r^\MI$ gilt
+$\left( t,t' \right) \in r^\MI$. Also
+$t \in {(\exists r.D )}^\MI$
 \end{itemize}
+\end{tafel}
+\end{proof}
 
-\textbf{Vollständigkeit}. 
 
-Beweisskizze per Induktion über i.
+\begin{lemma}
+    Wenn $C_0$ bezüglich $\MT$ erfüllbar ist, dann gibt $\ALC-\texttt{Elim}(C_0, \MT)$ \enquote{erfüllbar} zurück.
+\end{lemma}
 
-Sei $C_{0}$ erfüllbar bzgl. $\MT$ und sei $\MI$ Modell von $\MT$ mit
-$d_{0} \in C_{0}^\MI$. 
+\begin{proof}
+    Sei $C_0$ erfüllbar bezüglich $\MT$ und $\MI$ ein Modell von $C_0$ und $\MT$ mit $d_0 \in C_0^\MI$. Sei
+    \begin{align*}
+        \Gamma = \{ t_\MI(d) \mid d \in \Delta^\MI\}
+    \end{align*}
+    und $\Gamma_0, \Gamma_1, \ldots \Gamma_k$ die von $\ALC-\texttt{Elim}(C_0, \MI)$ erzeugte Sequenz.
+    Wir zeigen:
 
-Sei $\Gamma = \left\{ t_\MI\left( d \right)\  \middle| \ d \in \Delta^\MI \right\}$.
+    Behauptung: $\Gamma \subseteq \Gamma_i$ für alle $i \leq k$.
+    \begin{tafel}[Beweis der Behauptung]
+    Per Induktion über $i$:
 
-Sei $\Gamma_{0},\ldots,\Gamma_{k}$ die von $\text {$\ALC$}\mathrm{-}\text{Elim}\left( C_{0},\MT \right)$ erzeugte Sequenz. 
+    IA $i = 0$ trivial: jedes Element von $\Gamma$ (semantischer Typ) ist auch syntaktischer Typ (erfüllt a-d).
 
-Behauptung: $\Gamma \subseteq \Gamma_{i}$ für alle $i \geq 0$
+    IS $i \rightarrow i + 1$: Gelte $\Gamma \subseteq \Gamma_i$, zu zeigen $\Gamma \subseteq \Gamma_{i + 1}$.
 
-Daraus folgt wegen $d_{0} \in C_{0}^\MI$, dass $C_{0} \in t_{i}\left( d_{0} \right) \in \Gamma \subseteq \Gamma_{k}$.
+    $t \in \Gamma \subseteq \Gamma_i$, es genügt zu zeigen, dass $t$ nicht schlecht in $\Gamma_i$. Sei $\exists r.C \in t$ und $S = \{C\} \cup \{D\mid \forall r.D \in t\}$. Da $t \in \Gamma$, gibt es $d \in \Delta^\MI$ mit $t_\MI(d) = t$. Also gibt es nach Semantik $e \in \Delta^\MI$ mit $(d, e) \in r^\MI$ und $e \in D'$ für alle $D \in S$.
 
-Also gibt $\text {$\ALC$}\mathrm{-}Elim(C_{0},\MT)$ „erfüllbar`` zurück.
+    Es gilt also $S \subseteq t_\MI(e)$ und $t_\MI(e) \in \Gamma \subseteq \Gamma_i$. Also ist $t$ nicht schlecht in $\Gamma_i$.
+    \end{tafel}
+    Wegen $d_0 \in C_0^\MI$ ist also $C_0 \in t_\MI(d_0) \in \Gamma \subseteq \Gamma_k$. Also gibt der Algorithmus \enquote{erfüllbar} zurück.
+\end{proof}
 
-I.A. $i = 0$. Einfach jedes Element von $\Gamma$ (semantisch Typ)
-ist auch ein syntaktischer Typ.
 
-I.S. Gelte $\Gamma \subseteq \Gamma_{i}$ (I.V.). Zu zeigen:
-$\Gamma \subseteq \Gamma_{i + 1}$. 
-
-Sei $t \in \Gamma$. Es genügt zu zeigen: $t$ ist nicht schlecht in $\Gamma_{i}$. 
-
-Sei $\exists r.C \in t$ und $S = \left\{ C \right\} \cup \left\{ D \middle| \forall r.D \in T \right\}$.
-
-Da $t \in \Gamma$, gibt es $d \in \Delta^\MI$ mit $t_\MI\left( d \right) = t_{0}$. 
-
-Also gibt es nach Semantik $e \in \Delta^\MI$, $\left( d,e \right) \in r^\MI$, $e \in D^\MI$ für alle $D \in S$
-
-$t's$ gilt also $S \subseteq t_\MI\left( e \right)$ und $t_\MI\left( e \right) \in \Gamma \subseteq \Gamma_{i}$. Es folgt:
-$t$ nicht schlecht
+Aus den Lemmas 5.4--5.6 folgt nun:
 
 \begin{theorem}
 In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in ExpTime.
@@ -276,7 +280,7 @@ Offensichtliche Entsprechungen:
 
 \begin{itemize}
   \item $\sqcap$-Regel, $\sqcup$-Regel, TBox-Regel finden sich wieder in der Definition eines Typs.
-  \item $\exists$-Regel und $\forall$-Regel finden sich wieder in Def. von \enquote{schlecht}.
+  \item $\exists$-Regel und $\forall$-Regel finden sich wieder in Definition von \enquote{schlecht}.
   \item Freiheit von offensichtlichen Widersprüchen findet sich wieder in der Definition eines Typs
 \end{itemize}
 
@@ -289,31 +293,44 @@ Unterschiede:
 
 \subsection{Komplexität mit TBoxen, untere Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
 
-Um die ExpTime-Härte zu zeigen, reduzieren wir auf ein spieltheoretisches Problem:
+Um die ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Problem:
 
 \subsubsection{ExpTime-Spiele}\label{exptime-spiele}
 
 \begin{itemize}
-\item
-  Zwei Spieler spielen auf gegebener aussagenlogischen Formel
-  $\varphi$
-\item
-  Jede Variable in $\varphi$ gehört entweder Spieler 1 oder Spieler 2
-\item
-  Das Spiel beginnt auf einer gegebenen Anfangsbelegung $\pi_{0}$ der
-  Variablen
-\item
-  Spieler 1 beginnt, die Spieler wechseln sich ab
-\item
-  In jedem Zug ändert Spieler Wahrheitswert einer seiner Variablen; es
-  ist erlaubt, zu passen
-\item
-  Spieler 1 gewinnt, wenn $\varphi$ jemals wahr wird (egal, welcher
-  Spieler gezogen hat)
-\item
-  Spieler 2 gewinnt, wenn das Spiel unendlich weitergeht ohne dass
-  $\varphi$ wahr wird
+\item Zwei Spielerinnen spielen auf gegebener aussagenlogischen Formel $\varphi$
+\item Jede Variable in $\varphi$ gehört entweder Spielerin 1 oder Spielerin 2
+\item Das Spiel beginnt auf einer gegebenen Anfangsbelegung $\pi_0$ der Variablen in $\varphi$.
+\item Spielerin 1 beginnt, die Spielerinnen wechseln sich ab.
+\item In jedem Zug ändert Spieler Wahrheitswert einer ihrer Variablen; es ist erlaubt, zu passen
+\item Spielerin 1 gewinnt, wenn $\varphi$ jemals wahr wird (egal, welche Spielerin gezogen hat).
+\item Spielerin 2 gewinnt, wenn das Spiel unendlich weitergeht ohne dass $\varphi$ wahr wird
 \end{itemize}
+
+\begin{tafel}[Beispiel ExpTime-Spiele]\mbox{}
+    \begin{itemize}
+        \item Spiel A: $\varphi = \neg (p_1 \leftrightarrow p_2) \wedge \neg (q_1 \leftrightarrow q_2)$,
+            Sp1 kontrolliert $p_1, q_1$, Sp2 kontrolliert $p_2, q_2$. $\pi_0$ macht alle Variablen falsch.
+
+            Sp1 gewinnt wenn $p_1, p_2$ unterschiedlich belegt sind und ebenso $q_1, q_2$. Sp2 gewinnt, wenn sie den letzten Zug von Sp1 immer \enquote{komplementiert}.
+            Möglicher Spielverlauf:
+            \begin{center}
+            \begin{tabular}{rrrrr}
+                & $p_1$ & $p_2$ & $q_1$ & $q_2$\\
+                & 0 & 0 & 0 & 0\\
+                1 & 1 & 0 & 0 & 0\\
+                2 & 1 & 1 & 0 & 0\\
+                1 & 1 & 1 & 1 & 0\\
+                2 & 1 & 1 & 1 & 1\\
+            \end{tabular}
+        \end{center}
+
+        $\implies$ Sp2 gewinnt.
+
+    \item Spiel B: wie A $\varphi' = \varphi \vee (p_1 \wedge p_2 \wedge q_1 \wedge q_2)$.
+        Möglicher Spielverlauf:
+    \end{itemize}
+\end{tafel}
 
 \begin{definition}[ExpTime-Spiele]
 
