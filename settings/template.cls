@@ -31,6 +31,9 @@
 \declaretheorem[sibling=definition, name = Proposition]{proposition}
 \declaretheorem[numberwithin=section, name = T]{tafel}
 
+% We can continue via the "continues" argument. We redefine the text that appears if we do this to "Fortsetzung"
+\renewcommand{\thmcontinues}[1]{Fortsetzung}
+
 \usepackage[headsepline]{scrlayer-scrpage}
 \KOMAoption{headsepline}{.1pt:}
 

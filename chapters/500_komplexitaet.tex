@@ -43,7 +43,7 @@ $t \subseteq \sub\left( C_{0},T \right)$, so dass
 \end{enumerate}
 \end{definition}
 
-\begin{tafel}[Beispiel syntaktischer Typ]
+\begin{tafel}[Beispiel syntaktischer Typ]\label{t:synTyp}
 Sei $C_0 = A$, $\MT = \{\top \subseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
 
 Dann ist $$\sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
@@ -91,9 +91,7 @@ $\left\{ C \right\} \cup \left\{ \text{D\ } \middle| \ \forall r.D \in t \right\
 Erklärung: $t$ braucht einen \enquote{Zeugen}, es gibt aber keinen
 geeigneten.
 
-%TODO: fix this
-\setcounter{tafel}{0}
-\begin{tafel}[Fortsetzung]
+\begin{tafel}[continues=t:synTyp]
 
     Beispielsweise ist $t_0'$ schlecht in der Menge $\{t_0,t_1,t_2,t_0',t_1',t_2'\}$. Für $\exists r.A \in t_0'$ ist die Menge aus \autoref{def-badtype} $\{A,A'\}$. Kein Typ enhält $A$ und $A'$. Analog: $t_1'$, $t_2'$ sind schlecht. Entfernt man diese drei so erhält man die Menge $\Gamma_1 = \{t_1,t_2,t_2\}$. 
 
@@ -118,9 +116,7 @@ Nun sind aber $\{t_1,t_2,t_3\}$ schlecht in $\Gamma_1$: Sie enthalten $\exists r
     \EndProcedure{}
 \end{algorithmic}
 
-%TODO: fix this
-\setcounter{tafel}{0}
-\begin{tafel}[Fortsetzung 2]
+\begin{tafel}[continues=t:synTyp]
     Mit dem Beispiel aus T 5.1 enstehen folgende $\Gamma_i$:
     \begin{align*}
         \Gamma_0 &= \{t_0, t_1, t_2, t_0', t_1', t_2'\}\\
@@ -137,7 +133,7 @@ Wir müssen nun zeigen, dass der Algorithmus
 \end{enumerate}
 
 \begin{lemma}
-    $\ALC$-Elim($C_0,\MT$) terminiert nach $2^{\text{poly}(|C_0|+|\MT|)}$ Schritten.
+    $\ALC-\texttt{Elim}(C_0,\MT)$ terminiert nach $2^{\text{poly}(|C_0|+|\MT|)}$ Schritten.
 \end{lemma}
 
 \begin{proof}
@@ -167,7 +163,7 @@ Sei $n = \left| C_{0} \right| + |T|$. Dann gilt:
     r^\MI &= \{ (t,t') \mid \forall r.C \in t \text{ impliziert }C \in t' \} \text{ für alle Rollennamen } r
 \end{align*} 
 
-\begin{tafel}[Beispiel Modellkonstruktion]
+\begin{tafel}[Beispiel Modellkonstruktion]\label{t:example51}
     \begin{align*}
         C_0 &= A, \MT = \{ \top \sqsubseteq \forall r.\exists r.A \sqcap(\neg A \sqcup \exists r.A)\}\\
         \sub(C_0, \MT) &= \{ A, C_\MT, \forall r.\exists r.A, \neg A \sqcup \exists r.A, \exists r.A, \neg A\}\\
@@ -204,8 +200,7 @@ Behauptung: Für alle $C \in \sub(C_0, \MT)$ und alle $t \in \Gamma_i$ gilt:
     C \in t \implies t \in C^\MI
 \end{align*}
 
-\setcounter{tafel}{1}
-\begin{tafel}[Beweis der Behauptung]
+\begin{tafel}[name=Beweis der Behauptung, continues=t:example51]
     Die Behauptung impliziert das Lemma.
     \begin{enumerate}
         \item Wegen $C_0 \in t_0$ ist $t_0 \in C_0^\MI$
@@ -632,7 +627,7 @@ $t \subseteq \sub_{i}\left( C_{0} \right)$, so dass
 \end{enumerate}
 \end{definition}
 
-\begin{tafel}[Beispiel $i$-Typen]
+\begin{tafel}[Beispiel $i$-Typen]\label{t:example58}
     Sei $C_0 = A \sqcap \exists r.B \sqcap \exists r. \neg B \sqcap \forall r.\exists r.\neg A$
     \begin{align*}
         \sub(C_0) &=
@@ -668,9 +663,7 @@ $t \subseteq \sub_{i}\left( C_{0} \right)$, so dass
     \EndProcedure{}
 \end{algorithmic}
 
-%TODO: fix
-\setcounter{tafel}{7}
-\begin{tafel}
+\begin{tafel}[name=Beispiel $\ALC$-Worlds, continues=t:example58]
     $\ALC-\text{Worlds}(C_0)$ hat einen erfolgreichen Lauf.
 
     \begin{center}
