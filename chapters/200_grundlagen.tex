@@ -361,7 +361,7 @@ Seien $\MT_1$ und $\MT_2$ TBoxen mit $\MT_1 \subseteq \MT_2$. Dann gilt:
   \item \begin{proof}
     Kontraposition: Wenn $\MT_2 \not\models C \sqsubseteq D$ dann $\MT_1 \not\models C \sqsubseteq D$. \\
   Es gelte $\MT_2 \not\models C \sqsubseteq D$.
-  D.h. es gibt Modell $\MI$ von $\MT_2$ mit $C^\MI \not\subseteq D^\MI$.
+  Das heißt es gibt Modell $\MI$ von $\MT_2$ mit $C^\MI \not\subseteq D^\MI$.
   Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$.
   Also $\MT_1 \not\models C \sqsubseteq D$
   \end{proof}
@@ -464,9 +464,9 @@ Erfüllbarkeit konzentrieren.
 
 \begin{tafel}[Exemplarische Reduktion von Schlussfolgerungsproblemen]\mbox{}
     \begin{center} \begin{tabular}{ll}
-        $T \models C \sqsubseteq D$ & gdw. für alle Modelle $\MI$ von $\MT$ $C^\MI \subseteq D^\MI$\\
-                                    & gdw. es gibt kein Modell $\MI$ von $\MT$ bei dem $C^\MI \not\subseteq D^\MI$\\
-                                    & gdw. es gibt kein Modell $\MI$ von $\MT$ bei dem $(C \sqcap \neg D)^\MI \neq \emptyset$\\
+        $T \models C \sqsubseteq D$ & gdw.\ für alle Modelle $\MI$ von $\MT$ $C^\MI \subseteq D^\MI$\\
+                                    & gdw.\ es gibt kein Modell $\MI$ von $\MT$ bei dem $C^\MI \not\subseteq D^\MI$\\
+                                    & gdw.\ es gibt kein Modell $\MI$ von $\MT$ bei dem ${(C \sqcap \neg D)}^\MI \neq \emptyset$\\
                                     & gdw. $C \sqcap \neg D$ unerfüllbar bezüglich $\MT$\\
     \end{tabular}
 \end{center}
