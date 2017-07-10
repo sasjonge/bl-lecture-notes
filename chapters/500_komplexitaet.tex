@@ -7,12 +7,12 @@ Wir wollen zeigen:
 
 \begin{theorem}
 In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
-ExpTime-Vollständig.
+\ExpTime-Vollständig.
 \end{theorem}
 
-Mit Lemma 2.9: Subsumtion und Äquivalenz ExpTime-vollständig.
+Mit Lemma 2.9: Subsumtion und Äquivalenz \ExpTime-vollständig.
 
-Wir beginnen mit der oberer Schranke (Enthaltensein in ExpTime):
+Wir beginnen mit der oberer Schranke (Enthaltensein in \ExpTime):
 
 \begin{itemize}
   \item wir verwenden ein Verfahren aus der Modallogik: Typelimination
@@ -266,7 +266,7 @@ $t \in {(\exists r.D )}^\MI$
 Aus den Lemmas 5.4--5.6 folgt nun:
 
 \begin{theorem}\label{thm:tbox-exptime}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in ExpTime.
+In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in \ExpTime.
 \end{theorem}
 
 \subsubsection{Zusammenhang mit Tableau-Algorithmen}
@@ -288,7 +288,7 @@ Unterschiede:
 
 \subsection{Komplexität mit TBoxen, untere Schranke}\label{komplexituxe4t-mit-tboxen-untere-schranke}
 
-Um die ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Problem:
+Um die \ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Problem:
 
 \subsubsection{ExpTime-Spiele}\label{exptime-spiele}
 
@@ -302,7 +302,7 @@ Um die ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Prob
 \item Spielerin 2 gewinnt, wenn das Spiel unendlich weitergeht ohne dass $\varphi$ wahr wird
 \end{itemize}
 
-\begin{tafel}[Beispiel ExpTime-Spiele]\mbox{}
+\begin{tafel}[Beispiel \ExpTime-Spiele]\mbox{}
     \begin{itemize}
         \item Spiel A: $\varphi = \neg (p_1 \leftrightarrow p_2) \wedge \neg (q_1 \leftrightarrow q_2)$,
             Sp1 kontrolliert $p_1, q_1$, Sp2 kontrolliert $p_2, q_2$. $\pi_0$ macht alle Variablen falsch.
@@ -337,7 +337,7 @@ Um die ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Prob
     \end{itemize}
 \end{tafel}
 
-\begin{definition}[ExpTime-Spiele]
+\begin{definition}[\ExpTime-Spiele]
     Ein \emph{Spiel} ist ein Tupel $\left( \varphi,\ \Gamma_1,\Gamma_2,\pi_{0} \right)$ mit $\Gamma_1,\Gamma_2$ Partitionierung der Variablen in
   $\varphi_1$ und $\pi_{0}$ Anfangsbelegung
 
@@ -422,17 +422,17 @@ $v \in V$ Konfiguration $l(v)$ zuweist so, dass
     In Spiel B gibt es keine Gewinnstrategie für Sp1.
 \end{tafel}
 
-\begin{definition}[ExpTime-Spiel Entscheidungsproblem]
+\begin{definition}[\ExpTime-Spiel Entscheidungsproblem]
 \emph{Spiel\textsubscript{1}} ist das folgende Problem: Gegeben Spiel
 $\left( \varphi,\Gamma_1,\Gamma_2,\pi_0 \right)$, entscheide ob
 Spielerin 2 eine Gewinnstrategie hat.
 \end{definition}
 
 \begin{theorem}[Stockmeyer, Chandra 1979]
-Spiel\textsubscript{1} ist ExpTime-Vollständig
+Spiel\textsubscript{1} ist \ExpTime-Vollständig
 \end{theorem}
 
-Wir wollen nun die ExpTime-Schwere von Erfüllbarkeit in $\ALC$ bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} reduzieren darauf reduzieren.
+Wir wollen nun die \ExpTime-Schwere von Erfüllbarkeit in $\ALC$ bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} reduzieren darauf reduzieren.
 
 \subsubsection{Reduktion}\label{reduktion}
 
@@ -560,7 +560,7 @@ Setze außerdem $C_S = W$. Anmerkung: $C \rightarrow D$ ist Abkürzung für $\ne
 
 Daraus folgt:
 \begin{theorem}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten bezüglich TBoxen ExpTime-schwer.
+In $\ALC$ ist die Erfüllbarkeit von Konzepten bezüglich TBoxen \ExpTime-schwer.
 \end{theorem}
 
 Daraus ergibt sich zusammen mit \autoref{thm:tbox-exptime}:
@@ -573,17 +573,17 @@ Wir wollen zeigen:
 
 \begin{theorem}
 In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen)
-PSpace-Vollständig.
+\PSpace-Vollständig.
 \end{theorem}
-Mit \autoref{lem:problem-reduction} sind dann auch Subsumtion und Äquivalenz PSpace-vollständig.
+Mit \autoref{lem:problem-reduction} sind dann auch Subsumtion und Äquivalenz \PSpace-vollständig.
 
-Wir beginnen mit der oberen Schranke (Enthaltensein in PSPace) und benutzen dazu ein Verfahren aus der Modallogik: \emph{K-Worlds}.
+Wir beginnen mit der oberen Schranke (Enthaltensein in \PSpace) und benutzen dazu ein Verfahren aus der Modallogik: \emph{K-Worlds}.
 
-Zur Erinnerung: Wenn Konzept $C$ erfüllbar ist, dann hat $C$ ein Baummodell (\autoref{thm:baummodell}. Mit TBox $\MT$ kann es sein, dass alle Baummodelle unendlich sind, z.B. $A$ erfüllbar bezüglich $\MT = \{A \sqsubseteq \exists r.A\}$. Ohne TBox gibt es stets ein Baummodell, dessen Tiefe durch $|C|$ beschränkt ist. Es genügt die Existenz solcher Modelle zu überprüfen.
+Zur Erinnerung: Wenn Konzept $C$ erfüllbar ist, dann hat $C$ ein Baummodell (\autoref{thm:baummodell}). Mit TBox $\MT$ kann es sein, dass alle Baummodelle unendlich sind, z.B. $A$ erfüllbar bezüglich $\MT = \{A \sqsubseteq \exists r.A\}$. Ohne TBox gibt es stets ein Baummodell, dessen Tiefe durch $|C|$ beschränkt ist. Es genügt die Existenz solcher Modelle zu überprüfen.
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}-Worlds}\label{alc-worlds}
 
-Gesucht: Ein Alorithmus, der in PSpace läuft, aber:
+Gesucht: Ein Algorithmus, der in \PSpace{} läuft, aber:
 \begin{itemize}
 \item Ein linear tiefer Baum ist exponentiell groß.
 \item Wenn wir gesamtes Modell im Speicher hielten, dann würde das exponentiellen Platz erfordern.
@@ -593,7 +593,7 @@ Gesucht: Ein Alorithmus, der in PSpace läuft, aber:
 
 Wir entwickelt einen nichtdeterministischen Algorithmus, da
 \begin{theorem}[Savitch 1970]
-PSpace $=$ NPSpace
+    \PSpace{} $=$ \NPSpace{}
 \end{theorem}
 
 Wir nehmen an, dass die Eingabe $C_0$ in NNF ist. Weiterhin verwenden wir wieder Typen, definieren diese jedoch differenzierter.
@@ -769,7 +769,7 @@ Wir beginnen wieder mit Terminierung und Komplexitätsanalyse.
 
 Aus Lemmas 5.18--5.20 folgt nun:
 \begin{theorem}\label{thm:alc-pspace}
-    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) entscheidbar in PSpace.
+    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) entscheidbar in \PSpace.
 \end{theorem}
 
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}-Worlds vs. Tableau-Algorithmen}
@@ -788,12 +788,12 @@ Unterschiede:
     \item Tableau-Algorithmus ist nicht platzoptimiert.
 \end{itemize}
 
-$\ALC$-Worlds kann auf $\ALCI, \ALCQ, \ALCQI$ erweitert werden. Auch in diesen Logiken ist Erfüllbarkeit ohne TBoxen in PSpace.
+$\ALC$-Worlds kann auf $\ALCI, \ALCQ, \ALCQI$ erweitert werden. Auch in diesen Logiken ist Erfüllbarkeit ohne TBoxen in \PSpace.
 
 \subsection{Komplexität ohne TBoxen untere
 Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
 
-Wir reduzieren wieder ein spieltheoretisches Problem, um PSPace-Schwere zu zeigen.
+Wir reduzieren wieder ein spieltheoretisches Problem, um \PSpace-Schwere zu zeigen.
 
 
 \subsubsection{PSpace-Spiele}
@@ -808,7 +808,7 @@ Wir reduzieren wieder ein spieltheoretisches Problem, um PSPace-Schwere zu zeige
     \item Spielerin 1 gewinnt, wenn $\varphi$ am Ende wahr ist; sonst gewinnt Spielerin 2.
 \end{itemize}
 
-\begin{tafel}[Beispiel PSpace-Spiel]
+\begin{tafel}[Beispiel \PSpace-Spiel]
     \begin{align*}
         \varphi = \neg p_1 \rightarrow p_2 \wedge (\neg p_2 \rightarrow (p_4 \rightarrow \neg p_3))
     \end{align*}
@@ -822,7 +822,7 @@ Wir reduzieren wieder ein spieltheoretisches Problem, um PSPace-Schwere zu zeige
     $1000$ erfüllt $\varphi \implies$ Spielerin $1$ gewinnt.
 \end{tafel}
 
-Unterschiede zu ExpTime-Spielen:
+Unterschiede zu \ExpTime-Spielen:
 \begin{itemize}
     \item Das Spiel endet immer; die Anzahl an Schritten ist vorbestimmt.
     \item Die Spielerin hat keine Freiheit in der Wahl ihrer Variablen.
@@ -831,7 +831,7 @@ Unterschiede zu ExpTime-Spielen:
     \item Es wird keine Anfangsbelegung benötigt.
 \end{itemize}
 
-\begin{definition}[PSpace-Spiel]
+\begin{definition}[\PSpace-Spiel]
 Ein \emph{Spiel} ist eine aussagenlogische Formel $\varphi$ mit Variablen
   $p_1,\ldots,p_{n}$, $n$ geradzahlig.
 
@@ -868,7 +868,7 @@ $v \in V$ Konfiguration $\ell(v)$ zuweist, so dass
   $w \models \varphi$.
 \end{enumerate}
 
-\begin{tafel}[Beispiel PSpace Gewinnstrategie]\mbox{}
+\begin{tafel}[Beispiel \PSpace{} Gewinnstrategie]\mbox{}
     \begin{center}
     \begin{tikzpicture}
         \begin{scope}[every node/.style={fill=white}]
@@ -898,15 +898,15 @@ $v \in V$ Konfiguration $\ell(v)$ zuweist, so dass
     \end{center}
 \end{tafel}
 
-\begin{definition}[PSPace-Spiel Entscheidungsproblem]
+\begin{definition}[\PSpace-Spiel Entscheidungsproblem]
     Spiel\textsubscript{2} ist das folgende Problem: Gegeben Spiel $\varphi$, entscheide, ob Spielerin 1 eine Gewinnstrategie hat.
 \end{definition}
 
 \begin{theorem}[Schaefer 1978]
-    Spiel\textsubscript{2} ist PSpace-vollständig.
+    Spiel\textsubscript{2} ist \PSpace-vollständig.
 \end{theorem}
 
-Wir beweisen PSpace-Härte von Erfüllbarkeit in $\ALC$ ohne TBoxen per Reduktion von Spiel\textsubscript{2}.
+Wir beweisen \PSpace-Schwere von Erfüllbarkeit in $\ALC$ ohne TBoxen per Reduktion von Spiel\textsubscript{2}.
 
 \subsubsection{Reduktion}
 
@@ -959,7 +959,7 @@ Setze $C_\varphi = C_1 \sqcap C_2 \sqcap C_3 \sqcap C_4$.
 Daraus folgt:
 
 \begin{theorem}
-    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) PSpace-schwer.
+    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) \PSpace-schwer.
 \end{theorem}
 
 Daraus und aus \autoref{thm:alc-pspace} folgt:
