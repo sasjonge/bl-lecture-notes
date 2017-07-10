@@ -252,7 +252,7 @@ Beweis in 4 Schritten:
     \item Behauptung 1.
   Es werden nur I-Bäume mit einem Verzweigungsgrad
   von maximal $|C_0|$ generiert.
-  \begin{tafel} \begin{proof}
+  \begin{tafel}[Beweis der Behauptung für Terminerung] \begin{proof}
         Nur die $\exists$-Regel generiert Nachfolgeknoten, aber
         höchstens einen pro Konzept $\exists r.C \in \sub(C_0)$. Nach
         \autoref{lem:num-sub}  enthält
@@ -262,7 +262,7 @@ Beweis in 4 Schritten:
 \item Behauptung 2.
   Es werden nur I-Bäume mit einer Tiefe von maximal $\left| C_{0} \right|$
   generiert.
-    \begin{tafel} \begin{proof}
+  \begin{tafel}[Beweis der Behauptung für Terminierung]\begin{proof}
         Hilfsaussage: Wenn $v$ Knoten mit Tiefe $i$ ist, dann $\rd(C) \leq \rd(C_0) - i$ für alle $C \in \ML(v)$. Daraus folgt Behauptung 2, denn jeder Knoten ist mit mindestens einem Konzept beschriftet. Wenn es einen Knoten in Tiefe $k > \rd(C_0)$ gäbe, dann gäbe es auch $C\in \ML(v)$ und wegen der Hilfsaussage wäre die Rollentiefe negativ, was per Definition der Rollentiefe unmöglich ist.
 
         Beweis der Hilfsaussage per Induktion über Anzahl an Regelanwendungen:
@@ -426,7 +426,7 @@ zurück.
     \end{align*}
 von Mengen von I-Bäumen. Behauptung: Für alle $i\leq n$ ist $M_i$ realisierbar.
 
-\begin{tafel}
+\begin{tafel}[Beweis der Behauptung für Vollständigkeit]
 Beweis der Behauptung per Induktion über $i$.
 
 \textbf{I.A.} $i = 0, M_0 = \{ B_{ini}\}$. $B_{ini}$ ist realisierbar, da $C_0$ erfüllbar ist.
@@ -668,7 +668,7 @@ offensichtlichen Widerspruch. Unterschied hierbei ist, dass Realisierbarkeit bez
     \begin{align*}
         C \in \ML(v) \text{ impliziert } v \in C^\MI 
     \end{align*}
-    \begin{tafel}
+    \begin{tafel}[Beweis der Behauptung für Korrektheit]
     Die Behauptung impliziert, dass $C_0$ bezüglich $\MT$ erfüllbar ist:
     \begin{itemize}
         \item Da $C_0 \in \ML(v_{\text{ini}}) \implies v_{\text{ini}} \in C^\MI$
@@ -707,7 +707,7 @@ Der Tableau-Algorithmus stoppt nach endlicher Zeit.
   Es werden nur I-Bäume mit einem Verzweigungsgrad $\leq k := \left| C_0 \right| + \left| \MT \right|$ generiert.
 \item
   Es werden nur I-Bäume mit einer Tiefe von maximal $2^k$ generiert.
-  \begin{tafel}
+  \begin{tafel}[Beweis der maximalen I-Baum Tiefe]
   Angenommen, es wird ein I-Baum der Tiefe $> 2^k$ erzeugt. Dann wird irgendwann die $\exists '$-Regel auf einen Knoten $v$ der Tiefe $2^k$ angewendet.
 
   Betrachte Pfad $v_0, \ldots , v_{2^k}$ von der Wurzel bis v. Dieser Pfad hat $2^k+1$ Knoten.
