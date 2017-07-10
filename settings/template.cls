@@ -3,7 +3,11 @@
 \LoadClass[12pt,a4paper,oneside]{scrartcl}
 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
+
+%Reasonable fonts
+\usepackage{lmodern}
 
 \usepackage{microtype} % Microtypesetting for better layout
 
