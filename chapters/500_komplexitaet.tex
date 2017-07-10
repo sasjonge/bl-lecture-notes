@@ -974,88 +974,168 @@ Es gab eine Zeitlang Diskussionen darüber, was die beste Erklärung für die En
     \item Einbettbarkeit in das Guarded Fragment der Prädikatenlogik.
 \end{itemize}
 
-\subsection{Unentscheidbare
-Erweiterungen}\label{unentscheidbare-erweiterungen}
+\subsection{Unentscheidbare Erweiterungen}\label{unentscheidbare-erweiterungen}
 
-Ein \emph{Konkreter Bereich} ist ein Paar $B = (\Delta^{B},\Phi^{B})$
-wobei
+Einige Erweiterungen von $\ALC$, die zunächst vielleicht harmlos erscheinen, können zu \emph{Unentscheidbarkeit} führen. Wir betrachten hier beispielhaft konkrete Bereiche, die es erlauben Zahlen, Strings und anderen Datentypen zu verwenden.
 
+\subsubsection{Konkrete Bereiche}
+
+\begin{definition}[Konkreter Bereich]
+    Ein konkreter Bereich ist ein Paar $\MB = (\Delta^\MB, \Phi^\MB)$, wobei
 \begin{itemize}
-\item
-  $\Delta^{B}$ eine Menge von \emph{Werten} ist und
-\item
-  $\Phi^{B}$ eine Menge von \emph{Prädikaten}
+    \item $\Delta^\MB$ eine Menge von \emph{Werten} ist und
+    \item $\Phi^\MB$ eine Menge von \emph{Prädikaten}
 \end{itemize}
-
-sodass jedes $P \in \Phi^{B}$ mit einer Stelligkeit $n \geq 0$
+so dass jedes $P \in \Phi^\MB$ mit einer Stelligkeit $n \geq 0$
 ausgestattet ist und mit einer Extension
-$P^{B} \subseteq \left( \Delta^{B} \right)^{n}$.
+$P^\MB \subseteq {\left( \Delta^\MB \right)}^n$.
+\end{definition}
 
-\subsubsection{Definition 5.27 (ALCB
-Syntax)}\label{definition-5.27-alcb-syntax}
+\begin{tafel}[Beispiel konkrete Bereiche]\mbox{}
+    \begin{itemize}
+        \item Beispiel 1 $\MB_\Q = \left( \Delta^{\MB_\Q}, \Phi^{\MB_\Q} \right)$: 
+            \begin{align*}
+                \Delta^{\MB_\Q} &= \Q\\
+                \Phi^{\MB_\Q} &= \{ =_q \mid q \in \Q \} \cup \{+, -\}\\
+                {(=_q)}^{\MB_\Q} &= \{(q)\} \quad \text{für alle } q \in \Q\\
+                +^{\MB_\Q} &= \{(q_1, q_2, q_3) \mid q_1 + q_2 = q_3\}\\
+                -^{\MB_\Q} &= \{(q_1, q_2, q_3) \mid q_1 - q_2 = q_3\}
+            \end{align*}
+        \item Beispiel 2 $\MB_S = \left( \Delta^{\MB_S}, \Phi^{\MB_S} \right)$: 
+            \begin{align*}
+                \Delta^{\MB_S} &= \text{Menge aller Wörter über Unicode 2.0}\\
+                \Phi^{\MB_S} &= \{ =_s \mid s\ \text{ist Unicode-Wort}\} \cup \{\text{concat}\}\\
+                {(=_s)}^{\MB_S} &= \{(s)\}\ \text{für alle}\ s\\
+                \text{concat}^{\MB_S} &= \{(s_1, s_2, s_3) \mid s_1 \cdot s_2 = s_3\}
+            \end{align*}
+    \end{itemize}
+\end{tafel}
 
-Sei $B$ ein konkreter Bereich. Mit ALC($B$) bezeichnen wir die
-Erweiterung von $\ALC$ um $B$, d.h. um
 
-\begin{itemize}
-\item
-  \emph{Featurenamen} (eine zusätzliche Art von Rolle) und
-\item
-  die Konstruktoren $\exists R_1,\ldots,\ R_{n}\text{.P}$ und
-  $\forall R_1,\ldots,R_{n}\text{.P}$
+\begin{definition}[$\ALCB$ Syntax]
+    Sei $\MB$ ein konkreter Bereich. $\ALCB$ ist die Erweiterung von $\ALC$ um $\MB$, d.h.\ um
+    \begin{itemize}
+\item \emph{Featurenamen} (eine zusätzliche Art von Rolle) und
+\item die Konstruktoren $\exists R_1, \ldots, R_n.P$ und
+  $\forall R_1,\ldots,R_n.P$
 \end{itemize}
-
-wobei $P \in \Phi^{B}$ $n$-Stellig ist und die $R_{i}$
-\emph{Rollenkomposition} der Form $r_1;\ldots;r_{k};f$ sind mit
+wobei $P \in \Phi^\MB$ $n$-stellig ist und die $R_i$
+\emph{Rollenkomposition} der Form $$r_1;\ldots;r_{k};f$$ sind mit
 $r_{j}$ Rollenname und $f$ Featurename.
+\end{definition}
 
-\subsubsection{Definition 5.28 (ALCB
-Semantik)}\label{definition-5.28-alcb-semantik}
+\begin{tafel}[Beispiel $\ALCB$ Syntax]
+    \begin{align*}
+        \text{Mensch} &\sqsubseteq \forall \overbrace{\text{alter}}^\text{Featurename},\overbrace{\text{eltern}}^\text{Rolle};\overbrace{\text{alter}}^\text{Featurename}.<\\
+        \text{KGE} &\equiv \text{Mensch} \sqcap \forall \text{mutter};\text{alter},\text{vater};\text{alter}.=\\
+        \text{NAK} &\equiv \text{Mensch} \sqcap \exists \text{alter}, \text{geschwister};\text{alter}.<
+    \end{align*}
+\end{tafel}
 
+\begin{definition}[$\ALCB$ Semantik]
 Eine Interpretation $\MI$ ordnet nun zusätzlich zu jedem Featurenamen
-$f$ eine Funktion $f^\MI:\Delta^\MI \rightarrow \Delta^{B}$ zu. Für
-jede Rollenkomposition $r = r_1;\ldots r_{k};f$ bezeichnet $R^\MI$
+$f$ eine Funktion $f^\MI:\Delta^\MI \rightarrow \Delta^\MB$ zu. Für
+jede Rollenkomposition $$R = r_1;\ldots;r_k;f$$ bezeichnet $R^\MI$
 die Komposition der Interpretationen:
-$R^\MI = r_1^\MI \circ \ldots \circ r_{k}^\MI \circ f$
+$$R^\MI = r_1^\MI \circ \cdots \circ r_k^\MI \circ f^\MI$$
 
 Die Semantik der zusätzlichen Konstruktoren ist nun:
+    \begin{multline*}
+        {( \exists R_1,\ldots, R_k.P )}^\MI =\\
+    \left\{ d \in \Delta^\MI \mid \exists d_1,\ldots,d_k: ( d,d_i) \in R_i^\MI\ \text{für}\ 1 \leq i \leq k\ \text{und}\ ( d_1, \ldots, d_k ) \in P^\MB \right\}
+    \end{multline*}
+    \begin{multline*}
+    {( \forall R_1,\ldots, R_k.P )}^\MI =\\
+                  \left\{ d \in \Delta^\MI \mid \forall d_1,\ldots,d_k:( d,d_i) \in R_i^\MI\ \text{für}\ 1 \leq i \leq k\ \text{impliziert}\ (d_1, \ldots, d_k) \in P^\MB \right\}
+\end{multline*}
+%Holy f*ck batman, aligning on non-relational operators is not possible in latex
+\end{definition}
 
-\[\left( \exists R_1,\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \exists d_1,\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{und}}\ \left( d_1,\ldots,\ d_{k} \right) \in P^{B} \right\}\]
+\begin{tafel}[Beispiel $\ALCB$ Semantik]\mbox{}
+    \begin{center}
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={fill=white}]
+            \node (s1) at (0, 1.5) {maria};
+            \node (s2) at (4, 1.5) {klaus};
+            \node (s3) at (0, 0) {fritz};
+            \node (s4) at (2, 0) {hannah};
+            \node (s5) at (4, 0) {susi};
+            \node (s6) at (0, 3) {34};
+            \node (s7) at (4, 3) {36};
+            \node (s8) at (0, -1.5) {7};
+            \node (s9) at (2, -1.5) {7};
+            \node (s10) at (4, -1.5) {12};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \path [->] (s1) edge (s3);
+            \path [->] (s1) edge (s4);
+            \path [->] (s1) edge (s5);
+            \path [->] (s2) edge (s3);
+            \path [->] (s2) edge (s4);
+            \path [->] (s1) edge node {\tiny{alter}} (s6);
+            \path [->] (s2) edge node {\tiny{alter}} (s7);
+            \path [->] (s3) edge node {\tiny{alter}} (s8);
+            \path [->] (s4) edge node {\tiny{alter}} (s9);
+            \path [->] (s5) edge node {\tiny{alter}} (s10);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    (Unbeschriftete Kanten sind \enquote{kind}) 
+    \begin{align*}
+        {(\text{kind};\text{alter})}^\MI &= \{(\text{maria}, 7), (\text{maria},12), \ldots\}\\
+        {(\exists \text{alter}.=_7)}^\MI &= \{\text{hannah}, \text{fritz}\}\\
+        {(\forall \text{alter}.=_7)}^\MI &= \{\text{hannah}, \text{fritz}\}\\
+        {(\exists \text{alter},\text{kind};\text{alter}.>)}^\MI &= \{\text{maria}, \text{klaus}\}\\
+        {(\forall \text{alter},\text{kind};\text{alter}.>)}^\MI &= \Delta^\MI
+    \end{align*}
+\end{tafel}
 
-\[\left( \forall R_1,\ldots,\ R_{k}\text{.P} \right)^\MI = \left\{ d \in \Delta^\MI\ |\ \forall d_1,\ldots,d_{k}:\left( d,d_{i} \right) \in R_{i}^\MI\ \mathrm{fur}\ 1 \leq i \leq k\ \mathrm{\text{impliziert}}\ \left( d_1,\ldots,\ d_{k} \right) \in P^{B} \right\}\]
 
-\subsubsection{2-Registermaschinen}\label{registermaschinen}
+Wir zeigen, dass bereits scheinbar einfache konkrete Bereiche zu Unentscheidbarkeit führen können. Betrachte $\MB_1$ mit:
+\begin{align*}
+    \Delta^{\MB_1} &= \mathbb{N}\\
+    \Phi^{\MB_1} &= \{=_0, =, +_1\}
+\end{align*}
+wobei $=_0$ einstellig ist und $=, +_1$ zweistellig sind, mit den Extensionen:
+\begin{align*}
+    =_0^{\MB_1} &= \{0\}\\
+    =^{\MB_1} &= \{(i, i) \mid i \in \mathbb{N} \}\\
+    +_1^{\MB_1} &= \{(i, i + 1) \mid i \in \mathbb{N} \}\\
+\end{align*}
+
+\begin{theorem}
+    Erfüllbarkeit von $\ALC(\MB_1)$-Konzepten bezüglich TBoxen ist \emph{unentscheidbar}.
+\end{theorem}
+
+Beweis per Reduktion des Halteproblems für 2-Registermaschinen.
+
+\subsubsection{2-Registermaschinen}
+
+2-Registermaschinen sind ähnlich Turingmaschinen:
+\begin{itemize}
+    \item Es gibt endlich viele Zustände.
+    \item Statt eines Arbeitsbandes gibt es zwei Register mit Werten $\in \mathbb{N}$.
+    \item Statt einer Übergangsfunktion gibt es Instruktionen.
+\end{itemize}
+Die Instruktionen erlauben es, den Wert eines Registers
 
 \begin{itemize}
-\item
-  Endlich viele Zustände
-\item
-  Zwei Register mit Werten aus $\mathbb{N}$
-\item
-  Instruktionen um
-
-  \begin{itemize}
-  \item
-    Register zu inkrementieren
-  \item
-    Register auf null zu testen und bei Wert $\neq 0$ zu
-    dekrementieren. Der Folgezustand hängt davon ab, ob das Register
-    $0$ war.
-  \end{itemize}
+    \item zu inkrementieren oder
+    \item auf 0 zu testen und bei Wert $\neq 0$ zu dekrementieren.
 \end{itemize}
+Bei der zweiten Art Instruktion hängt der Folgezustand davon ab, ob der Registerwert 0 war.
 
-\subsubsection{Definition 5.30}\label{definition-5.30}
-
+\begin{definition}[2-Registermaschine]
 (Deterministische) \emph{2-Registermaschine} (2RM) ist Paar
 $M = \left( Q,P \right)$ mit
-$Q = \left\{ q_{0},\ldots,\ q_{l} \right\}$ Menge von \emph{Zuständen}
-und $P = I_{0},\ldots,I_{l - 1}$ \emph{Instruktionsfolge}. Per
-Definition ist $q_{0}$ Startzustand, $q_{l}$ Stoppzustand. Jede
-Instruktion ist $I_{i}$ hat eine der folgenden Formen:
+$Q = \left\{ q_0,\ldots,\ q_\ell \right\}$ Menge von \emph{Zuständen}
+und $P = I_{0},\ldots,I_{\ell - 1}$ \emph{Instruktionsfolge}. Per
+Definition ist $q_0$ Startzustand und $q_\ell$ Stoppzustand. Jede
+Instruktion $I_{i}$ hat eine der folgenden Formen:
 
 \begin{itemize}
 \item
-  $I_{i} = + (p,q_1)$ mit $p \in \left\{ 1,2 \right\}$
+  $I_{i} = + (p,q_j)$ mit $p \in \left\{ 1,2 \right\}$
   \emph{Register} und $q_{j}$ Folgezustand: Inkrementierunsanweisung
 \item
   $I_{i} = - (p,q_{j},q_{k})$ mit $p \in \left\{ 1,2 \right\}$
@@ -1063,6 +1143,11 @@ Instruktion ist $I_{i}$ hat eine der folgenden Formen:
   mit Folgezustand $q_{j}$, wenn Register $p$ den Wert $0$ enthält
   und $q_{k}$ sonst.
 \end{itemize}
+\end{definition}
+
+\begin{definition}[2-Registermaschinenberechnung]
+
+\end{definition}
 
 \subsubsection{Definition 5.31}\label{definition-5.31}
 
