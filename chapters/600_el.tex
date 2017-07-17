@@ -1,58 +1,138 @@
 
-\subsection{EL}\label{el}
+\subsection{\texorpdfstring{$\EL$}{EL}}\label{sec:el}
 
-Ein EL-Konzept ist ein ALC-Konzept, in dem nur die Konstruktoren
-$\top,\ $ $\sqcap$ und $\exists r.C$ verwendet werden.
+Für manche Anwendungen ist $\ALC$ zu komplex:
+\begin{itemize}
+    \item Auch hoch-optimierte Reasoner können sehr große und komplexe Ontologien oft nicht verarbeiten (oder nur nach intensivem Tuning)
+    \item In der Anfragebeantwortung muss man oft mit sehr großen Datenmengen umgehen und braucht schnelle Antworten (\autoref{sec:abox})
+\end{itemize}
 
-\subsection{Simulation}\label{simulation}
+Wir betrachten die Beschreibungslogik $\EL$:
+\begin{itemize}
+    \item viel weniger ausdrucksstark als $\ALC$, Basisoperatoren nur $\sqcap$ und $\exists r.C$
+    \item Erfüllbarkeit und Subsumtion in Polyzeit entscheidbar.
+\end{itemize}
 
-Simulation ist gerichtete Bisimulation.
-$\left( I_1,d_1 \right) \precsim \left( I_2,d_2 \right)$: es
-gibt Simulation $p$ von $I_1$ nach $I_2$ mit
-$d_1\text{\ p\ }d_2$.
+\begin{definition}[$\EL$]
+Ein $\EL$-Konzept ist ein $\ALC$-Konzept, in dem nur die Konstruktoren
+$\top, \sqcap$ und $\exists r.C$ verwendet werden.
+\end{definition}
 
-\hypertarget{lemma-6.3}{\subsubsection{Lemma 6.3}\label{lemma-6.3}}
+$\EL$ ist beliebt für biomedizinische Ontologien (die sind oft sehr groß und mit hohem Abstraktionsgrad):
+\begin{align*}
+    \text{Perikardium} &\sqsubseteq \text{Gewebe} \sqcap \exists \text{teilVon}.\text{Herz}\\
+    \text{Perikarditis} &\equiv \text{Entzündung} \sqcap \exists \text{ort}.\text{Perikardium}\\
+    \text{Entzündung} & \sqsubseteq \text{Krankheit} \sqcap \exists \text{wirktAuf}.\text{Gewebe}
+\end{align*}
 
-Seien $I_1,I_2$ Interpretationen, $d_1 \in \Delta^{I_1}$ und
-$d_2 \in \Delta^{I_2}$. Wenn
-$\left( I_1,d_1 \right) \precsim \left( I_2,d_2 \right)$, dann
-gilt für alle EL-Konzepte $C$: $d_1 \in C^{I_1}$ impliziert
-$d_2 \in C^{I_2}$.
+SNOMED CT ist in unwesentlicher Erweiterung von $\EL$ formuliert. $\EL$ ist Grundlage des EL-Profils von OWL 2.
 
-Beweisskizze per Induktion über die Struktur von $C$. Sei $\rho$
-eine Simulation zwischen $I_1$ und $I_2$ mit
-$d_1\text{\ $\rho$}\text{\ d}_2$.
+\subsubsection{Simulation}\label{simulation}
 
-\textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
-Bisimulation gilt $d_1 \in A^{I_1}$ impliziert
-$d_2 \in A^{I_2}$.
+Intuitiv: $\EL$ ist die \enquote{Hälfte von $\ALC$}; Simulation entspricht der \enquote{Hälfte von Bisimulation}.
 
-\textbf{I.S.} Unterscheide Fälle gemäß dem äußersten Konstrukt von
-$C$.
+\begin{definition}[Simulation]
+    Seien $\MI_1$ und $\MI_2$ Interpretationen. Relation $\rho \subset \Delta^{\MI_1} \times \Delta^{\MI_2}$ ist Simulation von $\MI_1$ nach $\MI_2$, wenn gilt:
+    \begin{enumerate}
+        \item Wenn $d_1 \rho d_2$, dann gilt für alle Konzeptnamen $A$:
+            \begin{center}
+                $d_1 \in A^{\MI_1}$ impliziert $d_2 \in A^{\MI_2}$
+            \end{center}
+        \item Wenn $d_1 \rho d_2$ und $(d_1, d'_1) \in r^{\MI_1}$ für beliebigen Rollennamen $r$, dann gibt es ein $d'_2 \in \Delta^{\MI_2}$ mit $d'_1 \rho d'_2$ und $(d_2, d'_2) \in r^{\MI_2}$.
+    \end{enumerate}
+\end{definition}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $C = D_1 \sqcap D_2$
-\end{enumerate}
+\begin{tafel}[Beispiele für Simulationen]\mbox{}
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (0, 1) {};
+            \node (s1) at (0, 0) {};
+            \node (s2) at (-1, -1) {};
+            \node (s3) at (1, -1) {};
+            \node (s4) at (4, 1) {};
+            \node (s5) at (3, -0) {};
+            \node (s6) at (5, -0) {};
+            \node (s7) at (3, -1) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node (name) at (0, 2) {$\MI_1$};
+            \node (name) at (4, 2) {$\MI_2$};
+            \node [left = 0.3cm of s0] at (s0){$A$};
+            \node [left = 0.3cm of s2] at (s2){$A$};
+            \node [left = 0.3cm of s3] at (s3){$B$};
+            \node [right = 0.3cm of s4] at (s4){$A$};
+            \node [right = 0.3cm of s6] at (s4){$A, B$};
+            \node [right = 0.3cm of s7] at (s7){$A, B, C$};
+            \path [->] (s0) edge node {\scriptsize{r}} (s1);
+            \path [->] (s1) edge node {\scriptsize{r}} (s2);
+            \path [->] (s1) edge node {\scriptsize{r}} (s3);
+            \path [->] (s4) edge node {\scriptsize{r}} (s5);
+            \path [->] (s4) edge node {\scriptsize{s}} (s6);
+            \path [->] (s5) edge node {\scriptsize{r}} (s7);
+            \path[dotted] [->] (s0) edge node {\scriptsize{$\rho$}}(s4);
+            \path[dotted] [->] (s1) edge node {\scriptsize{$\rho$}}(s5);
+            \path[dotted] [->] (s2) edge [bend right] node {\scriptsize{$\rho$}}(s7);
+            \path[dotted] [->] (s3) edge node {\scriptsize{$\rho$}}(s7);
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (1, 0) {};
+            \node (s1) at (0, 1) {};
+            \node (s2) at (-1, 0) {};
+            \node (s3) at (0, -1) {};
+            \node (s4) at (4, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node (name) at (0, 2) {$\MI_1$};
+            \node (name) at (4, 2) {$\MI_2$};
+            \node [left = 0.3cm of s0] at (s0){};
+            \node [left = 0.3cm of s1] at (s1){$A$};
+            \node [left = 0.3cm of s2] at (s2){$A, B$};
+            \node [left = 0.3cm of s3] at (s3){$B$};
+            \node [right = 0.3cm of s4] at (s4){$A, B$};
+            \path [->] (s0) edge node {\scriptsize{s}} (s1);
+            \path [->] (s1) edge node {\scriptsize{r}} (s2);
+            \path [->] (s2) edge node {\scriptsize{s}} (s3);
+            \path [->] (s3) edge node {\scriptsize{r}} (s0);
+            \path [->] (s4) edge [looseness=10] node [loop above] {\scriptsize{r, s}} (s4);
+            \path[dotted] [->] (s0) edge node {\scriptsize{$\rho$}}(s4);
+            \path[dotted] [->] (s1) edge node {\scriptsize{$\rho$}}(s4);
+            \path[dotted] [->] (s2) edge [bend right] node {\scriptsize{$\rho$}}(s4);
+            \path[dotted] [->] (s3) edge node {\scriptsize{$\rho$}}(s4);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    Wenn in $\MI_1$ nur $A, B, r, s$ verwendet werden, dann gilt für jede Interpretation $\MI$ und jedes Element $d \in \Delta^\MI: (\MI, d) \precsim (\MI, e)$.
+\end{tafel}
 
-\begin{quote}
-$d_1 \in C^{I_1}$ gdw. $d_1 \in D_1^{I_1}$und
-$d_1 \in D_2^{I_1}$ (Semantik) impliziert.
-$d_2 \in D_1^{I_2}$ und $d_2 \in D_2^{I_2}$ (I.V.) gdw.
-$d_2 \in C^{I_2}$ (Semantik)
-\end{quote}
+Beachte: im Gegensatz zu Bisimulation sind Simulationen gerichtet.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  $C = \exists r.D$
-\end{enumerate}
+Seien $\MI_1$ und $\MI_2$ Interpretationen, $d_1 \in \Delta^{\MI_1}, d_2 \in  \Delta^{\MI_2}$. Wir schreiben  $(\MI_1,d_1) \precsim (\MI_2,d_2)$, wenn es eine Simulation $\rho$ von $\MI_1$ nach $\MI_2$ gibt mit $d_1 \rho d_2$ (wir sagen: $d_1$ wird simuliert von $d_2$).
 
-\begin{quote}
-Hinrichtung und Rückrichtung analog über Semantik, 2. Bedingung der
-Simulation, I.V., Semantik.
-\end{quote}
+\begin{theorem}
+Seien $\MI_1,\MI_2$ Interpretationen, $d_1 \in \Delta^{\MI_1}$ und
+$d_2 \in \Delta^{\MI_2}$. Wenn
+$(\MI_1,d_1) \precsim (\MI_2,d_2)$, dann
+gilt für alle $\EL$-Konzepte $C$:
+\begin{center}
+$d_1 \in C^{\MI_1}$ impliziert $d_2 \in C^{\MI_2}$.
+\end{center}
+\end{theorem}
+\begin{tafel}[Beweis des Theorems 6.3]
+    \begin{proof}
+    per Induktion über $C$:
+    \begin{itemize}
+        \item $C=\top$: trivial
+        \item $C=A$: nach Bedingung 1 einer Simulation
+        \item $C=D\sqcap E$: nach IV und Semantik
+        \item $C=\exists r.D$: nach Bedingung 2 einer Simulation und IV
+    \end{itemize}
+\end{proof}
+\end{tafel}
 
 \subsubsection{Lemma 6.4}\label{lemma-6.4}
 
