@@ -1,4 +1,4 @@
-\newcommand{\settitlepage} {
+\newcommand{\settitlepage}{%
     \thispagestyle{empty}
 
     \begin{minipage}[H]{\textwidth}
@@ -19,8 +19,8 @@
     \begin{minipage}[H]{\textwidth}
         \begin{center}
 
-                \begin{tabular}{ r l }
-                  Dozent: & Prof. Dr. Thomas Schneider\\
+                \begin{tabular}{rl}
+                  Dozent: & Prof.\ Dr.\ Thomas Schneider\\
                   Mitschrift/Kommentare von: & Sascha Jongebloed, Robin Nolte\\
                 \end{tabular}
         \end{center}
@@ -33,17 +33,16 @@
     \newpage
 }
 
-\newcommand{\settableofcontents} {
+\newcommand{\settableofcontents}{%
     \setcounter{tocdepth}{4}
     \tableofcontents
     \newpage
 }
 
-\newcommand{\setbibliography} {
+\newcommand{\setbibliography}{%
     \clearpage
-    \phantomsection
-    \label{ch:bib}%
+    \phantomsection\label{ch:bib}%
     \addcontentsline{toc}{section}{Literatur}%
         \nocite{*}%
-        \printbibliography
+        \printbibliography{}
 }

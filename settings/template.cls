@@ -3,7 +3,11 @@
 \LoadClass[12pt,a4paper,oneside]{scrartcl}
 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
+
+%Reasonable fonts
+\usepackage{lmodern}
 
 \usepackage{microtype} % Microtypesetting for better layout
 
@@ -30,6 +34,9 @@
 \declaretheorem[sibling=definition, name = Korollar]{korollar}
 \declaretheorem[sibling=definition, name = Proposition]{proposition}
 \declaretheorem[numberwithin=section, name = T]{tafel}
+
+% We can continue via the "continues" argument. We redefine the text that appears if we do this to "Fortsetzung"
+\renewcommand{\thmcontinues}[1]{Fortsetzung}
 
 \usepackage[headsepline]{scrlayer-scrpage}
 \KOMAoption{headsepline}{.1pt:}
@@ -68,5 +75,8 @@
 \renewcommand{\right}{\aftergroup\egroup\originalright}
 
 \usepackage{enumitem}
+
+\usepackage[noend]{algpseudocode}
+
 
 \endinput
