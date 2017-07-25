@@ -113,7 +113,7 @@ Beachte: im Gegensatz zu Bisimulation sind Simulationen gerichtet.
 
 Seien $\MI_1$ und $\MI_2$ Interpretationen, $d_1 \in \Delta^{\MI_1}, d_2 \in  \Delta^{\MI_2}$. Wir schreiben  $(\MI_1,d_1) \precsim (\MI_2,d_2)$, wenn es eine Simulation $\rho$ von $\MI_1$ nach $\MI_2$ gibt mit $d_1 \rho d_2$ (wir sagen: $d_1$ wird simuliert von $d_2$).
 
-\begin{theorem}
+\begin{theorem}\label{thm:63}
 Seien $\MI_1,\MI_2$ Interpretationen, $d_1 \in \Delta^{\MI_1}$ und
 $d_2 \in \Delta^{\MI_2}$. Wenn
 $(\MI_1,d_1) \precsim (\MI_2,d_2)$, dann
@@ -134,140 +134,329 @@ $d_1 \in C^{\MI_1}$ impliziert $d_2 \in C^{\MI_2}$.
 \end{proof}
 \end{tafel}
 
-\subsubsection{Lemma 6.4}\label{lemma-6.4}
+Intuitiv: Wenn $(\MI_1, d_1) \precsim (\MI_2, d_2)$ und $(\MI_2, d_2) \precsim (\MI_1, d_1)$, dann kann $\EL$ nicht zwischen $d_1$ und $d_2$ \enquote{unterscheiden}.
 
-Bisimulation und wechselseitige Simulation sind nicht dasselbe.
+Achtung: Bisimulation und wechselseitige Simulation sind \emph{nicht dasselbe}
+\begin{lemma}
+    Es gibt $(\MI_1, d_1)$ und $(\MI_2, d_2)$, so dass
+    \begin{itemize}
+        \item $(\MI_1, d_1) \precsim (\MI_2, d_2)$ und $(\MI_2, d_2) \precsim (\MI_1, d_1)$
+        \item $(\MI_1, d_1) \not\sim (\MI_2, d_2)$
+    \end{itemize}
+\end{lemma}
 
-Beweisskizze: Zeige Wechselseitige Simulation, die keine Biosimulation
-ist:
+\begin{tafel}[Beispiel Lemma 6.4]\label{t:63}\mbox{}
+\begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (0, 2) {$d$};
+            \node (s1) at (0, 0) {};
+            \node (s2) at (3, 2) {$e$};
+            \node (s3) at (2, 0) {};
+            \node (s4) at (4, 0) {};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node (name) at (0, 3) {$\MI_1$};
+            \node (name) at (3, 3) {$\MI_2$};
+            \node [below = 0.3cm of s1] at (s1){$A$};
+            \node [below = 0.3cm of s3] at (s3){$A$};
+            \path[dotted] [->] (s2) edge [bend right] (s0);
+            \path[dotted] [->] (s3) edge [bend right] (s1);
+            \path[dotted] [->] (s4) edge [bend right] node {$*$}(s1);
+            \path[dashed] [->] (s0) edge (s2);
+            \path[dashed] [->] (s1) edge (s3);
+            \path [->] (s0) edge node {$r$} (s1);
+            \path [->] (s2) edge node {$r$} (s3);
+            \path [->] (s2) edge node {$r$} (s4);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
 
-\includegraphics[width=3.71910in,height=1.83200in]{media/image1.png}
+    Wechselseitige Simulation ist gegeben, aber $(\MI_1, d) \not\sim (\MI_2, e)$. Wenn es eine Bisimulation gäbe, müsste sie das Paar $*$ enthalten, was ein Widerspruch zu der 1. Bedingung von Bisimulationen ist.
+\end{tafel}
 
-\subsubsection{Lemma 6.6}\label{lemma-6.6}
+Man kann nun wieder Nicht-Asudrückbarkeitsresultate zeigen:
+\begin{lemma}
+    Das $\ALC$-Konzept $\forall r.A$ ist \emph{nicht} in $\EL$ ausdrückbar.
+\end{lemma}
+\begin{tafel}[continues=t:63]
+    \begin{proof}
+        Angenommen es gäbe ein $\EL$-Konzept $C$ mit $C \equiv \forall r.A$.
+        Dann gilt $d \in C^{\MI_1}$. Da $(\MI_1, d) \precsim (\MI_2, e)$,
+        folgt $e \in C^{\MI_2}$. Widerspruch zu $e \not\in {(\forall
+        r.A)}^{\MI_2}$.
+    \end{proof}
+    In $\EL\mathcal{I}$ ist $A \sqsubseteq \forall r.B$ ausdrückbar durch $\exists r^- A \sqsubseteq B$
+\end{tafel}
 
-Jedes EL-Konzept ist erfüllbar bzgl. jeder TBox.
+In $\EL$ ist Erfüllbarkeit \emph{kein} interessantes Schlussfolgerungsproblem:
 
-Beweisskizze per Induktion über die Struktur von $C$:
+\begin{lemma}
+    Jedes $\EL$-Konzept ist erfüllbar bezüglich jeder TBox.
+\end{lemma}
 
-\includegraphics[width=2.50460in,height=1.15200in]{media/image2.png}
+\begin{tafel}\mbox{}
+    \begin{proof}
+    Betrachte folgende Interpretation $\MI$:
+
+\begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (0, 0) {$d$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node [below = 0.4cm of s0] at (s0){$A_1, A_2, \ldots$};
+            \path [->] (s0) edge [loop right] node {$r_1, r_2, \ldots$} (s0);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+Für jedes $\EL$-Konzept $C$ gilt $C^\MI = \{d\}$. Beweis per Induktion über
+die Struktur von $C$.
+
+Also ist $\MI$ Modell jedes $\EL$-Konzepts und damit jeder $\EL$-TBox.
+\end{proof}
+\end{tafel}
+
+Daher konzentrieren wir uns auf Subsumtion.
 
 \subsection{Subsumtion ohne TBox}\label{subsumtion-ohne-tbox}
 
-Eine Subsumption $C \sqsubseteq D$ gilt in EL im Prinzip gdw mann
-$D$ syntaktisch in $C$ „wiederfindet``. Werden Konzepte als
-Baummodell dargestellt entspricht „Wiederfinden`` Simulation von
-$D$-Baum in $C$-Baum (also Teilgraphenproblem).
+Eine Subsumption $C \sqsubseteq D$ gilt in $\EL$ im Prinzip genau dann, wenn
+man $D$ syntaktisch in $C$ \enquote{wiederfindet}. Werden Konzepte als
+Bäume dargestellt entspricht \enquote{Wiederfinden} Simulation von
+$D$-Baum in $C$-Baum (also äquivalent zu einem Teilgraphenproblem).
 
-\subsubsection{Definition kanonisches
-Modell}\label{definition-kanonisches-modell}
+\begin{definition}[Kanonisches Modell - TODO]
+    Wir ordnen induktiv jedem $\EL$-Konzept $C$ eine Interpretation $\MI_C$ zu:
 
-Baue aus dem gegebenen Konzept $C$ intuitiv Baummodell.
+    Wir nennen $\MI_C$ kanonisches Modell, bezeichnen Wurzel stets mit $d_w$.
+\end{definition}
 
-\hypertarget{lemma-6.8}{\subsubsection{Lemma 6.8}\label{lemma-6.8}}
+Man sieht leicht, dass $\MI_C$ wirklich ein Modell ist:
 
-Für alle EL-Konzepte $C$ gilt: Die Interpretation $I_{C}$ ist Modell
-von $C$ mit $d_{w} \in C^{I_{C}}$.
+\begin{lemma}\label{lem:68}
+    Für alle $\EL$-Konzepte $C$ gilt: Die Interpretation $\MI_C$ ist Modell von $C$ mit $d_w \in C^{\MI_C}$.
+\end{lemma}
 
-Beweisskizze per Induktion über die Struktur von $C$.
+\begin{tafel}[Beweis von Lemma 6.8]
+    \begin{proof} per Induktion über $C$.
+        \begin{itemize}
+            \item $C = \top$: trivial $\top^{\MI_C} = \Delta^{\MI_C}$
+            \item $C = A$:, dann $I_C = {(d_w)}^A$, also $d_w \in A^{\MI_C}$
+            \item $C = D \sqcap E$: dann $I_C = TODO$. Nach IV $d_w \in D^{\MI_d}$ und $d_w \in D^{\MI_e}$. Da die Identität eine Simulationen von $\MI_D$ nach $\MI_C$ bzw. von $\MI_E$ nach $\MI_C$ ist, gilt $d_w \in D^{\MI_C}$ und $d_w \in E^{\MI_C}$, also $d_w \in C^{\MI_C}$ nach Semantik.
+            \item $C = \exists r.D$: dann $I_C = TODO$. IV liefert $d \in D^{\MI_D}$, also folgt $d \in D^{\MI_C}$, also $d_w \in {(\exists r.D)}^{\MI_C}$
+        \end{itemize}
+    \end{proof}
+\end{tafel}
 
-\hypertarget{lemma-6.9}{\subsubsection{Lemma 6.9}\label{lemma-6.9}}
+Die zentrale Eigenschaft kanonischer Modelle:
+\begin{lemma}\label{lem:69}
+Für alle $\EL$-Konzepte $C$, Interpretation $\MI$ und
+$e \in \Delta^\MI$ gilt:
+\begin{center}
+$e \in C^\MI$ gdw.
+$\left( \MI_C,d_w \right) \precsim \left( I,e \right)$.
+\end{center}
+\end{lemma}
 
-Für alle EL-Konzepte $C$, Interpretation $I$ und
-$e \in \Delta^{I}$ gilt: $e \in C^{I}$ gdw.
-$\left( I_{C},d_{w} \right) \precsim \left( I,e \right)$.
+\begin{tafel}[Beiweis Lemma 6.9]
+    Beispiel: $C = A \sqcap \exists r.(\exists r.\top \sqcap \exists s.B) \sqcap \exists s.A$.
+\begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (0, 4) {$d_w$};
+            \node (s1) at (-1, 2) {};
+            \node (s2) at (-2, 0) {};
+            \node (s3) at (0, 0) {};
+            \node (s4) at (1, 2) {};
+            \node (s5) at (4, 4) {$d$};
+            \node (s6) at (6, 4) {$f$};
+            \node (s7) at (4, 2) {$e$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node [right = 0.3cm of s4] at (s4){$A$};
+            \node [right = 0.3cm of s3] at (s3){$B$};
+            \node [above = 0.4cm of s5] at (s5){$A$};
+            \node [above = 0.4cm of s6] at (s6){$A,B$};
+            \path [->] (s0) edge node {$r$} (s1);
+            \path [->] (s1) edge node {$r$} (s2);
+            \path [->] (s1) edge node {$s$} (s3);
+            \path [->] (s0) edge node {$s$} (s4);
+            \path [->] (s5) edge node {$s$} (s6);
+            \path [->] (s5) edge node {$r$} (s7);
+            \path [->] (s6) edge [bend left] node {$r$} (s7);
+            \path [->] (s7) edge [loop below] node {$r$} (s7);
+            \path [->] (s7) edge node {$s$} (s6);
+            \path[dashed] [->] (s0) edge [bend right] (s5);
+            \path[dashed] [->] (s1) edge [bend right] (s7);
+            \path[dashed] [->] (s2) edge [bend right] (s7);
+            \path[dashed] [->] (s3) edge [bend left] (s6);
+            \path[dashed] [->] (s4) edge [bend left] (s6);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
 
-Beweisskizze.
+    \begin{proof}\mbox{}
+        \begin{itemize}
+            \item \enquote{$\Leftarrow$} Angenommen $(\MI_C, d_w) \precsim (\MI, e)$. \autoref{lem:68} liefert $d_w \in C^{\MI_C}$ und \autoref{thm:63} $e \in C^\MI$.
+            \item \enquote{$\Rightarrow$} Per Induktion über $C$:
+                \begin{itemize}
+                    \item $C = \top$: $\MI_C = d_w, \rho = \{(d_w, e)\}$ ist Simulation von $\MI_C$ nach $\MI$
+                    \item $C = A$: $\MI_C = d_w$ analog.
+                    \item $C = D \sqcap E$: $\MI_C$ wie in T6.5. IV liefert Simulation für $(\MI_D, d_w) \precsim (\MI, e)$ und $(\MI_E, d_w) \precsim (\MI, e)$. Leicht zu prüfen: $\rho_D \cup \rho_E$ ist Simulation.
+                    \item $C = \exists r.D$: Semantik liefert $e' \in D^\MI, (e, e') \in r^\MI$. $\MI_C$ siehe T6.5. IV liefert Simulation $\rho$ für $(\MI_D, d) \precsim (\MI, e')$. $\rho \cup \{(d_w, e)\}$ ist Simulation zeigt $(\MI_C, d_w) \precsim (\MI, e)$.
+                \end{itemize}
+        \end{itemize}
 
+    \end{proof}
+\end{tafel}
+
+Wir zeigen nun, dass $C \sqsubseteq D$ gdw.\ man $\MI_D$ in $\MI_C$ \enquote{wiederfindet}:
+
+\begin{lemma}
+Für alle $\EL$-Konzepte $C$, $D$ gilt:
+\begin{center}
+$C \sqsubseteq D$ gdw.
+$\left( \MI_D,d_w \right) \precsim \left( \MI_C,d_w \right)$
+\end{center}
+\end{lemma}
+
+\begin{tafel}[Beweis Lemma 6.10]
+    \begin{proof}\mbox{}
 \begin{itemize}
-\item
-  Hinrichtung per Induktion über $C$. Schau jeweils Simulation nach
-  I.V. an und ergänze diese.
-\item
-  Rückrichtung. Angenommen
-  $\left( I_{C},d_{w} \right) \precsim \left( I,e \right)$.
-  \protect\hyperlink{lemma-6.8}{Lemma 6.8} liefert
-  $d_{w} \in C^{I_{C}}$. Nach \protect\hyperlink{lemma-6.3}{Theorem
-  6.3} ist $e \in C^{I}$.
+    \item \enquote{$\Rightarrow$}
+  Betrachte kanonisches Modell $I_{C}$ von $C$. Wegen
+  \autoref{lem:68} gibt es $d_w \in C^{\MI_C}$. Mit $C \sqsubseteq D$
+  folgt $d_{W} \in D^{\MI_C}$. Mit \autoref{lem:69}
+  folgt $(\MI_D, d_w) \precsim (\MI_C, d_w)$.
+\item \enquote{$\Leftarrow$}
+  Angenommen
+  $\left( \MI_D,d_w \right) \precsim \left( \MI_C,d_w \right)$.
+  Betrachte beliebige Interpretation $\MI$ und $d \in C^\MI$. Zu
+  zeigen: $d \in D^{I}$. Wegen $d \in C^\MI$ und
+  \autoref{lem:69} gilt
+  $\left( \MI_C,d_w \right) \precsim \left( \MI,d \right)$.
+  Es gibt also Simulation $\rho_1$ von $\MI_D$ nach $\MI_C$ mit $\rho_1(d_w) = d_w$ und Simulation $\rho_2$ von $\MI_C$ nach $\MI$ mit $\rho_2(d_w)=d$. Die Komposition $\rho_1 \cdot \rho_2$ ist Simulation von $\MI_D$ nach $\MI$ mit $(\rho_1 \cdot \rho_2)(d_w) = d$. \autoref{lem:69} liefert $d \in D^\MI$.
 \end{itemize}
+\end{proof}
+\end{tafel}
 
-\subsubsection{Lemma 6.10}\label{lemma-6.10}
-
-Für alle EL-Konzepte $C$, $D$ gilt: $C \sqsubseteq D$ gdw.
-$\left( I_{D},d_{w} \right) \precsim \left( I_{C},d_{w} \right)$
-
-Beweisskizze.
-
-\begin{itemize}
-\item
-  Hinrichtung: Betrachte kanonisches Modell $I_{C}$ von $C$. Wegen
-  Lemma 6.8 gibt es $d_{w} \in C^{I_{C}}$. Mit $C \sqsubseteq D$
-  folgt $d_{W} \in D^{I_{C}}$. Mit \protect\hyperlink{lemma-6.9}{Lemma
-  6.9} folgt für $D,\ I_{C},d$ dass $d_{w} \in D^{I_{C}}$ gdw.
-  $\left( I_{D},d_{w} \right) \precsim \left( I_{C},d_{w} \right)$.
-\item
-  Rückrichtung. Angenommen
-  $\left( I_{D},d_{w} \right) \precsim \left( I_{C},d_{w} \right)$.
-  Betrachte beliebige Interpretation $I$ und $d \in C^{I}$. Zu
-  zeigen: $d \in D^{I}$. Wegen $d \in C^{I}$ und
-  \protect\hyperlink{lemma-6.9}{Lemma 6.9} gilt
-  $\left( I_{C},d_{w} \right) \precsim \left( I,d \right)$. Verkette
-  die Simulationen so dass
-  $\left( I_{D},d_{w} \right) \precsim \left( I,d \right)$. Mit
-  \protect\hyperlink{lemma-6.9}{Lemma 6.9} folgt
-  $d_{w} \in D^{I_{C}}$.
-\end{itemize}
-
-\subsubsection{Theorem 6.11}\label{theorem-6.11}
-
-Subsumtion in EL kann in polynomieller Zeit entschieden werden:
+Folgendes Theorem formuliert den recht einfachen Algorithmus:
+\begin{theorem}
+    Subsumtion in $\EL$ kann in polynomieller Zeit entschieden werden:
 
 \begin{itemize}
 \item
-  Konstruiere $I_{C}$ und $I_{D}$ in polynomieller Zeit.
+  Konstruiere $\MI_{C}$ und $\MI_{D}$ in polynomieller Zeit.
 \item
   Überprüfe in polynomieller Zeit, ob
-  $\left( I_{D},d_{w} \right) \precsim \left( I_{C},d_{w} \right)$
-
-  \begin{itemize}
-  \item
-    Berechne maximale Simulation $\varsigma$
-  \item
-    Teste ob $\left( d_{w},d_{W} \right) \in \varsigma$
-  \end{itemize}
+  $\left( \MI_D,d_w \right) \precsim \left( \MI_C,d_w \right)$.
 \end{itemize}
+\end{theorem}
+
+\begin{tafel}[Prozedur Theorem 6.11]
+    Gegeben $\MI_C, \MI_D$ entscheide $(\MI_D, d_w) \precsim (\MI_C, d_w)$ durch Berechnen der maximalen Simulation.
+    Berechne Folge $\rho_0, \rho_1, \ldots$ wie folgt:
+    \begin{align*}
+        \rho_0 &= \{(e, d) \in \Delta^{\MI_D} \times \Delta^{\MI_C} \mid e \in A^{\MI_D} \implies d \in A^{\MI_C} \text{für alle A}\}\\
+        \rho_{i + 1} &= \rho_i \mid \{(e, d) \mid\ \text{es gibt Relation}\ r\ \text{und}\ (e, e')\in r^{\MI_D}\text{, so dass}\ (e', d') \not\in \rho_i\ \text{für alle}\ (d, d') \in r^{\MI_C}
+    \end{align*}
+    Folge stabilisiert nach $|C| \cdot |D|$ Schritten und liefert die maximale Simulation.
+\end{tafel}
 
 \subsection{Subsumption mit TBox}\label{subsumption-mit-tbox}
+Wir verwenden ein so genanntes konsequenzbasiertes Verfahren.
 
-\subsubsection{Lemma 6.12}\label{lemma-6.12}
+Grundidee:
+\begin{itemize}
+    \item Mit Hilfe von Regeln werden zur TBox nach und nach neue Konzeptinklusionen hinzugefügt.
+    \item Am Ende muss man dann nur nach nachschauen, ob die gewünschte Subsumtion in der TBox explizit enthalten ist.
+\end{itemize}
 
-Seien $C,D$ zwei beliebige $\text{EL}$-Konzepte und $T$ eine
-EL-TBox. Sei weiterhin
-$T^{'} = T \cup \left\{ A_{C} \sqsubseteq C,D \sqsubseteq A_{D} \right\}$.
-mit Konzeptnamen $A_{C},A_{D}$, die nicht in $C,D,T$ vorkommen. Dann
-gilt; $T \models C \sqsubseteq D$ gdw
-$T^{'} \models A_{C} \sqsubseteq A_{D}$.
+In der Praxis haben sich derartige Verfahren als äußert effizient herausgestellt. Sie sind verwandt mit Sequenzkalkülen aus der klassischen Logik.
 
-\subsubsection{ Normalform}\label{normalform}
+Wir betrachten o.B.d.A. nur Subsumtion von Konzeptnamen bezüglich TBoxen.
 
-Eine TBox ist in \emph{Normalform}, wenn sie nur Inklusionen folgender
-Form enthält:
+\begin{lemma}\label{lem:612}
+    Seien $C, D$ zwei beliebige $\EL$-Konzepte und $\MT$ eine $\EL$-TBox. Sei weiterhin
+$\MT' = \MT \cup \left\{ A_C \sqsubseteq C,\ D \sqsubseteq A_D \right\}$,
+mit Konzeptnamen $A_C,A_D$, die nicht in $C,D,\MT$ vorkommen. Dann
+gilt:
+\begin{center}
+$\MT \models C \sqsubseteq D$ gdw.\
+$\MT' \models A_{C} \sqsubseteq A_{D}$.
+\end{center}
+\end{lemma}
 
-$A_1 \sqcap \ldots \sqcap A_{n} \sqsubseteq A$
-$A \sqsubseteq \exists r.A_1$ $\exists r.A \sqsubseteq A_1$
+\autoref{lem:612} liefert eine Polyzeit-Reduktion
+\begin{itemize}
+    \item von Subsumtion zwischen beliebigen Konzepten bezüglich TBoxen
+    \item auf Subsumtion zwischen Konzeptnamen bezüglich TBoxen.
+\end{itemize}
 
-\subsubsection{Lemma 6.14}\label{lemma-6.14}
+Wir betrachten o.B.d.A.\ nur TBoxen in folgender Normalform:
 
-Jede EL-TBox $T$ kann in polynomieller Zeit in eine TBox $T^{'}$ in
-Normalform gewandelt werden, so dass für alle Konzeptnamen $A,B$ in
-$T$ gilt: $T \models A \sqsubseteq B$ gdw
-$T \models A \sqsubseteq B$. Dann ist $T'$ \emph{konservative
-Erweiterung} von $T$.
+\begin{definition}[Normalform]
+    Eine TBox ist in \emph{Normalform}(NF), wenn sie nur Inklusionen folgender
+Form enthält: \begin{align*}
+    A_1 \sqcap \ldots \sqcap A_n &\sqsubseteq A\\
+A &\sqsubseteq \exists r.A_1\\
+\exists r.A &\sqsubseteq A_1
+\end{align*}
+wobei $A, A_1, \ldots, A_n$ Konzeptnamen oder $\top$ sind.
+\end{definition}
 
-\subsubsection{Lemma 6.14}\label{lemma-6.14-1}
+\begin{lemma}
+    Jede $\EL$-TBox $\MT$ kann in polynomieller Zeit in eine TBox $\MT'$ in NF gewandelt werden, so dass für alle Konzeptnamen $A, B$ in $\MT$ gilt:
+    \begin{align*}
+        \MT \models A\sqsubseteq B\ \text{gdw.}\ \MT' \models A\sqsubseteq B
+        \tag{$*$}
+    \end{align*}
+\end{lemma}
+Wenn ($*$) gilt, sagen wir $\MT'$ ist eine konservative
+Erweiterung von $\MT$. Um die NF herzustellen, wenden wir
+Normalisierungsregeln an.
 
-Jede EL-TBox $T$ kann durch linear viele Regelanwendungen in TBox in
-Normalform transformiert werden, die konservative Erweiterung von $T$
+\begin{tafel}[Beispiel Normalisierung]
+    \begin{align*}
+        A \sqcap \exists r.B &\sqsubseteq A\\
+        A \sqcap B &\sqsubseteq \exists r.A\\
+                   &\Downarrow\\
+        A \sqcap A_{\exists r.B} &\sqsubseteq A\\
+        \exists r.B &\sqsubseteq A_{\exists r.B}\\
+        A \sqcap B &\sqsubseteq A_{\exists r.A}\\
+        A_{\exists r.A} &\sqsubseteq \exists r.A\\
+    \end{align*}
+\end{tafel}
+
+\begin{align*}
+    C_1 \sqcap \dots \sqcap C_n \sqsubseteq E
+    &\rightsquigarrow
+    C_i \sqsubseteq A_{C_i},\ C_1 \sqcap \dots \sqcap C_{i - 1} \sqcap A_{C_i} \sqcap C_{i + 1} \sqcap \dots \sqcap C_n \sqsubseteq E \tag{NF1}\\
+    &\text{wenn}\ C_i\ \text{Existenzrestriktion}\\
+    \exists r.C \sqsubseteq E
+    &\rightsquigarrow
+    C \sqsubseteq A_C,\ \exists r.A_C \sqsubseteq E \tag{NF2}\\
+    C \sqsubseteq \exists r.D
+    &\rightsquigarrow
+    C \sqsubseteq A_C,\ A_C \sqsubseteq \exists r.D \tag{NF3}\\
+    A \sqsubseteq \exists r.C
+    &\rightsquigarrow
+    A \sqsubseteq \exists r.A_C,\ A_C \sqsubseteq C \tag{NF4}\\
+    A \sqsubseteq C_1 \sqcap C_2
+    &\rightsquigarrow
+    A \sqsubseteq C_1,\ A \sqsubseteq C_2 \tag{NF5}\\
+    &\text{wenn}\ C\ \text{weder Konzeptname noch}\ \top
+\end{align*}
+$A$ ist Konzeptname, $C_i, D, E$ sind beliebige Konzepte; $A_{C_(i)}$ sind neue Konzeptnamen.
+
+\begin{lemma}
+Jede $\EL$-TBox $\MT$ kann durch linear viele Regelanwendungen in TBox in
+Normalform transformiert werden, die konservative Erweiterung von $\MT$
 ist.
+\end{lemma}
+
 
 Die Regeln fügen jeweils Zwischenkonzepte ein.
 
