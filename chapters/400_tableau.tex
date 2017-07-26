@@ -70,7 +70,7 @@ Baum $\left( V,E,\ML \right)$ mit
         \sub(C_0) &= \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(\neg A \sqcap \exists r.B), C_0\}
     \end{align*}
 
-    \includegraphics[width=3.71910in,height=1.83200in]{media/42ibaum.png}
+    \includegraphics[width=3.71910in]{media/42ibaum.png}
 \end{tafel}
 
 \subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
@@ -106,7 +106,7 @@ Sei $\left( V,E,\ML \right)$ ein I-Baum.
     Wähle $v \in V$ und $C \sqcup D \in \ML\left( v \right)$ so dass
     $\left\{ C,D \right\} \cap \ML\left( v \right) = \emptyset$
   \item
-      erweitere $L(v)$ um $C$ \emph{oder} um $D$ (ergibt \emph{zwei} I-Bäume)
+      erweitere $\ML(v)$ um $C$ \emph{oder} um $D$ (ergibt \emph{zwei} I-Bäume)
   \end{itemize}
 \item $\exists$-Regel
 
@@ -145,7 +145,7 @@ Der Algorithmus stoppt, wenn alle I-Bäume vollständig sind. Anschließend wird
 
 Beispiel:
 
-\includegraphics[width=5.71910in,height=3.83200in]{media/43taleau.png}
+\includegraphics[height=3.83200in]{media/43taleau.png}
 
 \end{tafel}
 
@@ -275,7 +275,7 @@ da $i = 0$.
 $\sqcap$, $\exists$):
 
 \begin{enumerate}
-\item $\sqcap$-Regel. Dann $C \sqcap D \in L(v)$ und $L(v)$ wird um $C$ und $D$ erweitert.
+\item $\sqcap$-Regel. Dann $C \sqcap D \in \ML(v)$ und $\ML(v)$ wird um $C$ und $D$ erweitert.
 Nach I.V. gilt: $\rd\left( C \sqcap D \right) \leq \rd\left( C_{0} \right) - i$,
 also auch $\rd\left( C \right) \leq rd\left( C_{0} \right) - i$,
 weil $\rd\left( C \right) \leq \rd\left( C \sqcap D \right)$.
@@ -314,7 +314,7 @@ Nun kann die Terminierung mittels Behauptung 3 beweisen werden:
     Offenbar gilt $MM_{i+1} <_{\text{mul}} MM_i$ für alle $i \geq 0$. Also ist die Folge der $MM_i$ endlich.
 \end{proof}
 
-\includegraphics[width=3.71910in,height=1.83200in]{media/45mm.png}
+\includegraphics[width=3.71910in]{media/45mm.png}
 \end{tafel}
 
 \subsubsection{Korrektheit und Vollständigkeit}
@@ -489,7 +489,7 @@ Offenbar ist eine naive Implementierung nicht effizient. Dabei kann man aber ein
     \item Backjumping: Führe Buch über die \enquote{Herkunft} von Knotenbeschriftungen und Kanten mittels Dependenzmengen. Wenn Backtracking nötig, springe direkt zu einer der Ursachen des Widerspruches zurück.
 \end{itemize}
 
-\begin{tafel}[Demonstration des Vorteils von Backumping]
+\begin{tafel}[Demonstration des Vorteils von Backjumping]
     Sei 
     \begin{align*}
     \ML(v) = \{\overbrace{\exists r.A \sqcup B}^1, \overbrace{A_1 \sqcup A_1'}^2, \ldots, \overbrace{A_n \sqcup A_n'}^{n + 1}, \forall r.\neg A\}
@@ -643,7 +643,7 @@ blockierten Vorgänger hat. Beachte, dass \enquote{Vorgänger} kein direkter Vor
 \subsubsection{Vollständigkeit}\label{vollstuxe4ndigkeit}
 
 \begin{theorem}
-    Wenn $C_0$ bezüglich $\MT$ ist, dann gibt der Algorithmus \enquote{erfüllbar} zurück.
+    Wenn $C_0$ bezüglich $\MT$ erfüllbar ist, dann gibt der Algorithmus \enquote{erfüllbar} zurück.
 \end{theorem}
 
 Beweis wie ohne TBoxen: Alle $M_{0},\ldots,\ M_{n}$ sind realisierbar
@@ -712,7 +712,7 @@ Der Tableau-Algorithmus stoppt nach endlicher Zeit.
 
   Betrachte Pfad $v_0, \ldots , v_{2^k}$ von der Wurzel bis v. Dieser Pfad hat $2^k+1$ Knoten.
 
-  Weil es nur $2^k$ möglich Knotenbeschriftungen gibt, muss es auf dem Pfad zwei Knoten $v_i$ und $v_j$ geben, mit $0 \leq i < j \leq 2^k$, welche dieselben Knotenbeschriftungen haben, also $L(v_i) = L(v_j)$. Also ist $v_j$ durch $v_i$ blockiert, weswegen auch $v$ blockiert ist. $\lightning$
+  Weil es nur $2^k$ möglich Knotenbeschriftungen gibt, muss es auf dem Pfad zwei Knoten $v_i$ und $v_j$ geben, mit $0 \leq i < j \leq 2^k$, welche dieselben Knotenbeschriftungen haben, also $\ML(v_i) = \ML(v_j)$. Also ist $v_j$ durch $v_i$ blockiert, weswegen auch $v$ blockiert ist. $\lightning$
 
   Widerspruch zur Anwendung der $\exists '$-Regel auf $v_j$, also ist die Annahme falsch.
   \end{tafel}

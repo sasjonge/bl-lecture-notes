@@ -25,21 +25,21 @@ Wir nehmen oBdA. an, dass das Eingabe-Konzept $C_0$ in NNF ist und die Eingabe-T
 
 \begin{definition}[Typ]
 
-Ein Typ für $C_{0}$ und $T$ ist Teilmenge
-$t \subseteq \sub\left( C_{0},T \right)$, so dass
+Ein Typ für $C_{0}$ und $\MT$ ist Teilmenge
+$t \subseteq \sub\left( C_{0}, \MT \right)$, so dass
 
 \begin{enumerate}
 \item
   $A \in t$ gdw. $\neg A \notin t$ für alle
-  $\neg A \in \sub\left( C_{0},T \right)$
+  $\neg A \in \sub\left( C_{0}, \MT \right)$
 \item
   $C \sqcap D \in t$ gdw. $C \in t$ und $D \in t$ für alle
-  $C \sqcap D \in \sub\left( C_{0},T \right)$
+  $C \sqcap D \in \sub\left( C_{0}, \MT \right)$
 \item
   $C \sqcup D \in t$ gdw. $C \in t$ oder $D \in t$ für alle
-  $C \sqcup D \in \sub\left( C_{0},T \right)$
+  $C \sqcup D \in \sub\left( C_{0}, \MT \right)$
 \item
-  $C_{T} \in t$
+  $C_{\MT} \in t$
 \end{enumerate}
 \end{definition}
 
@@ -303,7 +303,7 @@ Um die \ExpTime-Schwere zu zeigen, reduzieren wir auf ein spieltheoretisches Pro
 \item Jede Variable in $\varphi$ gehört entweder Spielerin 1 oder Spielerin 2
 \item Das Spiel beginnt auf einer gegebenen Anfangsbelegung $\pi_0$ der Variablen in $\varphi$.
 \item Spielerin 1 beginnt, die Spielerinnen wechseln sich ab.
-\item In jedem Zug ändert Spieler Wahrheitswert einer ihrer Variablen; es ist erlaubt, zu passen
+\item In jedem Zug ändert die jeweilige Spielerin den Wahrheitswert einer ihrer Variablen; es ist erlaubt, zu passen
 \item Spielerin 1 gewinnt, wenn $\varphi$ jemals wahr wird (egal, welche Spielerin gezogen hat).
 \item Spielerin 2 gewinnt, wenn das Spiel unendlich weitergeht ohne dass $\varphi$ wahr wird
 \end{itemize}
@@ -363,8 +363,8 @@ Das hier relevante Entscheidungsproblem bezieht sich auf \emph{Gewinnstrategien}
 Intuitiv:
 
 \begin{itemize}
-  \item eine Gewinnstrategie sagt Spielerin 2 nach jedem möglichen Spielverlauf wie er spielen muss um zu gewinnen.
-  \item wenn Spielerin 2 eine Gewinnstrategie hat, so kann sie das Spiel immer gewinnen --- egal was Spielerin 2 tut.
+  \item eine Gewinnstrategie sagt Spielerin 2 nach jedem möglichen Spielverlauf wie sie spielen muss um zu gewinnen.
+  \item wenn Spielerin 2 eine Gewinnstrategie hat, so kann sie das Spiel immer gewinnen --- egal was Spielerin 1 tut.
 \end{itemize}
 
 \begin{definition}[Gewinnstrategie]
@@ -425,7 +425,7 @@ $v \in V$ Konfiguration $l(v)$ zuweist so, dass
     \end{tikzpicture}
 \end{center}
 
-    In Spiel B gibt es keine Gewinnstrategie für Sp1.
+    In Spiel B gibt es keine Gewinnstrategie für Sp2.
 \end{tafel}
 
 \begin{definition}[\ExpTime-Spiel Entscheidungsproblem]
@@ -438,13 +438,13 @@ Spielerin 2 eine Gewinnstrategie hat.
 Spiel\textsubscript{1} ist \ExpTime-Vollständig
 \end{theorem}
 
-Wir wollen nun die \ExpTime-Schwere von Erfüllbarkeit in $\ALC$ bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} reduzieren darauf reduzieren.
+Wir wollen nun die \ExpTime-Schwere von Erfüllbarkeit in $\ALC$ bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} darauf reduzieren.
 
 \subsubsection{Reduktion}\label{reduktion}
 
 Reduziere Spiel\textsubscript{1}: Gegeben Spiel
 $\left( \varphi,\Gamma_1,\Gamma_2,\pi_{0} \right)$, konstruiere in
-Polynomialzeit Konzept $C_{S}$ und TBox $\MT_{S}$, so dass Spielerin 2 eine Gewinnstrategie in $S$ hat gdw. $C_s$ erfüllbar bezüglich $\MT$ ist.
+Polynomialzeit Konzept $C_{S}$ und TBox $\MT_{S}$, so dass Spielerin 2 eine Gewinnstrategie in $S$ hat gdw. $C_S$ erfüllbar bezüglich $\MT$ ist.
 
 Idee: (Baum)-Modelle von $C_S$ und $\MT_S$ kodieren Gewinnstrategien.
 
@@ -724,8 +724,8 @@ Wir beginnen wieder mit Terminierung und Komplexitätsanalyse.
     Nun ist leicht zu sehen, dass der Verzweigungsgrad von $B$ beschränkt ist durch die Anzahl an Subkonzepten $\exists r.C$ von $C_0$ also durch $|C_0|$. Außerdem ist die Tiefe von $B$ beschränkt durch $\rd(C_0)$, also durch $|C_0|$.
     Also terminiert $\ALC-\texttt{Worlds}(C_0)$ und
     \begin{itemize}
-        \item Rekursionsstapel hat Tiefe $\leq |C_0$ und
-        \item Speicherbedarf pro Aufruf polynomiell in $|C_0$.
+        \item Rekursionsstapel hat Tiefe $\leq |C_0|$ und
+        \item Speicherbedarf pro Aufruf polynomiell in $|C_0|$.
     \end{itemize}
     Also wird nur polynomiell viel Platz benötigt.
 \end{proof}
@@ -841,7 +841,7 @@ Unterschiede zu \ExpTime-Spielen:
 Ein \emph{Spiel} ist eine aussagenlogische Formel $\varphi$ mit Variablen
   $p_1,\ldots,p_{n}$, $n$ geradzahlig.
 
-  Eine \emph{Konfiguration} ist ein Wort Wort $w \in {\left\{ 0,1 \right\}}^*$
+  Eine \emph{Konfiguration} ist ein Wort $w \in {\left\{ 0,1 \right\}}^*$
 \end{definition}
 
 \begin{itemize}
