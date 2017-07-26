@@ -1109,13 +1109,13 @@ wobei $=_0$ einstellig ist und $=, +_1$ zweistellig sind, mit den Extensionen:
     +_1^{\MB_1} &= \{(i, i + 1) \mid i \in \mathbb{N} \}\\
 \end{align*}
 
-\begin{theorem}
+\begin{theorem}\label{thm:531}
     Erfüllbarkeit von $\ALC(\MB_1)$-Konzepten bezüglich TBoxen ist \emph{unentscheidbar}.
 \end{theorem}
 
 Beweis per Reduktion des Halteproblems für 2-Registermaschinen.
 
-\subsubsection{2-Registermaschinen}
+\subsubsection{Reduktion von 2-Registermaschinen}
 
 2-Registermaschinen sind ähnlich Turingmaschinen:
 \begin{itemize}
@@ -1152,30 +1152,135 @@ Instruktion $I_{i}$ hat eine der folgenden Formen:
 \end{definition}
 
 \begin{definition}[2-Registermaschinenberechnung]
+    Eine Konfiguration ist ein Tripel $(q, m, n)$ mit $q$ aktueller Zustand und $m, n \in \mathbb{N}$ Registerinhalte.
 
+    Konfigurationsübergänge $(q, m, n) \vdash_M (q', m', n')$ sind definiert:
+    \begin{itemize}
+        \item Wenn $I_i = +(1, q_j)$, dann $(q_i, m, n) \vdash_M (q_j, m + 1, n)$
+        \item Wenn $I_i = +(2, q_j)$, dann $(q_i, m, n) \vdash_M (q_j, m, n + 1)$
+        \item Wenn $I_i = -(1, q_j, q_k)$, dann $(q_i, 0, n) \vdash_M (q_j, m, n + 1)$ und $(q_i, m, n) \vdash_M (q_k, m - 1, n)$ für $m > 0$.
+        \item Wenn $I_i = -(2, q_j, q_k)$, dann $(q_i, m, 0) \vdash_M (q_j, m, 0)$ und $(q_i, m, n) \vdash (q_k, m, n - 1)$ für $n > 0$
+    \end{itemize}
+    Eine \emph{Berechnung} von $M$ auf Eingabe  $(m, n) \in \mathbb{N}^2$ ist die eindeutige (längste) Konfigurationsfolge
+    \begin{gather*}
+    (q_0, m, n) = (p_0, m_0, n_0) \vdash_M (p_1, m_1, n_1) \vdash_M \cdots
+    \end{gather*}
 \end{definition}
 
-\subsubsection{Definition 5.31}\label{definition-5.31}
 
-Konfiguration und Konfigurationsübergänge
-$\left( q,m,n \right) \vdash_{M}(q^{'},m',n^{'})$. Berechnung als
-eindeutige längste Konfigurationsfolge.
+\begin{tafel}[Beispiel 2-Registermaschinen Addition]\mbox{}
+    \begin{itemize}
+        \item Eingabe $m, n$ (Register 1, 2), Ausgabe $m + n$ (Register 1)
+        \item Zustände $q_0, q_1, q_2$
+        \item Instruktionen: \begin{align*}
+                I_0 &= -(2, q_2, q_1)\\
+                I_1 &= +(1, q_0)
+            \end{align*}
+        \item Berechnung $2 + 3 = 5$: \begin{align*}
+                (q_0, 3, 2)
+                \stackrel{I_0}{\vdash_M} (q_1, 3, 1)
+                \stackrel{I_1}{\vdash_M} (q_0, 4, 1)
+                \stackrel{I_0}{\vdash_M} (q_1, 4, 0)
+                \stackrel{I_1}{\vdash_M} (q_0, 5, 0)
+                \stackrel{I_0}{\vdash_M} (q_2, 5, 0)
+            \end{align*}
+    \end{itemize}
 
-\subsubsection{Theorem 5.29}\label{theorem-5.29}
+\end{tafel}
 
-Das Erfüllbarkeitsproblem in $ALC(B_1)$ ist unentscheidbar.
+\begin{definition}[Halteproblem für 2RMs]
+    Das Halteproblem für 2RMs ist das folgende Problem: Gegeben eine 2RM $M$, entscheide, ob $M$ gestartet auf Eingabe $(0, 0)$ hält (also $q_\ell$ erreicht).
+\end{definition}
 
+\begin{theorem}[Minsky 1967]
+    Das Halteproblem für 2RMs ist unentscheidbar.
+\end{theorem}
+
+Für den Beweis von \autoref{thm:531}:
+Gegeben 2RM $M$,  konstruieren $\ALC(\MB_1)$-TBox $\MT_M$ und wähle einen Konzeptnamen $A$, so dass gilt:
+\begin{center}
+    $M$ hält auf $(0, 0)$ gdw. $A$ ist unerfüllbar bezüglich $\MT_M$
+\end{center}
+
+Wir verwenden folgende Symbole:
 \begin{itemize}
-\item
-  $\Delta^{B_1}\mathbb{= N}$
-\item
-  $\Phi^{B_1} = \left\{ =_{0}, = , +_1 \right\}$, wobei $=_{0}$
-  einstellig, die anderen Zweistellig.
+    \item Konzeptnamen $Q_0, \ldots, Q_\ell$ für die Zustände $q_0, \ldots, q_\ell$
+    \item Featurenamen $f_1, f_2$, um die Registerinhalte zu speichern
+    \item Rollennamen $r$, um die Nachfolgekonfiguration zu verbinden
+    \item Konzeptnamen $A$, der die Anfangskonfiguration anzeigt
 \end{itemize}
+Wir nahmen o.B.d.A. an: $q_0 \neq q_\ell$.
 
-Beweisskizze. Gegeben 2RM $M$,
-konstuiere$\text {$\ALC$}\left( B_1 \right)$-TBox $T_{M}$ und wähle
-einen Konzeptnamen $J$ sodass: $M$ hält auf $\left( 0,0 \right)$
-gdw. $J$ unerfüllbar bzgl. $T_{M}$. Zeige dies jeweils für
-Hinrichtung und Rückrichtung per Kontraposition. \textbf{Wo kommen i und
-j her?}
+Die TBox $\MT_M$ enthält folgende Konzeptinklusionen:
+\begin{enumerate}
+    \item Start in Zustand $q_0$ und mit Registerwerten $0$:
+        \begin{gather*}
+            A \sqsubseteq Q_0 \sqcap \exists f_1.=_0 \sqcap \exists f_2.=_0
+        \end{gather*}
+    \item Inkrementierung. Für alle $I_i = +(p, q_j)$:
+        \begin{gather*}
+            Q_i \sqsubseteq \exists r.Q_j \sqcap \forall f_p, (r;f_p).+_1 \sqcap \forall f_{\bar{p}}, (r;f_{\bar{p}}).=
+        \end{gather*}
+        (wobei $\bar{1} = 2$ und $\bar{2} = 1$)
+    \item Dekrementierung. Für alle $I_i = -(p, q_j, q_k)$: \begin{align*}
+            Q_i \sqcap \exists f_p.=_0 &\sqsubseteq \exists r.Q_j \sqcap \forall f_p, (r;f_p).= \sqcap \forall f_{\bar{p}}, (r;f_{\bar{p}}).=\\
+            Q_i \sqcap \neg\exists f_p.=_0 &\sqsubseteq \exists r.Q_k \sqcap \forall(r;f_p),f_p.+_1 \sqcap \forall f_{\bar{p}}, (r;f_{\bar{p}}).=
+        \end{align*}
+    \item Haltezustand wird nie erreicht:
+        \begin{gather*}
+            \top \sqsubseteq \neg Q_\ell
+        \end{gather*}
+\end{enumerate}
+
+\begin{lemma}
+    $M$ hält auf $(0, 0)$ gdw. A unerfüllbar bezüglich $\MT_M$.
+\end{lemma}
+
+\begin{tafel}[Beweis des Lemmas]\mbox{}
+    \begin{proof}\mbox{}
+    \begin{itemize}
+        \item $\Leftarrow$ per Kontraposition
+
+            Angenommen $M$ hält nicht und die Berechnung ist $(p_0, m_0, n_0) \vdash (p_1, m_1, n_1) \vdash \cdots$.
+
+            Definition der Interpretation $\MI$:
+            \begin{align*}
+                \Delta^\MI &= \mathbb{N}\\
+                Q^\MI_i &= \{ j \mid p_j = q_i\}\\
+                f^\MI_1(i) &= m_i, f^\MI_2(i) = n_i\\
+                r^\MI &= \{(j, j + 1) \mid j \geq 0\}\\
+                A^\MI &= \{0\}
+            \end{align*}
+            Man prüft leicht, dass alle Konzeptinklusionen 1--4 auf $\MT_M$ in $\MI$ erfüllt sind. Insbesondere ist $Q^\MI_\ell = \emptyset$, da Berechnung unendlich ist und $q_\ell$ keine Nachfolgezustände hat.
+        \item $\Rightarrow$ per Kontraposition.
+
+            Angenommen $A$ ist erfüllbar bezüglich $\MT_M$. Dann gibt es ein Modell $\MI$ von $\MT_M$ mit $A^\MI \neq \emptyset$.
+            Definition parallel:
+            \begin{enumerate}
+                \item Berechnung $(p_0, m_0, n_0) \vdash_M (p_1, m_1, n_1) \vdash_M \cdots$
+                \item Abbildung $\pi: \mathbb{N} \rightarrow \Delta^\MI$ so dass:
+                    \begin{enumerate}
+                        \item $\pi(i) = Q_j$ gdw. $p_i = q_j$
+                        \item $f^\MI_1(\pi(i)) = m_i, f^\MI_2(\pi(i)) = n_i$
+                    \end{enumerate}
+            \end{enumerate}
+            Induktionsanfang: $(p_0, m_0, n_0) = (q_0, 0, 0)$ und $\pi(0) \in A^\MI$. $a, b$ erfüllt wegen Konzeptinklusion 1.
+
+            Induktionsschritt: Mit a und Konzeptinklusion 4 ist $\pi(i) \in Q_j$ für ein $j < l$.
+            \begin{itemize}
+                \item 1. Fall $I_j = +(p_i, q_k)$. Mit Konzeptinklusion 2 gibt es $(\pi(i), d) \in r^\MI$, so dass $d \in Q^\MI_k$, $f^\MI_p(d) = f^\MI_p(\pi(i)) + 1$ und $f^\MI_{\bar{p}}(d) = f^\MI_{\bar{p}}(\pi(d))$. Setze $(p_{i + 1}, m_{i + 1}, n_{i + 1}) = (q_k, f^\MI_1(d), f^\MI_2(d))$, $\pi(i + 1) = d$.
+                    Man prüft leicht, dass a und b erfüllt sind.
+                \item 2. Fall analog mit Konzeptinklusion 3.
+            \end{itemize}
+    \end{itemize}
+\end{proof}
+\end{tafel}
+
+
+Man kann zeigen, dass \enquote{=} für die Reduktion nicht gebraucht wird. Es
+führen also schon sehr schwache arithmetische konkrete Bereiche zu
+Unentscheidbarkeit. Auch mit Wörtern und Konkatenation ist man sehr schnell
+unentscheidbar. Entscheidbar bleibt man aber, wenn man sich auf
+Vergleichsoperatoren konzentriert wie etwa $\mathbb{N}$ mit $=, <, >, \geq,
+\leq$.
+
