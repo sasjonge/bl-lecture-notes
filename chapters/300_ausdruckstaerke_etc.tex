@@ -4,7 +4,7 @@ linear quantifizieren, sondern nur beschreiben und charakterisieren.
 
 \subsection{Bisimulation}\label{bisimulation}
 
-Die Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdrucksstärke von $\ALC$ zusammenhängt.
+Die Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdrucksstärke von \ALC zusammenhängt.
 
 \begin{definition}[Bisimulation]
 
@@ -47,7 +47,7 @@ Die leere Relation ist immer Bisimulation.
     \label{thm:bisim}
 Seien $\MI_1$, $\MI_2$ Interpretationen,
 $d_1 \in \Delta^{\MI_1}$ und $d_2 \in \Delta^{\MI_2}$. Wenn
-$(\MI_1,d_1) \sim (\MI_2,d_2)$, dann gilt für alle $\ALC$-Konzepte
+$(\MI_1,d_1) \sim (\MI_2,d_2)$, dann gilt für alle \ALC-Konzepte
 $C$:
 
 $$d_1 \in C^{\MI_1}\ gdw.\ d_2 \in C^{\MI_2}$$
@@ -97,7 +97,7 @@ Rückrichtung analog, nur mit der 3. Bedingung.
 \end{proof}
 \end{tafel}
 
-Intuitiv gesprochen kann $\ALC$ nicht zwischen $d_1$ und $d_2$ \enquote{unterscheiden}.
+Intuitiv gesprochen kann \ALC nicht zwischen $d_1$ und $d_2$ \enquote{unterscheiden}.
 
 \subsubsection{Ausdrucksstärke}\label{ausdrucksstuxe4rke}
 
@@ -106,7 +106,7 @@ Intuitiv gesprochen kann $\ALC$ nicht zwischen $d_1$ und $d_2$ \enquote{untersch
 Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(\MI,d)$, wobei
 $\MI$ eine Interpretation und $d \in \Delta^\MI$ ein Element in $\MI$ ist.
 
-$E$ ist \emph{ausdrückbar in $\ALC$}, wenn es ein $\ALC$-Konzept $C$
+$E$ ist \emph{ausdrückbar in \ALC}, wenn es ein \ALC-Konzept $C$
 gibt, so dass für alle $\MI$ und $d \in \Delta^\MI$ gilt: \begin{align*}
 \left( \MI,\ d \right) \in E\ gdw.\ d \in C^\MI
 \end{align*}
@@ -115,14 +115,14 @@ gibt, so dass für alle $\MI$ und $d \in \Delta^\MI$ gilt: \begin{align*}
 Intuitionen:
 \begin{itemize}
     \item $d \in \Delta^\MI$ hat die Eigenschaft $E$ gdw. $(\MI, d) \in E$.
-    \item $E$ ist ausdrückbar, wenn es ein \emph{äquivalentes} $\ALC$-Konzept $C$ gibt.
+    \item $E$ ist ausdrückbar, wenn es ein \emph{äquivalentes} \ALC-Konzept $C$ gibt.
 \end{itemize}
 
 \subsubsection{Anwendungen von Bisimulation I}\label{theorem-3.4}
 
-\begin{theorem}[Beschränkungen der Ausdrucksstärke von $\ALC$]
+\begin{theorem}[Beschränkungen der Ausdrucksstärke von \ALC]
     \label{thm:beschraenkt}
-In $\ALC$ ist nicht ausdrückbar: 
+In \ALC ist nicht ausdrückbar: 
 \begin{itemize}
 \item das $\ALCI$-Konzept $\exists r^{-}.\top$ 
 \item die $\ALCQ$-Konzepte
@@ -142,7 +142,7 @@ In $\ALC$ ist nicht ausdrückbar:
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/33inv.png}
 
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
+Angenommen, es gäbe ein \ALC-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
 \end{proof} 
 
 \begin{proof} $\leq n\ r.\top$
@@ -151,13 +151,13 @@ Betrachte 2 Interpretationen $\MI$ und $\MJ$
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/33low.png}
 
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
+Angenommen, es gäbe ein \ALC-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
 \end{proof}
 \end{tafel}
 
 Man sieht, dass die Argumentation zum Beweis der Nicht-Ausdrückbarkeit immer auf dasselbe hinausläuft:
 
-\begin{theorem}[$\ALC$ Nicht-Ausdrückbarkeit]
+\begin{theorem}[\ALC Nicht-Ausdrückbarkeit]
     \label{thm:alc-nicht-ausdruck}
 Sei $E$ eine Eigenschaft. Wenn es Interpretation $\MI_1$, $\MI_2$
 und Elemente $d_1 \in \Delta^{\MI_1}$ und
@@ -171,7 +171,7 @@ $d_2 \in \Delta^{\MI_2}$ gibt, so dass
   $(\MI_1,d_1) \sim (\MI_2,d_2)$,
 \end{itemize}
 
-dann ist $E$ nicht in $\ALC$ ausdrückbar.
+dann ist $E$ nicht in \ALC ausdrückbar.
 \end{theorem}
 
 \subsubsection{Anwendungen von Bisimulation II}
@@ -182,9 +182,9 @@ Baum (endlich oder unendlich). Konzept $C$ und TBox $\MT$ haben
 Wurzel $d$ sowie $d \in C^\MI$.
 
 
-$\ALC$ hat die \emph{Baummodelleigenschaft}.
+\ALC hat die \emph{Baummodelleigenschaft}.
 
-\begin{theorem}[$\ALC$ Baummodelleigenschaft]
+\begin{theorem}[\ALC Baummodelleigenschaft]
     \label{theorem-3.6}
     \label{thm:baummodell}
 Wenn ein ALC-Konzept $C$ bezüglich einer ALC-TBox $\MT$ erfüllbar ist,
@@ -229,7 +229,7 @@ erzeuge Kanten die den weiterführenden Rollen entsprechen.
 \begin{lemma}[Unravelling]
     \label{lemma37}
     \label{lem:unravelling}
-Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle $\ALC$-Konzepte $C$ und alle $p \in \Delta^{\MJ}$ gilt:
+Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle \ALC-Konzepte $C$ und alle $p \in \Delta^{\MJ}$ gilt:
 \begin{align*}
 \text{end}\left( p \right) \in C^\MI\ gdw.\ p \in C^{\MJ}
 \end{align*}
@@ -264,7 +264,7 @@ Zur Bisimulation:
 Nun folgt \autoref{thm:baummodell}.:
 
 %TODO: figure out how to repeat the theorem here
-\textbf{Theorem 3.6} Wenn ein $\ALC$-Konzept $C$ bezüglich einer TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Baummodell $\MI$.
+\textbf{Theorem 3.6} Wenn ein \ALC-Konzept $C$ bezüglich einer TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Baummodell $\MI$.
 
 \begin{tafel}[Beweis Baummodelleigenschaft]
 \begin{proof}
@@ -283,9 +283,9 @@ E^\MI$. Mit \autoref{lem:unravelling} folgt $p \in E^{\MJ}
 
 \subsubsection{Bisimulation versus Ausdrucksstärke}\label{bisimulation-versus-ausdrucksstuxe4rke}
 
-Bisimulation entspricht nicht der Ausdrucksstärke von $\ALC$, denn die Gegenrichtung von \autoref{thm:bisim} (also auch von \autoref{thm:alc-nicht-ausdruck}) gilt nicht:
+Bisimulation entspricht nicht der Ausdrucksstärke von \ALC, denn die Gegenrichtung von \autoref{thm:bisim} (also auch von \autoref{thm:alc-nicht-ausdruck}) gilt nicht:
 
-Es gibt Interpretationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^\MI$ gdw. $x \in C^{\MJ}$ für alle $\ALC$-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
+Es gibt Interpretationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^\MI$ gdw. $x \in C^{\MJ}$ für alle \ALC-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
 
 \begin{tafel}[Gegenbeispiel Bisimulation gleich Ausdrucksstärke]
 Beispiel:
@@ -302,7 +302,7 @@ Es gilt:
 
 Sie gilt allerdings für verschiedene Klassen von Interpretationen, wie die Klasse aller endlichen Interpretationen oder die Klasse aller Interpretationen mit endlicher Verzweigungszahl. Solche Klassen nennt man \emph{Henessy-Milner-Klassen}.
 
-\subsubsection{Bisimulation für Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{bisimulation-in-alc}
+\subsubsection{Bisimulation für Erweiterungen von \texorpdfstring{\ALC}{ALC}}\label{bisimulation-in-alc}
 
 Für $\ALCI$, $\ALCQ$ und $\ALCQI$ gibt es ebenfalls Bisimulationsbegriffe.
 
@@ -342,22 +342,22 @@ Intuitiv entspricht dies der Anzahl von Symbolen in $C$ bzw. $\MT$.
 
 \subsubsection{Endliche/beschränkte Modelleigenschaft}
 
-$\ALC$ hat \emph{endliche Modelleigenschaft}:
+\ALC hat \emph{endliche Modelleigenschaft}:
 
-\begin{theorem}[$\ALC$ endliche Modelleigenschaft]
-Wenn ein $\ALC$-Konzept $C$ bezüglich einer $\ALC$-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames \emph{endliches} Modell.
+\begin{theorem}[\ALC endliche Modelleigenschaft]
+Wenn ein \ALC-Konzept $C$ bezüglich einer \ALC-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames \emph{endliches} Modell.
 \end{theorem}
 
-$\ALC$ hat sogar \emph{beschränkte Modelleigenschaft}:
+\ALC hat sogar \emph{beschränkte Modelleigenschaft}:
 
-\begin{theorem}[$\ALC$ beschränkte Modelleigenschaft]
-Wenn ein $\ALC$-Konzept $C$ bezüglich einer $\ALC$-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der \emph{Kardinalität} $\leq 2^{|C|+|T|}$.
+\begin{theorem}[\ALC beschränkte Modelleigenschaft]
+Wenn ein \ALC-Konzept $C$ bezüglich einer \ALC-TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der \emph{Kardinalität} $\leq 2^{|C|+|T|}$.
 \end{theorem}
 
 \subsubsection{Typen}
 \label{sec:typ}
 
-Im Folgenden sei $C$ $\ALC$-Konzept und $\MT$ TBox, so dass $C$ erfüllbar bzgl. $\MT$.
+Im Folgenden sei $C$ \ALC-Konzept und $\MT$ TBox, so dass $C$ erfüllbar bzgl. $\MT$.
 
 Wir definieren den Begriff eines Typs:
 
@@ -536,7 +536,7 @@ Nach Behauptung gilt $[d] \in D^{\MJ}$.
 
 %TODO: dont copy paste the theorem
 \textbf{Theorem 3.11} \\
-Wenn ein $\ALC$-Konzept $C$ bezüglich einer $\text{$\ALC$-TBox}$ $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der
+Wenn ein \ALC-Konzept $C$ bezüglich einer $\text{\ALC-TBox}$ $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Modell der
 \emph{Kardinalität} $\leq 2^{\left| C \right| + |\MT|}$.
 
 \begin{proof}
@@ -600,7 +600,7 @@ Gegeben $C$ und $\MT$, so dass $|C|+|\MT| = n$,
 
 \begin{lemma}[Laufzeit Extensionsberechnung]
     \label{lem:extensionsberechnung}
-Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer in Zeit $O\left( \left| C \right| \cdot \left| \Delta^\MI \right| \right)$ -- die Extension $C^\MI$ berechnen.
+Gegeben sei ein \ALC-Konzept $C$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer in Zeit $O\left( \left| C \right| \cdot \left| \Delta^\MI \right| \right)$ -- die Extension $C^\MI$ berechnen.
 \end{lemma}
 
 \begin{proof}
@@ -631,11 +631,11 @@ Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann i
 \end{proof}
 
 \begin{korollar}
-Gegeben seien $C$, $\MT$ in $\ALC$ und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer: in Zeit $O(\left( \left| \MT \right| + \left| C \right| \right) \cdot \left| \Delta^\MI \right|)$ -- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
+Gegeben seien $C$, $\MT$ in \ALC und endliche Interpretation $\MI$. Man kann in polynomieller Zeit -- genauer: in Zeit $O(\left( \left| \MT \right| + \left| C \right| \right) \cdot \left| \Delta^\MI \right|)$ -- entscheiden, ob $\MI$ ein Modell von $C$ und $\MT$ ist.
 \end{korollar}
 
-\begin{theorem}[$\ALC$ Erfüllbarkeit ist entscheidbar]
-In $\ALC$ ist Erfüllbarkeit bzgl. TBoxen entscheidbar.
+\begin{theorem}[\ALC Erfüllbarkeit ist entscheidbar]
+In \ALC ist Erfüllbarkeit bzgl. TBoxen entscheidbar.
 \end{theorem}
 
 Die Komplexität liegt aber bei 2-\ExpTime: 2-exponentiell viele

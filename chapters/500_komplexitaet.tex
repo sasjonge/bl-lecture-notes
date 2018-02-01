@@ -6,7 +6,7 @@ Schranke}\label{komplexituxe4t-mit-tboxen-obere-schranke}
 Wir wollen zeigen:
 
 \begin{theorem}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
+In \ALC ist die Erfüllbarkeit von Konzepten bzgl. TBoxen
 \ExpTime-Vollständig.
 \end{theorem}
 
@@ -102,8 +102,8 @@ Nun sind aber $\{t_1,t_2,t_3\}$ schlecht in $\Gamma_1$: Sie enthalten $\exists r
 \end{tafel}
 
 \begin{algorithmic}
-    \Procedure{$\ALC$-Elim}{}
-    \State \textbf{input}: $\ALC$-Konzept $C_0$, $\ALC$-TBox $\MT$
+    \Procedure{\ALC-Elim}{}
+    \State \textbf{input}: \ALC-Konzept $C_0$, \ALC-TBox $\MT$
     \State \textbf{output}: \enquote{erfüllbar} / \enquote{unerfüllbar}
     \State Berechne $\Gamma_0$: Menge aller Typen für $C_0$ und $\MT$
     \State $i := 0$
@@ -155,7 +155,7 @@ Sei $n = \left| C_{0} \right| + |T|$. Dann gilt:
 \end{proof}
 
 \begin{lemma}
-    Wenn $\ALC$-Elim($C_0,\MT$) \enquote{erfüllbar} zurückgibt, dann ist $C_0$ erfüllbar bzgl. $\MT$.
+    Wenn \ALC-Elim($C_0,\MT$) \enquote{erfüllbar} zurückgibt, dann ist $C_0$ erfüllbar bzgl. $\MT$.
 \end{lemma}
 
 \begin{proof}
@@ -272,7 +272,7 @@ $t \in {(\exists r.D )}^\MI$
 Aus den Lemmas 5.4--5.6 folgt nun:
 
 \begin{theorem}\label{thm:tbox-exptime}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in \ExpTime.
+In \ALC ist die Erfüllbarkeit von Konzepten bzgl. TBoxen entscheidbar in \ExpTime.
 \end{theorem}
 
 \subsubsection{Zusammenhang mit Tableau-Algorithmen}
@@ -438,7 +438,7 @@ Spielerin 2 eine Gewinnstrategie hat.
 Spiel\textsubscript{1} ist \ExpTime-Vollständig
 \end{theorem}
 
-Wir wollen nun die \ExpTime-Schwere von Erfüllbarkeit in $\ALC$ bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} darauf reduzieren.
+Wir wollen nun die \ExpTime-Schwere von Erfüllbarkeit in \ALC bzgl. TBoxen beweisen indem wir Spiel\textsubscript{1} darauf reduzieren.
 
 \subsubsection{Reduktion}\label{reduktion}
 
@@ -566,7 +566,7 @@ Setze außerdem $C_S = W$. Anmerkung: $C \rightarrow D$ ist Abkürzung für $\ne
 
 Daraus folgt:
 \begin{theorem}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten bezüglich TBoxen \ExpTime-schwer.
+In \ALC ist die Erfüllbarkeit von Konzepten bezüglich TBoxen \ExpTime-schwer.
 \end{theorem}
 
 Daraus ergibt sich zusammen mit \autoref{thm:tbox-exptime}:
@@ -578,7 +578,7 @@ Schranke}\label{komplexituxe4t-ohne-tboxen-obere-schranke}
 Wir wollen zeigen:
 
 \begin{theorem}
-In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen)
+In \ALC ist die Erfüllbarkeit von Konzepten (ohne TBoxen)
 \PSpace-Vollständig.
 \end{theorem}
 Mit \autoref{lem:problem-reduction} sind dann auch Subsumtion und Äquivalenz \PSpace-vollständig.
@@ -587,7 +587,7 @@ Wir beginnen mit der oberen Schranke (Enthaltensein in \PSpace) und benutzen daz
 
 Zur Erinnerung: Wenn Konzept $C$ erfüllbar ist, dann hat $C$ ein Baummodell (\autoref{thm:baummodell}). Mit TBox $\MT$ kann es sein, dass alle Baummodelle unendlich sind, z.B. $A$ erfüllbar bezüglich $\MT = \{A \sqsubseteq \exists r.A\}$. Ohne TBox gibt es stets ein Baummodell, dessen Tiefe durch $|C|$ beschränkt ist. Es genügt die Existenz solcher Modelle zu überprüfen.
 
-\subsubsection{\texorpdfstring{$\ALC$}{ALC}-Worlds}\label{alc-worlds}
+\subsubsection{\texorpdfstring{\ALC}{ALC}-Worlds}\label{alc-worlds}
 
 Gesucht: Ein Algorithmus, der in \PSpace{} läuft, aber:
 \begin{itemize}
@@ -652,7 +652,7 @@ $t \subseteq \sub_{i}\left( C_{0} \right)$, so dass
 \end{tafel}
 
 \begin{algorithmic}
-    \Procedure{$\ALC$-Worlds}{$C_0$}
+    \Procedure{\ALC-Worlds}{$C_0$}
     \State{} $i\gets \rd(C_0)$
     \State{} Rate $t \subseteq \sub_i(C_0)$ mit $C_0 \in t$
     \State{} \Call{recurse}{$t, i, C_0$}
@@ -669,7 +669,7 @@ $t \subseteq \sub_{i}\left( C_{0} \right)$, so dass
     \EndProcedure{}
 \end{algorithmic}
 
-\begin{tafel}[name=Beispiel $\ALC$-Worlds, continues=t:example58]
+\begin{tafel}[name=Beispiel \ALC-Worlds, continues=t:example58]
     $\ALC-\text{Worlds}(C_0)$ hat einen erfolgreichen Lauf.
 
     \begin{center}
@@ -775,10 +775,10 @@ Wir beginnen wieder mit Terminierung und Komplexitätsanalyse.
 
 Aus Lemmas 5.18--5.20 folgt nun:
 \begin{theorem}\label{thm:alc-pspace}
-    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) entscheidbar in \PSpace.
+    In \ALC ist die Erfüllbarkeit von Konzepten (ohne TBoxen) entscheidbar in \PSpace.
 \end{theorem}
 
-\subsubsection{\texorpdfstring{$\ALC$}{ALC}-Worlds vs. Tableau-Algorithmen}
+\subsubsection{\texorpdfstring{\ALC}{ALC}-Worlds vs. Tableau-Algorithmen}
 Offensichtliche Entsprechungen:
 \begin{itemize}
   \item $\sqcap$-Regel, $\sqcup$-Regel finden sich wieder in der Definition eines $i$-Typs.
@@ -794,7 +794,7 @@ Unterschiede:
     \item Tableau-Algorithmus ist nicht platzoptimiert.
 \end{itemize}
 
-$\ALC$-Worlds kann auf $\ALCI, \ALCQ, \ALCQI$ erweitert werden. Auch in diesen Logiken ist Erfüllbarkeit ohne TBoxen in \PSpace.
+\ALC-Worlds kann auf $\ALCI, \ALCQ, \ALCQI$ erweitert werden. Auch in diesen Logiken ist Erfüllbarkeit ohne TBoxen in \PSpace.
 
 \subsection{Komplexität ohne TBoxen untere
 Schranke}\label{komplexituxe4t-ohne-tboxen-untere-schranke}
@@ -912,7 +912,7 @@ $v \in V$ Konfiguration $\ell(v)$ zuweist, so dass
     Spiel\textsubscript{2} ist \PSpace-vollständig.
 \end{theorem}
 
-Wir beweisen \PSpace-Schwere von Erfüllbarkeit in $\ALC$ ohne TBoxen per Reduktion von Spiel\textsubscript{2}.
+Wir beweisen \PSpace-Schwere von Erfüllbarkeit in \ALC ohne TBoxen per Reduktion von Spiel\textsubscript{2}.
 
 \subsubsection{Reduktion}
 
@@ -965,7 +965,7 @@ Setze $C_\varphi = C_1 \sqcap C_2 \sqcap C_3 \sqcap C_4$.
 Daraus folgt:
 
 \begin{theorem}
-    In $\ALC$ ist die Erfüllbarkeit von Konzepten (ohne TBoxen) \PSpace-schwer.
+    In \ALC ist die Erfüllbarkeit von Konzepten (ohne TBoxen) \PSpace-schwer.
 \end{theorem}
 
 Daraus und aus \autoref{thm:alc-pspace} folgt:
@@ -982,7 +982,7 @@ Es gab eine Zeitlang Diskussionen darüber, was die beste Erklärung für die En
 
 \subsection{Unentscheidbare Erweiterungen}\label{unentscheidbare-erweiterungen}
 
-Einige Erweiterungen von $\ALC$, die zunächst vielleicht harmlos erscheinen, können zu \emph{Unentscheidbarkeit} führen. Wir betrachten hier beispielhaft konkrete Bereiche, die es erlauben Zahlen, Strings und anderen Datentypen zu verwenden.
+Einige Erweiterungen von \ALC, die zunächst vielleicht harmlos erscheinen, können zu \emph{Unentscheidbarkeit} führen. Wir betrachten hier beispielhaft konkrete Bereiche, die es erlauben Zahlen, Strings und anderen Datentypen zu verwenden.
 
 \subsubsection{Konkrete Bereiche}
 
@@ -1019,7 +1019,7 @@ $P^\MB \subseteq {\left( \Delta^\MB \right)}^n$.
 
 
 \begin{definition}[$\ALCB$ Syntax]
-    Sei $\MB$ ein konkreter Bereich. $\ALCB$ ist die Erweiterung von $\ALC$ um $\MB$, d.h.\ um
+    Sei $\MB$ ein konkreter Bereich. $\ALCB$ ist die Erweiterung von \ALC um $\MB$, d.h.\ um
     \begin{itemize}
 \item \emph{Featurenamen} (eine zusätzliche Art von Rolle) und
 \item die Konstruktoren $\exists R_1, \ldots, R_n.P$ und

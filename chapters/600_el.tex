@@ -99,7 +99,7 @@ $\left( I_{C},d_{w} \right) \precsim \left( I,e \right)$.
 Beweisskizze.
 \subsection{\texorpdfstring{$\EL$}{EL}}\label{sec:el}
 
-Für manche Anwendungen ist $\ALC$ zu komplex:
+Für manche Anwendungen ist \ALC zu komplex:
 \begin{itemize}
     \item Auch hoch-optimierte Reasoner können sehr große und komplexe Ontologien oft nicht verarbeiten (oder nur nach intensivem Tuning)
     \item In der Anfragebeantwortung muss man oft mit sehr großen Datenmengen umgehen und braucht schnelle Antworten (\autoref{sec:abox})
@@ -107,12 +107,12 @@ Für manche Anwendungen ist $\ALC$ zu komplex:
 
 Wir betrachten die Beschreibungslogik $\EL$:
 \begin{itemize}
-    \item viel weniger ausdrucksstark als $\ALC$, Basisoperatoren nur $\sqcap$ und $\exists r.C$
+    \item viel weniger ausdrucksstark als \ALC, Basisoperatoren nur $\sqcap$ und $\exists r.C$
     \item Erfüllbarkeit und Subsumtion in Polyzeit entscheidbar.
 \end{itemize}
 
 \begin{definition}[$\EL$]
-Ein $\EL$-Konzept ist ein $\ALC$-Konzept, in dem nur die Konstruktoren
+Ein $\EL$-Konzept ist ein \ALC-Konzept, in dem nur die Konstruktoren
 $\top, \sqcap$ und $\exists r.C$ verwendet werden.
 \end{definition}
 
@@ -127,7 +127,7 @@ SNOMED CT ist in unwesentlicher Erweiterung von $\EL$ formuliert. $\EL$ ist Grun
 
 \subsubsection{Simulation}\label{simulation}
 
-Intuitiv: $\EL$ ist die \enquote{Hälfte von $\ALC$}; Simulation entspricht der \enquote{Hälfte von Bisimulation}.
+Intuitiv: $\EL$ ist die \enquote{Hälfte von \ALC}; Simulation entspricht der \enquote{Hälfte von Bisimulation}.
 
 \begin{definition}[Simulation]
     Seien $\MI_1$ und $\MI_2$ Interpretationen. Relation $\rho \subset \Delta^{\MI_1} \times \Delta^{\MI_2}$ ist Simulation von $\MI_1$ nach $\MI_2$, wenn gilt:
@@ -275,7 +275,7 @@ Achtung: Bisimulation und wechselseitige Simulation sind \emph{nicht dasselbe}
 
 Man kann nun wieder Nicht-Asudrückbarkeitsresultate zeigen:
 \begin{lemma}
-    Das $\ALC$-Konzept $\forall r.A$ ist \emph{nicht} in $\EL$ ausdrückbar.
+    Das \ALC-Konzept $\forall r.A$ ist \emph{nicht} in $\EL$ ausdrückbar.
 \end{lemma}
 \begin{tafel}[continues=t:63]
     \begin{proof}

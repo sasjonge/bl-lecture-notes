@@ -9,7 +9,7 @@ Von uns wird hauptsächlich das Problem der Erfüllbarkeit betrachtet.
 In der Praxis haben sich hauptsächlich Tableau-Algorithmen und
 Resolutionsverfahren als effizient herausgestellt.
 
-\subsection{\texorpdfstring{$\ALC$}{ALC} ohne TBoxen}\label{alc-ohne-tboxen}
+\subsection{\texorpdfstring{\ALC}{ALC} ohne TBoxen}\label{alc-ohne-tboxen}
 
 \subsubsection{Negationsnormalform}\label{negationsnormalform}
 
@@ -512,9 +512,9 @@ Offenbar ist eine naive Implementierung nicht effizient. Dabei kann man aber ein
     Standard Backtracking probiert $2^n$ sinnlose Alternativen bevor die Ursache des Problems gefunden wird ($2, \ldots, n + 1$). Mit Backjumping wird Buch über dir Herkunft von Konzepten geführt und direkt zur Ursache des Problems zurückgesprungen ($1$).
 \end{tafel}
 
-\subsection{\texorpdfstring{$\ALC$}{ALC} mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
+\subsection{\texorpdfstring{\ALC}{ALC} mit generellen TBoxen}\label{alc-mit-generellen-tboxen}
 
-Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in $\ALC$  \emph{bzgl. TBoxen}. Wir beobachten, dass jede TBox $\MT$ äquivalent ist zu einer TBox der Form
+Nun wollen wir einen Tableau-Algorithmus für die Erfüllbarkeit in \ALC  \emph{bzgl. TBoxen}. Wir beobachten, dass jede TBox $\MT$ äquivalent ist zu einer TBox der Form
 $\left\{ \top \sqsubseteq C_{\MT} \right\}$ mit: 
 \begin{align*}
 C_{\MT} := \bigsqcap_{C \sqsubseteq D \in \MT}\neg C \sqcup D
@@ -778,7 +778,7 @@ Also braucht man für eine effiziente Implementierung Optimerungstechniken, die 
 
 \end{tafel}
 
-\subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}
+\subsection{Erweiterungen von \texorpdfstring{\ALC}{ALC}}
 
 Der Algorithmus kann auch auf $\ALCI$, $\ALCQ$ und $\ALCQI$ erweitert werden.
 
