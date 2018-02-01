@@ -1,30 +1,30 @@
-\subsection{Erfüllbarkeit in \texorpdfstring{\ALC}{ALC}}
+\subsection{Erfüllbarkeit in \texorpdfstring{$\ALC$}{ALC}}
 
-\subsubsection{\texorpdfstring{\ALC}{ALC} bzgl. TBoxen}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC} bzgl. TBoxen}
 
 Komplexität: ExpTime-vollständig
 
 \paragraph{Obere Schranken}
 
-Um zu zeigen, dass die Erfüllbarkeit von \ALC bzgl. TBoxen in ExpTime liegt, haben wir den Algorithmus \enquote{Typ-Elimination} eingeführt.
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ bzgl. TBoxen in ExpTime liegt, haben wir den Algorithmus \enquote{Typ-Elimination} eingeführt.
 
 Für diesen habe wir syntaktische Typen definiert und dann gezeigt, dass dieser in $2^\{|C_0|+|\MT|\}$ Schritten terminiert.
 
 Die Korrektheit haben wir gezeigt, indem wir aus den Typen eine Interpretation gebildet haben und gezeigt haben, dass diese ein Modell von $C_0$ bzgl. $\MT$ ist.
 
-Die Vollständigkeit haben wir gezeigt, indem wir semantische Typen aus dem Modell $\MI$ gebildet haben. Dann haben wir (per Induktion über ) gezeigt, dass diese immer eine Teilmenge der Mengen von syntaktischen Typen die bei \ALC-Elim gebildet werden.
+Die Vollständigkeit haben wir gezeigt, indem wir semantische Typen aus dem Modell $\MI$ gebildet haben. Dann haben wir (per Induktion über ) gezeigt, dass diese immer eine Teilmenge der Mengen von syntaktischen Typen die bei $\ALC$-Elim gebildet werden.
 
 \paragraph{Untere Schranke}
 
-Nun wollen wir zeigen, das das Erfüllbarkeitsproblem von \ALC ExpTime-hart ist. Dazu reduzieren wir das ExpTime Spiel auf die Erfüllbarkeit von \ALC.
+Nun wollen wir zeigen, das das Erfüllbarkeitsproblem von $\ALC$ ExpTime-hart ist. Dazu reduzieren wir das ExpTime Spiel auf die Erfüllbarkeit von $\ALC$.
 
-\subsubsection{\texorpdfstring{\ALC}{ALC} ohne TBox}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC} ohne TBox}
 
 Komplexität: PSpace-vollständig
 
 \paragraph{Obere Schranken}
 
-Um zu zeigen, dass die Erfüllbarkeit von \ALC ohne TBoxen in PSpace liegt, haben wir den Algorithmus \enquote{\ALC-Worlds} eingeführt.
+Um zu zeigen, dass die Erfüllbarkeit von $\ALC$ ohne TBoxen in PSpace liegt, haben wir den Algorithmus \enquote{$\ALC$-Worlds} eingeführt.
 
 Für diesen haben wir i-Typen definiert und dann gezeigt, dass der Algorithmus terminiert und in PSpace liegt. Dies liegt daran, dass der Algorithmus einen endlichen Baum bildet, und wir nur einen Pfad zur selben Zeit betrachten müssen, da wir per Tiefensuche prüfen.
 
@@ -34,11 +34,11 @@ Vollständigkeit: Verwende $\MI$ um die nichtdeterministischen Entscheidungen de
 
 \paragraph{Untere Schranke}
 
-Nun wollen wir zeigen, dass das Erfüllbarkeitsproblem von  \ALC ohne TBoxen PSpace-hart ist. Dies zeigen wir, indem wir das PSpace-Spiel auf die Erfüllbarkeit reduzieren. 
+Nun wollen wir zeigen, dass das Erfüllbarkeitsproblem von  $\ALC$ ohne TBoxen PSpace-hart ist. Dies zeigen wir, indem wir das PSpace-Spiel auf die Erfüllbarkeit reduzieren. 
 
 \subsubsection{\texorpdfstring{$\ALCI$, $\ALCQ$, $\ALCQI$}{ALCI, ALCQ, ALCQI}}
 
-Für diese Variationen von \ALC gelten die selben Komplexitäten wie für \ALC
+Für diese Variationen von $\ALC$ gelten die selben Komplexitäten wie für $\ALC$
 
 \subsubsection{Unentscheidbare Erweiterungen}
 

@@ -1,28 +1,28 @@
 \subsection{Attributive Language with Complement
-(\texorpdfstring{\ALC}{ALC})}\label{attributive-language-with-complement-alc}
+(\texorpdfstring{$\ALC$}{ALC})}\label{attributive-language-with-complement-alc}
 
 \subsubsection{Konzept- und Rollennamen}\label{konzept--und-rollennamen}
 
 Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- und Kleinschreibung) Mengen.
 
-\subsubsection{\texorpdfstring{\ALC}{ALC}: Syntax}\label{alcsyntax}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC}: Syntax}\label{alcsyntax}
 
-\begin{definition}[\ALC-Konzepte]
-  Die Menge der \ALC-Konzepte ist induktiv definiert:
+\begin{definition}[$\ALC$-Konzepte]
+  Die Menge der $\ALC$-Konzepte ist induktiv definiert:
   \begin{itemize}
-    \item Jeder Konzeptname ist \ALC-Konzept
-    \item Wenn $C$, $D$ \ALC-Konzepte, so auch
+    \item Jeder Konzeptname ist $\ALC$-Konzept
+    \item Wenn $C$, $D$ $\ALC$-Konzepte, so auch
     \begin{itemize}
       \item $\neg C$ \tabto{2cm}(Negation)
       \item $C \sqcap D$ \tabto{2cm}(Konjunktion)
       \item $C \sqcup D$ \tabto{2cm}(Disjunktion)
     \end{itemize}
-    \item {Wenn $C$ \ALC-Konzept und $r$ Rollenname, so sind
+    \item {Wenn $C$ $\ALC$-Konzept und $r$ Rollenname, so sind
     \begin{itemize}
       \item $\exists r.C$ \tabto{2cm}(Existenzrestriktion)
       \item $\forall r.C$ \tabto{2cm}(Werterestriktion)
     \end{itemize}
-    \ALC-Konzepte}
+    $\ALC$-Konzepte}
   \end{itemize}
 \end{definition}
 
@@ -64,9 +64,9 @@ Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\ex
 
 Des Weiteren ist keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worden: Daher müssen Klammern verwendet werden!
 
-\subsubsection{\texorpdfstring{\ALC}{ALC}: Semantik}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
-\begin{definition}[\ALC Semantik]
+\begin{definition}[$\ALC$ Semantik]
 Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^\MI$,$\cdot^\MI$) mit
   \begin{itemize}
     \item{$\Delta^\MI$ nicht leere Menge (\emph{Domäne})}
@@ -176,7 +176,7 @@ intuitiv, dass etwas unmöglich ist, z.B.:
 \label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz}
 
 \begin{definition}[Erfüllbar, subsumiert, äquivalent]
-    \mbox{}\\Seien $C$ und $D$ \ALC-Konzepte. Dann
+    \mbox{}\\Seien $C$ und $D$ $\ALC$-Konzepte. Dann
 \begin{itemize}
 \item
   ist $C$ \emph{erfüllbar}, wenn es eine Interpretation $\MI$ gibt mit
@@ -287,7 +287,7 @@ Modellierungsmuster, die nicht in dieses Schema passen sind z.B.:
 \label{erfuxfcllbarkeit-subsumtion-uxe4quivalenz-1}
 
 \begin{definition}[Erfüllbar, subsumiert, äquivalent bezüglich einer TBox] 
-Seien $C$, $D$, \ALC-Konzepte und $\MT$ TBox. Dann
+Seien $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
   \item ist $C$ \emph{erfüllbar bzgl.} $\MT$ gdw. $\MT$ Modell $\MI$ hat mit $C^\MI \neq \emptyset$
@@ -460,7 +460,7 @@ $\MT \models C \equiv D$ gdw. $\MT \models \top \sqsubseteq \left( C \sqcap D \r
 
 Dies heißt für uns, dass ein Algorithmus für eines der Probleme auch für die
 anderen beiden verwendet werden kann. Alle drei Probleme haben dieselbe
-Komplexität (in \ALC). Daher werden wir uns im Folgenden hauptsächlich auf
+Komplexität (in $\ALC$). Daher werden wir uns im Folgenden hauptsächlich auf
 Erfüllbarkeit konzentrieren.
 
 \begin{tafel}[Exemplarische Reduktion von Schlussfolgerungsproblemen]\mbox{}
@@ -473,13 +473,13 @@ Erfüllbarkeit konzentrieren.
 \end{center}
 \end{tafel}
 
-\subsection{Erweiterungen von \texorpdfstring{\ALC}{ALC}}\label{erweiterungen-von-alc}
+\subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{erweiterungen-von-alc}
 
-Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von \ALC. Es existieren viel mehr Erweiterungen (z.B.: um spezielle Rolleniterpretationen, temporale Operatoren etc.). Diese können auch kombiniert werden, z.B.: $\ALCQI$.
+Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von $\ALC$. Es existieren viel mehr Erweiterungen (z.B.: um spezielle Rolleniterpretationen, temporale Operatoren etc.). Diese können auch kombiniert werden, z.B.: $\ALCQI$.
 
 \subsubsection{Inverse Rollen (\texorpdfstring{$\ALCI$}{ALCI})}\label{inverse-rollen-alci}
 
-Zunächst betrachten wir $\ALCI$, das \ALC um die Möglichkeit inverse Rollen in Existenz- und Werterestriktionen zu benutzen erweitert.
+Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen in Existenz- und Werterestriktionen zu benutzen erweitert.
 
 \begin{definition}[Inverse Rollen]
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
@@ -492,7 +492,7 @@ $\left( r^{-} \right)^\MI = \left\{ \left( e,d \right)\  \right|\ \left( d,e \ri
         \MT = \{& \text{Professor} \sqsubseteq \text{Verrückt} \sqcap \exists  \text{gibt}.\text{Vorlesung}\\
                 & \text{Vorlesung} \sqsubseteq \forall \text{wirdGegebenVon}.\neg\text{Verrückt}\}
     \end{align*}
-    Das folgende ist ein Modell von $\MT$, da es keine wirdGegebenVon-Kante gibt und man die intuitive Bedeutung der Kante in \ALC nicht erzwingen kann.
+    Das folgende ist ein Modell von $\MT$, da es keine wirdGegebenVon-Kante gibt und man die intuitive Bedeutung der Kante in $\ALC$ nicht erzwingen kann.
     \begin{center}
     \begin{tikzpicture}
         \begin{scope}[every node/.style={circle,thick,draw}]
