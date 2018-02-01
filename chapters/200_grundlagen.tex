@@ -277,9 +277,9 @@ Modellierungsmuster, die nicht in dieses Schema passen sind z.B.:
 \begin{itemize}
 \item Disjunktheitsconstraints $C \sqcap D \sqsubseteq \bot$: Kein Objekt kann gleichzeitig zu $C$ und $D$ gehören
 \item Komplexe Zusammenhänge zwischen mehreren Konzepten. Zum Beispiel:
-    \begin{align*}
+    \[
         \text{Professor} \sqcap \exists \text{hat}.\text{Lehrdeputat} \sqsubseteq \exists \text{hält}.\text{Vorlesung}
-    \end{align*}
+    \]
 \end{itemize}
 
 \subsubsection{Erfüllbarkeit, Subsumtion, Äquivalenz}
@@ -319,7 +319,8 @@ $\MT$.
         \end{scope}
     \end{tikzpicture}
     \end{center}
-\item Sei $\MT$ wieder aus \autoref{t25} und $C = \text{Student} \sqcap \exists \text{hört}.\text{PflichtVL} \sqcap \forall \text{hört}.\text{WahlVL}$.
+\item Sei $\MT$ wieder aus \autoref{t25} und
+    \[C = \text{Student} \sqcap \exists \text{hört}.\text{PflichtVL} \sqcap \forall \text{hört}.\text{WahlVL}.\]
     $C$ ist unerfüllbar bezüglich $\MT$: Nimm im Gegenteil an $C$ sei erfüllbar bezüglich $\MT$, dann gibt es Modell $\MI$ und Instanz $d\in C^\MI$. Nach Semantik von $\sqcap$ gilt $d \in (\exists \text{hört}.\text{PflichtVL})^\MI$. Also gibt es ein $e \in (\text{PflichtVL})^\MI$ mit $(d, e) \in \text{hört}^\MI$. Wegen $d \in (\forall \text{hört}.\text{WahlVL})^\MI$ gilt $e \in \text{WahlVL}^\MI$. Also ist $e \in (\text{PflichtVL} \sqcap \text{WahlVL})^\MI$, was $(\text{PflichtVL} \sqcap \text{WahlVL}) \in \bot$ verletzt. Folglich kann es keine Interpretation geben.
 \item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$. Es gilt $\MT \models C \sqsubseteq D$. Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$. Zu zeigen $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$. Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$. Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
     \end{enumerate}
