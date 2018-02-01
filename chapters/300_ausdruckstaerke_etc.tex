@@ -19,16 +19,16 @@ zwischen $\MI_1$ und $\MI_2$, wenn gilt:
   Konzeptnamen A: $d_1 \in A^{\MI_1}$ gdw. $d_2 \in A^{\MI_2}$.
 \item
   Wenn $d_1\text{\ $\rho$}\text{\ d}_2$ und
-  $\left( d_1,d_1^{'} \right) \in r^{\MI_1}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_2^{'} \in \Delta^{\MI_2}$
+  $\left( d_1,d_1' \right) \in r^{\MI_1}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_2' \in \Delta^{\MI_2}$
   mit ${d'}_1\text{\ $\rho$}{\ d'}_2$ und
-  $\left( d_2,d_2^{'} \right) \in r^{\MI_2}$.
+  $\left( d_2,d_2' \right) \in r^{\MI_2}$.
 \item
   Wenn $d_1\text{\ $\rho$}\text{\ d}_2$ und
-  $\left( d_2,d_2^{'} \right) \in r^{\MI_2}$ für beliebigen
-  Rollennamen $r$, dann gibt es ein $d_1^{'} \in \Delta^{\MI_1}$
+  $\left( d_2,d_2' \right) \in r^{\MI_2}$ für beliebigen
+  Rollennamen $r$, dann gibt es ein $d_1' \in \Delta^{\MI_1}$
   mit ${d'}_1\text{\ $\rho$}{\ d'}_2$ und
-  $\left( d_1,d_1^{'} \right) \in r^{\MI_1}$.
+  $\left( d_1,d_1' \right) \in r^{\MI_1}$.
 \end{enumerate}
 \end{definition}
 
@@ -211,7 +211,7 @@ Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 \begin{align*}
     \Delta^{\MJ} &= \text{Menge aller }d\text{-Pfade in }\MI\\
     A^{\MJ} &= \left\{ p \in \Delta^{\MJ}\  \right|\text{\ end}\left( p \right) \in A^\MI\}\\
-    r^{\MJ} &= \left\{ \left( p,p' \right) \in \Delta^{\MJ} \times \Delta^{\MJ}\ |\ \exists e:p^{'} = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^\MI \right\}
+    r^{\MJ} &= \left\{ \left( p,p' \right) \in \Delta^{\MJ} \times \Delta^{\MJ}\ |\ \exists e:p' = p \cdot e\ \mathrm{\text{und}}\ \left( \text{end}\left( p \right),e \right) \in r^\MI \right\}
 \end{align*}
 für alle Konzeptnamen $A$ und Rollennamen $r$
 \end{definition}
@@ -253,10 +253,10 @@ Zur Bisimulation:
 \item gilt per Definition von $\MJ$.
 \item
   Angenommen $e$ $\rho$ $p$ und
-  $\left( e,e^{'} \right) \in r^\MI$. Dann $e = end\left( p \right)$
-  per Konstruktion von $\MJ$. Wegen $\left( e,e^{'} \right) \in r^\MI$
+  $\left( e,e' \right) \in r^\MI$. Dann $e = end\left( p \right)$
+  per Konstruktion von $\MJ$. Wegen $\left( e,e' \right) \in r^\MI$
   ist $pe'$ Pfad. Nach Konstruktion von $\MJ$ gilt
-  $\left( p,pe^{'} \right) \in r^{\MJ}$.
+  $\left( p,pe' \right) \in r^{\MJ}$.
 \end{enumerate}
 \end{proof}
 \end{tafel}
@@ -455,7 +455,7 @@ Die Filtration von $\MI$ bzgl. $C$ und $\MT$ ist folgende Interpretation $\MJ$:
     \Delta^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in \Delta^\MI \right\}\\
     A^{\MJ} &= \left\{ \left\lbrack d \right\rbrack\ |\ d \in A^\MI \right\}
   \text{ für alle }A \in \sub\left( C,\MT \right)\\
-  r^{\MJ} &= \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d^{'} \in \left\lbrack d \right\rbrack,\ e^{'} \in \left\lbrack e \right\rbrack:\left( d^{'},e^{'} \right) \in r^\MI \right\}
+  r^{\MJ} &= \left\{ \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right)|\ \exists d' \in \left\lbrack d \right\rbrack,\ e' \in \left\lbrack e \right\rbrack:\left( d',e' \right) \in r^\MI \right\}
   \text{ für alle Rollennamen } r
 \end{align*}
 
@@ -514,9 +514,9 @@ Beweis der Behauptung per Induktion über die Struktur von $D$.
             &\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} \\
             &\Leftrightarrow (\text{Semantik }\exists) \text{ es gibt }[e] \in \Delta^{\MJ} \text{ mit } \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}\text{ und }\left\lbrack e \right\rbrack \in E^{\MJ} \\
             &\Leftrightarrow (\text{Definition }r^{\MJ} \text{ und }I.V.) \text{ es gibt }[e] \in \Delta^{\MJ},\\
-            &\quad\quad\text{ es gibt }d^{'} \in \left\lbrack d \right\rbrack, e^{'} \in \left\lbrack e \right\rbrack, \left( d^{'},\ e^{'} \right) \in r^\MI \text{ und }e^{'} \in E^\MI \\
-            &\Rightarrow (\text{Semantik }\exists) d^{'} \in \left( \exists r.E \right)^\MI \\
-            &\Rightarrow (d \sim d^{'}) d \in \left( \exists r.E \right)^\MI
+            &\quad\quad\text{ es gibt }d' \in \left\lbrack d \right\rbrack, e' \in \left\lbrack e \right\rbrack, \left( d',\ e' \right) \in r^\MI \text{ und }e' \in E^\MI \\
+            &\Rightarrow (\text{Semantik }\exists) d' \in \left( \exists r.E \right)^\MI \\
+            &\Rightarrow (d \sim d') d \in \left( \exists r.E \right)^\MI
         \end{align*}
 \end{enumerate}
 \end{enumerate}
