@@ -4,7 +4,7 @@ linear quantifizieren, sondern nur beschreiben und charakterisieren.
 
 \subsection{Bisimulation}\label{bisimulation}
 
-Die Bisimulation ist ein graphentheoretische Begriff, die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdrucksstärke von $\ALC$ zusammenhängt.
+Die Bisimulation ist ein graphentheoretische Begriff, der die \enquote{Ähnlichkeit} von Graphen beschreibt und eng mit der Ausdrucksstärke von $\ALC$ zusammenhängt.
 
 \begin{definition}[Bisimulation]
 
@@ -38,10 +38,10 @@ zwischen $\MI_1$ und $\MI_2$, wenn gilt:
 
 Seien $\MI_1$ und $\MI_2$ Interpretationen,
 $d_1 \in \Delta^{\MI_1}$, $d_2 \in \Delta^{\MI_2}$.
-
-$(\MI_1,d_1) \sim (\MI_2,d_2)$: Es gibt Bisimulation $\rho$
-zwischen $\MI_1$ und $\MI_2$ mit $d_1\text{\ $\rho$}\text{\ d}_2$. (Wir sagen \enquote{$d_1$ ist \emph{bisimilar zu} $d_2$}).
-Die leere Relation ist immer Bisimulation.
+Dann schreiben wir
+\[(\MI_1,d_1) \sim (\MI_2,d_2),\] wenn es eine Bisimulation $\rho$
+zwischen $\MI_1$ und $\MI_2$ gibt mit $d_1\text{\ $\rho$}\text{\ d}_2$. (Wir sagen \enquote{$d_1$ ist \emph{bisimilar zu} $d_2$}).
+Die leere Relation ist immer eine Bisimulation.
 
 \begin{theorem}[Bisimulationstheorem]
     \label{thm:bisim}
@@ -49,7 +49,7 @@ Seien $\MI_1$, $\MI_2$ Interpretationen,
 $d_1 \in \Delta^{\MI_1}$ und $d_2 \in \Delta^{\MI_2}$. Wenn
 $(\MI_1,d_1) \sim (\MI_2,d_2)$, dann gilt für alle $\ALC$-Konzepte
 $C$:
-\[d_1 \in C^{\MI_1}\ gdw.\ d_2 \in C^{\MI_2}\]
+\[d_1 \in C^{\MI_1} \gdw d_2 \in C^{\MI_2}\]
 \end{theorem}
 
 \begin{tafel}[Beweis des Bismulationstheorems] Beweis von \autoref{thm:bisim}
@@ -60,34 +60,36 @@ $d_1\text{\ $\rho$}\text{\ d}_2$.
 
 \textbf{I.A.} $C = A$ ist Konzeptname. Nach Bedingung 1. der
 Bisimulation gilt
-\[ d_1 \in A^{\MI_1}\ gdw.\ d_2 \in A^{\MI_2}. \]
+\[ d_1 \in A^{\MI_1} \gdw d_2 \in A^{\MI_2}. \]
 
 
 \textbf{I.S.} Unterscheide Fälle gemäß des äußersten Konstruktes von C.
 Es genügen $\neg$,$\sqcap$, $\exists\text{r.C}$:
 
 \begin{enumerate}
-\item
-  $C = \neg D$
+\item $C = \neg D$
     \begin{align*}
-        d_1 \in C^{\MI_1} &\stackrel{Sem.}{gdw.} d_1 \notin D^{\MI_1}\\
-        &\stackrel{I.V.}{gdw.} d_2 \notin D^{\MI_2} \\
-        &\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
+        d_1 \in C^{\MI_1}
+        &\gdw d_1 \notin D^{\MI_1} & \text{(Semantik)}\\
+        &\gdw d_2 \notin D^{\MI_2} & \text{(I.V.)}\\
+        &\gdw d_2 \in C^{\MI_2} & \text{(Semantik)}
     \end{align*}
 \item $C = D_1 \sqcap D_2$
   \begin{align*}
-d_1 \in C^{\MI_1} &\stackrel{Sem.}{gdw.} d_1 \in D_1^{\MI_1}\ und\ d_1 \in D_2^{\MI_1}\\
-&\stackrel{I.V.}{gdw.} d_2 \in D_1^{\MI_2}\ und\ d_2 \in D_2^{\MI_2} \\
-&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
+d_1 \in C^{\MI_1}
+&\gdw d_1 \in D_1^{\MI_1}\ und\ d_1 \in D_2^{\MI_1} & \text{(Semantik)}\\
+&\gdw d_2 \in D_1^{\MI_2}\ und\ d_2 \in D_2^{\MI_2} & \text{(I.V.)}\\
+&\gdw d_2 \in C^{\MI_2} & \text{(Semantik)}
 \end{align*}
 
 \item $C = \exists r.D$
   \begin{align*}
-d_1 \in C^{\MI_1} &\stackrel{Sem.}{\Rightarrow} \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1}\\
-&\stackrel{2.Bed.}{\Rightarrow} \exists e_2 \in \Delta_2^{\MI_2}: (d_2,e_e) \in r^{\MI_2}\ und\ (e_1 \rho e_2) \\
-&\stackrel{I.V.}{\Rightarrow} e_2 \in D^{\MI_2} \\
-&\stackrel{Sem.}{\Rightarrow} d_2 \in (\exists r.D)^{\MI_2} \\
-&\stackrel{Sem.}{gdw.} d_2 \in C^{\MI_2}
+d_1 \in C^{\MI_1}
+&\implies \exists e_1 : (d_1,e_1) \in r^{\MI_1}\ und\ e \in D^{\MI_1} & \text{(Semantik)}\\
+&\implies \exists e_2 \in \Delta_2^{\MI_2}: (d_2,e_e) \in r^{\MI_2}\ und\ (e_1 \rho e_2) & \text{(2. Bedingung)}\\
+&\implies e_2 \in D^{\MI_2} & \text{(I.V.)}\\
+&\implies d_2 \in (\exists r.D)^{\MI_2} & \text{(Semantik)}\\
+&\gdw d_2 \in C^{\MI_2} & \text{(Semantik)}
 \end{align*}
 \end{enumerate}
 Rückrichtung analog, nur mit der 3. Bedingung.
@@ -102,10 +104,9 @@ Intuitiv gesprochen kann $\ALC$ nicht zwischen $d_1$ und $d_2$ \enquote{untersch
 
 Eine \emph{Eigenschaft} $E$ ist eine Menge von Paaren $(\MI,d)$, wobei
 $\MI$ eine Interpretation und $d \in \Delta^\MI$ ein Element in $\MI$ ist.
-
 $E$ ist \emph{ausdrückbar in $\ALC$}, wenn es ein $\ALC$-Konzept $C$
 gibt, so dass für alle $\MI$ und $d \in \Delta^\MI$ gilt: 
-\[ \left( \MI,\ d \right) \in E\ gdw.\ d \in C^\MI \]
+\[ \left( \MI,\ d \right) \in E \gdw d \in C^\MI \]
 \end{definition}
 
 Intuitionen:
@@ -118,13 +119,13 @@ Intuitionen:
 
 \begin{theorem}[Beschränkungen der Ausdrucksstärke von $\ALC$]
     \label{thm:beschraenkt}
-In $\ALC$ ist nicht ausdrückbar: 
+In $\ALC$ sind nicht ausdrückbar: 
 \begin{itemize}
 \item das $\ALCI$-Konzept $\exists r^{-}.\top$ 
 \item die $\ALCQ$-Konzepte
 \begin{itemize}
-  \item $\leq n\ r.\top$ für alle $n\ > 0$ und
-  \item $\geq n\ r.\top$ für alle $n\ > 1$
+  \item $\leq n\ r.\top$ für alle $n > 0$ und
+  \item $\geq n\ r.\top$ für alle $n > 1$
 \end{itemize}
 \end{itemize}
 \end{theorem}
@@ -225,7 +226,7 @@ erzeuge Kanten die den weiterführenden Rollen entsprechen.
     \label{lemma37}
     \label{lem:unravelling}
 Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle $\ALC$-Konzepte $C$ und alle $p \in \Delta^{\MJ}$ gilt:
-\[ \text{end}\left( p \right) \in C^\MI\ gdw.\ p \in C^{\MJ} \]
+\[ \text{end}\left( p \right) \in C^\MI \gdw p \in C^{\MJ} \]
 \end{lemma}
 
 \begin{tafel}[Beweis Unravelling-Lemma]
@@ -426,7 +427,7 @@ Idee:
 \begin{definition}[Filtration]
 
 Sei $\MI$ Interpretation. Definiere Äquivalenzrelation $\sim$ auf
-$\Delta^\MI$: $$d \sim e\ gdw.\ t_\MI\left( d \right) = t_\MI\left( e \right)$$
+$\Delta^\MI$: $$d \sim e \gdw t_\MI\left( d \right) = t_\MI\left( e \right)$$
 Wir bezeichnen diese Äquivalenzklasse von $d \in \Delta^\MI$ bzgl. $\sim$ mit $\left\lbrack d \right\rbrack$.
 
 Die Filtration von $\MI$ bzgl. $C$ und $\MT$ ist folgende Interpretation $\MJ$:
@@ -466,7 +467,7 @@ Wenn $\MI$ Modell von $C$ und $\MT$, so auch $\MJ$.
 \begin{proof}
     Behauptung:
 Für alle $d \in \Delta^\MI$ und $D \in \sub(C,\MT)$ gilt:
-\[ d \in D^\MI\ gdw.\ \left\lbrack d \right\rbrack \in D^{\MJ} \]
+\[ d \in D^\MI \gdw \left\lbrack d \right\rbrack \in D^{\MJ} \]
 Beweis der Behauptung per Induktion über die Struktur von $D$.
 
 \textbf{I.A.} $C = A$ folgt aus Definition $A^{\MJ}$.
