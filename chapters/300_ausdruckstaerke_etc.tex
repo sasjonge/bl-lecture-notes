@@ -824,7 +824,8 @@ Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann i
 \end{lemma}
 
 \begin{proof}
-    Folgender rekursiver Algorithmus berechnet Extension von $C$ in $\MI$:\\
+    Folgender rekursiver Algorithmus berechnet Extension von $C$ in $\MI$:
+
     %TODO: improve
     \texttt{procedure} $ext(C, \MI)$\\
     \begin{tabular}{l l l}
@@ -836,9 +837,9 @@ Gegeben sei ein $\ALC$-Konzept $C$ und endliche Interpretation $\MI$. Man kann i
                       & $C = D \sqcup E:$ & \texttt{return }
         $ext(D, \MI) \cup ext(E, \MI)$\\
                       & $C = \exists r.D:$ & \texttt{return }
-        $\left\{d\in \Delta^\MI \middle| \exists e\in ext(D, \MI) : (d, e) \in r^\MI\right\}$\\
+        $\left\{d\in \Delta^\MI \mid \exists e\in ext(D, \MI) : (d, e) \in r^\MI\right\}$\\
                       & $C = \forall r.D:$ & \texttt{return }
-        $\left\{d\in \Delta^\MI \middle| \forall e \text{ mit } (d, e) \in r^\MI : e\in ext(D, \MI)\right\}$\\
+        $\left\{d\in \Delta^\MI \mid \forall e \text{ mit } (d, e) \in r^\MI : e\in ext(D, \MI)\right\}$\\
     \end{tabular}\\
     \texttt{endcase}
 

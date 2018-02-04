@@ -69,8 +69,29 @@ Baum $\left( V,E,\ML \right)$ mit
         C_0 &= A \sqcap \forall r.(\neg A \sqcap \exists r.B)\\
         \sub(C_0) &= \{A, \neg A, B, \exists r.B, \neg A \sqcap \exists r.B, \forall r.(\neg A \sqcap \exists r.B), C_0\}
     \end{align*}
-
-    \includegraphics[width=3.71910in]{media/42ibaum.png}
+Möglicher I-Baum:
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {};
+             \node (s1) at (-2, -2) {};
+             \node (s2) at (0, -2) {};
+             \node (s3) at (2, -2) {};
+             \node (s4) at (-2, -4) {};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node [above = 0.4cm of s0] at (s0){$\{A, B, \exists r.B\}$};
+             \node [left = 0.4cm of s1] at (s1){$\{B, \neg A\}$};
+             \node [below = 0.4cm of s2] at (s2){$\{\exists r.B\}$};
+             \node [right = 0.4cm of s3] at (s3){$\{A, \neg A\}$};
+             \node [left = 0.4cm of s4] at (s4){$\{\exists r.B\}$};
+             \path [->] (s0) edge node {$r$}(s1);
+             \path [->] (s0) edge node {$s$}(s2);
+             \path [->] (s0) edge node {$r$}(s3);
+             \path [->] (s1) edge node {$s$}(s4);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 \end{tafel}
 
 \subsubsection{Tableau-Algorithmus}\label{tableau-algorithmus}
