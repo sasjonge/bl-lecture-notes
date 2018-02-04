@@ -32,8 +32,67 @@ zwischen $\MI_1$ und $\MI_2$, wenn gilt:
 \end{enumerate}
 \end{definition}
 
-\begin{tafel}[TODO]
-    TODO
+\begin{tafel}[Beispiel Bisimulation] \mbox{}\\
+    \begin{enumerate}
+        \item \mbox{}
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{scope}[every node/.style={circle,draw,thick}]
+                        \node (s0) at (0, 0) {};
+                        \node (s1) at (3, 0) {};
+                    \end{scope}
+                    \begin{scope}[every node/.style={fill=white}]
+                        \node (name) at (0, 1) {$\MI_1$};
+                        \node (name) at (3, 1) {$\MI_2$};
+                        \node [left = 0.3cm of s0] at (s0){$A, A', B$};
+                        \node [right = 0.3cm of s4] at (s1){$A, A', B$};
+                        \path[dotted] [-] (s0) edge node {$\rho$}(s1);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{center}
+        \item \mbox{}
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{scope}[every node/.style={circle,draw,thick}]
+                        \node (s0) at (0, 0) {};
+                        \node (s1) at (3, 0) {};
+                        \node (s2) at (0, -2) {};
+                        \node (s3) at (3, -2) {};
+                    \end{scope}
+                    \begin{scope}[every node/.style={fill=white}]
+                        \node (name) at (0, 1) {$\MI_1$};
+                        \node (name) at (3, 1) {$\MI_2$};
+                        \path[dotted] [-] (s0) edge node {$\rho$}(s1);
+                        \path[dotted] [-] (s2) edge node {$\rho$}(s3);
+                        \path [->] (s0) edge node {$r$}(s2);
+                        \path [->] (s1) edge node {$r$}(s3);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{center}
+        
+        \item \mbox{}
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{scope}[every node/.style={circle,draw,thick}]
+                        \node (s0) at (0, 0) {};
+                        \node (s1) at (3, 0) {};
+                        \node (s2) at (5, 0) {};
+                        \node (s3) at (7, 0) {};
+                    \end{scope}
+                    \begin{scope}[every node/.style={fill=white}]
+                        \node (name) at (0, 1) {$\MI_1$};
+                        \node (name) at (3, 1) {$\MI_2$};
+                        \node (s4) at (9, 0) {$\cdots$};
+                        \path[dotted] [-] (s0) edge [bend right] node {$\rho$}(s1);
+                        \path[dotted] [-] (s0) edge [bend right] node {$\rho$}(s2);
+                        \path[dotted] [-] (s0) edge [bend right] node {$\rho$}(s3);
+                        \path [->] (s0) edge [loop left] node {$r$}(s0);
+                        \path [->] (s1) edge node {$r$}(s2);
+                        \path [->] (s2) edge node {$r$}(s3);
+                        \path [->] (s3) edge node {$r$}(s4);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{center}
 \end{tafel}
 
 Seien $\MI_1$ und $\MI_2$ Interpretationen,
