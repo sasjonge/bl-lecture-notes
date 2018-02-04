@@ -174,7 +174,7 @@ Intuitionen:
     \item $E$ ist ausdrückbar, wenn es ein \emph{äquivalentes} $\ALC$-Konzept $C$ gibt.
 \end{itemize}
 
-\subsubsection{Anwendungen von Bisimulation I}\label{theorem-3.4}
+\subsubsection{Verwendung von Bisimulation I}\label{theorem-3.4}
 
 \begin{theorem}[Beschränkungen der Ausdrucksstärke von $\ALC$]
     \label{thm:beschraenkt}
@@ -192,22 +192,63 @@ In $\ALC$ sind nicht ausdrückbar:
 
 \begin{tafel}[Beweisskizze] Finde Bisimulation für die dies nicht gilt.
 
-\begin{proof} $\exists r^{-}.\top$
+\begin{proof} $\exists r^{-}.\top$ ist nicht $\ALC$-ausdrückbar.
+ Betrachte zwei Interpretationen $\MI$ und $\MJ$
 
- Betrachte 2 Interpretationen $\MI$ und $\MJ$
+ \begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$d$};
+             \node (s1) at (3, -2) {$x$};
+             \node (s2) at (0, -2) {$e$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (0, 1) {$\MI$};
+             \node (name) at (3, 1) {$\MJ$};
+             \path[dotted] [-] (s2) edge node {$\rho$}(s1);
+             \path [->] (s0) edge node {$r$}(s2);
+         \end{scope}
+     \end{tikzpicture}
 
-\includegraphics[width=3.71910in,height=1.83200in]{media/33inv.png}
+     $(\MI, e) \sim (\MJ, x)$ bisimilar
+ \end{center}
 
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat x auch einen r-Vorgänger in $\MJ$. $\lightning$
+Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \exists r^{-}.\top$. Dann gilt $e \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also hat $x$ auch einen $r$-Vorgänger in $\MJ$. $\lightning$
 \end{proof} 
 
-\begin{proof} $\leq n\ r.\top$
+\begin{proof} $\leq n\ r.\top$ ist nicht $\ALC$-ausdrückbar.
 
-Betrachte 2 Interpretationen $\MI$ und $\MJ$
+Betrachte zwei Interpretationen $\MI$ und $\MJ$
 
-\includegraphics[width=3.71910in,height=1.83200in]{media/33low.png}
-
-Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
+ \begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$d$};
+             \node (s2) at (-1, -2) {$e_1$};
+             \node (s4) at (1, -2) {$e_n$};
+             \node (s1) at (3, 0) {$x$};
+             \node (s5) at (2, -2) {$y_1$};
+             \node (s7) at (4, -2) {$y_{n + 1}$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (0, 1) {$\MI$};
+             \node (name) at (3, 1) {$\MJ$};
+             \node (s3) at (0, -2) {$\cdots$};
+             \node (s6) at (3, -2) {$\cdots$};
+             \path [->] (s0) edge node {$r$}(s2);
+             \path [->] (s0) edge node {$r$}(s3);
+             \path [->] (s0) edge node {$r$}(s4);
+             \path [->] (s1) edge node {$r$}(s5);
+             \path [->] (s1) edge node {$r$}(s6);
+             \path [->] (s1) edge node {$r$}(s7);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
+ Bisimulation
+ \[
+     \rho = \{ (d, x) \} \cup \{ (e_i, y_j) \mid i \leq n, j \leq n + 1 \}
+ \]
+ Angenommen, es gäbe ein $\ALC$-Konzept $C$ mit $C \equiv \leq n\ r.\top$. Dann gilt $d \in C^\MI$. Mit \autoref{thm:bisim} folgt $x \in C^{\MJ}$, also $x \in \leq n\ r.\top$. $\lightning$
 \end{proof}
 \end{tafel}
 
@@ -230,13 +271,12 @@ $d_2 \in \Delta^{\MI_2}$ gibt, so dass
 dann ist $E$ nicht in $\ALC$ ausdrückbar.
 \end{theorem}
 
-\subsubsection{Anwendungen von Bisimulation II}
+\subsubsection{Verwendung von Bisimulation II}
 
 Eine Interpretation ist ein \emph{Baum} gdw. $(\Delta^\MI, \cdot^\MI)$
 Baum (endlich oder unendlich). Konzept $C$ und TBox $\MT$ haben
 \emph{gemeinsames Baummodell} $\MI$, wenn $\MI$ Modell von $\MT$ und Baum mit
 Wurzel $d$ sowie $d \in C^\MI$.
-
 
 $\ALC$ hat die \emph{Baummodelleigenschaft}.
 
@@ -247,8 +287,40 @@ Wenn ein ALC-Konzept $C$ bezüglich einer ALC-TBox $\MT$ erfüllbar ist,
 dann haben $C$ und $\MT$ ein \emph{gemeinsames Baummodell} $\MI$. (mit $\MI$ Baum, Wurzel in $C^\MI$.)
 \end{theorem}
 
-\begin{tafel}[TODO]
+\begin{tafel}[Beispiel Baummodell]
+    \begin{align*}
+        C &= A \sqcap \exists s.B \sqcap \forall s.\exists r.A\\
+        \MT &= \{ \top \sqsubseteq \exists s.A \}
+    \end{align*}
 
+ \begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {};
+             \node (s1) at (-1, -2) {};
+             \node (s2) at (1, -2) {};
+             \node (s3) at (-2, -4) {};
+             \node (s4) at (0, -4) {};
+             \node (s6) at (-2, -6) {};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (s5) at (1, -3) {$\vdots$};
+             \node (s7) at (0, -5) {$\vdots$};
+             \node (s8) at (-2, -7) {$\vdots$};
+             \node [right = 0.3cm of s0] at (s0){$A$};
+             \node [right = 0.3cm of s2] at (s2){$A$};
+             \node [right = 0.3cm of s4] at (s4){$A$};
+             \node [right = 0.3cm of s6] at (s6){$A$};
+             \node [left = 0.3cm of s1] at (s1){$B$};
+             \node [left = 0.3cm of s3] at (s3){$A$};
+             \path [->] (s0) edge node {$s$}(s2);
+             \path [->] (s0) edge node {$s$}(s1);
+             \path [->] (s1) edge node {$r$}(s3);
+             \path [->] (s1) edge node {$s$}(s4);
+             \path [->] (s3) edge node {$s$}(s6);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 \end{tafel}
 
 Die Baummodelleigenschaft ist Grundlage für Algorithmen und erlaubt Aussagen über die Ausdrucksstärke.
@@ -256,13 +328,12 @@ Die Baummodelleigenschaft ist Grundlage für Algorithmen und erlaubt Aussagen ü
 \subsubsection{Unravelling}\label{unravelling}
 
 Sei $\MI$ eine Interpretation und $d \in \Delta^\MI$. 
-
-$d$-Pfad in $\MI$: Sequenz $d_1\cdots d_n$, $n \geq 1$ mit $d_1 = d$ und
-für alle $i < n$: es gibt Rollenname $r$ mit $(d_i, d_{i + 1}) \in r^\MI$
+Dann ist ein $d$-Pfad in $\MI$ eine Sequenz $d_1\cdots d_n$, $n \geq 1$ mit $d_1 = d$ und
+für alle $i < n$ gilt: es gibt einen Rollennamen $r$ mit $(d_i, d_{i + 1}) \in r^\MI$
 \[\text{end}(d_1d_2\cdots d_n) = d_n\]
 
 \begin{definition}[Unravelling]
-Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
+Das Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 \begin{align*}
     \Delta^{\MJ} &= \text{Menge aller }d\text{-Pfade in }\MI\\
     A^{\MJ} &= \left\{ p \in \Delta^{\MJ}\  \right|\text{\ end}\left( p \right) \in A^\MI\}\\
@@ -271,15 +342,70 @@ Unravelling von $\MI$ an Stelle $d$ ist folgende Interpretation $\MJ$:
 für alle Konzeptnamen $A$ und Rollennamen $r$
 \end{definition}
 
-\begin{tafel}[TODO]
+\begin{tafel}[Beispiel Unravelling] \mbox{}
+ \begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$d$};
+             \node (s1) at (2, 0) {$e$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (0, 2) {$\MI$};
+             \node [above = 0.4cm of s0] at (s0){$A, B$};
+             \node [above = 0.4cm of s1] at (s1){$B$};
+             \path [->] (s0) edge [loop left] node {$r$}(s0);
+             \path [->] (s0) edge [bend left] node {$r$}(s1);
+             \path [->] (s1) edge [loop right] node {$r$}(s1);
+             \path [->] (s1) edge [bend left] node {$?$}(s0);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 
-\end{tafel}
+ Es gibt unendlich viele $d$-Pfade in $\MI$, da es in der Interpretation Kreise gibt. Beispiele:
+    \begin{align*}
+        p &= ddedee &\text{end}(p) = e\\
+        p' &= deeed &\text{end}(p') = d
+    \end{align*}
 
-\includegraphics[width=4.71910in,height=1.83200in]{media/36unraveling.png}
+Unravelling an Stelle $d$:
+ 
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$d$};
+             \node (s1) at (-1, -2) {$dd$};
+             \node (s2) at (1, -2) {$de$};
+             \node (s3) at (-3, -4) {$ddd$};
+             \node (s4) at (-1, -4) {$dde$};
+             \node (s5) at (1, -4) {$ded$};
+             \node (s6) at (3, -4) {$dee$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (s7) at (-3, -5) {$\vdots$};
+             \node (s8) at (-1, -5) {$\vdots$};
+             \node (s9) at (1, -5) {$\vdots$};
+             \node (s10) at (3, -5) {$\vdots$};
+             \node [above = 0.4cm of s0] at (s0){$A, B$};
+             \node [left = 0.5cm of s1] at (s1){$A, B$};
+             \node [left = 0.6cm of s3] at (s3){$A, B$};
+             \node [right = 0.5cm of s2] at (s2){$B$};
+             \node [right = 0.6cm of s6] at (s6){$B$};
+             \node at (-0.3, -4.7) {$B$};
+             \node at (1.8, -4.7) {$A, B$};
+             \path [->] (s0) edge  node {$r$}(s1);
+             \path [->] (s0) edge  node {$r$}(s2);
+             \path [->] (s1) edge  node {$r$}(s3);
+             \path [->] (s1) edge  node {$r$}(s4);
+             \path [->] (s2) edge  node {$r$}(s5);
+             \path [->] (s2) edge  node {$r$}(s6);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 
 Erklärung: Erzeuge Knoten, die den Folgen entsprechen, füge sie den
 Konzepten hinzu, die als letztes Element in der Folge vorkommen und
 erzeuge Kanten die den weiterführenden Rollen entsprechen.
+\end{tafel}
 
 \begin{lemma}[Unravelling]
     \label{lemma37}
@@ -290,8 +416,8 @@ Sei $\MJ$ Unravelling von $\MI$ an Stelle $d$. Für alle $\ALC$-Konzepte $C$ und
 
 \begin{tafel}[Beweis Unravelling-Lemma]
 \begin{proof}
-Mit Theorem genügt es folgende Bisimulation zu zeigen:
-\[ \left( \MI,end\left( p \right) \right)\sim\left( \MJ,p \right) \]
+    Mit \autoref{thm:bisim} genügt es folgende Bisimulation zu zeigen:
+\[ \left( \MI, \text{end}\left( p \right) \right)\sim\left( \MJ,p \right) \]
 Definiere Relation:
 \[ \rho = \left\{ \left( \text{end}\left( p \right),p \right) \in \Delta^\MI
 \times \Delta^{\MJ} \mid p\ \text{ist}\ d\text{-Pfad}\right\}
@@ -300,21 +426,20 @@ Definiere Relation:
 
 Zur Bisimulation:
 \begin{enumerate}
-\item gilt per Definition von $\MJ$.
-\item
-  Angenommen $e$ $\rho$ $p$ und
+\item Bedingung gilt per Definition von $\MJ$.
+\item Bedingung:
+  Angenommen $e\ \rho\ p$ und
   $\left( e,e' \right) \in r^\MI$. Dann $e = \text{end}\left( p \right)$
   per Konstruktion von $\MJ$. Wegen $\left( e,e' \right) \in r^\MI$
   ist $pe'$ Pfad. Nach Konstruktion von $\MJ$ gilt
   $\left( p,pe' \right) \in r^{\MJ}$.
+\item Bedingung: analog
 \end{enumerate}
 \end{proof}
 \end{tafel}
 
-Nun folgt \autoref{thm:baummodell}.:
-
+Nun kann \autoref{thm:baummodell} gezeigt werden.
 %TODO: figure out how to repeat the theorem here
-\textbf{Theorem 3.6} Wenn ein $\ALC$-Konzept $C$ bezüglich einer TBox $\MT$ erfüllbar ist, dann haben $C$ und $\MT$ ein gemeinsames Baummodell $\MI$.
 
 \begin{tafel}[Beweis Baummodelleigenschaft]
 \begin{proof}
@@ -327,7 +452,7 @@ Sei $D \sqsubseteq E$ in $\MT$ und $p \in D^{\MJ}$. Nach
 \autoref{lem:unravelling} ist dann $\text{end}\left( p \right) \in D^\MI$
 und weil $\MI$ Modell von $\MT$ folgt $\text{end}\left( p \right) \in
 E^\MI$. Mit \autoref{lem:unravelling} folgt $p \in E^{\MJ}
-\Rightarrow J \models D \sqsubseteq E$. %TODO: J seems wrong here
+\implies \MJ \models D \sqsubseteq E$. %TODO: J seems wrong here
 \end{proof}
 \end{tafel}
 
@@ -337,17 +462,14 @@ Bisimulation entspricht nicht der Ausdrucksstärke von $\ALC$, denn die Gegenric
 
 Es gibt Interpretationen $\MI$ und $\MJ$ und $d \in \MI$, $x \in \MJ$, so dass $d \in C^\MI$ gdw. $x \in C^{\MJ}$ für alle $\ALC$-Konzepte $C$, aber $(\MI,d) \not\sim (\MJ,x)$. 
 
-\begin{tafel}[Gegenbeispiel Bisimulation gleich Ausdrucksstärke]
+\begin{tafel}[Gegenbeispiel Bisimulation gleich Ausdrucksstärke, TODO]
 Beispiel:
 
 \includegraphics[width=3.71910in,height=1.83200in]{media/39bis.png}
 
-Es gilt:
+Es gilt $(\MI, d) \not\sim (\MJ, x)$. Versucht man eine Bisimulation $\rho$ mit $(d\ \rho\ x)$ zu konstruieren, braucht man $d' \in \Delta^\MI$ mit $d'\ \rho\ e'$. Das führt aber bei jeder möglichen Wahl von $d'$ zu Problemen mit Bedingung 3 der Bisimulation.
 
-\begin{itemize}
-  \item $d \in C^\MI$ gdw. $x \in C^{\MJ}$, falls ALC-Konzept C
-  \item $(\MI,d) \not\sim (\MJ,x)$: für $y$ in $\MJ$ gibt es kein adäquates Element $e \in \Delta^\MI$ mit $e\ \rho\ y$
-\end{itemize}
+Man kann zeigen, dass $d \in C^\MI$ und $x \in C^\MJ$ nicht durch $\ALC$ unterscheidbar sind.
 \end{tafel}
 
 Sie gilt allerdings für verschiedene Klassen von Interpretationen, wie die Klasse aller endlichen Interpretationen oder die Klasse aller Interpretationen mit endlicher Verzweigungszahl. Solche Klassen nennt man \emph{Henessy-Milner-Klassen}.
@@ -365,13 +487,10 @@ Dann gilt \autoref{thm:bisim} auch für $\ALCI$ und man kann z.B. eine Variante 
 
 Auch $\ALCQ$ und $\ALCQI$ haben die Baummodelleigenschaft.
 
-\subsection{Ausdrucksstärke und
-Modellkonstruktion}\label{ausdrucksstuxe4rke-und-modellkonstruktion}
+\subsection{Endliche Modelleigenschaft und Filtration}
+\label{ausdrucksstuxe4rke-und-modellkonstruktion}
 
-In diesem Abschnitt  wird die endliche Modelleigenschaft und Filtration eingeführt.
-
-\subsubsection{Größe von Konzepten und
-TBoxen}\label{gruxf6uxdfe-von-konzepten-und-tboxen}
+In diesem Abschnitt wird die endliche Modelleigenschaft und Filtration eingeführt.
 
 \begin{definition}[Größe]
 \emph{Größe} $\left| C \right|$ eines ALC-Konzeptes $C$ ist induktiv
@@ -382,15 +501,13 @@ definiert:
     \left| C \sqcap D \right| = \left| C \sqcup D \right| &= \left| C \right| + \left| D \right| + 1\\
     \left| \exists r.C \right| = \left| \forall r.C \right| &= \left| C \right| + 3
 \end{align*}
-\emph{Größe} $\left| C \right|$ einer TBox $\MT$ ist
+Die \emph{Größe} $\left| C \right|$ einer TBox $\MT$ ist
 \[
   \sum_{C \sqsubseteq D \in T} \left| C \right| + \left| D \right| + 1
   \]
 \end{definition}
 
 Intuitiv entspricht dies der Anzahl von Symbolen in $C$ bzw. $\MT$.
-
-\subsubsection{Endliche/beschränkte Modelleigenschaft}
 
 $\ALC$ hat die \emph{endliche Modelleigenschaft}:
 
@@ -457,7 +574,30 @@ Sei
     \sub(C,\MT) &= \{A, \exists r.A, B, A \sqcap B\}
 \end{align*}
 
-\includegraphics[width=4.71910in,height=1.83200in]{media/314typ.png}
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$d$};
+             \node (s1) at (2, 0) {$e$};
+             \node (s2) at (0, -2) {$f$};
+             \node (s3) at (2, -2) {$g$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (-2, 0) {$\MI$};
+             \node [above = 0.4cm of s0] at (s0){$A$};
+             \node [above = 0.4cm of s1] at (s1){$A$};
+             \node [left = 0.6cm of s2] at (s2){$A, B$};
+             \node [right = 0.5cm of s3] at (s3){$A$};
+             \path [->] (s0) edge [bend left] node {$r$}(s1);
+             \path [->] (s0) edge node {$r$}(s2);
+             \path [->] (s1) edge [bend left] node {$r$}(s0);
+             \path [->] (s1) edge  [loop right] node {$r$}(s0);
+             \path [->] (s1) edge  node {$r$}(s3);
+             \path [->] (s2) edge  node {$r$}(s3);
+             \path [->] (s3) edge  [loop below] node {$r$}(s3);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 \begin{align*}
     t_\MI(d)&=\{A, \exists r.A\}\\
     t_\MI(e)&=\{A, \exists r.A\}\\
@@ -510,11 +650,37 @@ Wenden wir diese Definition auf das Beispiel \autoref{t:typen} an.
 
 Die Interpretation $\MJ$ sieht wie folgt aus:
 
-\includegraphics[width=1.21910in,height=2.33200in]{media/314typcont.png}
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {$[d]$};
+             \node (s2) at (0, -2) {$[f]$};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (-2, 0) {$\MJ$};
+             \node [left = 0.6cm of s0] at (s0){$A$};
+             \node [left = 0.6cm of s2] at (s2){$A, B$};
+             \path [->] (s0) edge [loop right] node {$r$}(s0);
+             \path [->] (s0) edge [bend left] node {$r$}(s2);
+             \path [->] (s2) edge [bend left] node {$r$}(s0);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 
-Offensichtlich bringt Filtration aber nicht immer das minimale Modell, denn folgende Interpretation wäre auch ein Modell:
+Die Filtration ist aber nicht immer das minimale Modell, denn folgende Interpretation wäre auch ein Modell:
 
-\includegraphics[width=1.0in,height=1.0in]{media/314typcont2.png}
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node (name) at (-2, 0) {$\MJ$};
+             \node [left = 0.6cm of s0] at (s0){$A, B$};
+             \path [->] (s0) edge [loop right] node {$r$}(s0);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 \end{tafel}
 
 \begin{theorem} [Filtration Modell]
@@ -541,19 +707,19 @@ Beweis der Behauptung per Induktion über die Struktur von $D$.
   \def\labelenumii{\alph{enumii}.}
   \item Hinrichtung
       \begin{align*}
-          &d \in \left( \exists r.E \right)^\MI\\
-          \Leftrightarrow &(\text{Semantik})\text{ es gibt }e \in \Delta^\MI \text{ mit } \left( d,e \right) \in r^\MI \text{ und } e \in E^\MI \\
-          \Rightarrow &(\text{Definition }r^{\MJ} \text{ und } I.V.) \text{ es gibt }e \in \Delta^\MI \text{ mit }\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ} \text{ und } \left\lbrack e \right\rbrack \in E^{\MJ} \\
-          \Leftrightarrow &(\text{Semantik } \exists) \left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ}
+          d \in \left( \exists r.E \right)^\MI
+          &\iff \text{es gibt }e \in \Delta^\MI \text{ mit } \left( d,e \right) \in r^\MI \text{ und } e \in E^\MI && \text{(Semantik)}\\
+          &\implies \text{es gibt }e \in \Delta^\MI \text{ mit }\left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ} \text{ und } \left\lbrack e \right\rbrack \in E^{\MJ} && \text{(Definition $r^\MJ$ und I.V)}\\
+          & \iff \left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} && \text{(Semantik $\exists$)}
       \end{align*}
     \item Rückrichtung
         \begin{align*}
-            &\left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} \\
-            &\Leftrightarrow (\text{Semantik }\exists) \text{ es gibt }[e] \in \Delta^{\MJ} \text{ mit } \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}\text{ und }\left\lbrack e \right\rbrack \in E^{\MJ} \\
-            &\Leftrightarrow (\text{Definition }r^{\MJ} \text{ und }I.V.) \text{ es gibt }[e] \in \Delta^{\MJ},\\
-            &\quad\quad\text{ es gibt }d' \in \left\lbrack d \right\rbrack, e' \in \left\lbrack e \right\rbrack, \left( d',\ e' \right) \in r^\MI \text{ und }e' \in E^\MI \\
-            &\Rightarrow (\text{Semantik }\exists) d' \in \left( \exists r.E \right)^\MI \\
-            &\Rightarrow (d \sim d') d \in \left( \exists r.E \right)^\MI
+            \left\lbrack d \right\rbrack \in \left( \exists r.E \right)^{\MJ} 
+            &\iff \text{es gibt }[e] \in \Delta^{\MJ} \text{ mit } \left( \left\lbrack d \right\rbrack,\left\lbrack e \right\rbrack \right) \in r^{\MJ}\text{ und }\left\lbrack e \right\rbrack \in E^{\MJ}  && \text{(Semantik $\exists$)}\\
+            &\iff \text{es gibt }[e] \in \Delta^{\MJ}, \text{ es gibt }d' \in \left\lbrack d \right\rbrack, e' \in \left\lbrack e \right\rbrack, \\
+            & \hphantom{\iff} \left( d',\ e' \right) \in r^\MI  \text{ und }e' \in E^\MI && \text{Def. $r^\MJ$ und I.V.}\\
+            &\implies d' \in \left( \exists r.E \right)^\MI && \text{(Semantik $\exists$)}\\
+            &\implies  d \in \left( \exists r.E \right)^\MI && (d \sim d')
         \end{align*}
 \end{enumerate}
 \end{enumerate}
@@ -593,9 +759,26 @@ $\ALCQI$ hat nicht die endliche Modelleigenschaft.
         \top &\sqsubseteq ( \leq 1\ r^{-}\ \top)
     \end{align*}
 \end{proof}
-\begin{tafel}[Beispiel für unendliches $\ALCI$-Modell]\mbox{}
+\begin{tafel}[Beispiel für unendliches $\ALCQI$-Modell]\mbox{}
 
-\includegraphics[width=3.21910in,height=0.93200in]{media/318qi.png}
+\begin{center}
+     \begin{tikzpicture}
+         \begin{scope}[every node/.style={circle,draw,thick}]
+             \node (s0) at (0, 0) {};
+             \node (s2) at (2, 0) {};
+             \node (s2) at (4, 0) {};
+         \end{scope}
+         \begin{scope}[every node/.style={fill=white}]
+             \node [above = 0.4cm of s0] at (s0){$A$};
+             \node [above = 0.4cm of s1] at (s1){$\neg A$};
+             \node [above = 0.4cm of s2] at (s2){$\neg A$};
+             \node (s3) at (6, 0) {$\cdots$};
+             \path [->] (s0) edge node {$r$}(s1);
+             \path [->] (s1) edge node {$r$}(s2);
+             \path [->] (s2) edge node {$r$}(s3);
+         \end{scope}
+     \end{tikzpicture}
+ \end{center}
 
 Erklärung: Diese Interpretation müsste unendlich erweitert werden, damit es die TBox erfüllt.
 \end{tafel}
