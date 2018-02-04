@@ -195,20 +195,20 @@ In $\EL$ ist Erfüllbarkeit \emph{kein} interessantes Schlussfolgerungsproblem:
     Jedes $\EL$-Konzept ist erfüllbar bezüglich jeder TBox.
 \end{lemma}
 
-\begin{tafel}\mbox{}
+\begin{tafel}
     \begin{proof}
     Betrachte folgende Interpretation $\MI$:
 
-\begin{center}
+    \begin{center}
         \begin{tikzpicture}
-        \begin{scope}[every node/.style={circle,draw,thick}]
-            \node (s0) at (0, 0) {$d$};
-        \end{scope}
-        \begin{scope}[every node/.style={fill=white}]
-            \node [below = 0.4cm of s0] at (s0){$A_1, A_2, \ldots$};
-            \path [->] (s0) edge [loop right] node {$r_1, r_2, \ldots$} (s0);
-        \end{scope}
-    \end{tikzpicture}
+            \begin{scope}[every node/.style={circle,draw,thick}]
+                \node (s0) at (0, 0) {$d$};
+            \end{scope}
+            \begin{scope}[every node/.style={fill=white}]
+                \node [below = 0.4cm of s0] at (s0){$A_1, A_2, \ldots$};
+                \path [->] (s0) edge [loop right] node {$r_1, r_2, \ldots$} (s0);
+            \end{scope}
+        \end{tikzpicture}
     \end{center}
 
 Für jedes $\EL$-Konzept $C$ gilt $C^\MI = \{d\}$. Beweis per Induktion über
@@ -457,94 +457,190 @@ Normalform transformiert werden, die konservative Erweiterung von $\MT$
 ist.
 \end{lemma}
 
+\begin{tafel}[TODO]
 
-Die Regeln fügen jeweils Zwischenkonzepte ein.
+\end{tafel}
 
-Beweisskizze: Grad der Abnormalität definieren und zeigen, dass
+Der Algorithmus beginnt mit der ursprünglichen TBox und wendet dann erschöpfend folgende Regeln an:
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Der Grad ist beschränkt durch $\left| T \right|$
-\item
-  Jede Regelanwendung verringert den Grad
-\item
-  TBoxen vom Grad $0$ sind in Normalform
-\end{enumerate}
+\begin{description}
+    \item[R1] \[
+        \frac{}{A \sqsubseteq A}
+    \] wenn $A$ in $\MT$ vorkommt
+    \item[R2] \[
+        \frac{}{A \sqsubseteq \top}
+    \] wenn $A$ in $\MT$ vorkommt
+    \item[R3] \[
+        \frac{
+        A \sqsubseteq A_1\ \cdots\ A\sqsubseteq A_n\ A_1\sqcap \cdots \sqcap A_n \sqsubseteq B
+        }{A \sqsubseteq B}
+    \] 
+    \item[R3] \[
+        \frac{A \sqsubseteq \exists r.A_1\ A_1 \sqsubseteq B_1\ \exists r.B_1 \sqsubseteq B
+        }{A \sqsubseteq B}
+    \]
+\end{description}
 
-\subsubsection{Algorithmus}\label{algorithmus}
+\begin{tafel}[Beispiel Regelanwendung]
+    \begin{align*}
+        \MT = \{ A_2 &\sqsubseteq A_1 && 1\\
+            A_1 &\sqsubseteq \exists r.A_3 && 2\\
+            A_1 &\sqsubseteq \exists s.A_1 && 3\\
+            A_1 \sqcap A_2 &\sqsubseteq A_3 && 4\\
+        \exists r.A_3 & \sqsubseteq A_2\} && 5
+    \end{align*}
+    Durch \textbf{R1} und \textbf{R2} entstehen:
+    \begin{align*}
+        A_1 \sqsubseteq A_1, A_2 \sqsubseteq A_2, A_3 \sqsubseteq A_3\\
+        A_1 \sqsubseteq \top, A_2 \sqsubseteq \top, A_3 \sqsubseteq \top
+    \end{align*}
+    Weitere Regelanwendungen:
+    \begin{align*}
+        1 + 6 + 4, R_3 &\implies A_2 \sqsubseteq A_3 && 8\\
+        2 + 6 + 5, R_4 &\implies A_1 \sqsubseteq A_2 && 9\\
+        9 + 8, R_3 &\implies A_1 \sqsubseteq A_3 && 10\\
+    \end{align*}
+\end{tafel}
 
-Wende Regeln erschöpfend an um alle Subsumptionen zu berechnen:
 
-$\frac{\ }{A \sqsubseteq A}$ (Wenn $A$ in $T$ vorkommt)
-$\frac{\ }{A \sqsubseteq \top}$ (Wenn $A$ in $T$ vorkommt)
+Für eine $\EL$-TBox $\MT$ sei $\MT^*$ das Ergebnis erschöpfender
+Regelanwendungen. Wir nennen $\MT^*$ die \emph{Saturierung} von $\MT$. $\MT^*$ macht alle Subsumtionen zwischen Konzeptnamen explizit:
+\begin{theorem}\label{thm-el-rules}
+    Für alle Konzeptnamen $A, B$ in $\MT$ gilt:
+    \[
+        \MT \models A \sqsubseteq B \gdw A \sqsubseteq B \in \MT^*
+    \]
+\end{theorem}
+Der Algorithmus klassifiziert also die Konzeptnamen vollständig; berechnet nicht nur eine einzelne Subsumtion.
 
-$\frac{A \sqsubseteq A_1,\ldots,A \sqsubseteq A_{n},A_1 \sqcap \ldots \sqcap A_{n} \sqsubseteq B}{A \sqsubseteq B}$
-$\frac{A \sqsubseteq \exists r.A_1,\ A_1 \sqsubseteq B_1,\exists r.B_1 \sqsubseteq B}{A \sqsubseteq B}$
+\begin{theorem}
+    Die Konstruktion von $\MT*$ \emph{terminiert} nach $\mathcal{O}({|\MT|}^2)$ vielen Regelanwendungen.
+\end{theorem}
+\begin{tafel}
+    \begin{proof}
+        Jede Regelanwendung erzeugt neue Inklusion $A \sqsubseteq B$ wobei $A, B$ Konzeptnamen in $\MT$ sind. Es kann also nur $\mathcal{O}(|\MT|^2)$ viele solche Inklusionen geben.
+    \end{proof}
+\end{tafel}
 
-\textbf{Wo gehört das x hin Vorlesung 17?}
+Wir beweisen nun \autoref{thm-el-rules}:
 
-Für eine EL-TBox $T$ sei $T*$ das Ergebnis erschöpfender
-Regelanwendungen, die \emph{Saturierung}.
+\begin{theorem}
+    Für alle Konzeptnamen $A, B$ in $\MT$ gilt:
+    \[
+        A \sqsubseteq B \in \MT^* \implies \MT \models A \sqsubseteq B
+    \]
+\end{theorem}
 
-\subsubsection{Theorem 6.16 }\label{theorem-6.16}
+\begin{proof}
+    Sei $\MT = \MT_0, \MT_1, \ldots, \MT_n = \MT^*$ die durch Regelanwendung erzeugte folge von TBoxen. Es genügt folgende Behauptung zu zeigen:
+    \begin{center}
+        Für alle $i < n$ gilt: $\MT_i \models \MT_{i + 1}$
+    \end{center}
+    (d.h.: $\MT \models C \sqsubseteq D$ für alle $C \sqsubseteq D \in \MT_{i + 1}$)
+    \begin{tafel}[Beweis der Behauptung]
+    Sei $\MT_{i + 1} = \MT_i \cup \{ A \sqsubseteq B\}$. Dann gibt es eine Regel, so dass alle Vorbedingungen in $\MT_i$ enthalten sind und $A \sqsubseteq B$ die Nachbedingung ist. Durch Analyse der Regeln und Verwendung der Semantik folgt \[ \MT_i \models A \sqsubseteq B. \]
 
-Für alle Konzeptnamen $A,B$ in $T$ gilt:
-$T \models A \sqsubseteq B$ gdw $A \sqsubseteq B \in T*$
+    Beispiel für \textbf{R4}: Sei 
+    \[
+        \{ \overbrace{A \sqsubseteq \exists r.A_1}^1, \overbrace{ A_1 \sqsubseteq B_1}^2, \overbrace{\exists r.B_1 \sqsubseteq B}^3 \} \in \MT_i
+    \]
+    und $\MI$ ein beliebiges Modell von $\MT$. Sei $d \in A^\MI$. Wegen 1 gibt es $e \in A^\MI_1, (d, e) \in r^\MI$. Wegen 2 ist $e \in B_1^\MI$. Wegen 3 ist $d \in B^\MI$.
+\end{tafel}
 
-\paragraph{Terminierung}\label{terminierung-1}
+    Daraus folgt direkt $\MT \models \MT^*$.
+\end{proof}
 
-Beweisskizze. Jede Regelanwendung erzeugt eine neue Konzeptinklusion
-$A \sqsubseteq B$, wobei $A,B$ Konzeptnamen aus $T$. Es gibt nur
-endlich viele solcher Inklusionen.
+Nun wollen wir die Vollständigkeit zeigen. Wir konstruieren ein einziges Modell, das alle nicht aus $\MT$ folgenden Subsumtionen zwischen Konzeptnamen gleichzeitig falsch macht. Die Existenz solcher \emph{kanonischer Modelle} ist zentrale Eigenschaft von $\EL$.
 
-\paragraph{Korrektheit}\label{korrektheit-1}
 
-Beweisskizze. Sei $T = T_{0},\ \ldots,(T_{n} = T*)$ die durch
-Regelanwendungen erzeugte Folge von TBoxen. Es genügt zu zeigen:
-$T_{i} \models T_{i + 1}$. Zeige dies durch Vorbedingung der
-Regelanwendung und der Semantik.
+\begin{definition}[kanonische Interpretation]
+    Die kanonische Definition $\MT$ ist wie folgt definiert:
+    \begin{align*}
+        \Delta^\MI &= \{ d_A \mid A \text{ Konzeptname in } \MT^*\} \cup \{d_\top\}\\
+        A^\MI &= \{ d_B \mid B \sqsubseteq A \in \MT^*\}\\
+        r^\MI &= \{(d_a, d_B) \mid A \sqsubseteq A' \in \MT^* \text{ und } A' \sqsubseteq \exists r.B \in \MT^* \}
+    \end{align*}
+\end{definition}
 
-\paragraph{Vollständigkeit}\label{vollstuxe4ndigkeit-1}
+\begin{tafel}[Beispiel kanonische Interpretation] \mbox{}
+    TODO: woher kommt das und ist das richtig?
+\begin{center}
+        \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle,draw,thick}]
+            \node (s0) at (0, 0) {$d_{A_1}$};
+            \node (s1) at (2, 0) {$d_{A_2}$};
+            \node (s2) at (1, -2) {$d_{A_3}$};
+            \node (s3) at (3, -2) {$d_\top$};
+        \end{scope}
+        \begin{scope}[every node/.style={fill=white}]
+            \node [above = 0.5cm of s0] at (s0){$A_1, A_2, A_3$};
+            \node [above = 0.5cm of s1] at (s1){$A_1, A_2, A_3$};
+            \node [below = 0.5cm of s2] at (s2){$A_3$};
+            \node [below = 0.5cm of s3] at (s3){$\top$};
+            \path [->] (s0) edge [loop left] node {$s$} (s0);
+            \path [->] (s1) edge  node {$s$} (s0);
+            \path [->] (s0) edge  node {$r$} (s2);
+            \path [->] (s1) edge  node {$r$} (s2);
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+\end{tafel}
 
-\subparagraph{Kanonische
-Interpretation}\label{kanonische-interpretation}
+\begin{lemma}\label{lemma:620}
+    Die kanonische Interpretation $\MI$ ist ein Model von $\MT^*$.
+\end{lemma}
+\begin{tafel} Zu zeigen: alle Konzeptinklusionen in $\MT^*$ sind in $\MT$ erfüllt.
+    \begin{enumerate}
+        \item Fall: $A_1 \sqcap \cdots \sqcap A_n \sqsubseteq \MT^*$
 
-Die Kanonische Interpretation $I$ ist:
+            Angenommen $d_B \in A^\MI_i$ für alle $i \leq n$. Nach Definition von $\MI$ ist $B \sqsubseteq A_i \in \MT^*$  für alle $i \leq n$. Wegen \textbf{R3} ist $B \sqsubseteq A in \MT^*$, also $d_B \in A^\MI$.
+    \end{enumerate}
 
+    TODO: andere Fälle
+\end{tafel}
+
+Jetzt kann man zeigen:
+
+\begin{lemma}
+    Für alle Konzeptnamen $A, B \in \MT$ gilt:
+    \[
+        \MT \models A \sqsubseteq B \text{ impliziert } A \sqsubseteq B \in \MT^*
+    \]
+\end{lemma}
+
+\begin{proof}
+    Angenommen $A\sqsubseteq B \not\in \MT^* (*)$. Betrachte Element $d_A$ der kanonischen Interpretation $\MI$. Wegen \textbf{R1} ist $A \sqsubseteq A \in \MT^*$, also $d_A \in A^\MI$. Die Definition von $\MI$ und $(*)$ liefert $d_a \not\in B^\MI$. Da $\MI$ Modell von $\MT^*$ ist (\autoref{lemma:620}) und damit auch Modell von $\MT$ ist, folgt $\MT \not\models A\sqsubseteq B$.
+\end{proof}
+
+\subsection{Erweiterungen von \texorpdfstring{$\EL$}{EL}}\label{erweiterungen-von-el}
+
+Der beschriebene Algorithmus kann angepasst werden an $\EL$ erweitert um:
 \begin{itemize}
-\item
-  $\Delta^{I} = \left\{ d_{A}\ |\ A\ \mathrm{\text{Konzeptname\ in\ T}}* \right\} \cup \left\{ d_{\top} \right\}$
-\item
-  $A^{I} = \left\{ d_{\text{B\ }} \middle| \ B \sqsubseteq A \in T* \right\}$
-\item
-  $r^{I} = \left\{ \left( d_{A},d_{B} \right)\  \middle| \ A \sqsubseteq A' \in T*\ \mathrm{\text{und}}\ A' \sqsubseteq \exists r.B \in T*,\ A'\ \mathrm{\text{Konzeptname}} \right\}$
+    \item $\bot$
+    \item \enquote{Range Restrictions} $\top \sqsubseteq \forall r.C$
+    \item \enquote{Domain Restrictions} $\top \sqsubseteq \forall r^-.C$
+    \item Rolleninklusionen mit Verkettung: $r_1 \circ \cdots r_n \sqsubseteq r$
+    \item \dots
 \end{itemize}
 
-Erklärung: Konstruiere Intuitiv Modell aus allen Konzeptnamen.
+Viele andere Erweiterungen sind jedoch \textsc{ExpTime}-vollständig (wie $\ALC$). Wir betrachten exemplarisch
+\begin{itemize}
+    \item $\mathcal{ELU}$, die Erweiterung von $\EL$ mit $\sqcap$
+    \item $\EL_\forall$, die Erweiterung von $\EL$ mit $\foral r.C$
+    \item $\EL^{\geq 2}$, die Erweiterung von $\EL$ mit $\geq 2\ r.\top$
+\end{itemize}
 
-\hypertarget{lemma-6.18}{\subparagraph{Lemma 6.18}\label{lemma-6.18}}
 
-Die kanonische Interpretation ist ein Model von $T*$.
+\subsubsection{\texorpdfstring{$\EL$ mit Disjunktion un $\bot$}{EL mit Disjunktion und Bottom}}
 
-Beweis: Zeige, dass alle Inklusionen in $T*$ von $I$ erfüllt werden.
-Verwende die Inklusionen in Normalform. Überlege dazu, was aus den
-Inklusionen mithilfe der Definition gefolgert werden kann.
+\begin{theorem}
+    Erfüllbarkeit in $\mathcal{ELU}_\bot$ bezüglich TBoxen ist \textsc{ExpTime}-vollständig.
+\end{theorem}
 
-\subparagraph{Vollständigkeit}\label{vollstuxe4ndigkeit-2}
+\begin{proof}
+    Reduktion von Erfüllbarkeit von Konzeptnamen bezüglich $\ALC$-TBox $\MT$.
 
-Angenommen $A \sqsubseteq B \notin T*$. Betrachte Element $d_{A}$
-der kanonischen Interpretation $I$. Wegen R1:
-$A \sqsubseteq A \in T*$, also nach Def. $I$: $d_{A} \in A^{I}$.
-Def. von $I$ und $A \sqsubseteq B \notin T*$ liefern
-$d_{A} \notin B$. Da $I$ Modell von $T*$
-(\protect\hyperlink{lemma-6.18}{Lemma 6.18}), und damit von $T$, folgt
-nicht $T \models A \sqsubseteq B$.
-
-\subsection{Erweiterungen von EL}\label{erweiterungen-von-el}
-
-\hypertarget{el-mit-disjunktion-und-bottom}{\subsubsection{EL mit
-Disjunktion und Bottom}\label{el-mit-disjunktion-und-bottom}}
+\end{proof}
 
 Erfüllbarkeit in $\text{ELU}_{\bot}$ (mit Disjunktion) ist
 ExpTime-Vollständig.

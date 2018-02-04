@@ -162,7 +162,7 @@ Der Algorithmus stoppt, wenn alle I-Bäume vollständig sind. Anschließend wird
     \item \enquote{unerfüllbar} andernfalls, also wenn es in \emph{allen} vollständigen I-Bäumen einen offensichtlichen Widerspruch gibt.
 \end{itemize}
 
-\begin{tafel}[Beispielanwendung des Tableau-Algorithmus]
+\begin{tafel}[Beispielanwendung des Tableau-Algorithmus, TODO]
 
 Beispiel:
 
@@ -381,15 +381,13 @@ $\MI$ gilt $v \notin A^\MI$. Also $v \in \left( \neg A \right)^\MI$.
 
 \item $C = D \sqcap E$
     \begin{align*}
-        &C \in \ML(v)\\
-        &\implies (\sqcap\text{-Regel nicht anwendbar}) D \in \ML(v), E \in \ML(v)\\
-        &\implies (\text{I.V.}) v \in D^\MI,\ v \in E^\MI\\
-        &\implies (\text{Semantik}) v \in \left( D \sqcap E \right)^\MI
+        C \in \ML(v)
+        &\implies D \in \ML(v), E \in \ML(v) && \text{($\sqcap$-Regel nicht mehr anwendbar)}\\
+        &\implies v \in D^\MI,\ v \in E^\MI && \text{(I.V.)}\\
+        &\implies  v \in \left( D \sqcap E \right)^\MI && (\text{Semantik})
     \end{align*}
 
-\item $C = D \sqcup E$
-
-analog zu $\sqcap$.
+\item $C = D \sqcup E$: analog zu $\sqcap$.
 
 \item $C = \exists r.D$
 
@@ -399,9 +397,7 @@ Da die $\exists$-Regel nicht anwendbar ist, gibt es $v'\in V$ mit $(v,r,v')
 Nach I.V. gilt $v' \in D^\MI$; nach Konstruktion $(v,v') \in r^\MI$, woraus
 $v \in (\exists r.D^\MI)$ folgt.
 
-\item $C = \forall r.D$
-
-analog zu $\exists$.
+\item $C = \forall r.D$: analog zu $\exists$.
 \end{itemize}
     \end{proof}
 \end{tafel}
@@ -410,9 +406,7 @@ analog zu $\exists$.
     \label{def:realisierbarkeit}
 Sei $B = \left( V,E,\ML \right)$ ein I-Baum und $\MI$ eine Interpretation. $\MI$
 \emph{realisiert} $B$, wenn es eine Funktion
-\begin{align*}
-    \pi : V \rightarrow \Delta^\MI
-\end{align*}
+\[ \pi : V \rightarrow \Delta^\MI \]
 gibt, so dass gilt:
 \begin{itemize}
 \item
@@ -430,7 +424,7 @@ $B \in M$ realisierbar.
 
 Beachte: ein realisierbarer I-Baum enthält keinen offensichtlichen Widerspruch.
 
-\begin{tafel}[Beispiel Realisierbarkeit]\mbox{}\\
+\begin{tafel}[Beispiel Realisierbarkeit, TODO]\mbox{}\\
 
 \includegraphics[width=2.0in,height=4.0in]{media/47real.png}
 \end{tafel}
@@ -610,7 +604,7 @@ $v$ ist \emph{blockiert}, wenn $v$ direkt blockiert ist oder einen direkt
 blockierten Vorgänger hat. Beachte, dass \enquote{Vorgänger} kein direkter Vorgänger sein muss.
 \end{definition}
 
-\begin{tafel}[Beispiel Blockieren]\mbox{}\\
+\begin{tafel}[Beispiel Blockieren]\mbox{}
     \begin{center}
     \begin{tikzpicture}
         \begin{scope}[every node/.style={circle,thick,draw}]
@@ -655,7 +649,7 @@ blockierten Vorgänger hat. Beachte, dass \enquote{Vorgänger} kein direkter Vor
   $\ML\left( v' \right) = \left\{ C \right\}$
 \end{itemize}
 
-\begin{tafel}[Beispiel $\exists'$-Regel]\mbox{}\\
+\begin{tafel}[Beispiel $\exists'$-Regel, TODO]\mbox{}\\
 
 \includegraphics[width=5.71910in,height=2.33200in]{media/414block.png}
 

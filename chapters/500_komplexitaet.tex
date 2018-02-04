@@ -1,8 +1,6 @@
 \subsection{Komplexität mit TBoxen, obere
 Schranke}\label{komplexituxe4t-mit-tboxen-obere-schranke}
 
-\subsubsection{Obere Schranke}
-
 Wir wollen zeigen:
 
 \begin{theorem}
@@ -47,10 +45,8 @@ $t \subseteq \sub\left( C_{0}, \MT \right)$, so dass
 
 Beispiel:
 
-Sei $C_0 = A$, $\MT = \{\top \sqsubseteq C_{\MT}\}$ mit $$C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A')$$
-
-Dann ist $$sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\}$$
-
+Sei $C_0 = A$, $\MT = \{\top \sqsubseteq C_{\MT}\}$ mit \[C_{\MT} = \exists r.\exists r.A \sqcap \forall r.A' \sqcap (\neg A \sqcup \neg A') \]
+Dann ist \[ \sub(C_0, \MT) = \{A, C_{\MT}, \exists r.\exists r.A, \forall r.A',\neg A \sqcup \neg A', \exists r.A, A', \neg A, \neg A'\} \]
 Sei $M = \{C_{\MT}, \exists r.\exists r. A, \forall r.A', \neg A \sqcup \neg A'\}$
 
 Die Typen für $C_0$ und $\MT$ sind:
@@ -199,9 +195,7 @@ Sei $n = \left| C_{0} \right| + |T|$. Dann gilt:
 Die Erfüllbarkeit von $C_0$ bezüglich $\MT$ folgt dann aus:
 
 Behauptung: Für alle $C \in \sub(C_0, \MT)$ und alle $t \in \Gamma_i$ gilt:
-\begin{align*}
-    C \in t \implies t \in C^\MI
-\end{align*}
+\[ C \in t \implies t \in C^\MI \]
 
 \begin{tafel}[name=Beweis der Behauptung, continues=t:example51]
     Die Behauptung impliziert das Lemma.
@@ -257,7 +251,7 @@ $t \in {(\exists r.D )}^\MI$
     \begin{tafel}[Beweis der Behauptung]
     Per Induktion über $i$:
 
-    IA $i = 0$ trivial: jedes Element von $\Gamma$ (semantischer Typ) ist auch syntaktischer Typ (erfüllt a-d).
+    IA $i = 0$ jedes Element von $\Gamma$ (semantischer Typ) ist auch syntaktischer Typ (erfüllt a-d).
 
     IS $i \rightarrow i + 1$: Gelte $\Gamma \subseteq \Gamma_i$, zu zeigen $\Gamma \subseteq \Gamma_{i + 1}$.
 
@@ -739,7 +733,7 @@ Wir beginnen wieder mit Terminierung und Komplexitätsanalyse.
     \begin{align*}
         \Delta^\MI &= V\\
         r^\MI &= \{(v, v') \in E \mid \sigma(v') = r\} \quad \text{für alle Rollennamen } r\\
-        A^\MI &= \{v \mid A \in p_1(v)\} \quad \text{für alle Konzeptnamen } A\\
+        A^\MI &= \{v \mid A \in p_1(v)\} \quad \text{für alle Konzeptnamen } A
     \end{align*}
     ($p_1(v)$ erster Parameter in $\ell(v)$)
 
@@ -754,12 +748,10 @@ Wir beginnen wieder mit Terminierung und Komplexitätsanalyse.
     $\ALC-\texttt{Worlds}(C_0)$, der \texttt{true} zurückgibt.
     \begin{proof}
         Sei $C_0$ erfüllbar und $\MI$ ein Modell von $C_0$ mit $d_0 \in C_0^\MI$. Für jedes $d \in \Delta^\MI$ und $i \geq 0$ definiere:
-        \begin{align*}
-            t_i(d) = \{C \in \sub_i(C_0) \mid d \in C^\MI\}
-        \end{align*}
+        \[ t_i(d) = \{C \in \sub_i(C_0) \mid d \in C^\MI\} \]
         Idee: Wir verwenden $\MI$, um die nichtdeterministischen Entscheidungen von $\ALC-\texttt{Worlds}(C_0)$ zu einem erfolgreichen Lauf zu \enquote{lenken}. Zu diesen Zweck übergeben wir eine Element $d \in \Delta^\MI$ als virtuelles viertes Argument $p_4$ an \texttt{recurse}, so dass für alle $v \in V$:
         \begin{align*}
-             \tag{*}
+             \tag{*r
              \label{eqn:alc-worlds-impl}
             C \in p_1(v) \implies p_4(v) \in C^\MI
         \end{align*}
