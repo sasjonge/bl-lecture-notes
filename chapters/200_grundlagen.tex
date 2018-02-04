@@ -1,11 +1,9 @@
 \subsection{Attributive Language with Complement
 (\texorpdfstring{$\ALC$}{ALC})}\label{attributive-language-with-complement-alc}
 
-\subsubsection{Konzept- und Rollennamen}\label{konzept--und-rollennamen}
+\subsubsection{\texorpdfstring{$\ALC$}{ALC}: Syntax}\label{alcsyntax}
 
 Konzept- und Rollennamen sind abzählbar unendliche und disjunkte (durch Groß- und Kleinschreibung) Mengen.
-
-\subsubsection{\texorpdfstring{$\ALC$}{ALC}: Syntax}\label{alcsyntax}
 
 \begin{definition}[$\ALC$-Konzepte]
   Die Menge der $\ALC$-Konzepte ist induktiv definiert:
@@ -37,10 +35,7 @@ Hier einige Beispiel für diese Syntax:
 \end{align*}
 \end{tafel}
 
-\textbf{Weiteres zur Syntax}
-
 Dabei verwenden wir folgende Symbole:
-
 \begin{itemize}
   \item $A$,$B$ für Konzeptnamen
   \item $C$,$D$ für zusammengesetzte Konzepte
@@ -50,15 +45,14 @@ Dabei verwenden wir folgende Symbole:
 Zudem benutzen zudem folgende Abkürzungen: wir schreiben
 
 \begin{itemize}
-  \item $\top$ für $A \sqcup \neg A$
-  \item $\bot$ für $A \sqcap \neg A$
+    \item $\top$ für $A \sqcup \neg A$ (\enquote{top})
+    \item $\bot$ für $A \sqcap \neg A$ (\enquote{bottom})
 \end{itemize}
 
-\textbf{Präzedenzregel}
-
-\begin{itemize}
-  \item{$\neg$,$\exists$,$\forall$ binden stärker als $\sqcap$ und $\sqcup$}
-\end{itemize}
+Für die Operatoren legen wir folgende Präzedenzregel fest:
+\begin{center}
+  $\neg$,$\exists$,$\forall$ binden stärker als $\sqcap$ und $\sqcup$
+\end{center}
 
 Also zum Beispiel steht $\forall r.(\exists r.A \sqcap B)$ für $\forall r.((\exists r.A) \sqcap B)$ und nicht für $\forall r.(\exists r.(A \sqcap B))$.
 
@@ -67,7 +61,7 @@ Des Weiteren ist keine Präzedenz zwischen $\sqcap$ und $\sqcup$ definiert worde
 \subsubsection{\texorpdfstring{$\ALC$}{ALC}: Semantik}
 
 \begin{definition}[$\ALC$ Semantik]
-Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^\MI$,$\cdot^\MI$) mit
+Eine \emph{Interpretation} $\MI$ ist ein Paar ($\Delta^\MI$,$\cdot^\MI$) mit
   \begin{itemize}
     \item{$\Delta^\MI$ nicht leere Menge (\emph{Domäne})}
     \item{$\cdot^\MI$ \emph{Interpretationsfunktion} bildet ab:
@@ -77,14 +71,14 @@ Eine \emph{Interpretation} $\MI$ ist Paar ($\Delta^\MI$,$\cdot^\MI$) mit
      \end{itemize}}
   \end{itemize}
 
-Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
-\begin{itemize}
-  \item $(\neg C)^\MI = \Delta^\MI \setminus C^\MI$
-  \item $(C \sqcap D)^\MI = C^\MI \cap D^\MI$
-  \item $(C \sqcup D)^\MI = C^\MI \cup D^\MI$
-  \item $(\exists r.C)^\MI = \{d \in \Delta^\MI |$ es gibt $ e \in \Delta^\MI$ mit $(d,e) \in r^\MI$ und $e \in C^\MI\}$
-  \item $(\forall r.C)^\MI = \{d \in \Delta^\MI |$ für alle $ e \in \Delta^\MI$, $(d,e) \in r^\MI$ impliziert $e \in C^\MI\}$
-\end{itemize}
+Die Abbildung $\cdot^\MI$ wird induktiv auf zusammengesetzte Konzepte erweitert:
+\begin{align*}
+    (\neg C)^\MI &= \Delta^\MI \setminus C^\MI \\
+    (C \sqcap D)^\MI &= C^\MI \cap D^\MI \\
+    (C \sqcup D)^\MI &= C^\MI \cup D^\MI \\
+    (\exists r.C)^\MI &= \{d \in \Delta^\MI \mid \text{ es gibt } e \in \Delta^\MI \text{ mit } (d,e) \in r^\MI \text{ und } e \in C^\MI\} \\
+    (\forall r.C)^\MI &= \{d \in \Delta^\MI \mid \text{ für alle } e \in \Delta^\MI, (d,e) \in r^\MI \text{ impliziert } e \in C^\MI\}
+\end{align*}
 \end{definition}
 
 \begin{tafel}[Beispiel Semantik]
@@ -138,7 +132,7 @@ Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 \begin{itemize}
   \item $e$ für $r$-Nachfolger von $d$ (in $\MI$) wenn ($d$, $e$) $\in r^\MI$
   \item $e$ für $r$-Vorgänger von $d$ (in $\MI$) wenn ($e$, $d$) $\in r^\MI$
-  \item wenn $r$ unwichtig, sprechen wir nun von Nachfolgern / Vorgängern
+  \item wenn $r$ unwichtig ist, sprechen wir nur von Nachfolgern/Vorgängern
   \item $\MI$ ist endlich gdw. $\Delta^\MI$ endlich ist.
 \end{itemize}
 
@@ -147,14 +141,12 @@ Für Interpretationen verwenden wir übliche Terminologie für Graphen:
 
 Wir nennen
 \begin{itemize}
-\item
-  $C^\MI$ ist \emph{Extension} des Konzeptes oder der Rolle $C$
-\item
-    jedes $d \in C^\MI$ ist eine \emph{Instanz} des Konzeptes $C$
+\item $C^\MI$ die \emph{Extension} des Konzeptes oder der Rolle $C$
+\item jedes $d \in C^\MI$ eine \emph{Instanz} des Konzeptes $C$
 \item $r^\MI$ die \emph{Extension} der Rolle r.
 \end{itemize}
 
-Beachte, das $\top^\MI$ für jede Interpretation $\MI$ identisch mit
+Beachte, dass $\top^\MI$ für jede Interpretation $\MI$ identisch mit
 $\Delta^\MI$ ist. Intuitiv entspricht $\top$ der Menge alle Elemente.
 $\bot^\MI$ ist für jede Interpretation $\MI$ leer, repräsentiert also
 intuitiv, dass etwas unmöglich ist, z.B.:
@@ -165,7 +157,8 @@ intuitiv, dass etwas unmöglich ist, z.B.:
 
 \begin{tafel}[Beweis $\top^\MI = \Delta^\MI$]
     \begin{align*}
-        \top^\MI &= (A \sqcup \neq A)^\MI = A^\MI \cup (\neg A)^\MI\\
+        \top^\MI &= (A \sqcup \neg A)^\MI \\
+                 &= A^\MI \cup (\neg A)^\MI\\
                  &= A^\MI \cup (\Delta^\MI \setminus A^\MI)\\
                  &= \Delta^\MI
     \end{align*}
@@ -212,7 +205,7 @@ Morgansche Gesetz.
 
 TBoxen(\enquote{terminologische Boxen}) definieren Konzepte und setzen diese zueinander in Beziehung.
 
-\begin{definition}[TBox-Syntax]
+\begin{definition}[TBox, Syntax]
 \emph{Konzeptinklusion} ist Ausdruck $C \sqsubseteq D$ mit $C$, $D$ Konzepten.
 Eine \emph{TBox} ist eine endliche Menge von Konzeptinklusionen.  Wir
 verwenden $C \equiv D$ als Abkürzung für $C \sqsubseteq D$, $D \sqsubseteq C$.
@@ -262,7 +255,7 @@ Eine Interpretation $\MI$
     $\MI$ erfüllt auch $\text{Student} \sqsubseteq \exists \text{bekanntMit}.\text{Mensch}$ und $\text{VL} \equiv \text{PlfichtVL}$.
 \end{tafel}
 
-Intuitiv entsprechen Interpretationen mögliche Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} un\-erwünsch\-te Interpretationen.
+Intuitiv entsprechen Interpretationen möglichen Welten, TBoxen hingegen schließen Welten aus, die wir für nicht möglich halten. Jede Konzeptinklusion \enquote{eliminiert} unerwünschte Interpretationen.
 
 \subsubsection{Modellierung}\label{modellierung}
 
@@ -291,8 +284,8 @@ Seien $C$, $D$, $\ALC$-Konzepte und $\MT$ TBox. Dann
 
 \begin{itemize}
   \item ist $C$ \emph{erfüllbar bzgl.} $\MT$ gdw. $\MT$ Modell $\MI$ hat mit $C^\MI \neq \emptyset$
-  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$, wenn $C^\MI \subseteq D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \sqsubseteq D$)
-  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$, gdw. $C^\MI = D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \equiv D$)
+  \item wird $C$ \emph{von} $D$ \emph{subsumiert bzgl.} $\MT$ gdw. $C^\MI \subseteq D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \sqsubseteq D$)
+  \item sind $C$ und $D$ \emph{äquivalent bzgl.} $\MT$ gdw. $C^\MI = D^\MI$ in allen Modellen $\MI$ von $\MT$ (Notation $\MT \models C \equiv D$).
 \end{itemize}
 \end{definition}
 
@@ -302,7 +295,9 @@ $\MT$.
 
 \begin{tafel}[Beispiel Erfüllbarkeit, Subsumtion, Äquivalenz bezüglich $\MT$]\mbox{}
     \begin{enumerate}[label=\alph*)]
-    \item Sei $\MT$ die TBox aus \autoref{t25} und $C = \text{Student} \sqcap \forall \text{hört}.\text{PflichtVL}$. $C$ ist erfüllbar bezüglich $\MT$, denn folgende Interpretation $\MI$ ist Modell von $\MT$ mit $C^\MI$
+    \item Sei $\MT$ die TBox aus \autoref{t25} und 
+        \[ C = \text{Student} \sqcap \forall \text{hört}.\text{PflichtVL}. \]
+        $C$ ist erfüllbar bezüglich $\MT$, denn folgende Interpretation $\MI$ ist Modell von $\MT$ mit $C^\MI$
     \begin{center}
     \begin{tikzpicture}
         \begin{scope}[every node/.style={circle,thick,draw}]
@@ -321,8 +316,23 @@ $\MT$.
     \end{center}
 \item Sei $\MT$ wieder aus \autoref{t25} und
     \[C = \text{Student} \sqcap \exists \text{hört}.\text{PflichtVL} \sqcap \forall \text{hört}.\text{WahlVL}.\]
-    $C$ ist unerfüllbar bezüglich $\MT$: Nimm im Gegenteil an $C$ sei erfüllbar bezüglich $\MT$, dann gibt es Modell $\MI$ und Instanz $d\in C^\MI$. Nach Semantik von $\sqcap$ gilt $d \in (\exists \text{hört}.\text{PflichtVL})^\MI$. Also gibt es ein $e \in (\text{PflichtVL})^\MI$ mit $(d, e) \in \text{hört}^\MI$. Wegen $d \in (\forall \text{hört}.\text{WahlVL})^\MI$ gilt $e \in \text{WahlVL}^\MI$. Also ist $e \in (\text{PflichtVL} \sqcap \text{WahlVL})^\MI$, was $(\text{PflichtVL} \sqcap \text{WahlVL}) \in \bot$ verletzt. Folglich kann es keine Interpretation geben.
-\item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$. Es gilt $\MT \models C \sqsubseteq D$. Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$. Zu zeigen $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$. Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$. Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
+    $C$ ist unerfüllbar bezüglich $\MT$.
+    \begin{proof}
+        Nimm im Gegenteil an $C$ sei erfüllbar bezüglich $\MT$, dann gibt es Modell $\MI$ und Instanz $d\in C^\MI$.
+        Nach Semantik von $\sqcap$ gilt $d \in (\exists \text{hört}.\text{PflichtVL})^\MI$.
+        Also gibt es ein $e \in (\text{PflichtVL})^\MI$ mit $(d, e) \in \text{hört}^\MI$.
+        Wegen $d \in (\forall \text{hört}.\text{WahlVL})^\MI$ gilt $e \in \text{WahlVL}^\MI$.
+        Also ist $e \in (\text{PflichtVL} \sqcap \text{WahlVL})^\MI$, was $(\text{PflichtVL} \sqcap \text{WahlVL}) \in \bot$ verletzt.
+        Folglich kann es keine Interpretation geben.
+    \end{proof}
+\item Sei $\MT$ wie oben und $C = \text{Student}, D = \exists \text{bekanntMit}.\text{Student}$.
+    Es gilt $\MT \models C \sqsubseteq D$.
+    \begin{proof}
+        Sei $\MI$ Modell von $\MT$ und $d \in \text{Student}^\MI$.
+        Zu zeigen $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
+        Wegen Zeile 1 von $\MT$ gilt $d \in (\exists \text{hört}.\text{VL})^\MI$, also ist $d \in (\text{Student} \sqcap \exists \text{hört}.\text{VL})^\MI$.
+        Aus Zeile 3 von $\MT$ folgt wie gewünscht $d \in (\exists \text{bekanntMit}.\text{Student})^\MI$.
+    \end{proof}
     \end{enumerate}
 \end{tafel}
 
@@ -341,12 +351,8 @@ Das Erweitern einer TBox um zusätzliche Konzeptinklusionen wirkt sich wie folgt
 \label{lem:tbox-monoton}
 Seien $\MT_1$ und $\MT_2$ TBoxen mit $\MT_1 \subseteq \MT_2$. Dann gilt:
 \begin{enumerate}
-\item
-  Wenn $C$ erfüllbar bzgl. $\MT_2$, dann ist $C$ erfüllbar bzgl.
-  $\MT_1$.
-\item
-  Wenn $\MT_1 \models C \sqsubseteq D$, dann
-  $\MT_2 \models C \sqsubseteq D$.
+\item Wenn $C$ erfüllbar bzgl. $\MT_2$, dann ist $C$ erfüllbar bzgl. $\MT_1$.
+\item Wenn $\MT_1 \models C \sqsubseteq D$, dann $\MT_2 \models C \sqsubseteq D$.
 \end{enumerate}
 \end{lemma}
 
@@ -363,33 +369,34 @@ Seien $\MT_1$ und $\MT_2$ TBoxen mit $\MT_1 \subseteq \MT_2$. Dann gilt:
     Kontraposition: Wenn $\MT_2 \not\models C \sqsubseteq D$ dann $\MT_1 \not\models C \sqsubseteq D$. \\
   Es gelte $\MT_2 \not\models C \sqsubseteq D$.
   Das heißt es gibt Modell $\MI$ von $\MT_2$ mit $C^\MI \not\subseteq D^\MI$.
-  Wie im 1. Falls ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$.
+  Wie im 1. Fall ist $\MI$ auch Modell von $\MT_1 \subseteq \MT_2$.
   Also $\MT_1 \not\models C \sqsubseteq D$
   \end{proof}
 \end{enumerate}
 
 Die umgekehrten Aussagen sind im Allgemeinen nicht richtig. Beispiel:
 \begin{align*}
-    &\MT_1 = \emptyset, \MT_2 = \{A \sqsubseteq B\}\\
-    &\MT_1 \subseteq \MT_2 \\
+    &\MT_1 = \emptyset\\
+    &\MT_2 = \{A \sqsubseteq B\}\\
+    \intertext{dann gilt $\MT_1 \subseteq \MT_2$, aber}
     &\MT_2 \models A \sqsubseteq B\\
     &\MT_1 \models A \sqsubseteq B
 \end{align*}
 \end{tafel}
 
-Eine Logik, die diese Eigenschaften erfüllt, nennt man \emph{monoton} (das Hinzunehmen von Formeln kann nur zu \emph{zusätzlichen} Konsequenzen, führen, aber nicht dazu, dass Konsequenzen ungültig werden)
+Eine Logik, die diese Eigenschaften erfüllt, nennt man \emph{monoton}. Das Hinzunehmen von Formeln kann nur zu \emph{zusätzlichen} Konsequenzen führen, aber nicht dazu, dass Konsequenzen ungültig werden.
 
 \subsection{Schlussfolgerungsprobleme}\label{schlussfolgerungsprobleme}
 
-Schlussfolgern dient dazu aus explizit gegebenes Wissen neues Wissen abzuleiten, das vorher nur implizit vorhanden war. Beschreibungslogiken sind so designed, dass sie so viel Ausdrucksstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu Erlauben.
+Schlussfolgern dient dazu aus explizit gegebenes Wissen neues Wissen abzuleiten, das vorher nur implizit vorhanden war. Beschreibungslogiken sind so designed, dass sie so viel Ausdrucksstärke wie nötig, aber nicht mehr, besitzen, um möglichst effizientes Schlussfolgern zu erlauben.
 
 Die von uns betrachteten Schlussfolgerungsprobleme sind:
 
-\begin{itemize}
-  \item \textbf{Erfüllbarkeitsproblem}: Gegeben $C$ und $\MT$, entscheide ob $C$ erfüllbar bzgl. $\MT$.
-  \item \textbf{Subsumtionsproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \sqsubseteq D$
-  \item \textbf{Äquivalenzproblem}: Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \equiv D$
-\end{itemize}
+\begin{description}
+    \item[Erfüllbarkeitsproblem] Gegeben $C$ und $\MT$, entscheide ob $C$ erfüllbar bzgl. $\MT$.
+  \item[Subsumtionsproblem] Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \sqsubseteq D$
+  \item[Äquivalenzproblem] Gegeben $C$, $D$ und $\MT$, entscheide ob $\MT \models C \equiv D$
+\end{description}
 
 Diese Entscheidungsprobleme können auch mit leerer TBox $\MT = \emptyset$ betrachtet werden.
 
@@ -411,9 +418,10 @@ Man kann $\sqsubseteq$ als Hasse-Diagram darstellen, dessen Knoten mit Mengen vo
 
 \begin{tafel}[Beispiel Hasse-Diagram]\mbox{}
     \begin{align*}
-        \MT = \{&\text{Mensch} \equiv \text{Mann} \sqcup \text{Frau}, \text{Mensch} \sqsubseteq \text{Säugetier}\\
-               &\text{Frau} \sqsubseteq \neg\text{Mann}\\
-               &\text{NMM} \equiv \text{Mensch} \sqcap \neg\text{Mann}\}
+        \MT = \{\text{Mensch} &\equiv \text{Mann} \sqcup \text{Frau},\\
+            \text{Mensch} &\sqsubseteq \text{Säugetier}\\
+               \text{Frau} &\sqsubseteq \neg\text{Mann}\\
+               \text{NMM} &\equiv \text{Mensch} \sqcap \neg\text{Mann}\}
     \end{align*}
     \begin{center}
     \begin{tikzpicture}
@@ -436,13 +444,13 @@ Man kann $\sqsubseteq$ als Hasse-Diagram darstellen, dessen Knoten mit Mengen vo
 
 Ein weiteres Schlussforlgerungsproblem:
 
-\begin{itemize}
-  \item \textbf{Klassifikation}: Gegeben $\MT$, berechne das Hasse Diagramm für $\sqsubseteq$ bzgl. $\MT$, eingeschränkt auf Konzeptnamen in $\MT$.
-\end{itemize}
+\begin{description}
+  \item[Klassifikation] Gegeben $\MT$, berechne das Hasse Diagramm für $\sqsubseteq$ bzgl. $\MT$, eingeschränkt auf Konzeptnamen in $\MT$.
+\end{description}
 
 Dies ist ein Berechnungsproblem (kein Entscheidungsproblem), das in der Praxis durch $n^2$ Subsumtionsberchnungen berechenbar ist und für das zahlreiche Optimierungen verfügbar sind ($n$ = Anzahl der Konzeptnamen in $\MT$).
 
-\subsubsection{Reduktion}
+\subsubsection{Reduktionen}
 
 Die Schlussfolgerungsprobleme sind wechselseitig polynomiell aufeinander reduzierbar:
 
@@ -475,7 +483,7 @@ Erfüllbarkeit konzentrieren.
 
 \subsection{Erweiterungen von \texorpdfstring{$\ALC$}{ALC}}\label{erweiterungen-von-alc}
 
-Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von $\ALC$. Es existieren viel mehr Erweiterungen (z.B.: um spezielle Rolleniterpretationen, temporale Operatoren etc.). Diese können auch kombiniert werden, z.B.: $\ALCQI$.
+Wir betrachten exemplarisch die beiden Erweiterungen $\ALCI$ und $\ALCQ$ von $\ALC$. Es existieren viel mehr Erweiterungen (z.B.: um spezielle Rolleninterpretationen, temporale Operatoren etc.). Diese können auch kombiniert werden, z.B.: zu $\ALCQI$.
 
 \subsubsection{Inverse Rollen (\texorpdfstring{$\ALCI$}{ALCI})}\label{inverse-rollen-alci}
 
@@ -484,15 +492,15 @@ Zunächst betrachten wir $\ALCI$, das $\ALC$ um die Möglichkeit inverse Rollen 
 \begin{definition}[Inverse Rollen]
 Für jeden Rollennamen $r$ ist $r^{-}$ die \emph{inverse
 Rolle} zu $r$. Wir definieren
-$\left( r^{-} \right)^\MI = \left\{ \left( e,d \right)\  \right|\ \left( d,e \right) \in r^\MI\}$
+\[\left( r^{-} \right)^\MI = \left\{ \left( e,d \right) \mid \left( d,e \right) \in r^\MI\} \]
 \end{definition}
 
-\begin{tafel}[Beispiel Nützlichkeit von Inversen]
+\begin{tafel}[Beispiel Nützlichkeit von inversen Rollen]
     \begin{align*}
-        \MT = \{& \text{Professor} \sqsubseteq \text{Verrückt} \sqcap \exists  \text{gibt}.\text{Vorlesung}\\
-                & \text{Vorlesung} \sqsubseteq \forall \text{wirdGegebenVon}.\neg\text{Verrückt}\}
+        \MT = \{ \text{Professor} &\sqsubseteq \text{Verrückt} \sqcap \exists  \text{gibt}.\text{Vorlesung}\\
+                 \text{Vorlesung} &\sqsubseteq \forall \text{wirdGegebenVon}.\neg\text{Verrückt}\}
     \end{align*}
-    Das folgende ist ein Modell von $\MT$, da es keine wirdGegebenVon-Kante gibt und man die intuitive Bedeutung der Kante in $\ALC$ nicht erzwingen kann.
+    Die folgende Interpretation $\MI$ ist ein Modell von $\MT$, da es keine wirdGegebenVon-Kante gibt und man die intuitive Bedeutung der Kante in $\ALC$ nicht erzwingen kann.
     \begin{center}
     \begin{tikzpicture}
         \begin{scope}[every node/.style={circle,thick,draw}]
@@ -507,11 +515,13 @@ $\left( r^{-} \right)^\MI = \left\{ \left( e,d \right)\  \right|\ \left( d,e \ri
         \end{scope}
     \end{tikzpicture}
     \end{center}
-    Mit der Verwendung von Inversen lässt sich Zeile 2 von $\MT$ neu definieren, wodurch das Modell $\MT$ nicht mehr erfüllt.
+    Mit der Verwendung von inversen Rollen lässt sich Zeile 2 von $\MT$ neu definieren, wodurch die Interpretation $\MI$ $\MT$ nicht mehr erfüllt.
     \[ \text{Vorlesung} \sqsubseteq \forall \text{gibt}^-.\neg\text{Verrückt} \]
 \end{tafel}
 
 \subsubsection{Zahlenrestriktion (\texorpdfstring{$\ALCQ$}{ALCQ})}\label{zahlenrestriktion-alcq}
+
+$\ALCQ$ erweitert $\ALC$ um Zahlenrestriktionen:
 
 \begin{definition}[Zahlenrestriktion]
 Für jede natürliche Zahl $n$, jeden Rollennamen $r$ und
@@ -528,7 +538,7 @@ Die Semantik ist \begin{align*}
 \end{align*}
 \end{definition}
 
-\begin{tafel}[TODO]
+\begin{tafel}[TODO - Missing]
     %TODO
 \end{tafel}
 
@@ -543,4 +553,12 @@ Beachte:
 
 Basis:
 
-\fullcite{handbook}
+\begin{itemize}
+    \item \fullcite{handbook}\\
+        Kapitel 2: Basic Description Logics, In der SUUB zur Ausleihe und elektronisch verfügbar.
+    \item \fullcite{website_theoinf}\\
+        Kapitel 15 (v.a. Definition 15.9), 18, 19 (nur Definition 19.1), 20
+\end{itemize}
+
+Weiterführend:
+\fullcite{schmidt1991attributive}
